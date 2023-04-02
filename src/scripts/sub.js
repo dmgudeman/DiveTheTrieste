@@ -35,7 +35,7 @@ class Sub {
         this.ctx.clearRect(0,0, canvas.width, canvas.height)
     }
     update =() =>{
-        clear();
+        this.clear();
         // this.draw();
         let pos = this.newPosition();
         // this.draw(pos)

@@ -11,12 +11,43 @@
 
 //  } 
 
+#sub {
+    display: none;
+    z-index:100;
+}
 
-#sub{
+#crossSection {
     display:none;
+    z-index:20;
+}
+#cockpit {
+    display:none;
+    z-index: 20;
+    border: 2px solid black;
+    
+}
+
+#depth {
+    background-color: wheat;
+    color: rgb(58, 19, 19);
+    position:fixed;
+    font-size: 25;
+    font-weight: bold;
+    top: 50;
+    right: 200;
     z-index: 100;
+    width: 200;
+    height: 30;
+    border-radius: 15px;
+    text-align: center;
 }
-#floor{
-    display:none;
+
+
+// #sub{
+//     display:none;
+//     z-index: 100;
+// }
+// #floor{
+//     display:none;
    
-}
+// }
