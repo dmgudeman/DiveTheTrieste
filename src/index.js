@@ -47,6 +47,8 @@ document.addEventListener("DOMContentLoaded", () => {
     if (flag){
       
       clear();
+      canvas.width = window.innerWidth*2.5;
+      canvas.height = window.innerHeight*2;
       ocean.draw();
       sub.draw();
       newPos(sub);
