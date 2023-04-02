@@ -12,6 +12,9 @@ class Cockpit {
    }
 
    draw() {
+    let random = document.createElement('img')
+    random.src = 'assets/life/euphotic-pelagic/001_shark.jpg';
+    this.ctx.drawImage(random, this.x, this.y, this.w, this.h)
     this.ctx.drawImage(this.cockpitImage, this.x, this.y, this.w, this.h)
    }
 
