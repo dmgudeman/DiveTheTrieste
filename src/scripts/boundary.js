@@ -1,19 +1,36 @@
 
-function updateDepth(y,el) {
-  console.log((y-167)*21.66, "yyyyyy")
-  el.innerHTML = `Depth: ${Math.floor((y-137)*21.66)} feet`;
+function updateDepth(y, x,el) {
+//   console.log((y)*21.66, "yyyyyy in update Depth")
+  // console.log(y, "yyyyyy in update Depth 2")
+  // console.log(x, "XXXX in update Depth ")
+
+
+  el.innerHTML = `Depth: ${Math.floor((y-87)*21.66)} feet`;
+}
+
+function convertDepth(depth){
+
+  console.log(depth/21.66 + 87, 'MMMMMMMMMMMMMMM')
+  return depth/21.66 + 87;
 }
 export function detectDepth(sub, canvas ){
   let d = document.getElementById("depth");
   //  d.innerText =`${sub.x}`
     // console.log(`{x = ${sub.x}, y= ${sub.y}`)
-    updateDepth(sub.y, d)
     let x = sub.x;
     let y = sub.y;
+    let depth = Math.floor((y-87)*21.66);
+
+    console.log(x, "x")
+    console.log(y, "y")
+     console.log(depth, "detect depth")
+
+    updateDepth(sub.y, sub.x, d)
   
-  
-    if       (sub.y < 125 )                  {sub.y = 125}
-    if       (sub.x < 1200)                  {sub.x = 1200}
+    if       (depth < 0 )                  {  console.log(sub.vely); sub.y = 87}
+
+    if (sub.x <= 1200)                  {sub.dx = 0}
+    if (depth > 3000)   {sub.dy = 0}
 
     // else if  (sub.x < 1175 && sub.y > 165)  {sub.x = 1200;}
     // else if  (sub.x < 1220 && sub.y > 257)  {sub.x = 1220; y=257;} 

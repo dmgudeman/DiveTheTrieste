@@ -19,14 +19,9 @@ document.addEventListener("DOMContentLoaded", () => {
   
   canvas.addEventListener('mousedown', function(e) {
       getCursorPosition(canvas, e)  
-     flag === false ? flag = true : flag = false 
-     console.log(flag)
-     
-    update(flag)
-   
-
-    
-     })
+      flag === false ? flag = true : flag = false 
+      update(flag)
+    })
 
 
   function clear(){
@@ -43,9 +38,8 @@ document.addEventListener("DOMContentLoaded", () => {
   
   
   function update(flag) {
-    console.log("in update else statment")
+    let depth = sub.y
     if (flag){
-      
       clear();
       canvas.width = window.innerWidth*2.5;
       canvas.height = window.innerHeight*2;
@@ -56,28 +50,28 @@ document.addEventListener("DOMContentLoaded", () => {
     } else {
        cancelAnimationFrame(request)
        clear();
-       console.log("in update else statment")
-       cockpit.draw();
-
+       cockpit.draw(depth);
     }
   }
 
 
 
 
-  function moveUp(e) {
-   sub.dy = -sub.vel;   
+  function moveUp() {
+  
+    // detectDepth(sub)
+   sub.dy = -sub.vely;   
   }
 
   function moveDown(e) {
-    sub.dy = sub.vel;
+    sub.dy = sub.vely;
   }
 
   function moveLeft(e) {
-    sub.dx = -sub.vel;
+    sub.dx = -sub.velx;
   }
   function moveRight(e) {
-    sub.dx = sub.vel;  
+    sub.dx = sub.velx;  
   }
 
   function keyUp(e) {
