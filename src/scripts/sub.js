@@ -7,8 +7,8 @@ class Sub {
     constructor(options) {
         this.canvas = options.canvas;
         this.ctx = options.ctx;
-        this.x = options.x || 1200;
-        this.y = options.y || 87;
+        this.x = options.x || 900;
+        this.y = options.y || 80;
         this.w = options.width || 100 ;
         this.h = options.height || 100;
         this.velx = options.velx || 5;
@@ -16,6 +16,8 @@ class Sub {
         this.dx = options.velx || 0
         this.dy = options.vely || 0;
         this.subImage = options.subImage || document.getElementById("sub");
+        this.initialOutToSeaPos = options.initialOutToSeaPos || 900;
+        this.initialDepthPos = options.initialDepthPos || 80;
     }
 
     makeSub = ()=>{

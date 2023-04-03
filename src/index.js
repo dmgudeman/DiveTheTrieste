@@ -7,19 +7,56 @@ import {getCursorPosition} from './scripts/util'
 console.log('WEBACK IS WORKINGcccc');
 
 document.addEventListener("DOMContentLoaded", () => {
+  function loadImages(images, onComplete) {
+
+    let loaded = 0;
+
+    function onLoad() {
+        loaded++;
+        if (loaded == images.length) {
+            onComplete();
+        }
+    }
+
+    for (let i = 0; i < images.length; i++) {
+        let img = new Image();
+        img.addEventListener("load", onLoad);
+        img.src = images[i];
+        imageObjects.push(img);
+    }
+    return imageObjects;
+}
+  
+
+
   const canvas = document.querySelector('canvas');
   const ctx = canvas.getContext("2d");
   canvas.width = window.innerWidth*2.5;
   canvas.height = window.innerHeight*2;
+  
   let ocean = new Ocean({canvas, ctx});
   let sub = new Sub({canvas, ctx});
-  let cockpit = new Cockpit({canvas, ctx});
-  let flag = true;
+  let cockpit = new Cockpit({canvas, ctx, imageObjects});
+  let flag = false;
+  let imageObjects = [];
+  let depthFlag = false;
+
+  let bcr =canvas.getBoundingClientRect()
+
+  let oceanBottom = bcr.height;
+  let oceanRight = bcr.width;
+//   loadImages(["assets/life/euphotic-pelagic/001_shark.jpg", 
+// "assets/life/aphotic-pelagic/001_aphotic-fish.jpeg"], cockpit.draw);
   
-  
+  // open cockpit
   canvas.addEventListener('mousedown', function(e) {
       getCursorPosition(canvas, e)  
-      flag === false ? flag = true : flag = false 
+      let bcr =canvas.getBoundingClientRect()
+      console.log(bcr.width, bcr.height,"mmmmmmmmmm")
+      flag === false ? flag = true : flag = false    
+      if (flag) {
+        cockpit.draw(depth);
+      }
       update(flag)
     })
 
@@ -28,24 +65,51 @@ document.addEventListener("DOMContentLoaded", () => {
     ctx.clearRect(0,0, canvas.width, canvas.height)
   }
 
-  function newPos(sub){
-    sub.x += sub.dx;
-    sub.y += sub.dy;
-    detectDepth(sub, canvas);
-    detectWindowEdge(sub, canvas);
+  function newPos(dir){
+    detectDepth(ocean, sub, canvas, ctx);
+    console.log(ocean.sy, "ocean.sy")
+    console.log(depthFlag, "depthFlag")
+    if(!depthFlag){
+      if (dir === 'down'){
+        ocean.vely += 1
+        ocean.sy += ocean.vely;
+      } else if ( dir === 'right'){
+        ocean.velx += 1;
+        ocean.sx += ocean.velx;
+      } else if ( dir === 'left'){
+        ocean.sx -= 10;
+      } else {
+        ocean.sy -= 10;
+      }
+    }
+  
+   else{
+    
+      if (dir === 'down'){
+      sub.vely += 1
+      sub.y +=sub.vely;
+      } else if ( dir === 'right'){
+      sub.velx += 1;
+      sub.x +=sub.velx;
+      } else if ( dir === 'left'){
+      sub.x -= 10;
+      } else {
+      sub.y -= 10;
+      }
+    }
+    // detectWindowEdge(sub, canvas);
   }
+  
+  
   let request;
   
-  
+  // main animation loop
   function update(flag) {
-    let depth = sub.y
+    (ocean.sy + sub.y) >= 0.5*oceanBottom ? depthFlag = true :depthFlag = false;
     if (flag){
       clear();
-      canvas.width = window.innerWidth*2.5;
-      canvas.height = window.innerHeight*2;
       ocean.draw();
       sub.draw();
-      newPos(sub);
       request = requestAnimationFrame(update)   
     } else {
        cancelAnimationFrame(request)
@@ -54,25 +118,20 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
+  //preload the images for the cockpit
+ 
 
 
 
-  function moveUp() {
-  
-    // detectDepth(sub)
-   sub.dy = -sub.vely;   
-  }
 
-  function moveDown(e) {
-    sub.dy = sub.vely;
-  }
+function init() {
+    alert("start game");
+    // use imageObjects which will contain loaded images
+}
 
-  function moveLeft(e) {
-    sub.dx = -sub.velx;
-  }
-  function moveRight(e) {
-    sub.dx = sub.velx;  
-  }
+
+
+
 
   function keyUp(e) {
     if(
@@ -92,14 +151,15 @@ document.addEventListener("DOMContentLoaded", () => {
  
   function keyDown(e) {
     if (e.key === 'ArrowDown' || e.key === 'Down'){
-      console.log('keydown')
-        moveDown();
+     
+        newPos('down');
     } else if (e.key === 'ArrowLeft' || e.key === 'Left'){
-      moveLeft()
+      newPos('left');
     } else if (e.key === 'ArrowRight' || e.key === 'Rigth'){
-      moveRight();
+     
+      newPos('right');
     } else {
-      moveUp();
+      newPos('up')
   }
 }
   document.addEventListener('keyup', keyUp);

@@ -8,6 +8,6 @@ export function getCursorPosition(canvas, event) {
     const x = event.clientX - rect.left
     const y = event.clientY - rect.top
     console.log("x: " + x + " y: " + y)
-    console.log(event.offsetX, 'offsetX')
+  
    
 }

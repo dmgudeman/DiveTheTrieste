@@ -17,6 +17,11 @@
   border: 2px solid black;
 }
 
+#random {
+  display: none;
+  z-index: 15;
+}
+
 #depth {
   background-color: wheat;
   color: rgb(58, 19, 19);
@@ -77,4 +82,15 @@ table {
 input {
   -webkit-appearance: none;
   border-radius: 0;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+  overflow: hidden;
+  background-color: aquamarine;
 }
