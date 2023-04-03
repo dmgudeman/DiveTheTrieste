@@ -11,7 +11,7 @@ class Cockpit {
     this.h = options.height || window.innerHeight;
     this.cockpitImage = options.cockpitImage || document.getElementById("cockpit");
     this.imageObjects = options.imageObjects
-     console.log(options.imageObjects);
+  
    }
    
     

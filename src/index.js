@@ -3,7 +3,8 @@ import {detectDepth, detectWindowEdge} from './scripts/boundary';
 import Sub from './scripts/sub';
 import Ocean from './scripts/ocean';
 import Cockpit from './scripts/cockpit';
-import {getCursorPosition} from './scripts/util'
+import {getCursorPosition} from './scripts/util';
+import Keymaster from './scripts/keymaster';
 console.log('WEBACK IS WORKINGcccc');
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -30,12 +31,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
   const canvas = document.querySelector('canvas');
+
   const ctx = canvas.getContext("2d");
   canvas.width = window.innerWidth*2.5;
-  canvas.height = window.innerHeight*2;
-  
+  canvas.height = window.innerHeight*1.9;
   let ocean = new Ocean({canvas, ctx});
   let sub = new Sub({canvas, ctx});
+  let key = new Keymaster({ canvas, ctx, ocean, sub});
   let cockpit = new Cockpit({canvas, ctx, imageObjects});
   let flag = false;
   let imageObjects = [];
@@ -52,7 +54,7 @@ document.addEventListener("DOMContentLoaded", () => {
   canvas.addEventListener('mousedown', function(e) {
       getCursorPosition(canvas, e)  
       let bcr =canvas.getBoundingClientRect()
-      console.log(bcr.width, bcr.height,"mmmmmmmmmm")
+    
       flag === false ? flag = true : flag = false    
       if (flag) {
         cockpit.draw(depth);
@@ -65,40 +67,37 @@ document.addEventListener("DOMContentLoaded", () => {
     ctx.clearRect(0,0, canvas.width, canvas.height)
   }
 
-  function newPos(dir){
-    detectDepth(ocean, sub, canvas, ctx);
-    console.log(ocean.sy, "ocean.sy")
-    console.log(depthFlag, "depthFlag")
-    if(!depthFlag){
-      if (dir === 'down'){
-        ocean.vely += 1
-        ocean.sy += ocean.vely;
-      } else if ( dir === 'right'){
-        ocean.velx += 1;
-        ocean.sx += ocean.velx;
-      } else if ( dir === 'left'){
-        ocean.sx -= 10;
-      } else {
-        ocean.sy -= 10;
-      }
-    }
+  // function newPos(dir){
+  //   detectDepth(ocean, sub, canvas, ctx);
+  //   if(!depthFlag){
+  //     if (dir === 'down'){
+  //       ocean.vely += 1
+  //       ocean.sy += ocean.vely;
+  //     } else if ( dir === 'right'){
+  //       ocean.velx += 1;
+  //       ocean.sx += ocean.velx;
+  //     } else if ( dir === 'left'){
+  //       ocean.sx -= 10;
+  //     } else {
+  //       ocean.sy -= 10;
+  //     }
+  //   }
   
-   else{
+  //  else{
     
-      if (dir === 'down'){
-      sub.vely += 1
-      sub.y +=sub.vely;
-      } else if ( dir === 'right'){
-      sub.velx += 1;
-      sub.x +=sub.velx;
-      } else if ( dir === 'left'){
-      sub.x -= 10;
-      } else {
-      sub.y -= 10;
-      }
-    }
-    // detectWindowEdge(sub, canvas);
-  }
+  //     if (dir === 'down'){
+
+  //     } else if ( dir === 'right'){
+  //     sub.velx += 1;
+  //     sub.x +=sub.velx;
+  //     } else if ( dir === 'left'){
+  //     sub.x -= 10;
+  //     } else {
+  //     sub.y -= 10;
+  //     }
+  //   }
+  //   // detectWindowEdge(sub, canvas);
+  // }
   
   
   let request;
@@ -110,6 +109,7 @@ document.addEventListener("DOMContentLoaded", () => {
       clear();
       ocean.draw();
       sub.draw();
+      key.
       request = requestAnimationFrame(update)   
     } else {
        cancelAnimationFrame(request)
@@ -152,14 +152,14 @@ function init() {
   function keyDown(e) {
     if (e.key === 'ArrowDown' || e.key === 'Down'){
      
-        newPos('down');
+        key.newPos('down');
     } else if (e.key === 'ArrowLeft' || e.key === 'Left'){
-      newPos('left');
+      key.newPos('left');
     } else if (e.key === 'ArrowRight' || e.key === 'Rigth'){
      
-      newPos('right');
+      key.newPos('right');
     } else {
-      newPos('up')
+      key.newPos('up')
   }
 }
   document.addEventListener('keyup', keyUp);

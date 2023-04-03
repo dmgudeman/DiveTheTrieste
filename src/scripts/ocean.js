@@ -15,6 +15,7 @@ class Ocean {
     this.oceanImage = options.oceanImage || document.getElementById("crossSection");
     this.vely = options.vely || 5;
     this.velx = options.velx || 5;
+    this.surface_y = options.surface_y || 126;
   }
 
   draw = () => {
