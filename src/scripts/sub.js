@@ -16,7 +16,7 @@ class Sub {
         this.dx = options.velx || 0
         this.dy = options.vely || 0;
         this.subImage = options.subImage || document.getElementById("sub");
-        this.initialOutToSeaPos = options.initialOutToSeaPos || 900;
+        this.initialLateralPos = options.initialLateralPos || 900;
         this.initialDepthPos = options.initialDepthPos || 80;
     }
 

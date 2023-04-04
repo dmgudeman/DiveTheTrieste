@@ -3,9 +3,9 @@
 
 
 // })(this);
-import {detectDepth, detectWindowEdge} from './boundary';
-import Sub from './sub';
-import Ocean from './ocean';
+import {detectDepth, detectLateral} from './boundary';
+// import Sub from './sub';
+// import Ocean from './ocean';
 
 class Keymaster {
 
@@ -21,19 +21,27 @@ class Keymaster {
     getBottom(){
         let bcr = this.canvas.getBoundingClientRect();
         let oceanBottom = bcr.height;
+        
         console.log(oceanBottom, "ocean bottom in keymaster")
+        return oceanBottom;
+
+    }
+    getRight(){ 
+        let bcr = this.canvas.getBoundingClientRect();
+        let oceanRight = bcr.width;
+        
+        console.log(oceanRight, "ocean RIGHT in keymaster")
+        return oceanRight;
 
     }
 
     newPos(dir){
-        console.log("keymasterrrrrrrrrrrrrrrrrrrrrrrrrrrrrr", dir)
-
-       let depthFlag =  detectDepth( this.ocean, this.sub, this.canvas, dir);
-       console.log('depthFlag in NewPos', depthFlag)
+    
+       let lateralFlag = detectLateral(this.ocean, this.sub, this.canvas, dir);
+       let depthFlag = detectDepth( this.ocean, this.sub, this.canvas, dir);
+      
 
     if (dir === 'down') {
-        console.log("keymasterrrrrrrrrrrrrrrrrrrrrrrrrrrrrr", dir)
-        console.log(depthFlag)
         if(depthFlag === 'OCEAN') {
             this.ocean.vely += 1
             this.ocean.sy += this.ocean.vely;
@@ -64,6 +72,37 @@ class Keymaster {
             this.ocean.vely = 0
             this.ocean.sy === this.ocean.surface_y;
             return this.ocean
+
+    }
+    if (dir === 'right') {
+        if(lateralFlag === 'OCEAN') {
+            this.ocean.velx += 1
+            this.ocean.sx += this.ocean.velx;
+            return this.ocean
+        } else if (lateralFlag === 'SUB'){
+            this.sub.velx += 1
+            this.sub.x += this.sub.velx;
+            return this.sub
+        } else if (lateralFlag === 'STOP_RIGHT')
+            this.sub.velx = 0
+            this.sub.x === this.getRight();
+            return this.sub
+
+    }
+    if (dir === 'left') {
+        console.log('keymaster left', lateralFlag)
+        if(lateralFlag === 'OCEAN') {
+            this.ocean.velx += 1
+            this.ocean.sx -= this.ocean.velx;
+            return this.ocean
+        } else if (lateralFlag === 'SUB'){
+            this.sub.velx += 1
+            this.sub.x -= this.sub.velx;
+            return this.sub
+        } else if (lateralFlag === 'STOP_LEFT')
+            this.sub.velx = 0
+            this.sub.x === this.subInitialPos;
+            return this.sub
 
     }
 }

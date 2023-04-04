@@ -22,7 +22,6 @@ export function detectDepth(ocean, sub, canvas, dir){
   let bcr =canvas.getBoundingClientRect()
   // console.log(bcr.width, bcr.height, "bcrWidth, bcrHeight")
   let oceanBottom = bcr.height;
-
   let oceanRight = bcr.width;
   let surface_y = sub.initalDepthPosition;
   let conversion =SEA_DEPTH/oceanBottom;
@@ -36,33 +35,21 @@ export function detectDepth(ocean, sub, canvas, dir){
   // console.log(ocean.sy, 'oceansy')
   // console.log(oceanBottom-ocean.sy, 'oceanBottom-ocean.sy')
 
-  // updateDepth(y, x, d)
-  // console.log (oceanBottom-sub.y-ocean.sy,"COMPOSITE")
   let depthFlag = 'MOVE'
   if (dir === 'down'){
     if ((oceanBottom - ocean.sy - sub.y )< 200){
         return  depthFlag = 'STOP_DESCENT'
-      
-      } else if ((oceanBottom - ocean.sy - sub.y) < oceanBottom*0.50) {
-        console.log (oceanBottom - ocean.sy - sub.y, 'COMPOSITE SOWN')
-        console.log(oceanBottom*0.50, "limit down")
-        return depthFlag = "SUB";
-      } else {
-        return depthFlag = 'OCEAN'
-      }
-      
+    } else if ((oceanBottom - ocean.sy - sub.y) < oceanBottom*0.50) {
+      console.log (oceanBottom - ocean.sy - sub.y, 'COMPOSITE SOWN')
+      console.log(oceanBottom*0.50, "limit down")
+      return depthFlag = "SUB";
+    } else {
+      return depthFlag = 'OCEAN'
+    }
+    
   }
 
-
   if (dir === 'up'){
-    console.log('------')
-    console.log (oceanBottom - ocean.sy - sub.y, 'should be less than limit up SUB')
-    console.log(oceanBottom*0.50, "limit up")
-    console.log('------')
-    console.log((sub.y + ocean.sy), 'sub.y + ocean.sy should be less than little limit STOP ASCENT')
-    console.log(ocean.surface_y, 'little limit')
-    console.log('------')
-   
     if ((sub.y + ocean.sy) < (ocean.surface_y )) {
       return depthFlag = 'STOP_ASCENT' 
     } else if ((oceanBottom -  ocean.sy - sub.y ) < oceanBottom*0.50) {
@@ -77,11 +64,57 @@ export function detectDepth(ocean, sub, canvas, dir){
 
 }
 
- 
+export function detectLateral(ocean, sub, canvas, dir){
+  canvas.width = window.innerWidth*2.5;
+  canvas.height = window.innerHeight*1.9;
+  let bcr =canvas.getBoundingClientRect()
+  let oceanRight = bcr.width;
+  let lateralFlag = 'MOVE_LATERAL';
 
-  export function detectWindowEdge (sub, canvas) {
+  if (dir === 'right'){
+    console.log(oceanRight*0.50, "limit right")
+  console.log (ocean.sx, sub.x, 'ocean.sx, sub.x')
+
+    if ((oceanRight - sub.initialLateralPos  - ocean.sx - sub.x  )< 600){
+   
+        return  lateralFlag = 'STOP_RIGHT'
+    } else if ((oceanRight - ocean.sx - sub.x) < oceanRight*0.50) {
     
-
-    return sub
-
+   
+      console.log( "SUB")
+      return lateralFlag = "SUB";
+    } else {
+      console.log( "OCEAN")
+      return lateralFlag = 'OCEAN'
+    }
+    
   }
+  if (dir === 'left'){
+    console.log(sub.initialLateralPos, 'sub.initialLateralPos');
+    console.log(ocean.sx, 'ocean.sx');
+    console.log(sub.x,'sub.x' );
+    console.log(oceanRight, 'oceanRight')
+
+    if ((sub.initialLateralPos + ocean.sx )<=sub.initialLateralPos){
+      // console.log('STOP_LEFT in boundary')
+      // console.log(oceanRight - ocean.sx - sub.x , "COMPOSITE bigger than =>")
+      // console.log(sub.initialLateralPos);
+
+        return  lateralFlag = 'STOP_LEFT'
+    } else if ((oceanRight - ocean.sx - sub.x) < oceanRight*0.50) {
+      // console.log (oceanRight - ocean.sx - sub.x, 'COMPOSITE RIGHT')
+      // console.log(oceanRight*0.50, "limit right")
+      console.log( "SUB")
+      return lateralFlag = "SUB";
+    } else {
+      console.log( "OCEAN")
+      return lateralFlag = 'OCEAN'
+    }
+    
+  }
+
+
+
+}
+
+ 
