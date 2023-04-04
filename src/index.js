@@ -12,10 +12,10 @@ document.addEventListener("DOMContentLoaded", () => {
   const canvas = document.querySelector('canvas');
   const ctx = canvas.getContext("2d");
 
-  // canvas.width = window.innerWidth*2.5;
-  // canvas.height = window.innerHeight*1.9;
-  canvas.width = 4000;
-  canvas.height = 2000;
+  canvas.width = window.innerWidth*2.5;
+  canvas.height = window.innerHeight*1.9;
+  // canvas.width = 4000;
+  // canvas.height = 2000;
 
   let ocean = new Ocean({canvas, ctx});
   let sub = new Sub({canvas, ctx});

@@ -1,7 +1,6 @@
 
 
 class Images {
-
     constructor (options){
        this.sector = options.sector || 0;
        this.imageUrls = options.imageUrls || ['assets/life/ep/001_shark.jpg']
@@ -18,7 +17,6 @@ class Images {
         './assets/life/ap/010.jpeg',
         './assets/life/ap/011.webp',
         './assets/life/ap/012.jpeg'
-
     ];
        this.underImage = new Image();    
     }

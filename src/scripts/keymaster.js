@@ -14,7 +14,10 @@ class Keymaster {
         this.oceanBottom = this.canvas.height || 2000;
     }
 
-
+    prepareForAscent(){
+        // this.sub.vely = 
+        this.ocean.vely = 0
+    }
 
 
     newPos(dir){
@@ -47,9 +50,10 @@ class Keymaster {
             this.sub.y -= this.ocean.vely;
             return this.ocean
         } else if (depthFlag === 'OCEAN'){
-            console.log('OCEAN in keymaster; this.sub.y=', this.sub.y)
-            this.ocean.vely += 1
-            this.ocean.sy -= this.sub.vely;
+            console.log('OCEAN in keymaster; this.ocean.sy=', this.ocean.sy)
+            console.log('OCEAN in keymaster; this.ocean.vely=', this.ocean.vely)
+            this.ocean.vely -= 1
+            this.ocean.sy -= this.ocean.vely;
             return this.sub
         } else if (depthFlag === 'STOP_ASCENT')
             this.ocean.vely = 0

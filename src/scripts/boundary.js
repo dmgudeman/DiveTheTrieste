@@ -19,10 +19,10 @@ export function detectDepth(ocean, sub, canvas, dir){
 
     // console.log(oceanBottom, 'oceanBottom')
     // console.log(height,  'height')
-    console.log(sub.initialDepthPos, 'sub.inititalDepthPos')
-    console.log(ocean.sy, 'ocean.sy')
-    console.log(sub.y, 'sub.y')
-    console.log(composite, 'compposite')
+    // console.log(sub.initialDepthPos, 'sub.inititalDepthPos')
+    // console.log(ocean.sy, 'ocean.sy')
+    // console.log(sub.y, 'sub.y')
+    // console.log(composite, 'compposite')
   
   if (dir === 'down'){
     if (sub.y+ sub.initialDepthPos >= oceanBottom){
@@ -33,29 +33,37 @@ export function detectDepth(ocean, sub, canvas, dir){
     //   return depthFlag = "SUB";
     } else {
       console.log(ocean.sy, 'D ocean.sy')
-      console.log(sub.y, 'D sub.y')
+      console.log(canvas.height, 'D canvas.height')
+      // console.log(sub.y, 'D sub.y')
 
       console.log('OCEAN')
       return depthFlag = 'OCEAN'
     }   
   }
-
   if (dir === 'up'){
-    if (ocean.sy <= 0) {
-      console.log(ocean.sy, 'U ocean.sy')
-      console.log(sub.y, 'U sub.y')
-      console.log(ocean.surface_y, 'ocean.surface_y')
+    console.log('OCEAN')
+        return depthFlag = 'OCEAN'
 
-      console.log('STOP_ASCENT')
-      return depthFlag = 'STOP_ASCENT' 
-    } else if ((oceanBottom -  ocean.sy - sub.y ) < oceanBottom*0.58) {
-      console.log('SUB')
-      return depthFlag = "SUB";
-    } else {
-      console.log('OCEAN')
-      return depthFlag = 'OCEAN'
-    }
   }
+
+
+
+  // if (dir === 'up'){
+  //   if (ocean.sy <= 0) {
+  //     console.log(ocean.sy, 'U ocean.sy')
+  //     console.log(sub.y, 'U sub.y')
+  //     console.log(ocean.surface_y, 'ocean.surface_y')
+
+  //     console.log('STOP_ASCENT')
+  //     return depthFlag = 'STOP_ASCENT' 
+  //   } else if ((oceanBottom -  ocean.sy - sub.y ) < oceanBottom*0.58) {
+  //     console.log('SUB')
+  //     return depthFlag = "SUB";
+  //   } else {
+  //     console.log('OCEAN')
+  //     return depthFlag = 'OCEAN'
+  //   }
+  // }
   return depthFlag;
 }
 

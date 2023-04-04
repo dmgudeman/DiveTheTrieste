@@ -2,7 +2,7 @@
 class Ocean {
 
   constructor(options) {
-    this.canvas = options.canvas;
+   
     this.ctx = options.ctx;
     this.sx = options.sx || 0;
     this.sy = options.sy || 0;
