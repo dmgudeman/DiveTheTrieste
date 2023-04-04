@@ -10,7 +10,15 @@ class Images {
         './assets/life/ap/002.jpeg',
         './assets/life/ap/003.jpg',
         './assets/life/ap/004.jpeg',
-        './assets/life/ap/005.webp'
+        './assets/life/ap/005.webp',
+        './assets/life/ap/006.jpeg',
+        './assets/life/ap/007.jpeg',
+        './assets/life/ap/008.jpeg',
+        './assets/life/ap/009.jpeg',
+        './assets/life/ap/010.jpeg',
+        './assets/life/ap/011.webp',
+        './assets/life/ap/012.jpeg'
+
     ];
        this.underImage = new Image();    
     }
@@ -39,14 +47,14 @@ class Images {
         let imgs = this.images
         let used = []
         let x = Math.floor(Math.random()* imgs.length);
-         if(!used.includes(imgs[x])){
-            used.push(imgs[x])
-            return imgs[x]
-         } else {
-            used = [imgs[imgs.length%x+1]]
-            return imgs[imgs.length%x+1]
-         }
-
+        //  if(!used.includes(imgs[x])){
+        //     used.push(imgs[x])
+        //     return imgs[x]
+        //  } else {
+        //     used = [imgs[imgs.length%x+1]]
+        //     return imgs[imgs.length%x+1]
+        //  }
+       return imgs[x]
        
     }
  

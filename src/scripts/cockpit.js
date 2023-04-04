@@ -22,7 +22,7 @@ class Cockpit {
       let ui = new Image();
       ui.src = this.images.pickRandomImage();
       ui.onload = () => {
-         this.ctx.drawImage(ui, this.w*0.135, 0, this.w*0.75, this.h*0.78)
+         this.ctx.drawImage(ui, this.w*0.2, 0, this.w*0.7, this.h*0.81)
 
          // on load of first image, make the second image
          let cpi = new Image();

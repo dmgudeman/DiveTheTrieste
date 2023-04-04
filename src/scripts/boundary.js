@@ -23,13 +23,14 @@ export function detectDepth(ocean, sub, canvas, dir){
     console.log(ocean.sy, 'ocean.sy')
     console.log(sub.y, 'sub.y')
     console.log(composite, 'compposite')
+  
   if (dir === 'down'){
     if (sub.y+ sub.initialDepthPos >= oceanBottom){
       console.log('STOP_DESCENT')
       return  depthFlag = 'STOP_DESCENT'
-    } else if ((oceanBottom - ocean.sy - sub.y) < oceanBottom*0.58) {
-      console.log('SUB')
-      return depthFlag = "SUB";
+    // } else if ((oceanBottom - ocean.sy - sub.y) < oceanBottom*0.58) {
+    //   console.log('SUB')
+    //   return depthFlag = "SUB";
     } else {
       console.log(ocean.sy, 'D ocean.sy')
       console.log(sub.y, 'D sub.y')
