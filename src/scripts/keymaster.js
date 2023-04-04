@@ -28,16 +28,17 @@ class Keymaster {
     newPos(dir){
         console.log("keymasterrrrrrrrrrrrrrrrrrrrrrrrrrrrrr", dir)
 
-       let depthFlag =  detectDepth( this.ocean, this.sub, this.canvas);
+       let depthFlag =  detectDepth( this.ocean, this.sub, this.canvas, dir);
+       console.log('depthFlag in NewPos', depthFlag)
 
     if (dir === 'down') {
         console.log("keymasterrrrrrrrrrrrrrrrrrrrrrrrrrrrrr", dir)
         console.log(depthFlag)
-        if(depthFlag === 'MOVE') {
+        if(depthFlag === 'OCEAN') {
             this.ocean.vely += 1
             this.ocean.sy += this.ocean.vely;
             return this.ocean
-        } else if (depthFlag === 'SWITCH_TO_SUB'){
+        } else if (depthFlag === 'SUB'){
             this.sub.vely += 1
             this.sub.y += this.sub.vely;
             return this.sub
@@ -47,8 +48,25 @@ class Keymaster {
             return this.sub
 
     }
-    }
+    
+    if (dir === 'up') {
+        if(depthFlag === 'SUB') {
+            console.log('SUB in keymaster this.sub.y = ', this.sub.y)
+            this.sub.vely += 1
+            this.sub.y -= this.ocean.vely;
+            return this.ocean
+        } else if (depthFlag === 'OCEAN'){
+            console.log('OCEAN in keymaster; this.sub.y=', this.sub.y)
+            this.ocean.vely += 1
+            this.ocean.sy -= this.sub.vely;
+            return this.sub
+        } else if (depthFlag === 'STOP_ASCENT')
+            this.ocean.vely = 0
+            this.ocean.sy === this.ocean.surface_y;
+            return this.ocean
 
+    }
+}
     //     if(!depthFlag){
     //       if (dir === 'down'){
     //         this.ocean.vely += 1

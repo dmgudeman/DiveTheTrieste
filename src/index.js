@@ -86,7 +86,8 @@ document.addEventListener("DOMContentLoaded", () => {
   //  else{
     
   //     if (dir === 'down'){
-
+  //     sub.vely += 1
+  //     sub.y +=sub.vely;
   //     } else if ( dir === 'right'){
   //     sub.velx += 1;
   //     sub.x +=sub.velx;
@@ -109,7 +110,6 @@ document.addEventListener("DOMContentLoaded", () => {
       clear();
       ocean.draw();
       sub.draw();
-      key.
       request = requestAnimationFrame(update)   
     } else {
        cancelAnimationFrame(request)
@@ -151,7 +151,7 @@ function init() {
  
   function keyDown(e) {
     if (e.key === 'ArrowDown' || e.key === 'Down'){
-     
+     console.log('working')
         key.newPos('down');
     } else if (e.key === 'ArrowLeft' || e.key === 'Left'){
       key.newPos('left');
