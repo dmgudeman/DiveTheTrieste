@@ -1,40 +1,86 @@
+// canvas1 is the ocean floor and sub
+// canvas2 is opening
+// canvas3 is the cockpit
 
+import {showCanvas1, showCanvas2, showCanvas3} from './scripts/util'
 import {depth} from './scripts/boundary';
+import OceanView from './scripts/ocean_view';
 import Sub from './scripts/sub';
 import Ocean from './scripts/ocean';
+import Open from './scripts/open';
 import Cockpit from './scripts/cockpit';
 import {getCursorPosition} from './scripts/util';
 import Keymaster from './scripts/keymaster';
 
 console.log('WEBACK IS WORKINGcccc');
+const WIDTH = window.innerWidth * 2.5;
+const HEIGHT = window.innerHeight * 1.9;
 
 document.addEventListener("DOMContentLoaded", () => {
   const canvas = document.getElementById('canvas1');
   const ctx = canvas.getContext("2d");
+  const canvas2 = document.getElementById('canvas2');
+  const ctx2 = canvas.getContext("2d");
+  const canvas3 = document.getElementById('canvas3');
+  const ctx3 = canvas3.getContext("2d");
+  
+  canvas.width = WIDTH;
+  canvas.height = HEIGHT;
+  canvas2.width = WIDTH;
+  canvas2.height = HEIGHT;
+  canvas3.width = WIDTH;
+  canvas3.height = HEIGHT;
 
-  canvas.width = window.innerWidth*2.5;
-  canvas.height = window.innerHeight*1.9;
 
+  let open = new Open({ctx: ctx2})
+  // let oceanView = new OceanView({ctx});
   let ocean = new Ocean({ctx});
   let sub = new Sub({ctx});
   let key = new Keymaster({ ctx, ocean, sub});
-  let cockpit = new Cockpit({ctx});
+  let cockpit = new Cockpit({ctx: ctx3});
   let flag = false;
 
   ctx.onload = () => {
     ocean.draw();
+    showCanvas1()
   }
   console.log(canvas.width, 'canvas.width indexjs')
   console.log(canvas.height, 'canvas.height indexjs')
 
   ctx.canvas.addEventListener('mousedown', function(e) {
+    console.log('mouse clicked in listener 1 indexjs') 
       getCursorPosition(canvas, e)  
       flag === false ? flag = true : flag = false    
       if (flag) {
+      
         cockpit.draw();
-        canvas.addEventListener('dblclick', function(e) {})
+        showCanvas2()
+       
       }
       update(flag)
+    })
+    canvas2.addEventListener('mousedown', function(e) {
+      getCursorPosition(canvas, e) 
+      console.log('mouse clicked in listener 2 indexjs') 
+      showCanvas3()
+      // flag === false ? flag = true : flag = false    
+      // if (flag) {
+      //   cockpit.draw();
+        
+      // }
+      // update(flag)
+    })
+
+    canvas3.addEventListener('mousedown', function(e) {
+      getCursorPosition(canvas, e)  
+      console.log('mouse clicked in listener 3 indexjs')
+      showCanvas1()
+      // flag === false ? flag = true : flag = false    
+      // if (flag) {
+      //   cockpit.draw();
+        
+      // }
+      // update(flag)
     })
   function clear(){
     ctx.clearRect(0,0, canvas.width, canvas.height)
@@ -46,6 +92,7 @@ document.addEventListener("DOMContentLoaded", () => {
   function update(flag) {
     if (flag){
       clear();
+      // oceanView.draw();
       ocean.draw(); 
       sub.draw();
       // sub.draw2();

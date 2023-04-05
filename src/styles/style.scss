@@ -1,33 +1,37 @@
 
 
-//  body {
-//     display: flex;
-//     align-items: center;
-//     justify-content: center;
-//  } 
-//  #ocean-canvas { 
-//      background-color: blue; 
 
-
-//  } 
 canvas {
     position: absolute;
-    background:brown;
+    // background:brown;
     left:0;
     right:0;
+    
 
 
 }
-// #canvas1{
-//     z-index: 75
-// }
+#canvas1{
+    // display:none;
+}
+
+#canvas2{
+    // display: none;
+    // z-index: 100;
+    background-color: rgb(85, 15, 77);
+
+    display: none;
+
+}
 #canvas3{
-    z-index: 110;
+    // z-index: 80;
     background-color: transparent;
+    display: none;
     
 }
 
-
+body img {
+    display: none;
+}
 
 
 #sub {

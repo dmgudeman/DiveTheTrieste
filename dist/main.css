@@ -3,14 +3,22 @@
   \*************************************************************************************************************************************/
 canvas {
   position: absolute;
-  background: brown;
   left: 0;
   right: 0;
 }
 
+#canvas2 {
+  background-color: rgb(85, 15, 77);
+  display: none;
+}
+
 #canvas3 {
-  z-index: 110;
   background-color: transparent;
+  display: none;
+}
+
+body img {
+  display: none;
 }
 
 #sub {
