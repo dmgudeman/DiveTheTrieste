@@ -3,7 +3,6 @@ import Images from './images';
 
 class Cockpit {
    constructor (options){
-      this.canvas = options.canvas;
       this.ctx = options.ctx;
       this.x = options.x || 0;
       this.y = options.y || 0;
@@ -17,7 +16,6 @@ class Cockpit {
    }
     
    draw() {
-  
       // make first image
       let ui = new Image();
       ui.src = this.images.pickRandomImage();

@@ -1,5 +1,5 @@
 
-import {detectDepth, detectWindowEdge, depth} from './scripts/boundary';
+import {depth} from './scripts/boundary';
 import Sub from './scripts/sub';
 import Ocean from './scripts/ocean';
 import Cockpit from './scripts/cockpit';
@@ -14,22 +14,20 @@ document.addEventListener("DOMContentLoaded", () => {
 
   canvas.width = window.innerWidth*2.5;
   canvas.height = window.innerHeight*1.9;
-  // canvas.width = 4000;
-  // canvas.height = 2000;
 
-  let ocean = new Ocean({canvas, ctx});
-  let sub = new Sub({canvas, ctx});
-  let key = new Keymaster({ canvas, ctx, ocean, sub});
-  let cockpit = new Cockpit({canvas, ctx});
+  let ocean = new Ocean({ctx});
+  let sub = new Sub({ctx});
+  let key = new Keymaster({ ctx, ocean, sub});
+  let cockpit = new Cockpit({ctx});
   let flag = false;
 
-  
+  ctx.onload = () => {
+    ocean.draw();
+  }
   console.log(canvas.width, 'canvas.width indexjs')
   console.log(canvas.height, 'canvas.height indexjs')
 
-
-
-  canvas.addEventListener('mousedown', function(e) {
+  ctx.canvas.addEventListener('mousedown', function(e) {
       getCursorPosition(canvas, e)  
       flag === false ? flag = true : flag = false    
       if (flag) {
@@ -41,10 +39,7 @@ document.addEventListener("DOMContentLoaded", () => {
   function clear(){
     ctx.clearRect(0,0, canvas.width, canvas.height)
   }
-
  
-  
-  
   let request;
   
   // main animation loop
@@ -62,22 +57,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  // function keyUp(e) {
-  //   if(
-  //   e.key === "Right" ||
-  //   e.key === "ArrowRight" ||
-  //   e.key === "Left" ||
-  //   e.key === "ArrowLeft" ||
-  //   e.key === "Up" ||
-  //   e.key === "ArrowUp" ||
-  //   e.key === "Down" ||
-  //   e.key === "ArrowDown" 
-  //   ){
-  //     sub.dx = 0;
-  //     sub.dy = 0;
-  //   }
-  // }
- 
   function keyDown(e) {
     if (e.key === 'ArrowDown' || e.key === 'Down'){
         key.newPos('down');
@@ -89,6 +68,6 @@ document.addEventListener("DOMContentLoaded", () => {
         key.newPos('up')
   }
 }
-  // document.addEventListener('keyup', keyUp);
+
   document.addEventListener('keydown', keyDown);
 })

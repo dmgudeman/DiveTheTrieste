@@ -3,13 +3,12 @@ import {detectDepth, detectLateral, moveSubVertical} from './boundary';
 class Keymaster {
 
     constructor(options) {
-        this.canvas = options.canvas;
         this.ctx = options.ctx;
         this.dir = options.dir;
         this.sub = options.sub;
         this.ocean = options.ocean;
-        this.oceanRight = this.canvas.width || 4000;
-        this.oceanBottom = this.canvas.height || 2000;
+        this.oceanRight = this.ctx.canvas.width || 4000;
+        this.oceanBottom = this.ctx.canvas.height || 2000;
     }
 
     // prepareForAscent(){
@@ -20,8 +19,8 @@ class Keymaster {
 
     newPos(dir){
      
-        detectLateral(this.ocean, this.sub, this.canvas, dir);
-        detectDepth( this.ocean, this.sub, this.canvas, dir);
+        detectLateral(this.ocean, this.sub, this.ctx.canvas, dir);
+        detectDepth( this.ocean, this.sub, this.ctx.canvas, dir);
         
         if (dir === 'down') {
             if(this.ocean.depthFlag === 'OCEAN') {
