@@ -33,7 +33,7 @@ class Keymaster {
 
             } else if (this.ocean.depthFlag === 'STOP_DESCENT'){
                 this.ocean.sy = this.ocean.depthLimit;  
-                console.log(this.sub)
+         
                 if ( this.sub.y < this.sub.subDepthLimit){
                     this.sub.vely += 1
                     this.sub.y += this.sub.vely;
@@ -62,19 +62,20 @@ class Keymaster {
 
         
         if (dir === 'up') {
-        if (this.ocean.depthFlag === 'OCEAN'){
-                this.ocean.sy -= this.ocean.vely;
-            }
-            else if (this.oceandepthFlag === 'STOP_ASCENT')
-                this.ocean.sy = 0;
-                if ( this.sub.y > this.sub.initialDepthPos){
-                    this.sub.vely += 1;
-                    this.sub.y -= this.sub.vely;
-                } else {
-                    this.sub.vely = 0;
-                }
-            
 
+            if (this.ocean.depthFlag === 'OCEAN'){
+                    this.ocean.sy -= this.ocean.vely;
+                } else if (this.ocean.depthFlag === 'STOP_ASCENT'){
+                    this.ocean.sy = 0;
+            
+                    if ( this.sub.y > this.sub.initialDepthPos){
+                     
+                        this.sub.vely += 1;
+                        this.sub.y -= this.sub.vely;
+                    } else if (this.sub.y < this.sub.initialDepthPos) {
+                        this.sub.vely = 0;
+                    }
+                }
         }
         if (dir === 'right') {
             if(this.ocean.lateralFlag === 'OCEAN') {
