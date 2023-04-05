@@ -39,7 +39,6 @@ class Images {
             image.src = url;
             this.images.push(image);
         });
-
     }
 
     draw(){
@@ -49,13 +48,8 @@ class Images {
         let imgs = this.images
         let used = []
         let x = Math.floor(Math.random()* imgs.length);
-        //  if(!used.includes(imgs[x])){
-        //     used.push(imgs[x])
-        //     return imgs[x]
-        //  } else {
-        //     used = [imgs[imgs.length%x+1]]
-        //     return imgs[imgs.length%x+1]
-        //  }
+
+    
        return imgs[x]
        
     }
@@ -68,13 +62,5 @@ class Images {
 
         
 }
-
-
-
-
-
-
-
-
 
 export default Images;

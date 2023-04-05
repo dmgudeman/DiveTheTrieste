@@ -10,6 +10,25 @@
 
 
 //  } 
+canvas {
+    position: absolute;
+    background:brown;
+    left:0;
+    right:0;
+
+
+}
+// #canvas1{
+//     z-index: 75
+// }
+#canvas3{
+    z-index: 100;
+    background-color: transparent;
+    
+}
+
+
+
 
 #sub {
     display: none;

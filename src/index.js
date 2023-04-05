@@ -9,7 +9,7 @@ import Keymaster from './scripts/keymaster';
 console.log('WEBACK IS WORKINGcccc');
 
 document.addEventListener("DOMContentLoaded", () => {
-  const canvas = document.querySelector('canvas');
+  const canvas = document.getElementById('canvas1');
   const ctx = canvas.getContext("2d");
 
   canvas.width = window.innerWidth*2.5;
@@ -46,8 +46,9 @@ document.addEventListener("DOMContentLoaded", () => {
   function update(flag) {
     if (flag){
       clear();
-      ocean.draw();
+      ocean.draw(); 
       sub.draw();
+      // sub.draw2();
       depth(ocean,sub, canvas);
       request = requestAnimationFrame(update)   
     } else {
