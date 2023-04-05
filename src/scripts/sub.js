@@ -1,7 +1,5 @@
 
 
-import {clear} from './util.js';
-
 class Sub {
 
     constructor(options) {
@@ -18,6 +16,10 @@ class Sub {
         this.subImage = options.subImage || document.getElementById("sub");
         this.initialLateralPos = options.initialLateralPos || 900;
         this.initialDepthPos = options.initialDepthPos || 80;
+        this.subDepthFlag = 'SUB';
+        this.subLateralFlag = 'SUB';
+        this.subDepthLimit = options.subDepthLimit || 820;
+        this.subLateralLimit = options.subLateralLimit || 1700;
     }
 
     makeSub = ()=>{
