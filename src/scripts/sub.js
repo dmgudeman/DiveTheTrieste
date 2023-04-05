@@ -20,27 +20,24 @@ class Sub {
         this.subLateralFlag = 'SUB';
         this.subDepthLimit = options.subDepthLimit || 820;
         this.subLateralLimit = options.subLateralLimit || 1700;
-        this.spriteSheet =  this.makeSprite();
+        // this.spriteSheet =  this.makeSprite();
+        this.canvasSub = document.getElementById("canvas3")
+        this.ctxSub = canvas3.getContext('2d')
+        // this.canvasSub.width = this.canvas.width;
+        // this.canvasSub.height = this.canvas.height;
       
-        this.canvasSub = document.getElementById('canvas3') || '';
-        this.ctxSub = canvas3.getContext('2d');
-        console.log(this.canvasSub)
+        this.spriteSheet = document.getElementById('sprite') || '';
+      
     }
    
     draw = () => {
-        // this.ctx.drawImage(this.subImage,this.x, this.y)
+        // // this.ctx.drawImage(this.subImage,this.x, this.y)
         this.ctx.drawImage(this.subImage, this.x, this.y, this.w, this.h)
-        // this.draw2();
+        this.draw2();
     }
 
-    makeSprite = () => {
-        let ss = new Image();
-        ss.src = 'assets/sprite.png';
-        ss.onload = ()=>{
-        
-            return ss;
-        }
-       return console.log('no sprite sheet in makeSprite')
+    styleSprite = () => {
+       this.spriteSheet.setAttribute.style.zIndex = 110;
     }
     
     draw2() {
@@ -53,32 +50,33 @@ class Sub {
         // add more sprites here
         ];
         
-        this.canvasSub.width = 1000;
-        this.canvasSub.height = 1000;
-        this.ctx.drawImage(this.spriteSheet, 0, 0, 500, 500);
-        this.canvasSub.width = sprites[0].width;
-        this.canvasSub.height = sprites[0].height;
-        let currentFrame = 0;
+        // this.canvasSub.width = 1000;
+        // this.canvasSub.height = 1000;
+        // this.ctx.drawImage(this.spriteSheet, 0, 0, 500, 500);
+        // this.canvasSub.width = sprites[0].width;
+        // this.canvasSub.height = sprites[0].height;
+    //     let currentFrame = 0;
         
-        let lastFrameTime = 0; 
-        let animate = (currentTime) => {
-            const elapsedTime = currentTime - lastFrameTime;
-            if (elapsedTime > 1000/15) {
-            this.ctx.clearRect(0, 0, this.canvasSub.width, this.canvasSub.height);
-            const sprite = sprites[currentFrame];
-            this.ctx.drawImage(this.spriteSheet, sprite.x, sprite.y, sprite.width, sprite.height, 0, 0, this.canvasSub.width, this.canvasSub.height);
+    //     let lastFrameTime = 0; 
+    //     let animate = (currentTime) => {
+    //         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+    //         const elapsedTime = currentTime - lastFrameTime;
+    //         if (elapsedTime > 1000/15) {
+    //         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+    //         const sprite = sprites[currentFrame];
+    //         this.ctx.drawImage(this.spriteSheet, sprite.x, sprite.y, sprite.width, sprite.height, this.x, this.y, this.w, this.y);
             
 
-            currentFrame++;
-            if (currentFrame >= sprites.length) {
-                currentFrame = 0;
-            }
-            lastFrameTime = currentTime; 
-            }
-            requestAnimationFrame(animate);
-        }
+    //         currentFrame++;
+    //         if (currentFrame >= sprites.length) {
+    //             currentFrame = 0;
+    //         }
+    //         lastFrameTime = currentTime; 
+    //         }
+    //         requestAnimationFrame(animate);
+    //     }
              
-       animate();
+    //    animate();
     
    }
 
