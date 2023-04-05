@@ -1,16 +1,15 @@
 
 export function depth(ocean, sub, canvas){
   const SEA_DEPTH = 36161;
-  let conversion = SEA_DEPTH / canvas.width;
+  let conversion = SEA_DEPTH / canvas.height;
   let composite = ocean.sy + sub.y - sub.initialDepthPos;
   let depth = Math.floor(conversion * composite);
+  if( depth < 0) depth = 0;
   let d = document.getElementById("depth");
-  d.innerHTML = `Depth: ${ocean.sy } feet`;
+  d.innerHTML = `Depth: ${depth } feet`;
 }
 
 export function detectDepth(ocean, sub, canvas, dir){
-
-
   if (dir === 'down'){
     if (ocean.sy >=  ocean.depthLimit) {
       return  ocean.depthFlag = 'STOP_DESCENT';
