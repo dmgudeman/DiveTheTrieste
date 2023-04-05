@@ -2,8 +2,9 @@
 
 
 canvas {
-    position: absolute;
-    // background:brown;
+    // position: absolute;
+    // display: block;
+    background:brown;
     left:0;
     right:0;
     
@@ -11,13 +12,13 @@ canvas {
 
 }
 #canvas1{
-    // display:none;
+    display:block;
 }
 
 #canvas2{
     // display: none;
     // z-index: 100;
-    background-color: rgb(85, 15, 77);
+    background-color: transparent;
 
     display: none;
 
@@ -36,23 +37,23 @@ body img {
 
 #sub {
     display: none;
-    z-index:100;
+    // z-index:100;
 }
 
 #crossSection {
     display:none;
-    z-index:20;
+    // z-index:20;
 }
 #cockpit {
     display:none;
-    z-index: 20;
+    // z-index: 20;
     border: 2px solid black;
     
 }
 
 #random {
     display:none;
-    z-index: 15
+    // z-index: 15
 }
 
 #depth {

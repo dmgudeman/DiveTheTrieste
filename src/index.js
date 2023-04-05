@@ -38,7 +38,7 @@ document.addEventListener("DOMContentLoaded", () => {
   let sub = new Sub({ctx});
   let key = new Keymaster({ ctx, ocean, sub});
   let cockpit = new Cockpit({ctx: ctx3});
-  let flag = false;
+  let flag = true;
 
   ctx.onload = () => {
     ocean.draw();
@@ -47,41 +47,45 @@ document.addEventListener("DOMContentLoaded", () => {
   console.log(canvas.width, 'canvas.width indexjs')
   console.log(canvas.height, 'canvas.height indexjs')
 
-  ctx.canvas.addEventListener('mousedown', function(e) {
-    console.log('mouse clicked in listener 1 indexjs') 
-      getCursorPosition(canvas, e)  
-      flag === false ? flag = true : flag = false    
-      if (flag) {
-      
-        cockpit.draw();
-        showCanvas2()
-       
+
+    let handler1 = function(e) {
+      console.log('mouse clicked in listener 1 indexjs') 
+        getCursorPosition(canvas, e)  
+        // flag === false ? flag = true : flag = false    
+        // if (flag) {
+        
+          cockpit.draw();
+          showCanvas2()
+        
+        // }
+        update(flag)
+        canvas.removeEventListener('click', handler1);
       }
-      update(flag)
-    })
+    ctx.canvas.addEventListener('mousedown',handler1 )
+    
     canvas2.addEventListener('mousedown', function(e) {
       getCursorPosition(canvas, e) 
       console.log('mouse clicked in listener 2 indexjs') 
       showCanvas3()
       // flag === false ? flag = true : flag = false    
       // if (flag) {
-      //   cockpit.draw();
+        cockpit.draw();
         
       // }
       // update(flag)
     })
 
-    canvas3.addEventListener('mousedown', function(e) {
-      getCursorPosition(canvas, e)  
-      console.log('mouse clicked in listener 3 indexjs')
-      showCanvas1()
-      // flag === false ? flag = true : flag = false    
-      // if (flag) {
-      //   cockpit.draw();
+    // canvas3.addEventListener('mousedown', function(e) {
+    //   getCursorPosition(canvas, e)  
+    //   console.log('mouse clicked in listener 3 indexjs')
+    //   showCanvas1()
+    //   // flag === false ? flag = true : flag = false    
+    //   // if (flag) {
+    //     cockpit.draw();
         
-      // }
-      // update(flag)
-    })
+    //   // }
+    //   // update(flag)
+    // })
   function clear(){
     ctx.clearRect(0,0, canvas.width, canvas.height)
   }

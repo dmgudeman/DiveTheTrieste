@@ -29,11 +29,23 @@ class Sub {
         this.spriteSheet = document.getElementById('sprite') || '';
       
     }
+
+    clickHandler = (e) => {
+        const rect = this.canvas.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+      
+        // Check if the click was inside the image
+        if (x > 0 && x < this.width && y > 0 && y < this.height) {
+          console.log("Image clicked!");
+        }
+    }
    
     draw = () => {
         // // this.ctx.drawImage(this.subImage,this.x, this.y)
         this.ctx.drawImage(this.subImage, this.x, this.y, this.w, this.h)
-        this.draw2();
+        this.ctx.canvas.addEventListener("click", this.clickHandler)
+        
     }
 
     styleSprite = () => {
