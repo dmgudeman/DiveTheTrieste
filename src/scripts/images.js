@@ -16,7 +16,11 @@ class Images {
         './assets/life/ap/009.jpeg',
         './assets/life/ap/010.jpeg',
         './assets/life/ap/011.webp',
-        './assets/life/ap/012.jpeg'
+        './assets/life/ap/012.jpeg',
+        './assets/life/ap/013.jpeg',
+        './assets/life/ap/014.jpeg',
+        './assets/life/ap/015.jpeg',
+        './assets/life/ap/016.jpeg',
     ];
        this.underImage = new Image();    
     }
