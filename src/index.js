@@ -120,7 +120,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function handler1(e) {
     getCursorPosition(canvas1, e);
-    images.pickSector();
+    // images.pickSector();
     cockpit.draw();
     showCanvas3();
     update();

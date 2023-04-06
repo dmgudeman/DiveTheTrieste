@@ -80,6 +80,9 @@ class Images {
         './assets/life/dp/012.jpeg',
         './assets/life/dp/013.webp',
         './assets/life/dp/014.jpeg'
+       
+
+
     ];
     eb = [
         './assets/life/eb/001.jpeg',
@@ -118,3 +121,4 @@ class Images {
 export default Images;
 
   
+    // }
