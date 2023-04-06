@@ -23,10 +23,10 @@ class Ocean {
   }
 
   draw (){
-    this.ctx.drawImage(
+     this.ctx.drawImage(
         this.oceanImage, 
         this.sx, this.sy, this.sWidth, this.sHeight,
-        this.dx, this.dy, this.dWidth, this.dHeight)
+        this.dx, this.dy, this.dWidth, this.dHeight)     
   }    
 }
 export default Ocean;

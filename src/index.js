@@ -9,7 +9,6 @@ import Ocean from "./scripts/ocean";
 import Cockpit from "./scripts/cockpit";
 import { getCursorPosition } from "./scripts/util";
 import Keymaster from "./scripts/keymaster";
-import Images from "./scripts/images";
 
 const WIDTH = window.innerWidth * 2.5;
 const HEIGHT = window.innerHeight * 1.9;
@@ -33,7 +32,6 @@ document.addEventListener("DOMContentLoaded", () => {
   let ocean = new Ocean({ ctx: ctx1 });
   let sub = new Sub({ ctx: ctx1 });
   let key = new Keymaster({ ctx: ctx1, ocean, sub });
-  let images = new Images({ ctx: ctx1, sub, ocean });
   let cockpit = new Cockpit({ ctx: ctx3, sub, ocean });
 
   const rect2 = canvas2.getBoundingClientRect();
@@ -63,11 +61,12 @@ document.addEventListener("DOMContentLoaded", () => {
   // make the instruction page canvas
   const backgroundImage = new Image();
   backgroundImage.src = "assets/openOcean.png";
-  backgroundImage.style.zIndex = 20;
+  
   backgroundImage.onload = function () {
     ctx2.drawImage(backgroundImage, 0, 0, canvas2.width, canvas2.height);
-    let d = document.getElementById("depth");
-    d.style.display = "none";
+    backgroundImage.style.zIndex = 100;
+    // let d = document.getElementById("depth");
+    // d.style.display = "none";
 
     const instructions = new Image();
     instructions.src = "assets/instructions.png";
@@ -111,29 +110,24 @@ document.addEventListener("DOMContentLoaded", () => {
     update();
   };
 
-  const oceanBackDrop = new Image();
-  oceanBackDrop.src = "assets/crossSection.png";
-  oceanBackDrop.onLoad = () => {
-    ctx1.drawImage(oceanBackDrop, 0, 0, WIDTH, HEIGHT);
-    sub.draw();
-  };
 
+
+  //use update to make sure the canvas is rendered
   function handler1(e) {
     getCursorPosition(canvas1, e);
-    // images.pickSector();
     cockpit.draw();
     showCanvas3();
     update();
   }
+  ctx1.canvas.addEventListener("mousedown", handler1);
 
   // adding click function to the cockpit
-  ctx1.canvas.addEventListener("mousedown", handler1);
   const rect = canvas3.getBoundingClientRect();
   canvas3.addEventListener("mousedown", (e) => {
     const x = e.clientX - rect.left;
     const y = e.clientY - rect.top;
     if (x > 300 && x < canvas3.width*0.7 && y > 100 && y < canvas3.height*0.7) {
-      cockpit.draw();
+      cockpit.draw();   
     }
   });
 
@@ -141,12 +135,18 @@ document.addEventListener("DOMContentLoaded", () => {
     ctx1.clearRect(0, 0, canvas1.width, canvas1.height);
   }
 
+ 
+  let lastFrameTime = 0; 
   // main animation loop
-  function update() {
+  function update(currentTime) {
+    const elapsedTime = currentTime - lastFrameTime;
+    if (elapsedTime > 1000/10) {
     clear();
     ocean.draw();
     sub.draw();
     depth(ocean, sub, canvas1);
+    lastFrameTime = currentTime; 
+    }
     requestAnimationFrame(update);
   }
 

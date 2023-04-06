@@ -9,6 +9,13 @@ export function depth(ocean, sub, canvas) {
   return depth;
 }
 
+export function makeDepthGauge(ctx){
+  let dg = document. createElement("h2");
+  ctx.appendChild(dg);
+
+
+}
+
 export function pickImageArray(ocean, sub, ctx) {
   let x = ocean.sx + sub.x + sub.initialLateralPos;
   let y = ocean.sy + sub.y + sub.initialDepthPos;
