@@ -35,7 +35,6 @@ export function showCanvas1() {
 }
 
 export function showCanvas2() {
-  console.log("show canvas2 clicked");
   const canvas1 = document.getElementById("canvas1");
   const canvas2 = document.getElementById("canvas2");
   const canvas3 = document.getElementById("canvas3");
@@ -45,7 +44,6 @@ export function showCanvas2() {
 }
 
 export function showCanvas3() {
-  console.log("show canvas3 clicked");
   const canvas1 = document.getElementById("canvas1");
   const canvas2 = document.getElementById("canvas2");
   const canvas3 = document.getElementById("canvas3");

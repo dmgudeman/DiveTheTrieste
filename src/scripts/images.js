@@ -1,4 +1,4 @@
-import {depth, pickImageArray} from './boundary';
+import {pickImageArray} from './boundary';
 
 class Images {
     constructor (options){
@@ -8,17 +8,8 @@ class Images {
         this.images = [this.eb, this.ep, this.db, this.dp, this.ab, this.ap]        
     }
    
-
-    pickSector(){
-        let canvas = this.ctx.canvas;
-        let sectorDepth =  depth(this.ocean, this.sub, canvas )
-        console.log( sectorDepth, "depth in images")
-    }
- 
-
     pickRandomImage () {
         let arrNum =  pickImageArray(this.ocean, this.sub, this.ctx)
-        console.log('arrNum', arrNum)
         let arr = this.images[arrNum]
         let x = Math.floor(Math.random() * arr.length);
         return arr[x]   
@@ -89,9 +80,6 @@ class Images {
         './assets/life/dp/012.jpeg',
         './assets/life/dp/013.webp',
         './assets/life/dp/014.jpeg'
-       
-
-
     ];
     eb = [
         './assets/life/eb/001.jpeg',
@@ -129,18 +117,4 @@ class Images {
 
 export default Images;
 
-   // preloadImages(urls, callback) {
-    //     let loaded = 0;
-    //     urls.forEach((url) => {
-    //         const image = new Image();
-    //         image.onload = () => {
-    //             loaded++;
-    //             if (loaded === urls.length) {
-    //                 return this.images;
-    //                 //callback
-    //             }
-    //         };
-    //         image.src = url;
-    //         this.images.push(image);
-    //     });
-    // }
+  

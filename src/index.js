@@ -11,7 +11,6 @@ import { getCursorPosition } from "./scripts/util";
 import Keymaster from "./scripts/keymaster";
 import Images from "./scripts/images";
 
-console.log("WEBACK IS WORKINGcccc");
 const WIDTH = window.innerWidth * 2.5;
 const HEIGHT = window.innerHeight * 1.9;
 
@@ -37,8 +36,6 @@ document.addEventListener("DOMContentLoaded", () => {
   let images = new Images({ ctx: ctx1, sub, ocean });
   let cockpit = new Cockpit({ ctx: ctx3, sub, ocean });
 
-  let flag = true;
-
   const rect2 = canvas2.getBoundingClientRect();
   canvas2.addEventListener("click", (e) => {
     const x = e.clientX - rect2.left;
@@ -59,7 +56,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const x = e.clientX - rect2.left;
     const y = e.clientY - rect2.top;
     if (x > 100 && x < 300 && y > 300 && y < 350) {
-      showCanvas1()
+      showCanvas1();
     }
   });
 
@@ -69,8 +66,8 @@ document.addEventListener("DOMContentLoaded", () => {
   backgroundImage.style.zIndex = 20;
   backgroundImage.onload = function () {
     ctx2.drawImage(backgroundImage, 0, 0, canvas2.width, canvas2.height);
-    let d = document.getElementById('depth');
-    d.style.display = 'none';
+    let d = document.getElementById("depth");
+    d.style.display = "none";
 
     const instructions = new Image();
     instructions.src = "assets/instructions.png";
@@ -108,101 +105,49 @@ document.addEventListener("DOMContentLoaded", () => {
     ctx2.fillText("DIVE THE TRIESTE!", 520, 175);
   };
   const instructions = new Image();
-    instructions.src = "assets/instructions.png";
-    instructions.onload = () => {
-      ctx2.drawImage(instructions, 450, 250, 600, 600);
-      update()
+  instructions.src = "assets/instructions.png";
+  instructions.onload = () => {
+    ctx2.drawImage(instructions, 450, 250, 600, 600);
+    update();
   };
 
   const oceanBackDrop = new Image();
-     oceanBackDrop.src = "assets/crossSection.png"
-     oceanBackDrop.onLoad = () => {
-     
-      ctx1.drawImage(oceanBackDrop, 0, 0, WIDTH, HEIGHT);
-      sub.draw();
-    
-
-     }
-
-  // ctx1.onload = () => {
-  //   ocean.draw();
-  //   sub.draw();
-  //   ctx3.onload = () => {
-  //     cockpit.draw();
-  //   };
-  // };
-  // showCanvas1()
-
-  console.log(canvas1.width, "canvas.width indexjs");
-  console.log(canvas1.height, "canvas.height indexjs");
+  oceanBackDrop.src = "assets/crossSection.png";
+  oceanBackDrop.onLoad = () => {
+    ctx1.drawImage(oceanBackDrop, 0, 0, WIDTH, HEIGHT);
+    sub.draw();
+  };
 
   function handler1(e) {
-    console.log("mouse clicked in listener 1 indexjs");
     getCursorPosition(canvas1, e);
-    // flag === false ? flag = true : flag = false
-    // if (flag) {
     images.pickSector();
     cockpit.draw();
     showCanvas3();
-
-    // }
-    update(flag);
+    update();
   }
+
+  // adding click function to the cockpit
   ctx1.canvas.addEventListener("mousedown", handler1);
   const rect = canvas3.getBoundingClientRect();
   canvas3.addEventListener("mousedown", (e) => {
     const x = e.clientX - rect.left;
     const y = e.clientY - rect.top;
-    if (x > 300 && x < 1000 && y > 100 && y < 800) {
-      console.log("MOUSE DOWN!");
+    if (x > 300 && x < canvas3.width*0.7 && y > 100 && y < canvas3.height*0.7) {
       cockpit.draw();
     }
   });
 
-  // canvas2.addEventListener("mousedown", (e) => {
-  //   getCursorPosition(canvas2, e);
-  //   console.log("mouse clicked in listener 2 indexjs");
-  //   showCanvas3();
-  //   // flag === false ? flag = true : flag = false
-  //   // if (flag) {
-  //   cockpit.draw();
-
-  //   // }
-  //   // update(flag)
-  // });
-
-  // canvas3.addEventListener('mousedown', (e) => {
-  //   getCursorPosition(canvas3, e)
-  //   console.log('mouse clicked in listener 3 indexjs')
-  //   showCanvas1()
-  //   // flag === false ? flag = true : flag = false
-  //   // if (flag) {
-  //     // cockpit.draw();
-
-  //   // }
-  //   // update(flag)
-  // })
   function clear() {
     ctx1.clearRect(0, 0, canvas1.width, canvas1.height);
   }
 
-  let request;
-
   // main animation loop
   function update() {
-    // if (flag) {
     clear();
-    // oceanView.draw();
     ocean.draw();
     sub.draw();
-    // sub.draw2();
     depth(ocean, sub, canvas1);
-    request = requestAnimationFrame(update);
-    // } else {
-    //   cancelAnimationFrame(request);
-    //   clear();
-    //   cockpit.draw();
-    // }
+    requestAnimationFrame(update);
   }
 
   function keyDown(e) {
