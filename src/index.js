@@ -61,7 +61,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
   // button 4
-  let audioFlag = false;
+  let audioFlag = true;
 function toggleAudio () {
   
     let audio = document.getElementById("music")
@@ -194,7 +194,6 @@ const sprites = [
     // sub.draw();
     depth(ocean, sub, canvas1);
     const sprite = sprites[currentFrame];
-          console.log(sub.y, "sub.x")
           ctx1.drawImage(spriteSheet, sprite.x, sprite.y, sprite.width, sprite.height, sub.x, sub.y, sub.w, sub.h);
           currentFrame++;
           if (currentFrame >= sprites.length) {
