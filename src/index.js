@@ -4,10 +4,8 @@
 
 import { showCanvas1, showCanvas2, showCanvas3 } from "./scripts/util";
 import { depth } from "./scripts/boundary";
-// import OceanView from "./scripts/ocean_view";
 import Sub from "./scripts/sub";
 import Ocean from "./scripts/ocean";
-import Open from "./scripts/open";
 import Cockpit from "./scripts/cockpit";
 import { getCursorPosition } from "./scripts/util";
 import Keymaster from "./scripts/keymaster";
@@ -22,8 +20,8 @@ document.addEventListener("DOMContentLoaded", () => {
   const canvas2 = document.getElementById("canvas2");
   const canvas3 = document.getElementById("canvas3");
 
-  const ctx2 = canvas2.getContext("2d");
   const ctx1 = canvas1.getContext("2d");
+  const ctx2 = canvas2.getContext("2d");
   const ctx3 = canvas3.getContext("2d");
 
   canvas1.width = WIDTH;
@@ -33,10 +31,7 @@ document.addEventListener("DOMContentLoaded", () => {
   canvas3.width = WIDTH;
   canvas3.height = HEIGHT;
 
-  let open = new Open({ ctx: ctx2 });
-  // let oceanView = new OceanView({ctx});
   let ocean = new Ocean({ ctx: ctx1 });
-
   let sub = new Sub({ ctx: ctx1 });
   let key = new Keymaster({ ctx: ctx1, ocean, sub });
   let images = new Images({ ctx: ctx1, sub, ocean });
@@ -45,73 +40,92 @@ document.addEventListener("DOMContentLoaded", () => {
   let flag = true;
 
   const rect2 = canvas2.getBoundingClientRect();
-  canvas2.addEventListener("click", (e)=> {
-     const x = e.clientX - rect2.left;
-     const y = e.clientY - rect2.top;
+  canvas2.addEventListener("click", (e) => {
+    const x = e.clientX - rect2.left;
+    const y = e.clientY - rect2.top;
     if (x > 100 && x < 300 && y > 100 && y < 150) {
-       window.location.href = "https://github.com/dmgudeman";
+      window.location.href = "https://github.com/dmgudeman";
     }
- })
+  });
 
- canvas2.addEventListener("click", (e)=> {
+  canvas2.addEventListener("click", (e) => {
     const x = e.clientX - rect2.left;
     const y = e.clientY - rect2.top;
     if (x > 100 && x < 300 && y > 200 && y < 250) {
-       window.location.href = "https://www.linkedin.com/in/davidmgudeman/"
+      window.location.href = "https://www.linkedin.com/in/davidmgudeman/";
     }
- })
+  });
+  canvas2.addEventListener("click", (e) => {
+    const x = e.clientX - rect2.left;
+    const y = e.clientY - rect2.top;
+    if (x > 100 && x < 300 && y > 300 && y < 350) {
+      showCanvas1()
+    }
+  });
 
   const backgroundImage = new Image();
-    backgroundImage.src = "assets/openOcean.png";
-    backgroundImage.style.zIndex = 20;
-    backgroundImage.onload = function() {
+  backgroundImage.src = "assets/openOcean.png";
+  backgroundImage.style.zIndex = 20;
+  backgroundImage.onload = function () {
     ctx2.drawImage(backgroundImage, 0, 0, canvas2.width, canvas2.height);
-      // draw first button
-      ctx2.fillStyle = "#fff";
-      ctx2.fillRect(100, 100, 250, 50);
-      ctx2.fillStyle = "#4CAF50";
-      ctx2.font = "bold 20px Arial";
-      ctx2.fillText("D Gudeman Github", 115, 132);
 
-   
-      // draw second button
-      let button2 = {x:100, y:200, width: 250, height: 50}
-      ctx2.fillStyle = "#fff";
-      ctx2.fillRect(button2.x, button2.y, button2.width, button2.height);
-      ctx2.fillStyle = "#4CAF50";
-      ctx2.font = "bold 20px Arial";
-      ctx2.fillText("D Gudeman Linked In", 114, 232);
 
-      let banner = {x:450, y:100, width: 600, height:150}
-      ctx2.fillStyle = "#fff";
-      ctx2.fillRect(banner.x, banner.y, banner.width, banner.height);
-      ctx2.fillStyle = "#4CAF50";
-      ctx2.font = "bold 50px Arial";
-      ctx2.fillText("DIVE THE TRIESTE!", 520, 175);
-  
+    const instructions = new Image();
+    instructions.src = "assets/instructions.png";
+
+    instructions.onload = () => {
+      ctx2.drawImage(instructions, 450, 250, 600, 600);
+    };
+    // draw first button
+    ctx2.fillStyle = "#fff";
+    ctx2.fillRect(100, 100, 250, 50);
+    ctx2.fillStyle = "#4CAF50";
+    ctx2.font = "bold 20px Arial";
+    ctx2.fillText("D Gudeman Github", 115, 132);
+
+    // draw second button
+    let button2 = { x: 100, y: 200, width: 250, height: 50 };
+    ctx2.fillStyle = "#fff";
+    ctx2.fillRect(button2.x, button2.y, button2.width, button2.height);
+    ctx2.fillStyle = "#4CAF50";
+    ctx2.font = "bold 20px Arial";
+    ctx2.fillText("D Gudeman Linked In", 114, 232);
+
+    let button3 = { x: 100, y: 300, width: 250, height: 50 };
+    ctx2.fillStyle = "#fff";
+    ctx2.fillRect(button3.x, button3.y, button3.width, button3.height);
+    ctx2.fillStyle = "#4CAF50";
+    ctx2.font = "bold 20px Arial";
+    ctx2.fillText("Go To Application", 114, 332);
+
+    let banner = { x: 450, y: 100, width: 600, height: 150 };
+    ctx2.fillStyle = "#fff";
+    ctx2.fillRect(banner.x, banner.y, banner.width, banner.height);
+    ctx2.fillStyle = "#4CAF50";
+    ctx2.font = "bold 50px Arial";
+    ctx2.fillText("DIVE THE TRIESTE!", 520, 175);
   };
   const instructions = new Image();
 
- instructions.src = "assets/instructions.png";
+  instructions.src = "assets/instructions.png";
 
- instructions.onload = () => {
+  instructions.onload = () => {
     ctx2.drawImage(instructions, 450, 250, 600, 600);
-  }
+  };
 
   ctx1.onload = () => {
-    console.log("ctx3 on load");
     ocean.draw();
     sub.draw();
     ctx3.onload = () => {
       cockpit.draw();
-     };
+    };
   };
   // showCanvas1()
- 
+
   console.log(canvas1.width, "canvas.width indexjs");
   console.log(canvas1.height, "canvas.height indexjs");
 
-  function handler1 (e) {
+  function handler1(e) {
     console.log("mouse clicked in listener 1 indexjs");
     getCursorPosition(canvas1, e);
     // flag === false ? flag = true : flag = false
@@ -122,15 +136,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // }
     update(flag);
-  };
+  }
   ctx1.canvas.addEventListener("mousedown", handler1);
   const rect = canvas3.getBoundingClientRect();
-  canvas3.addEventListener('mousedown', (e) => {
+  canvas3.addEventListener("mousedown", (e) => {
     const x = e.clientX - rect.left;
     const y = e.clientY - rect.top;
     if (x > 300 && x < 1000 && y > 100 && y < 800) {
-       console.log("MOUSE DOWN!");
-       cockpit.draw()
+      console.log("MOUSE DOWN!");
+      cockpit.draw();
     }
   });
 
@@ -166,13 +180,13 @@ document.addEventListener("DOMContentLoaded", () => {
   // main animation loop
   function update() {
     // if (flag) {
-      clear();
-      // oceanView.draw();
-      ocean.draw();
-      sub.draw();
-      // sub.draw2();
-      depth(ocean, sub, canvas1);
-      request = requestAnimationFrame(update);
+    clear();
+    // oceanView.draw();
+    ocean.draw();
+    sub.draw();
+    // sub.draw2();
+    depth(ocean, sub, canvas1);
+    request = requestAnimationFrame(update);
     // } else {
     //   cancelAnimationFrame(request);
     //   clear();
