@@ -65,7 +65,7 @@ document.addEventListener("DOMContentLoaded", () => {
 function toggleAudio () {
   let button4 = { x: 100, y: 400, width: 250, height: 50 };
     let audio = document.getElementById("music")
-    console.log('audio.paused', audio.paused)
+ 
     if (audioFlag){
       audio.play() 
       ctx2.clearRect(button4.x, button4.y, button4.width, button4.height);
@@ -76,7 +76,7 @@ function toggleAudio () {
       ctx2.font = "bold 20px Arial";
       ctx2.fillText("Pause Music", 115, 432);  
         } else {
-         console.log('hi there')
+    
        audio.pause();
        ctx2.clearRect(button4.x, button4.y, button4.width, button4.height);
        ctx2.fillStyle = "#fff";
