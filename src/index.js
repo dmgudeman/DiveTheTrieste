@@ -61,16 +61,30 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
   // button 4
-  let audioFlag = true;
+  let audioFlag = false;
 function toggleAudio () {
-  
+  let button4 = { x: 100, y: 400, width: 250, height: 50 };
     let audio = document.getElementById("music")
     console.log('audio.paused', audio.paused)
     if (audioFlag){
-      audio.play()   
+      audio.play() 
+      ctx2.clearRect(button4.x, button4.y, button4.width, button4.height);
+      ctx2.fillStyle = "#fff";
+      ctx2.fillRect(button4.x, button4.y, button4.width, button4.height);
+      ctx2.fillText("", 115, 432); 
+      ctx2.fillStyle = "#4CAF50";
+      ctx2.font = "bold 20px Arial";
+      ctx2.fillText("Pause Music", 115, 432);  
         } else {
          console.log('hi there')
        audio.pause();
+       ctx2.clearRect(button4.x, button4.y, button4.width, button4.height);
+       ctx2.fillStyle = "#fff";
+       ctx2.fillRect(button4.x, button4.y, button4.width, button4.height);
+       ctx2.fillText("", 115, 432); 
+       ctx2.fillStyle = "#4CAF50";
+       ctx2.font = "bold 20px Arial";
+       ctx2.fillText("Play Music", 115, 432); 
       }
    audioFlag = !audioFlag;
 
@@ -79,7 +93,6 @@ function toggleAudio () {
     const x = e.clientX - rect2.left;
     const y = e.clientY - rect2.top;
     if (x > 100 && x < 300 && y > 400 && y < 450) {
-    
      toggleAudio();
     }
   });
@@ -91,8 +104,7 @@ function toggleAudio () {
   backgroundImage.onload = function () {
     ctx2.drawImage(backgroundImage, 0, 0, canvas2.width, canvas2.height);
     backgroundImage.style.zIndex = 100;
-    // let d = document.getElementById("depth");
-    // d.style.display = "none";
+
 
     const instructions = new Image();
     instructions.src = "assets/instructions.png";
@@ -128,7 +140,7 @@ function toggleAudio () {
     ctx2.fillRect(button4.x, button4.y, button4.width, button4.height);
     ctx2.fillStyle = "#4CAF50";
     ctx2.font = "bold 20px Arial";
-    ctx2.fillText("Toggle Sound", 114, 432);
+    ctx2.fillText("Play Music", 114, 432);
 
     let banner = { x: 450, y: 100, width: 600, height: 150 };
     ctx2.fillStyle = "#fff";
