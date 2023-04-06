@@ -2,6 +2,8 @@
 // canvas2 is opening
 // canvas3 is the cockpit
 
+// dmgudeman.github.io/DiveTheTrieste
+
 import { showCanvas1, showCanvas2, showCanvas3 } from "./scripts/util";
 import { depth } from "./scripts/boundary";
 import Sub from "./scripts/sub";
