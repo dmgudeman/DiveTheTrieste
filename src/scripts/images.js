@@ -1,52 +1,26 @@
-
+import {depth, pickImageArray} from './boundary';
 
 class Images {
     constructor (options){
-       this.sector = options.sector || 0;
-       this.imageUrls = options.imageUrls || ['assets/life/ep/001_shark.jpg']
-       this.images = options.images || [
-        './assets/life/ap/001.jpeg',
-        './assets/life/ap/002.jpeg',
-        './assets/life/ap/003.jpg',
-        './assets/life/ap/004.jpeg',
-        './assets/life/ap/005.webp',
-        './assets/life/ap/006.jpeg',
-        './assets/life/ap/007.jpeg',
-        './assets/life/ap/008.jpeg',
-        './assets/life/ap/009.jpeg',
-        './assets/life/ap/010.jpeg',
-        './assets/life/ap/011.webp',
-        './assets/life/ap/012.jpeg',
-        './assets/life/ap/013.jpeg',
-        './assets/life/ap/014.jpeg',
-        './assets/life/ap/015.jpeg',
-        './assets/life/ap/016.jpeg',
-    ];
-       this.underImage = new Image();    
+        this.ctx = options.ctx;
+        this.ocean = options.ocean;
+        this.sub = options.sub;
+        this.images = [this.eb, this.ep, this.db, this.dp, this.ab, this.ap]        
     }
+   
 
-    preloadImages(urls, callback) {
-        let loaded = 0;
-        urls.forEach((url) => {
-            const image = new Image();
-            image.onload = () => {
-                loaded++;
-                if (loaded === urls.length) {
-                    return this.images;
-                    //callback
-                }
-            };
-            image.src = url;
-            this.images.push(image);
-        });
+    pickSector(){
+        let canvas = this.ctx.canvas;
+        let sectorDepth =  depth(this.ocean, this.sub, canvas )
+        console.log( sectorDepth, "depth in images")
     }
+ 
 
-    draw(){
-
-    }
-    pickRandomImage(arr= this.images){
-     
-        let x = Math.floor(Math.random()* arr.length);
+    pickRandomImage () {
+        let arrNum =  pickImageArray(this.ocean, this.sub, this.ctx)
+        console.log('arrNum', arrNum)
+        let arr = this.images[arrNum]
+        let x = Math.floor(Math.random() * arr.length);
         return arr[x]   
     }
  
@@ -146,7 +120,7 @@ class Images {
         './assets/life/ep/008.jpeg',
         './assets/life/ep/009.jpeg',
         './assets/life/ep/010.jpeg',
-        './assets/life/ep/011.jpeg',
+        './assets/life/ep/011.jpg',
         './assets/life/ep/012.webp',
         './assets/life/ep/013.jpeg',
         './assets/life/ep/014.jpeg'
@@ -154,3 +128,19 @@ class Images {
 }
 
 export default Images;
+
+   // preloadImages(urls, callback) {
+    //     let loaded = 0;
+    //     urls.forEach((url) => {
+    //         const image = new Image();
+    //         image.onload = () => {
+    //             loaded++;
+    //             if (loaded === urls.length) {
+    //                 return this.images;
+    //                 //callback
+    //             }
+    //         };
+    //         image.src = url;
+    //         this.images.push(image);
+    //     });
+    // }

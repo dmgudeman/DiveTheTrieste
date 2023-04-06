@@ -22,7 +22,7 @@ class Ocean {
 
   }
 
-  draw = () => {
+  draw (){
     this.ctx.drawImage(
         this.oceanImage, 
         this.sx, this.sy, this.sWidth, this.sHeight,

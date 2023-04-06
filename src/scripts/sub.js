@@ -30,7 +30,7 @@ class Sub {
       
     }
 
-    clickHandler = (e) => {
+    clickHandler (e) {
         const rect = this.canvas.getBoundingClientRect();
         const x = e.clientX - rect.left;
         const y = e.clientY - rect.top;
@@ -41,14 +41,14 @@ class Sub {
         }
     }
    
-    draw = () => {
+    draw () {
         // // this.ctx.drawImage(this.subImage,this.x, this.y)
         this.ctx.drawImage(this.subImage, this.x, this.y, this.w, this.h)
         this.ctx.canvas.addEventListener("click", this.clickHandler)
         
     }
 
-    styleSprite = () => {
+    styleSprite() {
        this.spriteSheet.setAttribute.style.zIndex = 110;
     }
     
