@@ -134,8 +134,24 @@ document.addEventListener("DOMContentLoaded", () => {
   function clear() {
     ctx1.clearRect(0, 0, canvas1.width, canvas1.height);
   }
+  const spriteSheet = new Image();
+   spriteSheet.src = 'assets/sprite.png';
 
+   spriteSheet.onload = () => {
+      ctx1.drawImage(spriteSheet, 0, 0, 500, 500);
+      console.log(spriteSheet, 'spriteSheet')
+   }
+
+const sprites = [
+  { x: 0, y: 0, width: 125, height: 200 },
+  { x: 135, y: 0, width: 135, height: 200 },
+  { x: 280, y: 0, width: 125, height: 200 },
+  { x: 410, y: 0, width: 140, height: 200 }
+
+];
  
+
+  let currentFrame = 0;
   let lastFrameTime = 0; 
   // main animation loop
   function update(currentTime) {
@@ -143,8 +159,15 @@ document.addEventListener("DOMContentLoaded", () => {
     if (elapsedTime > 1000/10) {
     clear();
     ocean.draw();
-    sub.draw();
+    // sub.draw();
     depth(ocean, sub, canvas1);
+    const sprite = sprites[currentFrame];
+          console.log(sub.y, "sub.x")
+          ctx1.drawImage(spriteSheet, sprite.x, sprite.y, sprite.width, sprite.height, sub.x, sub.y, sub.w, sub.h);
+          currentFrame++;
+          if (currentFrame >= sprites.length) {
+            currentFrame = 0;
+          }
     lastFrameTime = currentTime; 
     }
     requestAnimationFrame(update);
@@ -164,3 +187,44 @@ document.addEventListener("DOMContentLoaded", () => {
 
   document.addEventListener("keydown", keyDown);
 });
+
+
+// const spriteSheet = new Image();
+//    spriteSheet.src = 'sprite.png';
+
+// const sprites = [
+//   { x: 0, y: 0, width: 125, height: 200 },
+//   { x: 135, y: 0, width: 135, height: 200 },
+//   { x: 280, y: 0, width: 125, height: 200 },
+//   { x: 410, y: 0, width: 140, height: 200 }
+
+// ];
+
+// const canvas3 = document.getElementById('canvas3');
+// const ctx = canvas3.getContext('2d');
+// canvas3.width =1000;
+// canvas3.height = 1000;
+// ctx.drawImage(spriteSheet, 0, 0, 500, 500);
+// canvas3.width = sprites[0].width;
+// canvas3.height = sprites[0].height;
+//   let currentFrame = 0
+//   let lastFrameTime = 0; 
+//   function animate(currentTime) {
+//     const elapsedTime = currentTime - lastFrameTime;
+//     if (elapsedTime > 1000/15) {
+//       ctx.clearRect(0, 0, canvas3.width, canvas3.height);
+//       const sprite = sprites[currentFrame];
+//       ctx.drawImage(spriteSheet, sprite.x, sprite.y, sprite.width, sprite.height, 0, 0, canvas3.width, canvas3.height);
+//       currentFrame++;
+//       if (currentFrame >= sprites.length) {
+//         currentFrame = 0;
+//       }
+//       lastFrameTime = currentTime; 
+//     }
+//     requestAnimationFrame(animate);
+//   }
+  
+
+//   animate();
+
+// })
