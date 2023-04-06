@@ -23,11 +23,7 @@ class Sub {
         // this.spriteSheet =  this.makeSprite();
         this.canvasSub = document.getElementById("canvas3")
         this.ctxSub = canvas3.getContext('2d')
-        // this.canvasSub.width = this.canvas.width;
-        // this.canvasSub.height = this.canvas.height;
-      
         this.spriteSheet = document.getElementById('sprite') || '';
-      
     }
 
     clickHandler (e) {
@@ -37,14 +33,13 @@ class Sub {
       
         // Check if the click was inside the image
         if (x > 0 && x < this.width && y > 0 && y < this.height) {
-          console.log("Image clicked!");
         }
     }
    
     draw () {
         // // this.ctx.drawImage(this.subImage,this.x, this.y)
         this.ctx.drawImage(this.subImage, this.x, this.y, this.w, this.h)
-        this.ctx.canvas.addEventListener("click", this.clickHandler)
+        // this.ctx.canvas.addEventListener("click", this.clickHandler)
         
     }
 

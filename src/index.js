@@ -63,12 +63,14 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
+  // make the instruction page canvas
   const backgroundImage = new Image();
   backgroundImage.src = "assets/openOcean.png";
   backgroundImage.style.zIndex = 20;
   backgroundImage.onload = function () {
     ctx2.drawImage(backgroundImage, 0, 0, canvas2.width, canvas2.height);
-
+    let d = document.getElementById('depth');
+    d.style.display = 'none';
 
     const instructions = new Image();
     instructions.src = "assets/instructions.png";
@@ -96,7 +98,7 @@ document.addEventListener("DOMContentLoaded", () => {
     ctx2.fillRect(button3.x, button3.y, button3.width, button3.height);
     ctx2.fillStyle = "#4CAF50";
     ctx2.font = "bold 20px Arial";
-    ctx2.fillText("Go To Application", 114, 332);
+    ctx2.fillText("Go To The Trieste", 114, 332);
 
     let banner = { x: 450, y: 100, width: 600, height: 150 };
     ctx2.fillStyle = "#fff";
@@ -106,20 +108,29 @@ document.addEventListener("DOMContentLoaded", () => {
     ctx2.fillText("DIVE THE TRIESTE!", 520, 175);
   };
   const instructions = new Image();
-
-  instructions.src = "assets/instructions.png";
-
-  instructions.onload = () => {
-    ctx2.drawImage(instructions, 450, 250, 600, 600);
+    instructions.src = "assets/instructions.png";
+    instructions.onload = () => {
+      ctx2.drawImage(instructions, 450, 250, 600, 600);
+      update()
   };
 
-  ctx1.onload = () => {
-    ocean.draw();
-    sub.draw();
-    ctx3.onload = () => {
-      cockpit.draw();
-    };
-  };
+  const oceanBackDrop = new Image();
+     oceanBackDrop.src = "assets/crossSection.png"
+     oceanBackDrop.onLoad = () => {
+     
+      ctx1.drawImage(oceanBackDrop, 0, 0, WIDTH, HEIGHT);
+      sub.draw();
+    
+
+     }
+
+  // ctx1.onload = () => {
+  //   ocean.draw();
+  //   sub.draw();
+  //   ctx3.onload = () => {
+  //     cockpit.draw();
+  //   };
+  // };
   // showCanvas1()
 
   console.log(canvas1.width, "canvas.width indexjs");
