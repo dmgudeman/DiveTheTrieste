@@ -44,11 +44,58 @@ document.addEventListener("DOMContentLoaded", () => {
 
   let flag = true;
 
+  const rect2 = canvas2.getBoundingClientRect();
+  canvas2.addEventListener("click", (e)=> {
+     const x = e.clientX - rect2.left;
+     const y = e.clientY - rect2.top;
+    if (x > 100 && x < 300 && y > 100 && y < 150) {
+       window.location.href = "https://github.com/dmgudeman";
+    }
+ })
+
+ canvas2.addEventListener("click", (e)=> {
+    const x = e.clientX - rect2.left;
+    const y = e.clientY - rect2.top;
+    if (x > 100 && x < 300 && y > 200 && y < 250) {
+       window.location.href = "https://www.linkedin.com/in/davidmgudeman/"
+    }
+ })
+
   const backgroundImage = new Image();
     backgroundImage.src = "assets/openOcean.png";
+    backgroundImage.style.zIndex = 20;
     backgroundImage.onload = function() {
     ctx2.drawImage(backgroundImage, 0, 0, canvas2.width, canvas2.height);
+      // draw first button
+      ctx2.fillStyle = "#fff";
+      ctx2.fillRect(100, 100, 250, 50);
+      ctx2.fillStyle = "#4CAF50";
+      ctx2.font = "bold 20px Arial";
+      ctx2.fillText("D Gudeman Github", 115, 132);
+
+   
+      // draw second button
+      let button2 = {x:100, y:200, width: 250, height: 50}
+      ctx2.fillStyle = "#fff";
+      ctx2.fillRect(button2.x, button2.y, button2.width, button2.height);
+      ctx2.fillStyle = "#4CAF50";
+      ctx2.font = "bold 20px Arial";
+      ctx2.fillText("D Gudeman Linked In", 114, 232);
+
+      let banner = {x:450, y:100, width: 600, height:150}
+      ctx2.fillStyle = "#fff";
+      ctx2.fillRect(banner.x, banner.y, banner.width, banner.height);
+      ctx2.fillStyle = "#4CAF50";
+      ctx2.font = "bold 50px Arial";
+      ctx2.fillText("DIVE THE TRIESTE!", 520, 175);
+  
   };
+  const instructions = new Image();
+
+ instructions.src = "assets/instructions.png";
+ instructions.onload = () => {
+    ctx2.drawImage(instructions, 450, 250, 600, 600);
+  }
 
   ctx1.onload = () => {
     console.log("ctx3 on load");
@@ -86,17 +133,17 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  canvas2.addEventListener("mousedown", (e) => {
-    getCursorPosition(canvas2, e);
-    console.log("mouse clicked in listener 2 indexjs");
-    showCanvas3();
-    // flag === false ? flag = true : flag = false
-    // if (flag) {
-    cockpit.draw();
+  // canvas2.addEventListener("mousedown", (e) => {
+  //   getCursorPosition(canvas2, e);
+  //   console.log("mouse clicked in listener 2 indexjs");
+  //   showCanvas3();
+  //   // flag === false ? flag = true : flag = false
+  //   // if (flag) {
+  //   cockpit.draw();
 
-    // }
-    // update(flag)
-  });
+  //   // }
+  //   // update(flag)
+  // });
 
   // canvas3.addEventListener('mousedown', (e) => {
   //   getCursorPosition(canvas3, e)
@@ -116,7 +163,7 @@ document.addEventListener("DOMContentLoaded", () => {
   let request;
 
   // main animation loop
-  function update(flag) {
+  function update() {
     // if (flag) {
       clear();
       // oceanView.draw();

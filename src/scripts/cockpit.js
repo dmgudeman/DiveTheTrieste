@@ -30,7 +30,6 @@ class Cockpit {
           const x = e.clientX - rect.left;
           const y = e.clientY - rect.top;
          if (x > 100 && x < 300 && y > 100 && y < 150) {
-            console.log("Rectangle clicked!");
             showCanvas1()
          }
       })
@@ -39,7 +38,6 @@ class Cockpit {
          const x = e.clientX - rect.left;
          const y = e.clientY - rect.top;
          if (x > 100 && x < 300 && y > 200 && y < 250) {
-            console.log("Rectangle clicked!");
             showCanvas2()
          }
       })
@@ -67,7 +65,7 @@ class Cockpit {
             this.ctx.fillStyle = "#fff";
             this.ctx.fillRect(100, 100, 200, 50);
             this.ctx.fillStyle = "#4CAF50";
-            this.ctx.font = "20px Arial";
+            this.ctx.font = "bold 20px Arial";
             this.ctx.fillText("Go to Ocean", 135, 132);
    
          
@@ -76,7 +74,7 @@ class Cockpit {
             this.ctx.fillStyle = "#fff";
             this.ctx.fillRect(button2.x, button2.y, button2.width, button2.height);
             this.ctx.fillStyle = "#4CAF50";
-            this.ctx.font = "20px Arial";
+            this.ctx.font = "bold 20px Arial";
             this.ctx.fillText("About Project", 135, 232);
            
          
