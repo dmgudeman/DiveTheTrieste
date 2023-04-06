@@ -4,7 +4,7 @@
 
 import { showCanvas1, showCanvas2, showCanvas3 } from "./scripts/util";
 import { depth } from "./scripts/boundary";
-import OceanView from "./scripts/ocean_view";
+// import OceanView from "./scripts/ocean_view";
 import Sub from "./scripts/sub";
 import Ocean from "./scripts/ocean";
 import Open from "./scripts/open";
@@ -93,6 +93,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const instructions = new Image();
 
  instructions.src = "assets/instructions.png";
+
  instructions.onload = () => {
     ctx2.drawImage(instructions, 450, 250, 600, 600);
   }
