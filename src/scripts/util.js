@@ -41,4 +41,5 @@ export function showCanvas3() {
     canvas1.style.display = 'none';
     canvas2.style.display = 'none';
     canvas3.style.display = 'block';
+
 }

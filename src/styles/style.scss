@@ -1,33 +1,25 @@
 
 
 
-canvas {
-    // position: absolute;
-    // display: block;
-    background:brown;
-    left:0;
-    right:0;
-    
-
-
-}
+// canvas {
+//     position: absolute;
+//     display: block;
+//     background:brown;
+//     left:0;
+//     right:0;
+// }
 #canvas1{
-    display:block;
+    // display: none;
+    background-color:yellow;
 }
 
 #canvas2{
-    // display: none;
-    // z-index: 100;
-    background-color: transparent;
-
     display: none;
-
+    background-color: green;
 }
 #canvas3{
-    // z-index: 80;
-    background-color: transparent;
-    display: none;
-    
+    display:none;
+    background-color: purple;   
 }
 
 body img {
@@ -37,23 +29,19 @@ body img {
 
 #sub {
     display: none;
-    // z-index:100;
+  
 }
 
 #crossSection {
     display:none;
-    // z-index:20;
+   
 }
 #cockpit {
-    display:none;
-    // z-index: 20;
-    border: 2px solid black;
-    
+    display:none;   
 }
 
 #random {
-    display:none;
-    // z-index: 15
+    display:none;  
 }
 
 #depth {
@@ -72,11 +60,3 @@ body img {
 }
 
 
-// #sub{
-//     display:none;
-//     z-index: 100;
-// }
-// #floor{
-//     display:none;
-   
-// }

@@ -9,6 +9,10 @@ export function depth(ocean, sub, canvas){
   d.innerHTML = `Depth: ${depth } feet`;
 }
 
+export function pickImageArray(ocean, sub, ctx){
+
+}
+
 export function detectDepth(ocean, sub, canvas, dir){
   if (dir === 'down'){
     if (ocean.sy >=  ocean.depthLimit) {
