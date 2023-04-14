@@ -1,4 +1,4 @@
-[link to view project] (dmgudeman.github.io/DiveTheTrieste)
+[link to view project](dmgudeman.github.io/DiveTheTrieste)
 
 
 ## Dive The Trieste!
