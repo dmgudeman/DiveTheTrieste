@@ -15,5 +15,21 @@ body {
     // background-color: aquamarine;
 	background-color: transparent;
 }
+#depth,
+#canvas1,
+#canvas2,
+#canvas3 {
+  margin-top: 50px; /* Adjust the value as needed */
+}
+
+.navbar {
+	position: fixed;
+	top: 0;
+	left: 0;
+    background-color: aquamarine;
+    z-index: 100;
+    width: 100vw;
+    height: 50px;
+}
 
 

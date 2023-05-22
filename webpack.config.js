@@ -29,7 +29,9 @@ const config = {
           },
           'sass-loader', // compiles sass to css
         ]
-      }
+      },
+      
+    
     ]
   },
   plugins: [new MiniCssExtractPlugin()]
