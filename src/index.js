@@ -14,6 +14,9 @@ import Keymaster from "./scripts/keymaster";
 
 const WIDTH = window.innerWidth * 2.5;
 const HEIGHT = window.innerHeight * 1.9;
+const canvasContainer = document.getElementById("canvas-container");
+
+
 
 document.addEventListener("DOMContentLoaded", () => {
   const canvas1 = document.getElementById("canvas1");
@@ -30,6 +33,8 @@ document.addEventListener("DOMContentLoaded", () => {
   canvas2.height = HEIGHT;
   canvas3.width = WIDTH;
   canvas3.height = HEIGHT;
+  // canvasContainer.style.marginTop = `${rect.top + 50}px`;
+  // const rect = canvasContainer.getBoundingClientRect();
 
   let ocean = new Ocean({ ctx: ctx1 });
   let sub = new Sub({ ctx: ctx1 });

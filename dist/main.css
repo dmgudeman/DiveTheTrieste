@@ -97,17 +97,6 @@ input {
   border-radius: 0;
 }
 
-body {
-  margin: 0;
-  padding: 0;
-  border: 0;
-  font-size: 100%;
-  font: inherit;
-  vertical-align: baseline;
-  overflow: hidden;
-  background-color: transparent;
-}
-
 #depth,
 #canvas1,
 #canvas2,
@@ -123,4 +112,8 @@ body {
   z-index: 100;
   width: 100vw;
   height: 50px;
+}
+
+#canvas-container {
+  margin-top: 50px;
 }
