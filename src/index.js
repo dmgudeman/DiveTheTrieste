@@ -20,6 +20,8 @@ document.addEventListener("DOMContentLoaded", () => {
   const canvas2 = document.getElementById("canvas2");
   const canvas3 = document.getElementById("canvas3");
   const gitHubButton = document.getElementById("gitHubButton");
+  const linkedInButton = document.getElementById("linkedInButton");
+  const musicNoteButton = document.getElementById("musicNoteButton");
 
   const ctx1 = canvas1.getContext("2d");
   const ctx2 = canvas2.getContext("2d");
@@ -43,12 +45,8 @@ document.addEventListener("DOMContentLoaded", () => {
       window.location.href = "https://github.com/dmgudeman"; 
   });
 
-  canvas2.addEventListener("click", (e) => {
-    const x = e.clientX - rect2.left;
-    const y = e.clientY - rect2.top;
-    if (x > 100 && x < 300 && y > 200 && y < 250) {
+  linkedInButton.addEventListener("click", (e) => {
       window.location.href = "https://www.linkedin.com/in/davidmgudeman/";
-    }
   });
   canvas2.addEventListener("click", (e) => {
   
@@ -62,41 +60,40 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 
-  // button 4
-  let audioFlag = false;
+  // music button
+  let audioFlag = true;
 function toggleAudio () {
   let button4 = { x: 100, y: 400, width: 250, height: 50 };
     let audio = document.getElementById("music")
  
     if (audioFlag){
       audio.play() 
-      ctx2.clearRect(button4.x, button4.y, button4.width, button4.height);
-      ctx2.fillStyle = "#fff";
-      ctx2.fillRect(button4.x, button4.y, button4.width, button4.height);
-      ctx2.fillText("", 115, 432); 
-      ctx2.fillStyle = "#4CAF50";
-      ctx2.font = "bold 20px Arial";
-      ctx2.fillText("Pause Music", 115, 432);  
+      musicNoteButton.classList.add('redNote')
+      // ctx2.clearRect(button4.x, button4.y, button4.width, button4.height);
+      // ctx2.fillStyle = "#fff";
+      // ctx2.fillRect(button4.x, button4.y, button4.width, button4.height);
+      // ctx2.fillText("", 115, 432); 
+      // ctx2.fillStyle = "#4CAF50";
+      // ctx2.font = "bold 20px Arial";
+      // ctx2.fillText("Pause Music", 115, 432);  
         } else {
     
        audio.pause();
-       ctx2.clearRect(button4.x, button4.y, button4.width, button4.height);
-       ctx2.fillStyle = "#fff";
-       ctx2.fillRect(button4.x, button4.y, button4.width, button4.height);
-       ctx2.fillText("", 115, 432); 
-       ctx2.fillStyle = "#4CAF50";
-       ctx2.font = "bold 20px Arial";
-       ctx2.fillText("Play Music", 115, 432); 
+      //  ctx2.clearRect(button4.x, button4.y, button4.width, button4.height);
+      //  ctx2.fillStyle = "#fff";
+      //  ctx2.fillRect(button4.x, button4.y, button4.width, button4.height);
+      //  ctx2.fillText("", 115, 432); 
+      //  ctx2.fillStyle = "#4CAF50";
+      //  ctx2.font = "bold 20px Arial";
+      //  ctx2.fillText("Play Music", 115, 432); 
       }
    audioFlag = !audioFlag;
 
   }
-  canvas2.addEventListener("click", (e) => {
-    const x = e.clientX - rect2.left;
-    const y = e.clientY - rect2.top;
-    if (x > 100 && x < 300 && y > 400 && y < 450) {
+  musicNoteButton.addEventListener("click", (e) => {
+  
      toggleAudio();
-    }
+    
   });
 
   // make the instruction page canvas
@@ -123,12 +120,12 @@ function toggleAudio () {
     // ctx2.fillText("D Gudeman Github", 115, 132);
 
     // draw second button
-    let button2 = { x: 100, y: 200, width: 250, height: 50 };
-    ctx2.fillStyle = "#fff";
-    ctx2.fillRect(button2.x, button2.y, button2.width, button2.height);
-    ctx2.fillStyle = "#4CAF50";
-    ctx2.font = "bold 20px Arial";
-    ctx2.fillText("D Gudeman Linked In", 114, 232);
+    // let button2 = { x: 100, y: 200, width: 250, height: 50 };
+    // ctx2.fillStyle = "#fff";
+    // ctx2.fillRect(button2.x, button2.y, button2.width, button2.height);
+    // ctx2.fillStyle = "#4CAF50";
+    // ctx2.font = "bold 20px Arial";
+    // ctx2.fillText("D Gudeman Linked In", 114, 232);
 
     let button3 = { x: 100, y: 300, width: 250, height: 50 };
     ctx2.fillStyle = "#fff";
@@ -138,12 +135,12 @@ function toggleAudio () {
     ctx2.fillText("Go To The Trieste", 114, 332);
     
    
-    let button4 = { x: 100, y: 400, width: 250, height: 50 };
-    ctx2.fillStyle = "#fff";
-    ctx2.fillRect(button4.x, button4.y, button4.width, button4.height);
-    ctx2.fillStyle = "#4CAF50";
-    ctx2.font = "bold 20px Arial";
-    ctx2.fillText("Play Music", 114, 432);
+    // let button4 = { x: 100, y: 400, width: 250, height: 50 };
+    // ctx2.fillStyle = "#fff";
+    // ctx2.fillRect(button4.x, button4.y, button4.width, button4.height);
+    // ctx2.fillStyle = "#4CAF50";
+    // ctx2.font = "bold 20px Arial";
+    // ctx2.fillText("Play Music", 114, 432);
 
     let banner = { x: 450, y: 100, width: 600, height: 150 };
     ctx2.fillStyle = "#fff";
