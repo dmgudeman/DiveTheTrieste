@@ -19,6 +19,7 @@ export function showCanvas1() {
   const canvas2 = document.getElementById("canvas2");
   const canvas3 = document.getElementById("canvas3");
   const gauge = document.querySelector('.gauge');
+  const trieste3Container = document.getElementById("trieste3Container");
   const ctx3 = canvas1.getContext("2d");
 
   let sub = new Sub({ ctx: ctx1 });
@@ -35,6 +36,7 @@ export function showCanvas1() {
   canvas2.style.display = "none";
   canvas3.style.display = "none";
   gauge.classList.add('visible');
+  trieste3Container.classList.add('hide');
 
 
   
@@ -45,10 +47,12 @@ export function showCanvas2() {
   const canvas2 = document.getElementById("canvas2");
   const canvas3 = document.getElementById("canvas3");
   const gauge = document.querySelector('.gauge');
+  const trieste3Container = document.getElementById("trieste3Container");
   canvas1.style.display = "none";
   canvas2.style.display = "block";
   canvas3.style.display = "none";
   gauge.classList.remove('visible');
+  trieste3Container.classList.remove('hide');
   
 }
 
@@ -57,6 +61,7 @@ export function showCanvas3() {
   const canvas2 = document.getElementById("canvas2");
   const canvas3 = document.getElementById("canvas3");
   const gauge = document.querySelector('.gauge');
+  const trieste3Container = document.getElementById("trieste3Container");
   canvas1.style.display = "none";
   canvas2.style.display = "none";
   canvas3.style.display = "block";

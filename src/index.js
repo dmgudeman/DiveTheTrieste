@@ -22,6 +22,8 @@ document.addEventListener("DOMContentLoaded", () => {
     const gitHubButton = document.getElementById("gitHubButton");
     const linkedInButton = document.getElementById("linkedInButton");
     const musicNoteButton = document.getElementById("musicNoteButton");
+    // const trieste3Button = document.getElementById("trieste3Container");
+    const trieste3Container = document.getElementById("trieste3Container")
 
     const ctx1 = canvas1.getContext("2d");
     const ctx2 = canvas2.getContext("2d");
@@ -40,13 +42,19 @@ document.addEventListener("DOMContentLoaded", () => {
     let cockpit = new Cockpit({ ctx: ctx3, sub, ocean });
 
     const rect2 = canvas2.getBoundingClientRect();
+    
     gitHubButton.addEventListener("click", () => {
-        window.location.href = "https://github.com/dmgudeman";
+      window.location.href = "https://github.com/dmgudeman";
     });
 
     linkedInButton.addEventListener("click", (e) => {
-        window.location.href = "https://www.linkedin.com/in/davidmgudeman/";
+      window.location.href = "https://www.linkedin.com/in/davidmgudeman/";
     });
+
+    trieste3Container.addEventListener("click", (e)=> {
+      showCanvas1();
+      trieste3Container.classList.add('hide');
+    })
     canvas2.addEventListener("click", (e) => {
         const x = e.clientX - rect2.left;
         const y = e.clientY - rect2.top;

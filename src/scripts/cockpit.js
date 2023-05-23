@@ -18,14 +18,16 @@ class Cockpit {
     this.underImageUrl =
       options.underImageUrl || "assets/life/ep/001_shark.jpg";
   }
-
+  
   draw() {
     const rect = this.canvas.getBoundingClientRect();
     this.canvas.addEventListener("click", (e) => {
+      const trieste3Container = document.getElementById("trieste3Container")
       const x = e.clientX - rect.left;
       const y = e.clientY - rect.top;
       if (x > 100 && x < 300 && y > 100 && y < 150) {
         showCanvas1();
+        trieste3Container.classList.remove('hide');
       }
     });
 
@@ -34,6 +36,8 @@ class Cockpit {
       const y = e.clientY - rect.top;
       if (x > 100 && x < 300 && y > 200 && y < 250) {
         showCanvas2();
+
+
       }
     });
 
