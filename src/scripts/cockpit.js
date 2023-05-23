@@ -26,8 +26,7 @@ class Cockpit {
       const x = e.clientX - rect.left;
       const y = e.clientY - rect.top;
       if (x > 100 && x < 300 && y > 100 && y < 150) {
-        showCanvas1();
-        trieste3Container.classList.remove('hide');
+        showCanvas1();     
       }
     });
 

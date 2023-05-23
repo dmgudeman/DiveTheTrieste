@@ -1,4 +1,16 @@
-
+.home {
+    position: fixed;
+    left: 25px;
+    top: 10px;
+    width: 65px;
+    height: 65px;
+    padding-left: 6px;
+    padding-top: 8px;
+    background-color: white;
+    color: #4CAF50;
+    z-index: 100;
+    border-radius: 5px;
+}
 .gitHub {
     position: fixed;
     right: 100px;
@@ -15,6 +27,7 @@
     top: 10px;
     width: 50px;
     padding-left: 4px;
+  
     background-color: white;
     color: #0A66C2;
     z-index: 100;
@@ -23,27 +36,30 @@
 
 .musicNote {
     position: fixed;
-    right: 240px;
+    left: 108px;
     top: 10px;
-    width: 62px;
-    padding-left: 4px;
+    width: 65px;
+    height: 65px;
+    padding-left: 6px;
+    padding-top: 8px;
     background-color: white;
     color: #4CAF50;
     z-index: 100;
+    border-radius: 5px;
 }
 .musicNote.redNote {
     color: red;
 }
 
-.trieste3Button {
-    position: fixed;
-    left: 240px;
-    top: 10px;
-    width: 150px;
-    height: 150px;
-    background-color: antiquewhite;
-    z-index: 100;
-}
+// .trieste3Button {
+//     position: fixed;
+//     left: 240px;
+//     top: 10px;
+//     width: 150px;
+//     height: 150px;
+//     background-color: antiquewhite;
+//     z-index: 100;
+// }
 
 
 canvas {
@@ -115,7 +131,7 @@ body img {
 .trieste3Button {
     display: block;
     position: fixed;
-    left: 140px;
+    left: 80px;
     top: 300px;
     width: 300px;
     height: 300px;
@@ -133,7 +149,7 @@ body img {
    color: white;
 //    background-color:rgb(234, 46, 83);
    background-color: gray;
-   left: 212px;
+   left: 148px;
    top: 425px;
     width: 170px;
    z-index: 101;
@@ -151,32 +167,93 @@ body img {
     display: none;
 }
 
+.bubblesContainer {
+   display: block;
+  }
 
 
-
-.bubble-container {
-    position: relative;
-    width: 200px;
-    height: 200px;
-    background-color: #000;
+ .bubbleContainer.hide {
+   display: none;
   }
   
   .bubble {
+    left: 200px;
     position: absolute;
-    width: 20px;
-    height: 20px;
-    background-color: #fff;
+    top:400px;
+    width: 5px;
+    height: 5px;
+    background-color: rgb(235, 171, 171);
+    border-radius: 50%;
+    animation: bubbleRise 3s linear infinite;
+    z-index: 100;
+  }
+  .bubble1 {
+    left: 200px;
+    position: absolute;
+    top:400px;
+    width: 10px;
+    height: 10px;
+    background-color: white;
     border-radius: 50%;
     animation: bubbleRise 2s linear infinite;
+    z-index: 100;
   }
+  .bubble2 {
+    left: 200px;
+    position: absolute;
+    top:400px;
+    width: 20px;
+    height: 13px;
+    background-color: white;
+    border-radius: 50%;
+    animation: bubbleRise 5s linear infinite;
+    z-index: 100;
+  }
+  .bubble3 {
+    left: 200px;
+    position: absolute;
+    top:400px;
+    width: 5px;
+    height: 6px;
+    background-color: white;
+    border-radius: 50%;
+    animation: bubbleRise 4s linear infinite;
+    z-index: 100;
+  }
+  .bubble4 {
+    left: 200px;
+    position: absolute;
+    top:400px;
+    width: 9px;
+    height: 8px;
+    background-color: white;
+    border-radius: 50%;
+    animation: bubbleRise 1.2s linear infinite;
+    z-index: 100;
+  }
+  .bubble5 {
+    left: 200px;
+    position: absolute;
+    top:400px;
+    width: 20px;
+    height: 13px;
+    background-color: white;
+    border-radius: 50%;
+    animation: bubbleRise 1.3s linear infinite;
+    z-index: 100;
+  }
+
+ 
   
   @keyframes bubbleRise {
     0% {
-      bottom: -20px;
+    //   bottom: -20px;
+      top: 400px;
       opacity: 0;
     }
     100% {
-      bottom: 100%;
+    //   bottom: 100%;
+    top: 0;
       opacity: 1;
     }
   }

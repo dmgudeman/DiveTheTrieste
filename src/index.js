@@ -23,7 +23,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const linkedInButton = document.getElementById("linkedInButton");
     const musicNoteButton = document.getElementById("musicNoteButton");
     // const trieste3Button = document.getElementById("trieste3Container");
-    const trieste3Container = document.getElementById("trieste3Container")
+    const trieste3Container = document.getElementById("trieste3Container");
 
     const ctx1 = canvas1.getContext("2d");
     const ctx2 = canvas2.getContext("2d");
@@ -42,26 +42,31 @@ document.addEventListener("DOMContentLoaded", () => {
     let cockpit = new Cockpit({ ctx: ctx3, sub, ocean });
 
     const rect2 = canvas2.getBoundingClientRect();
-    
+
     gitHubButton.addEventListener("click", () => {
-      window.location.href = "https://github.com/dmgudeman";
+        window.location.href = "https://github.com/dmgudeman";
     });
 
     linkedInButton.addEventListener("click", (e) => {
-      window.location.href = "https://www.linkedin.com/in/davidmgudeman/";
+        window.location.href = "https://www.linkedin.com/in/davidmgudeman/";
     });
 
-    trieste3Container.addEventListener("click", (e)=> {
-      showCanvas1();
-      trieste3Container.classList.add('hide');
-    })
-    canvas2.addEventListener("click", (e) => {
-        const x = e.clientX - rect2.left;
-        const y = e.clientY - rect2.top;
-        if (x > 100 && x < 300 && y > 300 && y < 350) {
-            showCanvas1();
-        }
+    trieste3Container.addEventListener("click", (e) => {
+        showCanvas1();
     });
+    // const bubbles = document.querySelectorAll(".bubble");
+
+    // // Function to generate a random size for each bubble
+    // function getRandomSize() {
+    //     return Math.floor(Math.random() * 15); // Adjust the range of random sizes as needed
+    // }
+
+    // // Apply random size to each bubble
+    // bubbles.forEach((bubble) => {
+    //     const size = getRandomSize();
+    //     bubble.style.width = `${size}px`;
+    //     bubble.style.height = `${size}px`;
+    // });
 
     // music button
     let audioFlag = true;
@@ -72,11 +77,9 @@ document.addEventListener("DOMContentLoaded", () => {
         if (audioFlag) {
             audio.play();
             musicNoteButton.classList.add("redNote");
-           
         } else {
             audio.pause();
             musicNoteButton.classList.remove("redNote");
-           
         }
         audioFlag = !audioFlag;
     }
@@ -99,12 +102,12 @@ document.addEventListener("DOMContentLoaded", () => {
             ctx2.drawImage(instructions, 450, 250, 600, 600);
         };
 
-        let button3 = { x: 100, y: 300, width: 250, height: 50 };
-        ctx2.fillStyle = "#fff";
-        ctx2.fillRect(button3.x, button3.y, button3.width, button3.height);
-        ctx2.fillStyle = "#4CAF50";
-        ctx2.font = "bold 20px Arial";
-        ctx2.fillText("Go To The Trieste", 114, 332);
+        // let button3 = { x: 100, y: 300, width: 250, height: 50 };
+        // ctx2.fillStyle = "#fff";
+        // ctx2.fillRect(button3.x, button3.y, button3.width, button3.height);
+        // ctx2.fillStyle = "#4CAF50";
+        // ctx2.font = "bold 20px Arial";
+        // ctx2.fillText("Go To The Trieste", 114, 332);
 
         let banner = { x: 450, y: 100, width: 600, height: 150 };
         ctx2.fillStyle = "#fff";
