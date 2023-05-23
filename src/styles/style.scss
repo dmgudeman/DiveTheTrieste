@@ -1,6 +1,26 @@
 
 
+.gitHub {
+    position: fixed;
+    right: 100px;
+    top: 10px;
+    width: 50px;
+    padding-left: 1px;
 
+    background-color: white;
+    z-index: 100;
+}
+
+.linkedIn {
+    position: fixed;
+    right: 170px;
+    top: 10px;
+    width: 50px;
+    padding-left: 4px;
+    background-color: white;
+    color: #0A66C2;
+    z-index: 100;
+}
 canvas {
     position: absolute;
     display: block;
@@ -11,14 +31,12 @@ canvas {
 #canvas1{
     display: none;
     background-color:yellow;
-
 }
 
-#canvas2{
-    
+#canvas2{   
     background-color: green;
- 
 }
+
 #canvas3{
     display:none;
     background-color: purple;  
@@ -60,9 +78,6 @@ body img {
     text-align: center;
 }
 
-
-
-
 .gauge {
     display:none;
 }
@@ -70,6 +85,7 @@ body img {
 .gauge.visible{
     display: block;
 }
+
 
 
 

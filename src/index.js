@@ -19,6 +19,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const canvas1 = document.getElementById("canvas1");
   const canvas2 = document.getElementById("canvas2");
   const canvas3 = document.getElementById("canvas3");
+  const gitHubButton = document.getElementById("gitHubButton");
 
   const ctx1 = canvas1.getContext("2d");
   const ctx2 = canvas2.getContext("2d");
@@ -38,12 +39,8 @@ document.addEventListener("DOMContentLoaded", () => {
   let cockpit = new Cockpit({ ctx: ctx3, sub, ocean });
 
   const rect2 = canvas2.getBoundingClientRect();
-  canvas2.addEventListener("click", (e) => {
-    const x = e.clientX - rect2.left;
-    const y = e.clientY - rect2.top;
-    if (x > 100 && x < 300 && y > 100 && y < 150) {
-      window.location.href = "https://github.com/dmgudeman";
-    }
+  gitHubButton.addEventListener("click", () => {
+      window.location.href = "https://github.com/dmgudeman"; 
   });
 
   canvas2.addEventListener("click", (e) => {
@@ -118,11 +115,12 @@ function toggleAudio () {
       ctx2.drawImage(instructions, 450, 250, 600, 600);
     };
     // draw first button
-    ctx2.fillStyle = "#fff";
-    ctx2.fillRect(100, 100, 250, 50);
-    ctx2.fillStyle = "#4CAF50";
-    ctx2.font = "bold 20px Arial";
-    ctx2.fillText("D Gudeman Github", 115, 132);
+    // ctx2.fillStyle = "#fff";
+    // L T W H
+    // ctx2.fillRect(45, 5, 60, 60);
+    // ctx2.fillStyle = "#4CAF50";
+    // ctx2.font = "bold 20px Arial";
+    // ctx2.fillText("D Gudeman Github", 115, 132);
 
     // draw second button
     let button2 = { x: 100, y: 200, width: 250, height: 50 };
