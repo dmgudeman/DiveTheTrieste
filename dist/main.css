@@ -1,3 +1,125 @@
-#canvas1{display:none;background-color:#ff0}#canvas2{background-color:green}#canvas3{display:none;background-color:purple}body img{display:none}#sub{display:none}#crossSection{display:none}#cockpit{display:none}#random{display:none}#depth{background-color:wheat;color:#3a1313;position:fixed;font-size:25;font-weight:bold;top:50;right:200;z-index:21;width:200;height:30;border-radius:15px;text-align:center}*,*:before,*:after{box-sizing:border-box}html,body,div,span,object,iframe,figure,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,code,em,img,small,strike,strong,sub,sup,tt,b,u,i,ol,ul,li,fieldset,form,label,table,caption,tbody,tfoot,thead,tr,th,td,main,canvas,embed,footer,header,nav,section,video{margin:0;padding:0;border:0;font-size:100%;font:inherit;vertical-align:baseline;text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased;text-size-adjust:none}footer,header,nav,section,main{display:block}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:"";content:none}table{border-collapse:collapse;border-spacing:0}input{-webkit-appearance:none;border-radius:0}body{margin:0;padding:0;border:0;font-size:100%;font:inherit;vertical-align:baseline;overflow:hidden;background-color:rgba(0,0,0,0)}
+/*!*************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[1].use[1]!./node_modules/sass-loader/dist/cjs.js!./src/index.scss ***!
+  \*************************************************************************************************************************************/
+canvas {
+  position: absolute;
+  display: block;
+  background: brown;
+  left: 0;
+  right: 0;
+}
 
-/*# sourceMappingURL=main.css.map*/
+#canvas1 {
+  display: none;
+  background-color: yellow;
+}
+
+#canvas2 {
+  background-color: green;
+}
+
+#canvas3 {
+  display: none;
+  background-color: purple;
+}
+
+body img {
+  display: none;
+}
+
+#sub {
+  display: none;
+}
+
+#crossSection {
+  display: none;
+}
+
+#cockpit {
+  display: none;
+}
+
+#random {
+  display: none;
+}
+
+#depth {
+  background-color: wheat;
+  color: rgb(58, 19, 19);
+  position: fixed;
+  font-size: 25;
+  font-weight: bold;
+  top: 50;
+  right: 200;
+  z-index: 21;
+  width: 200;
+  height: 30;
+  border-radius: 15px;
+  text-align: center;
+}
+
+.gauge {
+  display: none;
+}
+
+.gauge.visible {
+  display: block;
+}
+
+*, *:before, *:after {
+  box-sizing: border-box;
+}
+
+html, body, div, span, object, iframe, figure, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, code, em, img, small, strike, strong, sub, sup, tt, b, u, i, ol, ul, li, fieldset, form, label, table, caption, tbody, tfoot, thead, tr, th, td, main, canvas, embed, footer, header, nav, section, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  text-size-adjust: none;
+}
+
+footer, header, nav, section, main {
+  display: block;
+}
+
+body {
+  line-height: 1;
+}
+
+ol, ul {
+  list-style: none;
+}
+
+blockquote, q {
+  quotes: none;
+}
+
+blockquote:before, blockquote:after, q:before, q:after {
+  content: "";
+  content: none;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+input {
+  -webkit-appearance: none;
+  border-radius: 0;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+  overflow: hidden;
+  background-color: transparent;
+}

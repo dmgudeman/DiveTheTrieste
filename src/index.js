@@ -5,7 +5,7 @@
 // dmgudeman.github.io/DiveTheTrieste
 
 import { showCanvas1, showCanvas2, showCanvas3 } from "./scripts/util";
-import { depth } from "./scripts/boundary";
+import { showDepth } from "./scripts/boundary";
 import Sub from "./scripts/sub";
 import Ocean from "./scripts/ocean";
 import Cockpit from "./scripts/cockpit";
@@ -30,6 +30,7 @@ document.addEventListener("DOMContentLoaded", () => {
   canvas2.height = HEIGHT;
   canvas3.width = WIDTH;
   canvas3.height = HEIGHT;
+
 
   let ocean = new Ocean({ ctx: ctx1 });
   let sub = new Sub({ ctx: ctx1 });
@@ -58,8 +59,12 @@ document.addEventListener("DOMContentLoaded", () => {
     const y = e.clientY - rect2.top;
     if (x > 100 && x < 300 && y > 300 && y < 350) {
       showCanvas1();
+      
     }
   });
+
+
+
   // button 4
   let audioFlag = false;
 function toggleAudio () {
@@ -204,7 +209,7 @@ const sprites = [
     clear();
     ocean.draw();
     // sub.draw();
-    depth(ocean, sub, canvas1);
+    showDepth(ocean, sub, canvas1);
     const sprite = sprites[currentFrame];
           ctx1.drawImage(spriteSheet, sprite.x, sprite.y, sprite.width, sprite.height, sub.x, sub.y, sub.w, sub.h);
           currentFrame++;
@@ -228,9 +233,21 @@ const sprites = [
     }
   }
 
+
+
   document.addEventListener("keydown", keyDown);
+
+
 });
 
+  // display the depth-gauge
+  // const gauge = document.querySelector('.gauge-container');
+  // if (hideGauge) {
+  //   gauge.classList.add('hide'); // Add the "visible" class to show the element
+  // } else {
+  //   gauge.classList.remove('hide'); // Remove the "visible" class to hide the element
+  // }
+ 
 
 // const spriteSheet = new Image();
 //    spriteSheet.src = 'sprite.png';

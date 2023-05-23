@@ -1,4 +1,4 @@
-export function depth(ocean, sub, canvas) {
+export function showDepth(ocean, sub, canvas) {
   const SEA_DEPTH = 36161;
   let conversion = SEA_DEPTH / canvas.height;
   let composite = ocean.sy + sub.y - sub.initialDepthPos;
@@ -9,12 +9,12 @@ export function depth(ocean, sub, canvas) {
   return depth;
 }
 
-export function makeDepthGauge(ctx){
-  let dg = document. createElement("h2");
-  ctx.appendChild(dg);
+// export function makeDepthGauge(ctx){
+//   let dg = document.createElement("h2");
+//   ctx.appendChild(dg);
 
 
-}
+// }
 
 export function pickImageArray(ocean, sub, ctx) {
   let x = ocean.sx + sub.x + sub.initialLateralPos;
