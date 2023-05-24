@@ -11,6 +11,8 @@ export function getCursorPosition(canvas, event) {
   const y = event.clientY - rect.top;
 //   console.log("x: " + x + " y: " + y);
 }
+
+
 // canvas1 is the ocean
 // canvas2 is the opening page
 // canvas3 is the cockpit
@@ -48,6 +50,15 @@ export function showCanvas1() {
   canvas3.style.display = "none";
   gauge.classList.add('visible');
   trieste3Container.classList.add('hide');
+  // modal.style.display = "block";
+  // if (!hasModalDisplayed) {
+    console.log('vvvvvvv', localStorage.getItem('modalDisplayed'))
+    if (!(localStorage.getItem('modalDisplayed') === 'true')) {
+      modal.style.display = 'block';
+     
+    }
+  // }
+  
  
 }
 
@@ -100,3 +111,27 @@ export function showCanvas3() {
   bubblesContainer.classList.add('hide'); 
   
 }
+
+
+const modal = document.getElementById("modal");
+const closeButton = document.getElementsByClassName("close")[0];
+
+
+
+// let hasModalDisplayed;
+// if (!hasModalDisplayed) {
+//   localStorage.setItem('modalDisplayed', false);
+// }
+
+closeButton.addEventListener("click", function () {
+  modal.style.display = "none";
+  localStorage.setItem('modalDisplayed', true)
+});
+
+window.addEventListener("click", function (event) {
+    if (event.target === modal) {
+        modal.style.display = "none";
+        localStorage.setItem('modalDisplayed', true)
+    }
+});
+

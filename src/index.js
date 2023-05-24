@@ -16,6 +16,8 @@ const WIDTH = window.innerWidth * 2.5;
 const HEIGHT = window.innerHeight * 1.9;
 
 document.addEventListener("DOMContentLoaded", () => {
+  
+     localStorage.setItem('modalDisplayed', false);
     const canvas1 = document.getElementById("canvas1");
     const canvas2 = document.getElementById("canvas2");
     const canvas3 = document.getElementById("canvas3");
@@ -53,6 +55,27 @@ document.addEventListener("DOMContentLoaded", () => {
 
     trieste3Container.addEventListener("click", (e) => {
         showCanvas1();
+    });
+
+    const openModalButton = document.getElementById("openModalButton");
+    const modal = document.getElementById("modal");
+    const closeButton = document.getElementsByClassName("close")[0];
+
+    // Open the modal when the button is clicked
+    openModalButton.addEventListener("click", function () {
+        modal.style.display = "block";
+    });
+
+    // Close the modal when the close button is clicked
+    closeButton.addEventListener("click", function () {
+        modal.style.display = "none";
+    });
+
+    // Close the modal when the user clicks outside the modal
+    window.addEventListener("click", function (event) {
+        if (event.target === modal) {
+            modal.style.display = "none";
+        }
     });
     // const bubbles = document.querySelectorAll(".bubble");
 
