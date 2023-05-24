@@ -68,23 +68,21 @@ export function showCanvas2() {
   const canvas3 = document.getElementById("canvas3");
   const gauge = document.querySelector('.gauge');
   const trieste3Container = document.getElementById("trieste3Container");
+  const homeButton = document.getElementById("homeButton");
   canvas1.style.display = "none";
   canvas2.style.display = "block";
   canvas3.style.display = "none";
   gauge.classList.remove('visible');
   trieste3Container.classList.remove('hide');
+  homeButton.classList.add('hide');
   const bubblesContainer = document.querySelector(".bubblesContainer");
   const bubbles = bubblesContainer.getElementsByClassName('bubble');
   bubblesContainer.classList.add('hide'); 
   for (let i = 0; i < bubbles.length; i++) {
     const bubble = bubbles[i]; 
-    // start the animation
     bubble.style.animation = '';
-    // show the div
     bubble.style.display = '';
-  }
-  
-  
+  } 
 }
 
 export function showCanvas3() {
@@ -103,9 +101,7 @@ export function showCanvas3() {
   const bubbles = bubblesContainer.getElementsByClassName('bubble');
   for (let i = 0; i < bubbles.length; i++) {
     const bubble = bubbles[i]; 
-    // Stop the animation
     bubble.style.animation = 'none';
-    // Hide the div
     bubble.style.display = 'none';
   }
   bubblesContainer.classList.add('hide'); 
@@ -115,13 +111,6 @@ export function showCanvas3() {
 
 const modal = document.getElementById("modal");
 const closeButton = document.getElementsByClassName("close")[0];
-
-
-
-// let hasModalDisplayed;
-// if (!hasModalDisplayed) {
-//   localStorage.setItem('modalDisplayed', false);
-// }
 
 closeButton.addEventListener("click", function () {
   modal.style.display = "none";

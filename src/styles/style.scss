@@ -1,16 +1,4 @@
-.home {
-    position: fixed;
-    left: 25px;
-    top: 10px;
-    width: 65px;
-    height: 65px;
-    padding-left: 6px;
-    padding-top: 8px;
-    background-color: white;
-    color: #4CAF50;
-    z-index: 100;
-    border-radius: 5px;
-}
+
 .gitHub {
     position: fixed;
     right: 100px;
@@ -32,6 +20,46 @@
     z-index: 100;
 }
 
+.trieste3Button {
+    display: block;
+    position: fixed;
+    left: 80px;
+    top: 300px;
+    width: 300px;
+    height: 300px;
+    background-color: transparent;
+    z-index: 100;
+}
+.trieste3Container{
+    position: relative;
+}
+.trieste3Container.hide {
+    display: none;
+}
+
+.textOverlay {
+   display: block;
+   position: fixed;
+   font-size: 25;
+   font-weight: bold;
+   font-family: Arial, Helvetica, sans-serif;
+//    color: #4CAF50;
+   color: white;
+//    background-color:rgb(234, 46, 83);
+   background-color: gray;
+   left: 148px;
+   top: 425px;
+    width: 170px;
+   z-index: 101;
+   border-radius: 3px;
+   text-align: center;
+   box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.textOverlay.hide{
+    display: none;
+ }
+
 .musicNote {
     position: fixed;
     left: 108px;
@@ -45,20 +73,27 @@
     z-index: 100;
     border-radius: 5px;
 }
+
 .musicNote.redNote {
     color: red;
 }
 
-// .trieste3Button {
-//     position: fixed;
-//     left: 240px;
-//     top: 10px;
-//     width: 150px;
-//     height: 150px;
-//     background-color: antiquewhite;
-//     z-index: 100;
-// }
-
+.home {
+    position: fixed;
+    left: 25px;
+    top: 10px;
+    width: 65px;
+    height: 65px;
+    padding-left: 6px;
+    padding-top: 8px;
+    background-color: white;
+    color: #4CAF50;
+    z-index: 100;
+    border-radius: 5px;
+}
+.home.hide {
+    display: none;
+}
 
 canvas {
     position: absolute;
@@ -67,6 +102,7 @@ canvas {
     left:0;
     right:0;
 }
+
 #canvas1{
     display: none;
     background-color:yellow;
@@ -85,7 +121,6 @@ canvas {
 body img {
     display: none;
 }
-
 
 #sub {
     display: none;  
@@ -125,56 +160,16 @@ body img {
     display: block;
 }
 
-
-.trieste3Button {
-    display: block;
-    position: fixed;
-    left: 80px;
-    top: 300px;
-    width: 300px;
-    height: 300px;
-    background-color: transparent;
-    z-index: 100;
-}
-
-.textOverlay {
-   display: block;
-   position: fixed;
-   font-size: 25;
-   font-weight: bold;
-   font-family: Arial, Helvetica, sans-serif;
-//    color: #4CAF50;
-   color: white;
-//    background-color:rgb(234, 46, 83);
-   background-color: gray;
-   left: 148px;
-   top: 425px;
-    width: 170px;
-   z-index: 101;
-   border-radius: 3px;
-   text-align: center;
-   box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-}
-.textOverlay.hide{
-    display: none;
- }
- .trieste3Container{
-    position: relative;
-}
-.trieste3Container.hide {
-    display: none;
-}
-
+///bubbles
 .bubblesContainer {
    display: block;
-  }
+}
 
-
- .bubbleContainer.hide {
+.bubbleContainer.hide {
    display: none;
-  }
+}
   
-  .bubble {
+.bubble {
     left: 200px;
     position: absolute;
     top:400px;
@@ -184,8 +179,8 @@ body img {
     border-radius: 50%;
     animation: bubbleRise 3s linear infinite;
     z-index: 100;
-  }
-  .bubble1 {
+}
+.bubble1 {
     left: 200px;
     position: absolute;
     top:400px;
@@ -195,8 +190,8 @@ body img {
     border-radius: 50%;
     animation: bubbleRise 2s linear infinite;
     z-index: 100;
-  }
-  .bubble2 {
+}
+.bubble2 {
     left: 200px;
     position: absolute;
     top:400px;
@@ -206,8 +201,8 @@ body img {
     border-radius: 50%;
     animation: bubbleRise 5s linear infinite;
     z-index: 100;
-  }
-  .bubble3 {
+}
+.bubble3 {
     left: 200px;
     position: absolute;
     top:400px;
@@ -217,8 +212,8 @@ body img {
     border-radius: 50%;
     animation: bubbleRise 4s linear infinite;
     z-index: 100;
-  }
-  .bubble4 {
+}
+.bubble4 {
     left: 200px;
     position: absolute;
     top:400px;
@@ -228,8 +223,8 @@ body img {
     border-radius: 50%;
     animation: bubbleRise 1.2s linear infinite;
     z-index: 100;
-  }
-  .bubble5 {
+}
+.bubble5 {
     left: 200px;
     position: absolute;
     top:400px;
@@ -239,24 +234,23 @@ body img {
     border-radius: 50%;
     animation: bubbleRise 1.3s linear infinite;
     z-index: 100;
-  }
+}
 
- 
-  
-  @keyframes bubbleRise {
+
+
+@keyframes bubbleRise {
     0% {
-    //   bottom: -20px;
-      top: 400px;
-      opacity: 0;
+        top: 400px;
+        opacity: 0;
     }
     100% {
-    //   bottom: 100%;
-    top: 0;
-      opacity: 1;
-    }
-  }
 
-  .modal {
+    top: 0;
+        opacity: 1;
+    }
+}
+
+.modal {
     display: none; /* Initially hide the modal */
     position: fixed;
     z-index: 9999;
@@ -266,7 +260,7 @@ body img {
     height: 100%;
     overflow: auto;
     background-color: rgba(0, 0, 0, 0.5);
-  }
+}
   
   .modal-content {
     background-color: #fefefe;
@@ -286,7 +280,8 @@ body img {
     color: red;
   }
 
-  
+
+
 
 
 
