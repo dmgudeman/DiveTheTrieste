@@ -16,8 +16,7 @@ const WIDTH = window.innerWidth * 2.5;
 const HEIGHT = window.innerHeight * 1.9;
 
 document.addEventListener("DOMContentLoaded", () => {
-  
-    localStorage.setItem('modalDisplayed', false);
+    localStorage.setItem("modalDisplayed", false);
     const canvas1 = document.getElementById("canvas1");
     const canvas2 = document.getElementById("canvas2");
     const canvas3 = document.getElementById("canvas3");
@@ -25,7 +24,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const linkedInButton = document.getElementById("linkedInButton");
     const musicNoteButton = document.getElementById("musicNoteButton");
     const goToOceanButton = document.getElementById("trieste3Container");
-    const homeButton= document.getElementById("homeButton");
+    const homeButton = document.getElementById("homeButton");
 
     const ctx1 = canvas1.getContext("2d");
     const ctx2 = canvas2.getContext("2d");
@@ -44,7 +43,7 @@ document.addEventListener("DOMContentLoaded", () => {
     let cockpit = new Cockpit({ ctx: ctx3, sub, ocean });
 
     // const rect2 = canvas2.getBoundingClientRect();
-    
+
     gitHubButton.addEventListener("click", () => {
         window.location.href = "https://github.com/dmgudeman";
     });
@@ -55,11 +54,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
     goToOceanButton.addEventListener("click", () => {
         showCanvas1();
+       
     });
 
     homeButton.addEventListener("click", () => {
         showCanvas2();
-    })
+        showMessage("hello world");
+    });
 
     const openModalButton = document.getElementById("openModalButton");
     const modal = document.getElementById("modal");
@@ -81,7 +82,7 @@ document.addEventListener("DOMContentLoaded", () => {
             modal.style.display = "none";
         }
     });
-   
+
     // music button
     let audioFlag = true;
     function toggleAudio() {
@@ -156,6 +157,25 @@ document.addEventListener("DOMContentLoaded", () => {
     function clear() {
         ctx1.clearRect(0, 0, canvas1.width, canvas1.height);
     }
+
+    // message
+    const messageElement = document.getElementById("message");
+
+    function showMessage(message) {
+        messageElement.textContent = message;
+        messageElement.classList.remove("fade-out");
+        // messageElement.classList.remove("hide");
+        // messageElement.style.display = 'block';
+        messageElement.classList.add("fade-out");
+
+        setTimeout(() => {
+            messageElement.classList.remove("fade-out");
+        }, 2000);
+    }
+
+    // showMessage("Hello, world!");
+
+    // sprite
     const spriteSheet = new Image();
     spriteSheet.src = "assets/sprite.png";
 

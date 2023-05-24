@@ -282,6 +282,33 @@ body img {
 
 
 
+  #message {
+    display:none;
+    position: fixed;
+    opacity: 1;
+    transition: opacity 0.5s ease-in-out;
+    font-size: 1in;
+    font-weight: bold;
+    top: 200px;
+    left: 500px;
+    width: 200px;
+    height: 200px;
+    z-index: 101;
+    
+  }
+//   .message {
+   
+   
+   
+//   }
+//   .message.hide {
+//     display:none;
+//   }
+  
+  .fade-out {
+    opacity: 0;
+  }
+
 
 
 

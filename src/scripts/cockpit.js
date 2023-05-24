@@ -59,21 +59,6 @@ class Cockpit {
         // draw cockpit image
         this.ctx.drawImage(cpi, this.x, this.y, this.w, this.h);
         cpi.style.zIndex = 55;
-
-        // draw first button
-        this.ctx.fillStyle = "#fff";
-        this.ctx.fillRect(100, 100, 200, 50);
-        this.ctx.fillStyle = "#4CAF50";
-        this.ctx.font = "bold 20px Arial";
-        this.ctx.fillText("Go to Ocean", 135, 132);
-
-        // draw second button
-        let button2 = { x: 100, y: 200, width: 200, height: 50 };
-        this.ctx.fillStyle = "#fff";
-        this.ctx.fillRect(button2.x, button2.y, button2.width, button2.height);
-        this.ctx.fillStyle = "#4CAF50";
-        this.ctx.font = "bold 20px Arial";
-        this.ctx.fillText("About Project", 135, 232);
       };
     };
   }
