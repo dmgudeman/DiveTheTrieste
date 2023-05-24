@@ -101,6 +101,7 @@ export function showCanvas3() {
   canvas1.style.display = "none";
   canvas2.style.display = "none";
   canvas3.style.display = "block";
+  canvas3.style.cursor ="pointer";
   gauge.classList.add('visible');
   trieste3Container.classList.remove('hide');
   musicNoteButton.classList.remove("can1MN");
