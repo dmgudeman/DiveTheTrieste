@@ -184,14 +184,6 @@ body img {
   text-align: center;
 }
 
-.gauge {
-  display: none;
-}
-
-.gauge.visible {
-  display: block;
-}
-
 .bubblesContainer {
   display: block;
 }

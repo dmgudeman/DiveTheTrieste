@@ -59,7 +59,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     homeButton.addEventListener("click", () => {
         showCanvas2();
-        showMessage("hello world");
+        
     });
 
     const openModalButton = document.getElementById("openModalButton");
