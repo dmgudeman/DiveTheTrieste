@@ -16,25 +16,19 @@ export function getCursorPosition(canvas, event) {
 // canvas1 is the ocean
 // canvas2 is the opening page
 // canvas3 is the cockpit
+const canvas1 = document.getElementById("canvas1");
+const ctx1 = canvas1.getContext("2d");
+const canvas2 = document.getElementById("canvas2");
+const canvas3 = document.getElementById("canvas3");
+const ctx3 = canvas1.getContext("2d");
+const gauge = document.querySelector('.gauge');
+const trieste3Container = document.getElementById("trieste3Container");
+const homeButton = document.getElementById("homeButton")
+const musicNoteButton = document.getElementById("musicNoteButton")
+const bubblesContainer = document.querySelector(".bubblesContainer");
+const bubbles = bubblesContainer.getElementsByClassName('bubble');
+
 export function showCanvas1() {
-  const canvas1 = document.getElementById("canvas1");
-  const ctx1 = canvas1.getContext("2d");
-  const canvas2 = document.getElementById("canvas2");
-  const canvas3 = document.getElementById("canvas3");
-  const ctx3 = canvas1.getContext("2d");
-  const gauge = document.querySelector('.gauge');
-  const trieste3Container = document.getElementById("trieste3Container");
-  const bubblesContainer = document.querySelector(".bubblesContainer");
-  const bubbles = bubblesContainer.getElementsByClassName('bubble');
-  for (let i = 0; i < bubbles.length; i++) {
-    const bubble = bubbles[i]; 
-    // Stop the animation
-    bubble.style.animation = 'none';
-    // Hide the div
-    bubble.style.display = 'none';
-  }
-  bubblesContainer.classList.add('hide'); 
-  
   let sub = new Sub({ ctx: ctx1 });
   let ocean = new Ocean({ ctx: ctx1 });
   ctx1.onload = () => {
@@ -45,36 +39,53 @@ export function showCanvas1() {
     };
   };
 
+  for (let i = 0; i < bubbles.length; i++) {
+    const bubble = bubbles[i]; 
+    // Stop the animation
+    bubble.style.animation = 'none';
+    // Hide the div
+    bubble.style.display = 'none';
+  }
+  bubblesContainer.classList.add('hide'); 
+
+  if (!(localStorage.getItem('modalDisplayed') === 'true')) {
+    modal.style.display = 'block';
+    
+  }
+  
   canvas1.style.display = "block";
   canvas2.style.display = "none";
   canvas3.style.display = "none";
   gauge.classList.add('visible');
   trieste3Container.classList.add('hide');
-  // modal.style.display = "block";
-  // if (!hasModalDisplayed) {
-    console.log('vvvvvvv', localStorage.getItem('modalDisplayed'))
-    if (!(localStorage.getItem('modalDisplayed') === 'true')) {
-      modal.style.display = 'block';
-     
-    }
-  // }
-  
+  musicNoteButton.classList.add("can1MN");
+  musicNoteButton.classList.remove("can2MN");
+  musicNoteButton.classList.remove("can3MN");
+  homeButton.classList.add("can1home");
+  homeButton.classList.remove("can2home");
+  homeButton.classList.remove("can3home"); 
  
 }
 
 export function showCanvas2() {
-  const canvas1 = document.getElementById("canvas1");
-  const canvas2 = document.getElementById("canvas2");
-  const canvas3 = document.getElementById("canvas3");
-  const gauge = document.querySelector('.gauge');
-  const trieste3Container = document.getElementById("trieste3Container");
-  const homeButton = document.getElementById("homeButton");
+  // const canvas1 = document.getElementById("canvas1");
+  // const canvas2 = document.getElementById("canvas2");
+  // const canvas3 = document.getElementById("canvas3");
+  // const gauge = document.querySelector('.gauge');
+  // const trieste3Container = document.getElementById("trieste3Container");
+  // const homeButton = document.getElementById("homeButton");
   canvas1.style.display = "none";
   canvas2.style.display = "block";
   canvas3.style.display = "none";
   gauge.classList.remove('visible');
   trieste3Container.classList.remove('hide');
-  homeButton.classList.add('hide');
+  musicNoteButton.classList.remove("can1MN");
+  musicNoteButton.classList.add("can2MN");
+  musicNoteButton.classList.remove("can3MN");
+  homeButton.classList.remove("can1home");
+  homeButton.classList.add("can2home");
+  homeButton.classList.remove("can3home"); 
+  
   const bubblesContainer = document.querySelector(".bubblesContainer");
   const bubbles = bubblesContainer.getElementsByClassName('bubble');
   bubblesContainer.classList.add('hide'); 
@@ -83,19 +94,21 @@ export function showCanvas2() {
     bubble.style.animation = '';
     bubble.style.display = '';
   } 
+  
 }
 
 export function showCanvas3() {
-  const canvas1 = document.getElementById("canvas1");
-  const canvas2 = document.getElementById("canvas2");
-  const canvas3 = document.getElementById("canvas3");
-  const gauge = document.querySelector('.gauge');
-  const trieste3Container = document.getElementById("trieste3Container");
   canvas1.style.display = "none";
   canvas2.style.display = "none";
   canvas3.style.display = "block";
   gauge.classList.add('visible');
   trieste3Container.classList.remove('hide');
+  musicNoteButton.classList.remove("can1MN");
+  musicNoteButton.classList.remove("can2MN");
+  musicNoteButton.classList.add("can3MN");
+  homeButton.classList.remove("can1home");
+  homeButton.classList.remove("can2home");
+  homeButton.classList.add("can3home"); 
  
   const bubblesContainer = document.querySelector(".bubblesContainer");
   const bubbles = bubblesContainer.getElementsByClassName('bubble');
@@ -107,7 +120,6 @@ export function showCanvas3() {
   bubblesContainer.classList.add('hide'); 
   
 }
-
 
 const modal = document.getElementById("modal");
 const closeButton = document.getElementsByClassName("close")[0];
