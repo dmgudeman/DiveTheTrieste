@@ -5,7 +5,8 @@
 // dmgudeman.github.io/DiveTheTrieste
 
 import { showCanvas1, showCanvas2, showCanvas3 } from "./scripts/util";
-import { showDepth, calcDepth} from "./scripts/boundary";
+import { showDepth, detectLateral} from "./scripts/boundary";
+import { calcMovement, getMessage, getTimedMessage} from './scripts/provideMessage';
 import Sub from "./scripts/sub";
 import Ocean from "./scripts/ocean";
 import Cockpit from "./scripts/cockpit";
@@ -199,17 +200,18 @@ document.addEventListener("DOMContentLoaded", () => {
 
     let currentFrame = 0;
     let lastFrameTime = 0;
+    let counter = 0;
+    let onOceanFlag = true;
     // main animation loop
     function update(currentTime) {
 
-        console.log('calcDepth', calcDepth(ocean, sub) )
-        console.log('showDepth', showDepth(ocean, sub))
+   
         const elapsedTime = currentTime - lastFrameTime;
         if (elapsedTime > 1000 / 10) {
             clear();
             ocean.draw();
             // sub.draw();
-
+            // calcMovement(ocean, sub);
             showDepth(ocean, sub, canvas1);
             const sprite = sprites[currentFrame];
             ctx1.drawImage(
@@ -232,12 +234,16 @@ document.addEventListener("DOMContentLoaded", () => {
         requestAnimationFrame(update);
     }
 
+
+    
+
     function keyDown(e) {
         if (e.key === "ArrowDown" || e.key === "Down") {
             key.newPos("down");
         } else if (e.key === "ArrowLeft" || e.key === "Left") {
             key.newPos("left");
         } else if (e.key === "ArrowRight" || e.key === "Rigth") {
+            detectLateral("right")
             key.newPos("right");
         } else {
             key.newPos("up");

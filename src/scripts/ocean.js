@@ -30,8 +30,8 @@ class Ocean {
     this.vely = options.vely || 20;
     this.velx = options.velx || 20;
     this.surface_y = options.surface_y || INITIAL_Y_POSITION;
-    this.depthFlag = 'MOVE';
-    this.lateralFlag = 'MOVE';
+    // this.depthFlag = 'MOVE';
+    // this.lateralFlag = 'MOVE';
     this.depthLimit = options.depthLimit || OCEAN_OBJECT_DEPTH_LIMIT;
     this.lateralLimit = options.lateralLimit || OCEAN_OBJECT_LAT_LIMIT;
 

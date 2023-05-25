@@ -1,5 +1,6 @@
 import {
     DEPTH_CONT_SHELF,
+    INITIAL_Y_POSITION,
     LEFT_EDGE_TRENCH,
     RIGHT_EDGE_TRENCH,
     SEA_DEPTH,
@@ -8,7 +9,7 @@ import { HEIGHT } from "../index";
 
 export function showDepth(ocean, sub) {
     let conversion = SEA_DEPTH / HEIGHT; // 19.64 feet per pixel
-    let composite = ocean.sy + sub.y - sub.initialDepthPos;
+    let composite = ocean.sy + sub.y - INITIAL_Y_POSITION;
     let depth = Math.floor(conversion * composite);
 
     if (depth < 0) depth = 0;
@@ -23,19 +24,13 @@ export function showDepth(ocean, sub) {
 //   ctx.appendChild(dg);
 
 // }
-export function calcDepth(ocean, sub) {
-    let conversion = SEA_DEPTH / HEIGHT;
-    console.log('HEIGHT', HEIGHT)
-
-    console.log( 'OCEAN', ocean.sy)
-    console.log( 'sub.y', sub.y)
-
-    console.log('sub.initialDepthPos', sub.initialDepthPos);
-    let composite = ocean.sy + sub.y ;
-    let depth = Math.floor(conversion * composite);
-    if (depth < 0) depth = 0;
-    return depth;
-}
+// export function calcDepth(ocean, sub) {
+//     let conversion = SEA_DEPTH / HEIGHT;
+//     let composite = ocean.sy + sub.y - INITIAL_Y_POSITION;
+//     let depth = Math.floor(conversion * composite);
+//     if (depth < 0) depth = 0;
+//     return composite;
+// }
 
 export function pickImageArray(ocean, sub, ctx) {
     let x = ocean.sx + sub.x + sub.initialLateralPos;
@@ -93,6 +88,7 @@ export function detectDepth(ocean, dir) {
 }
 
 export function detectLateral(ocean, dir) {
+  console.log('ocean.x in detect lateral', ocean.sx)
     if (dir === "right") {
         if (ocean.sx < ocean.lateralLimit) {
             return (ocean.lateralFlag = "OCEAN");

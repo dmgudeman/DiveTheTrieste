@@ -9,7 +9,7 @@ function moveMessage() {
     topPositionEM -= 1; // Adjust the speed of the animation by changing the value
     edMessage.style.top = topPositionEM + 'px';
 
-    if (topPositionEM <= -50) { // Adjust the condition for when the message disappears
+    if (topPositionEM <= -250) { // Adjust the condition for when the message disappears
         clearInterval(intervalId);
         linkedInButton.removeEventListener('click', removeElement);
         linkedInButton.addEventListener('click', addAndStartAnimation);
@@ -35,10 +35,12 @@ function addEdMessage(text) {
     edMessage.style.padding = '10px';
     edMessage.style.backgroundColor = '#fff';
     edMessage.style.border = '1px solid #000';
-    edMessage.style.borderRadius = '5px';
+    edMessage.style.borderRadius = '100px';
     edMessage.style.transition = 'top 1s ease'; /* Transition for the animation */
     edMessage.style.fontSize = '1rem';
     edMessage.style.zIndex = '999';
+    edMessage.style.width = '200px';
+    edMessage.style.height= '200px';
 
     canvasContainer.appendChild(edMessage);
 }
