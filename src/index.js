@@ -11,6 +11,7 @@ import Ocean from "./scripts/ocean";
 import Cockpit from "./scripts/cockpit";
 import { getCursorPosition } from "./scripts/util";
 import Keymaster from "./scripts/keymaster";
+import { addAndStartAnimation } from "./scripts/edMessage";
 
 const WIDTH = window.innerWidth * 2.5;
 const HEIGHT = window.innerHeight * 1.9;
@@ -21,7 +22,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const canvas2 = document.getElementById("canvas2");
     const canvas3 = document.getElementById("canvas3");
     const gitHubButton = document.getElementById("gitHubButton");
-    const linkedInButton = document.getElementById("linkedInButton");
+    // const linkedInButton = document.getElementById("linkedInButton");
     const musicNoteButton = document.getElementById("musicNoteButton");
     const goToOceanButton = document.getElementById("trieste3Container");
     const homeButton = document.getElementById("homeButton");
@@ -48,11 +49,15 @@ document.addEventListener("DOMContentLoaded", () => {
         window.location.href = "https://github.com/dmgudeman";
     });
 
-    linkedInButton.addEventListener("click", () => {
+    // linkedInButton.addEventListener("click", startAnimation())
+    // () => {
         // window.location.href = "https://www.linkedin.com/in/davidmgudeman/";
-        moveMessage();
-        console.log("Button Pressed")
-    });
+        
+       
+    // });
+    let newText= 'newText'
+    const linkedInButton = document.getElementById('linkedInButton');
+    linkedInButton.addEventListener('click', ()=>addAndStartAnimation(newText));
 
     goToOceanButton.addEventListener("click", () => {
         showCanvas1();
@@ -234,23 +239,76 @@ document.addEventListener("DOMContentLoaded", () => {
             key.newPos("up");
         }
     }
+   
+    // let topPositionEM;
+    // let intervalId;
+    // let edMessage;
+    
+    // function moveMessage() {
+    //     console.log("I'm messaging");
+    //     topPositionEM -= 1; // Adjust the speed of the animation by changing the value
+    //     edMessage.style.top = topPositionEM + 'px';
+    
+    //     if (topPositionEM <= -50) { // Adjust the condition for when the message disappears
+    //         clearInterval(intervalId);
+    //         linkedInButton.removeEventListener('click', removeElement);
+    //         linkedInButton.addEventListener('click', addAndStartAnimation);
+    //     }
+    // }
+    
+    // function startAnimation() {
+    //     console.log("Button pressed");
+    //     topPositionEM = 200;
+    //     edMessage.style.display = 'block';
+    //     intervalId = setInterval(moveMessage, 10);
+    // }
+    
+    // function addEdMessage(text) {
+    //     const canvasContainer = document.getElementById('canvasContainer');
+    //     edMessage = document.createElement('div');
+    //     edMessage.textContent = text;
+    //     edMessage.id = 'edMessage';
+    //     edMessage.style.position = 'absolute';
+    //     edMessage.style.top = '200px'; /* Adjust the initial position */
+    //     edMessage.style.left = '50%';
+    //     edMessage.style.transform = 'translateX(-50%)';
+    //     edMessage.style.padding = '10px';
+    //     edMessage.style.backgroundColor = '#fff';
+    //     edMessage.style.border = '1px solid #000';
+    //     edMessage.style.borderRadius = '5px';
+    //     edMessage.style.transition = 'top 1s ease'; /* Transition for the animation */
+    //     edMessage.style.fontSize = '1rem';
+    //     edMessage.style.zIndex = '999';
+    
+    //     canvasContainer.appendChild(edMessage);
+    // }
+    
+    // function removeElement() {
+    //     edMessage.style.display = 'none';
+    //     edMessage.parentNode.removeChild(edMessage);
+    // }
+    
+    // function addAndStartAnimation() {
+    //     addEdMessage("hi there");
+    //     startAnimation();
+    //     linkedInButton.removeEventListener('click', addAndStartAnimation);
+    //     linkedInButton.addEventListener('click', removeElement);
+    // }
+    
+   
+    
+    
+    
+ 
+ 
+ 
+ 
 
-    const edMessage = document.getElementById('edMessage');
-    let topPositionEM = parseInt(getComputedStyle(edMessage).top);
-
-    function moveMessage() {
-        topPositionEM -= 1; // Adjust the speed of the animation by changing the value
-
-        edMessage.style.top = topPositionEM + 'px';
-
-        if (topPositionEM <= -50) { // Adjust the condition for when the message disappears
-            clearInterval(intervalId);
-            edMessage.style.display = 'none';
-        }
-    }
-
-    const intervalId = setInterval(moveMessage, 10); // Adjust the interval for smoothness
+    
+    
+    
     
 
     document.addEventListener("keydown", keyDown);
 });
+

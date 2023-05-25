@@ -122,7 +122,7 @@
   left: 25px;
 }
 
-.canvasContainer {
+#canvasContainer {
   position: relative;
 }
 
@@ -370,7 +370,7 @@ body img {
   border-radius: 5px;
   transition: top 1s ease; /* Transition for the animation */
   font-size: 1rem;
-  z-index: 100;
+  z-index: 999;
 }
 
 *, *:before, *:after {
