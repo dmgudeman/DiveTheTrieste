@@ -6,9 +6,12 @@ export function showDepth(ocean, sub, canvas) {
   let conversion = SEA_DEPTH / canvas.height;
   let composite = ocean.sy + sub.y - sub.initialDepthPos;
   let depth = Math.floor(conversion * composite);
+
+  
   if (depth < 0) depth = 0;
   let d = document.getElementById("depth");
   d.innerHTML = `Depth: ${depth} feet`;
+
   return depth;
 }
 

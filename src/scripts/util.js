@@ -56,7 +56,9 @@ export function showCanvas1() {
   canvas1.style.display = "block";
   canvas2.style.display = "none";
   canvas3.style.display = "none";
-  gauge.classList.add('visible');
+  gauge.classList.add('hidegauge');
+  gauge.classList.remove('hidegauge');
+  gauge.classList.remove('hidegauge');
   trieste3Container.classList.add('hide');
   musicNoteButton.classList.add("can1MN");
   musicNoteButton.classList.remove("can2MN");
@@ -68,16 +70,13 @@ export function showCanvas1() {
 }
 
 export function showCanvas2() {
-  // const canvas1 = document.getElementById("canvas1");
-  // const canvas2 = document.getElementById("canvas2");
-  // const canvas3 = document.getElementById("canvas3");
-  // const gauge = document.querySelector('.gauge');
-  // const trieste3Container = document.getElementById("trieste3Container");
-  // const homeButton = document.getElementById("homeButton");
+
   canvas1.style.display = "none";
   canvas2.style.display = "block";
   canvas3.style.display = "none";
-  gauge.classList.remove('visible');
+  gauge.classList.add('hidegauge');
+  gauge.classList.add('hidegauge');
+  gauge.classList.add('hidegauge');
   trieste3Container.classList.remove('hide');
   musicNoteButton.classList.remove("can1MN");
   musicNoteButton.classList.add("can2MN");
@@ -102,7 +101,9 @@ export function showCanvas3() {
   canvas2.style.display = "none";
   canvas3.style.display = "block";
   canvas3.style.cursor ="pointer";
-  gauge.classList.add('visible');
+  gauge.classList.remove('hidegauge');
+  gauge.classList.remove('hidegauge');
+  gauge.classList.remove('hidegauge');
   trieste3Container.classList.remove('hide');
   musicNoteButton.classList.remove("can1MN");
   musicNoteButton.classList.remove("can2MN");
