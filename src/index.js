@@ -5,7 +5,7 @@
 // dmgudeman.github.io/DiveTheTrieste
 
 import { showCanvas1, showCanvas2, showCanvas3 } from "./scripts/util";
-import { showDepth } from "./scripts/boundary";
+import { showDepth, calcDepth} from "./scripts/boundary";
 import Sub from "./scripts/sub";
 import Ocean from "./scripts/ocean";
 import Cockpit from "./scripts/cockpit";
@@ -13,8 +13,8 @@ import { getCursorPosition } from "./scripts/util";
 import Keymaster from "./scripts/keymaster";
 import { addAndStartAnimation } from "./scripts/edMessage";
 
-const WIDTH = window.innerWidth * 2.5;
-const HEIGHT = window.innerHeight * 1.9;
+export const WIDTH = window.innerWidth * 2.5; // width of canvases
+export const HEIGHT = window.innerHeight * 1.9;  // height of canvases
 
 document.addEventListener("DOMContentLoaded", () => {
     localStorage.setItem("modalDisplayed", false);
@@ -165,22 +165,22 @@ document.addEventListener("DOMContentLoaded", () => {
         ctx1.clearRect(0, 0, canvas1.width, canvas1.height);
     }
 
-    // message
-    const messageElement = document.getElementById("message");
+    // // message
+    // const messageElement = document.getElementById("message");
 
-    function showMessage(message) {
-        messageElement.textContent = message;
-        messageElement.classList.remove("fade-out");
-        // messageElement.classList.remove("hide");
-        // messageElement.style.display = 'block';
-        messageElement.classList.add("fade-out");
+    // function showMessage(message) {
+    //     messageElement.textContent = message;
+    //     messageElement.classList.remove("fade-out");
+    //     // messageElement.classList.remove("hide");
+    //     // messageElement.style.display = 'block';
+    //     messageElement.classList.add("fade-out");
 
-        setTimeout(() => {
-            messageElement.classList.remove("fade-out");
-        }, 2000);
-    }
+    //     setTimeout(() => {
+    //         messageElement.classList.remove("fade-out");
+    //     }, 2000);
+    // }
 
-    // showMessage("Hello, world!");
+    // // showMessage("Hello, world!");
 
     // sprite
     const spriteSheet = new Image();
@@ -201,11 +201,15 @@ document.addEventListener("DOMContentLoaded", () => {
     let lastFrameTime = 0;
     // main animation loop
     function update(currentTime) {
+
+        console.log('calcDepth', calcDepth(ocean, sub) )
+        console.log('showDepth', showDepth(ocean, sub))
         const elapsedTime = currentTime - lastFrameTime;
         if (elapsedTime > 1000 / 10) {
             clear();
             ocean.draw();
             // sub.draw();
+
             showDepth(ocean, sub, canvas1);
             const sprite = sprites[currentFrame];
             ctx1.drawImage(

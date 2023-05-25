@@ -1,4 +1,5 @@
 import { detectDepth, detectLateral, moveSubVertical } from "./boundary";
+import {HEIGHT} from '../index';
 import {
     DEPTH_CONT_SHELF,
     LEFT_EDGE_TRENCH,
@@ -12,13 +13,12 @@ class Keymaster {
         this.dir = options.dir;
         this.sub = options.sub;
         this.ocean = options.ocean;
-        this.oceanRight = this.ctx.canvas.width || 4000;
-        this.oceanBottom = this.ctx.canvas.height || 2000;
+     
     }
 
     newPos(dir) {
-        const lat = detectLateral(this.ocean, this.sub, this.ctx.canvas, dir);
-        const depth = detectDepth(this.ocean, this.sub, this.ctx.canvas, dir);
+        const lat = detectLateral(this.ocean, dir);
+        const depth = detectDepth(this.ocean, dir);
         console.log("LATERAL", lat);
         // console.log('this.ocean', this.ocean)
         // console.log('this.sub', this.sub)

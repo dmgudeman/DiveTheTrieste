@@ -1,10 +1,12 @@
 import {pickImageArray} from './boundary';
 
+
 class Images {
     constructor (options){
         this.ctx = options.ctx;
         this.ocean = options.ocean;
         this.sub = options.sub;
+        // this assigns a number to the arrays
         this.images = [this.eb, this.ep, this.db, this.dp, this.ab, this.ap]        
     }
    
@@ -119,6 +121,3 @@ class Images {
 }
 
 export default Images;
-
-  
-    // }
