@@ -189,24 +189,7 @@ body img {
 .gaugeContainer.hidegauge {
     display:none;
 }
-// .gauge {
-//     display: block;
-// }
-// .gauge.hideGauge {
-//     display: none;
-// }
 
-// .can2gauge {
-//     display: none;
-// }
-
-// .can3gauge {
-//     display: block;
-// }
-
-// .gauge.visible{
-//     display: block;
-// }
 
 ///bubbles
 .bubblesContainer {
@@ -381,6 +364,26 @@ body img {
   .fade-out {
     opacity: 0;
   }
+
+  #edMessage {
+    position: absolute;
+    top: 200px; /* Adjust the initial position */
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 10px;
+    background-color: #fff;
+    border: 1px solid #000;
+    border-radius: 5px;
+    transition: top 1s ease; /* Transition for the animation */
+    font-size: 1rem;
+    z-index: 100;
+  }
+
+//   #edMessage.hideEdMessage {
+//     display: none;
+//   }
+
+
 
 
 

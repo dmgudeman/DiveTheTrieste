@@ -49,7 +49,9 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     linkedInButton.addEventListener("click", () => {
-        window.location.href = "https://www.linkedin.com/in/davidmgudeman/";
+        // window.location.href = "https://www.linkedin.com/in/davidmgudeman/";
+        moveMessage();
+        console.log("Button Pressed")
     });
 
     goToOceanButton.addEventListener("click", () => {
@@ -232,6 +234,23 @@ document.addEventListener("DOMContentLoaded", () => {
             key.newPos("up");
         }
     }
+
+    const edMessage = document.getElementById('edMessage');
+    let topPositionEM = parseInt(getComputedStyle(edMessage).top);
+
+    function moveMessage() {
+        topPositionEM -= 1; // Adjust the speed of the animation by changing the value
+
+        edMessage.style.top = topPositionEM + 'px';
+
+        if (topPositionEM <= -50) { // Adjust the condition for when the message disappears
+            clearInterval(intervalId);
+            edMessage.style.display = 'none';
+        }
+    }
+
+    const intervalId = setInterval(moveMessage, 10); // Adjust the interval for smoothness
+    
 
     document.addEventListener("keydown", keyDown);
 });
