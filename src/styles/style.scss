@@ -8,8 +8,7 @@
     width: 50px;
     padding-left: 1px;
     background-color: white;
-    z-index: 100;
-  
+    z-index: 100;  
 }
 
 .linkedIn {
@@ -20,8 +19,7 @@
     padding-left: 4px;
     background-color: white;
     color: #0A66C2;
-    z-index: 100;
-    
+    z-index: 100;   
 }
 
 .trieste3Button {
@@ -32,39 +30,38 @@
     width: 300px;
     height: 300px;
     background-color: transparent;
-    z-index: 100;
-  
+    z-index: 100; 
 }
+
 .trieste3Container{
     position: relative;
 }
+
 .trieste3Container.hide {
     display: none;
 }
 
 .textOverlay {
-   display: flex;
-   align-items: center;
-   justify-content: center;
-   position: fixed;
-   font-size: 25;
-   font-weight: bold;
-   font-family: Arial, Helvetica, sans-serif;
-//    color: #4CAF50;
-   color: white;
-//    background-color:rgb(234, 46, 83);
-   background-color: gray;
-// background-color: rgb(226, 131, 147);
-   left: 110px;
-   top: 625px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    font-size: 25;
+    font-weight: bold;
+    font-family: Arial, Helvetica, sans-serif;
+    //    color: #4CAF50;
+    color: white;
+    //    background-color:rgb(234, 46, 83);
+    background-color: gray;
+    // background-color: rgb(226, 131, 147);
+    left: 110px;
+    top: 625px;
     width: 170px;
-   height:32px;
-   z-index: 101;
-   border-radius: 8px;
-  
-   box-shadow: 3px 3px 4px rgba(0, 0, 0, 0.5);
+    height:32px;
+    z-index: 101;
+    border-radius: 8px;
+    box-shadow: 3px 3px 4px rgba(0, 0, 0, 0.5);
 }
-
 
 .textOverlay.hide{
     display: none;
@@ -120,6 +117,8 @@
     left: 25px;
 }
 
+
+///// CANVASES
 #canvasContainer {
     position: relative;
 }
@@ -195,7 +194,7 @@ body img {
 }
 
 
-///bubbles
+///bubbles from the sub on the opening page
 .bubblesContainer {
    display: block;
 }
@@ -279,8 +278,7 @@ body img {
         opacity: 0;
     }
     100% {
-
-    top: 0;
+        top: 0;
         opacity: 1;
     }
 }
@@ -340,8 +338,6 @@ body img {
     color: red;
   }
 
-
-
   #message {
     display:none;
     position: fixed;
@@ -356,15 +352,7 @@ body img {
     z-index: 101;
     
   }
-//   .message {
-   
-   
-   
-//   }
-//   .message.hide {
-//     display:none;
-//   }
-  
+
   .fade-out {
     opacity: 0;
   }
@@ -383,9 +371,6 @@ body img {
     z-index: 999;
   }
 
-//   #edMessage.hideEdMessage {
-//     display: none;
-//   }
 
 
 
