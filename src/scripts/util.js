@@ -1,8 +1,9 @@
 import Sub from "./sub";
 import Ocean from "./ocean";
-import { getTimedMessage } from "./provideMessage";
-import { removeMessageElement } from "./edMessage";
+import { getMessage } from "./provideMessage";
+import { removeMessageElement, stopAnimation } from "./edMessage";
 import { WIDTH, HEIGHT } from "../index";
+import { onCanvas1 } from "./constants";
 
 export function clear(ctx) {
   ctx.clearRect(0, 0, WIDTH, HEIGHT);
@@ -41,7 +42,7 @@ let messageInterval;
 
 export function showCanvas1() {
 
-  
+  onCanvas1.flag = true;
   // let sub = new Sub({ ctx: ctx1 });
   // let ocean = new Ocean({ ctx: ctx1 });
   // ctx1.onload = () => {
@@ -53,11 +54,11 @@ export function showCanvas1() {
   // };
 
 
-  // messageInterval =  setInterval(() => {
-  //   getTimedMessage(ocean, sub)
+  messageInterval =  setInterval(() => {
+    getMessage()
     
       
-  //   }, 3000);
+    }, 3000);
   //  setInterval(ocean, sub);
   for (let i = 0; i < bubbles.length; i++) {
     const bubble = bubbles[i]; 
@@ -86,13 +87,15 @@ export function showCanvas1() {
   homeButton.classList.remove("can2home");
   homeButton.classList.remove("can3home"); 
   edMessage.classList.remove("hideEdMessage")
-  removeMessageElement();
+ 
  
 }
 
 export function showCanvas2() {
   clearInterval(messageInterval);
-  removeMessageElement();
+  stopAnimation();
+  onCanvas1.flag = false;
+
 
   canvas1.style.display = "none";
   canvas2.style.display = "block";
@@ -123,7 +126,9 @@ export function showCanvas2() {
 }
 
 export function showCanvas3() {
+  onCanvas1.flag = false;
   clearInterval(messageInterval)
+  stopAnimation();
   removeMessageElement();
   canvas1.style.display = "none";
   canvas2.style.display = "none";
@@ -147,7 +152,9 @@ export function showCanvas3() {
     bubble.style.display = 'none';
   }
   bubblesContainer.classList.add('hide'); 
-
+  clearInterval(messageInterval)
+  stopAnimation();
+  removeMessageElement();
   
 }
 

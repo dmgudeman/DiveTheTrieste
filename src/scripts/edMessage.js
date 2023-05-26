@@ -64,7 +64,20 @@ export function removeMessageElement() {
     }
 }
 
+export function stopAnimation() {
+    // Stop the animation
+    clearInterval(intervalId);
+  }
+
 export function addAndStartAnimation(text) {
     addEdMessage(text);
     startAnimation();
 }
+
+document.addEventListener('visibilitychange', () => {
+    if (document.visibilityState === 'hidden') {
+      stopAnimation();
+    } else {
+      startAnimation();
+    }
+  });

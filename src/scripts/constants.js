@@ -1,6 +1,11 @@
 import {WIDTH, HEIGHT} from '../index';
 
 
+export const onCanvas1 = {
+    flag: false
+  };
+
+export let ON_CANVAS_1 = false
 export const SURFACE = 100;
 export const DEPTH_CONT_SHELF = 450;
 

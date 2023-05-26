@@ -14,57 +14,68 @@ import {
     DYSPHOTIC_PELAGIC,
     APHOTIC_BENTHIC,
     APHOTIC_PELAGIC,
+    onCanvas1
 } from "./constants";
 import { WIDTH, HEIGHT } from "../index";
 import { addAndStartAnimation } from "./edMessage";
 
-
 // this is to allow calculation of a modelo so that
 // the bubble messages released at a slow pace
 let i = 0;
-
+let flag;
 // this is being called from the main animation loop in index.js
 export function calcMovement(ocean, sub) {
     let compVert = ocean.sy + sub.y - INITIAL_Y_POSITION;
     let compLat = ocean.sx + sub.x - SUB_INITIAL_LAT_POS;
     i++;
-    // console.log(i);
+    
     // console.log("comLat", compLat);
     // console.log("compVert", compVert);
-    if (i % 40 === 0) {
+    if (i % 40 === 0 && onCanvas1.flag) {
+
         if (compLat < B_P_BARRIER && compVert < CONT_SHELF_BENTHIC) {
-            EUPHOTIC_BENTHIC;
+           flag = EUPHOTIC_BENTHIC;
         } else if (
             compLat < LEFT_EDGE_TRENCH &&
             compVert <= CONT_SHELF_BENTHIC
         ) {
-            EUPHOTIC_PELAGIC
+          flag = EUPHOTIC_PELAGIC;
         } else if (
             compLat < LEFT_EDGE_TRENCH &&
             compVert > CONT_SHELF_BENTHIC
         ) {
-           DYSPHOTIC_BENTHIC;
+         flag = DYSPHOTIC_BENTHIC;
         }
-    }
-}
 
-export const getMessage = (flag) => {
-    console.log("FFFFFFLLLLAAAAGGG", flag);
-    let message;
-    switch (flag) {
-        case EUPHOTIC_BENTHIC:
-           message = iteraterMessage(ebMessages);
-           addAndStartAnimation(message);
-           return
-        case EUPHOTIC_PELAGIC:
+        let message;
+        if (flag === EUPHOTIC_BENTHIC) {
+            message = iteraterMessage(ebMessages);
+            addAndStartAnimation(message);
+            return;
+        } else if (flag === EUPHOTIC_PELAGIC) {
             message = iteraterMessage(epMessages);
             addAndStartAnimation(message);
-            return
-        case DYSPHOTIC_BENTHIC:
-            return iteraterMessage(dbMessages);
-        default:
-            return null;
+            return;
+        } else if (flag === DYSPHOTIC_BENTHIC) {
+            message = iteraterMessage(dbMessages);
+            addAndStartAnimation(message);
+            return;
+        }
+
+
+
+
+
+
+
+
     }
+}
+console.log( flag)
+export const getMessage = (ocean, sub) => {
+    let flag = calcMovement(ocean, sub);
+   
+   
 };
 
 export const getTimedMessage = (ocean, sub) => {
