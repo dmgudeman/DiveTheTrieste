@@ -25,6 +25,7 @@ import {
 } from "./constants";
 import { HEIGHT } from "../index";
 import { globalOcean, globalSub } from "../index";
+import { getDisplaySub } from "./moveSub";
 
 export function showDepth(ocean, sub) {
     let conversion = SEA_DEPTH / HEIGHT; // 19.64 feet per pixel
@@ -64,9 +65,7 @@ export function pickImageArray(ocean, sub, ctx) {
 }
 
 export function getDisplayObjects() {
-    console.log("Im HERE");
     let ocean = globalOcean.ocean;
-
     let sub = globalSub.sub;
     let compVert = ocean.sy + sub.y - INITIAL_Y_POSITION;
     let compLat = ocean.sx + sub.x - SUB_INITIAL_LAT_POS;
@@ -76,9 +75,11 @@ export function getDisplayObjects() {
    
 
     let displayObjects = { ocean: ocean, sub: sub, mover: null };
+    let displaySub;
     /// this returns the velocity and which object is to move;
     // Out of bounds to the left
     if (compLat < 0) {
+      console.log('COMPLAT LESS THAN ZERO', compLat)
       sub.velRight = 0;
       sub.velLeft = 0;
       sub.velUp = 0;
@@ -116,7 +117,8 @@ export function getDisplayObjects() {
             sub.velUp = VERTICAL_VELOCITY;
             sub.velDown = 0;
         }
-    } else if (compLat <= INITIAL_LAT && compLat > 0) {
+    } else if (compLat <= INITIAL_LAT) {
+      console.log('COMPLAT LESS THAN INITIAL_LAT', compLat)
         //Initial positiion
         if (compVert <= 0) {
             ocean.velRight = LAT_VELOCITY;
@@ -139,6 +141,7 @@ export function getDisplayObjects() {
             displayObjects.mover = "ocean";
         }
     } else if (compLat <= SLOPE_LAT && compLat> INITIAL_LAT) {
+      console.log('COMPLAT LESS THAN SLOPE_LAT', compLat)
         if (compVert <= 0) {
             ocean.velRight = LAT_VELOCITY;
             ocean.velLeft = LAT_VELOCITY;
@@ -158,7 +161,8 @@ export function getDisplayObjects() {
             ocean.velDown = 0;
             displayObjects.mover = "ocean";
         }
-      } else if (compLat <= LEFT_EDGE_TRENCH) {
+      } else if (compLat < OCEAN_LAT_LIMIT-20) {
+        console.log('COMPLAT AT OCEAN LAT LIMIT', compLat)
         if (compVert <= 0) {
             ocean.velRight = LAT_VELOCITY;
             ocean.velLeft = LAT_VELOCITY
@@ -179,13 +183,21 @@ export function getDisplayObjects() {
             ocean.velDown = 0;
             displayObjects.mover = "ocean";
         }
+    } else {
+      console.log('LAST IN LOOP')
+    displaySub = getDisplaySub(ocean, sub);
+    console.log('DDDDDDDD',displayObjects)
     }
+    if (displaySub) {
+      console.log('display SUB is here',displaySub);
 
-    displayObjects.ocean = ocean;
-    displayObjects.sub = sub;
-    console.log(displayObjects);
-    console.log("sub", sub);
-    console.log("ocean", ocean);
+      displayObjects = displaySub;
+    }
+    // displayObjects.ocean = ocean;
+    // displayObjects.sub = sub;
+    // console.log(displayObjects);
+    // console.log("sub", sub);
+    // console.log("ocean", ocean);
     return displayObjects;
 }
 

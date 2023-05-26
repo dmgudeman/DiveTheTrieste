@@ -22,7 +22,7 @@ export const SLOPE_LAT = 200;
 export const SLOPE_DEPTH = 300;
 export const SHELF_DEPTH = DEPTH_CONT_SHELF;
 export const TRENCH_DEPTH = OCEAN_BOTTOM;
-export const LEFT_EDGE_TRENCH = 1211;
+export const LEFT_EDGE_TRENCH = 1400;
 export const RIGHT_EDGE_TRENCH = WIDTH - 200;
 //vertical for messages and images
 export const B_P_BARRIER = 200;
@@ -34,7 +34,7 @@ export const APHOTIC_BENTHIC_BARRIER = OCEAN_BOTTOM - 200;
 // OBJECT option values
 export const OCEAN_DEPTH_LIMIT = 820;
 export const OCEAN_LAT_LIMIT = 1271;
-export const FULL_LAT_LIMIT = WIDTH - 100;
+export const FULL_LAT_LIMIT = WIDTH - 500;
 export const FULL_VERTICAL_LIMIT = HEIGHT - 100;
 export const INITIAL_Y_POSITION = 80; // for both objects
 export const SUB_INITIAL_LAT_POS = 800;

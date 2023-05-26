@@ -62,7 +62,7 @@ export function removeMessageElement() {
         edMessage.parentNode.removeChild(edMessage);       
 }
 
-export function stopAnimation() {
+export function stopMessageAnimation() {
     clearInterval(intervalId);
   }
 

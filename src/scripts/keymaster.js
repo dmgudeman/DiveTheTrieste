@@ -3,15 +3,17 @@ import {HEIGHT} from '../index';
 import {
     DEPTH_CONT_SHELF,
     LEFT_EDGE_TRENCH,
+    OCEAN_LAT_LIMIT,
     RIGHT_EDGE_TRENCH
 } from "./constants";
+import { globalOcean, globalSub } from "../index";
 
 class Keymaster {
     constructor(options) {
         this.ctx = options.ctx;
         this.dir = options.dir;
-        this.sub = options.sub;
-        this.ocean = options.ocean;
+        this.ocean = globalOcean.ocean;
+        this.sub = globalSub.sub;
      
     }
 
@@ -19,7 +21,6 @@ class Keymaster {
         const lat = detectLateral(this.ocean, dir);
         const depth = detectDepth(this.ocean, dir);
         let displayObjects = getDisplayObjects();
-        console.log('displayObjects', displayObjects)
         // const ocean = getDisplayObjects.ocean;
         // const sub = getDisplayObjects.sub;
         const mover = displayObjects.mover;
@@ -27,8 +28,8 @@ class Keymaster {
         // console.log('this.ocean', this.ocean)
         // console.log('this.sub', this.sub)
         // console.log('this.ctx.canvas', this.ctx.canvas)
-        // console.log('dir', dir)
-        console.log("DEPTH", depth);
+        console.log('mmmmmover', mover)
+
 
         if (dir === "down") {
             if (mover === 'ocean') {
@@ -43,12 +44,15 @@ class Keymaster {
         if (dir === "right") {
             if (mover === 'ocean'){
                 this.ocean.sx += this.ocean.velRight;
+            } else if (mover === 'sub') {
+                this.ocean.sx = OCEAN_LAT_LIMIT;
+                this.sub.x += this.sub.velRight;
             }
         }
         if (dir === "left") {
             if (mover === 'ocean'){
                 this.ocean.sx -= this.ocean.velLeft;
-            }
+            } 
         }
             // } else if (this.ocean.depthFlag === "SHELF_STOP_DESCENT") {
             //     // this.sub.vely = 0;

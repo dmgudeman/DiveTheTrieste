@@ -3,7 +3,7 @@ import Ocean from "./ocean";
 import { getMessage } from "./provideMessage";
 import { removeMessageElement, stopAnimation } from "./edMessage";
 import { WIDTH, HEIGHT } from "../index";
-import { onCanvas1 } from "./constants";
+import { stopMessageAnimation } from "./constants";
 
 export function clear(ctx) {
   ctx.clearRect(0, 0, WIDTH, HEIGHT);
@@ -36,7 +36,7 @@ let messageInterval;
 
 export function showCanvas1() { //the ocean
 
-  onCanvas1.flag = true;
+  stopMessageAnimation.messFlag = true;
   // let sub = new Sub({ ctx: ctx1 });
   // let ocean = new Ocean({ ctx: ctx1 });
   // ctx1.onload = () => {
@@ -85,7 +85,7 @@ export function showCanvas1() { //the ocean
 export function showCanvas2() { //opening page
   clearInterval(messageInterval);
   stopAnimation();
-  onCanvas1.flag = false;
+  stopMessageAnimation.flag = false;
 
   canvas1.style.display = "none";
   canvas2.style.display = "block";

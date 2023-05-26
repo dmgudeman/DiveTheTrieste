@@ -13,11 +13,10 @@ import {
     DYSPHOTIC_BENTHIC,
     DYSPHOTIC_PELAGIC,
     APHOTIC_BENTHIC,
-    APHOTIC_PELAGIC,
-    onCanvas1
+    APHOTIC_PELAGIC
 } from "./constants";
 import { WIDTH, HEIGHT } from "../index";
-import { addAndStartAnimation, stopAnimation, removeMessageElement } from "./edMessage";
+import { addAndStartAnimation, stopAnimation, stopMessageAnimation, removeMessageElement } from "./edMessage";
 import {globalOcean, globalSub} from '../index';
 
 
@@ -27,7 +26,9 @@ let i = 0;
 let flag;
 let oldFlag;
 // this is being called from the main animation loop in index.js
-export function calcMovement(ocean, sub) {
+export function calcMovement() {
+    let ocean = globalOcean.ocean;
+    let sub = globalSub.sub;
     let compVert = ocean.sy + sub.y - INITIAL_Y_POSITION;
     let compLat = ocean.sx + sub.x - SUB_INITIAL_LAT_POS;
     i++;
@@ -64,13 +65,10 @@ export function calcMovement(ocean, sub) {
                 flag = DYSPHOTIC_BENTHIC;
             }
         }
-
-       
+    
         if (oldFlag !== flag){
           oldFlag = flag;
-        
     
-
         let message;
         if (flag === EUPHOTIC_BENTHIC) {
             message = iteraterMessage(ebMessages);
@@ -96,7 +94,7 @@ export function calcMovement(ocean, sub) {
     }
     }
 }
-console.log( flag)
+
 export const getMessage = (ocean, sub) => {
     let flag = calcMovement(ocean, sub);
    
