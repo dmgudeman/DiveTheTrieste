@@ -1,11 +1,10 @@
 import {WIDTH, HEIGHT} from '../index';
 
 
-export const onCanvas1 = {
-    flag: false
+export const stopMessageAnimation = {
+    messFlag: false
   };
 
-export let ON_CANVAS_1 = false
 export const SURFACE = 100;
 export const DEPTH_CONT_SHELF = 450;
 
@@ -18,8 +17,9 @@ export const RIGHT_EDGE_TRENCH = WIDTH - 200;
 
 export const CONT_SHELF_BENTHIC = DEPTH_CONT_SHELF - 150;
 export const E_D_BARRIER = SURFACE + 200;
-export const D_A_BARRIER = HEIGHT - 400;
+export const D_A_BARRIER = HEIGHT - 400;   // dysphotic_aphotic_barrier
 export const OCEAN_BOTTOM = HEIGHT - 100;
+export const APHOTIC_BENTHIC_BARRIER = OCEAN_BOTTOM - 200;
 
 export const OCEAN_OBJECT_DEPTH_LIMIT = 820;
 export const OCEAN_OBJECT_LAT_LIMIT = 1271;

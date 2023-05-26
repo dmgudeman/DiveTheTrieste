@@ -2,9 +2,8 @@ import Sub from "./sub";
 import Ocean from "./ocean";
 import { getMessage } from "./provideMessage";
 import { removeMessageElement, stopAnimation } from "./edMessage";
-import { WIDTH, HEIGHT } from "../index";
-import { onCanvas1 } from "./constants";
-
+import { WIDTH, HEIGHT} from "../index";
+import { stopMessageAnimation } from "./constants";
 export function clear(ctx) {
   ctx.clearRect(0, 0, WIDTH, HEIGHT);
 }
@@ -42,7 +41,7 @@ let messageInterval;
 
 export function showCanvas1() {
 
-  onCanvas1.flag = true;
+  stopMessageAnimation.messFlag = false;
   // let sub = new Sub({ ctx: ctx1 });
   // let ocean = new Ocean({ ctx: ctx1 });
   // ctx1.onload = () => {
@@ -94,7 +93,7 @@ export function showCanvas1() {
 export function showCanvas2() {
   clearInterval(messageInterval);
   stopAnimation();
-  onCanvas1.flag = false;
+  stopMessageAnimation.messFlag = true;
 
 
   canvas1.style.display = "none";
@@ -126,7 +125,7 @@ export function showCanvas2() {
 }
 
 export function showCanvas3() {
-  onCanvas1.flag = false;
+  stopMessageAnimation.messFlag = true;
   clearInterval(messageInterval)
   stopAnimation();
   removeMessageElement();
