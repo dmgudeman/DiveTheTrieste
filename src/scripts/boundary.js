@@ -6,12 +6,15 @@ import {
     SEA_DEPTH,
 } from "./constants";
 import { HEIGHT } from "../index";
+import {globalOcean, globalSub} from '../index';
+
 
 export function showDepth(ocean, sub) {
     let conversion = SEA_DEPTH / HEIGHT; // 19.64 feet per pixel
     let composite = ocean.sy + sub.y - INITIAL_Y_POSITION;
     let depth = Math.floor(conversion * composite);
-     
+    console.log('ocean.sx', ocean.sx);
+    console.log('ocean.sy',ocean.sy)
     if (depth < 0) depth = 0;
     let d = document.getElementById("depth");
     d.innerHTML = `Depth: ${depth} feet`;
@@ -19,20 +22,10 @@ export function showDepth(ocean, sub) {
     return depth;
 }
 
-// export function makeDepthGauge(ctx){
-//   let dg = document.createElement("h2");
-//   ctx.appendChild(dg);
-
-// }
-// export function calcDepth(ocean, sub) {
-//     let conversion = SEA_DEPTH / HEIGHT;
-//     let composite = ocean.sy + sub.y - INITIAL_Y_POSITION;
-//     let depth = Math.floor(conversion * composite);
-//     if (depth < 0) depth = 0;
-//     return composite;
-// }
 
 export function pickImageArray(ocean, sub, ctx) {
+
+
     let x = ocean.sx + sub.x + sub.initialLateralPos;
     let y = ocean.sy + sub.y + sub.initialDepthPos;
     let deep = y / ctx.canvas.height;
@@ -54,6 +47,17 @@ export function pickImageArray(ocean, sub, ctx) {
             return 4; //ab
         }
     }
+}
+
+export function getMovementFlag(dir) {
+  let ocean = globalOcean.ocean;
+  let sub = globalSub.sub;
+  let compVert = ocean.sy + sub.y - INITIAL_Y_POSITION;
+  let compLat = ocean.sx + sub.x - SUB_INITIAL_LAT_POS;
+  i++;
+
+  if (i % 40 === 0 && !stopMessageAnimation.messFlag) {}
+  
 }
 
 export function detectDepth(ocean, dir) {

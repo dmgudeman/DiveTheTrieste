@@ -78,7 +78,7 @@ export function showCanvas1() { //the ocean
   homeButton.classList.add("can1home");
   homeButton.classList.remove("can2home");
   homeButton.classList.remove("can3home"); 
-  edMessage.classList.remove("hideEdMessage")
+  edMessage ? edMessage.classList.remove("hideEdMessage") : null;
 }
 
 export function showCanvas2() { //opening page

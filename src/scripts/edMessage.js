@@ -15,7 +15,6 @@ function moveMessage() {
 }
 // start animation for message bubbles
 function startAnimation() {
-   
     topPositionEM = 200;
     edMessage.style.display = "block";
     intervalId = setInterval(moveMessage, 10);
@@ -26,16 +25,16 @@ function getRandomPosition(max) {
     // to set the message bubble to appear in different places
     return Math.floor(Math.random() * max);
 }
+
 function addEdMessage(text) {
-   
     edMessage = document.createElement("div");
     edMessage.textContent = text;
     edMessage.id = "edMessage";
     edMessage.style.position = "absolute";
     edMessage.style.top =
-        getRandomPosition(window.innerHeight) + "px"; /* Random top position */
+        getRandomPosition(window.innerHeight) + "px"; // random top position
     edMessage.style.left =
-        getRandomPosition(window.innerWidth) + "px"; /* Random left position */
+        getRandomPosition(window.innerWidth) + "px"; // random left position
     edMessage.style.transform = "translateX(-50%)";
     edMessage.style.padding = "30px";
     edMessage.style.paddingTop = "75px";
@@ -43,7 +42,7 @@ function addEdMessage(text) {
     edMessage.style.border = "1px solid #000";
     edMessage.style.borderRadius = "100px";
     edMessage.style.transition =
-        "top 2s ease"; /* Transition for the animation */
+        "top 1s ease"; // transition for animation
     edMessage.style.fontSize = "1rem";
     edMessage.style.zIndex = "999";
     edMessage.style.width = "200px";
@@ -60,22 +59,16 @@ function addEdMessage(text) {
     canvasContainer.appendChild(edMessage);
 }
 
-export function removeMessageElement() {
-       
+export function removeMessageElement() {   
         edMessage.style.display = "none";
-        edMessage.parentNode.removeChild(edMessage);
-        // canvasContainer.removeChild(edMessage)
-
+        edMessage.parentNode.removeChild(edMessage);       
 }
 
 export function stopAnimation() {
-    // Stop the animation
-    
     clearInterval(intervalId);
   }
 
 export function addAndStartAnimation(text) {
-
     addEdMessage(text);
     startAnimation();
 }
