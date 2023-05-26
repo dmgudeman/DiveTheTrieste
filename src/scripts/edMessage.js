@@ -1,9 +1,7 @@
-import { stopMessageAnimation } from "./constants";
-
 let topPositionEM;
 let intervalId;
 let edMessage;
-const canvasContainer = document.getElementById("canvasContainer");
+
 function moveMessage() {
     topPositionEM -= 3; // Adjust the speed of the animation by changing this value
     edMessage.style.top = topPositionEM + "px";
@@ -27,6 +25,10 @@ function getRandomPosition(max) {
 }
 
 function addEdMessage(text) {
+<<<<<<< HEAD
+=======
+    const canvasContainer = document.getElementById("canvasContainer");
+>>>>>>> main
     edMessage = document.createElement("div");
     edMessage.textContent = text;
     edMessage.id = "edMessage";
@@ -54,7 +56,7 @@ function addEdMessage(text) {
     edMessage.style.overflowWrap = "break-word";
     edMessage.style.fontStyle = "italic";
     edMessage.style.color = "green";
-    edMessage.style.opacity = "0.7";
+    edMessage.style.opacity = "0.5";
 
     canvasContainer.appendChild(edMessage);
 }

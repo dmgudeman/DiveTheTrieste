@@ -4,7 +4,6 @@ import {
     D_A_BARRIER,
     CONT_SHELF_BENTHIC,
     OCEAN_BOTTOM,
-    APHOTIC_BENTHIC_BARRIER,
     B_P_BARRIER,
     LEFT_EDGE_TRENCH,
     RIGHT_EDGE_TRENCH,
@@ -15,7 +14,7 @@ import {
     DYSPHOTIC_PELAGIC,
     APHOTIC_BENTHIC,
     APHOTIC_PELAGIC,
-    stopMessageAnimation
+    onCanvas1
 } from "./constants";
 import { WIDTH, HEIGHT } from "../index";
 import { addAndStartAnimation, stopAnimation, removeMessageElement } from "./edMessage";
@@ -28,9 +27,7 @@ let i = 0;
 let flag;
 let oldFlag;
 // this is being called from the main animation loop in index.js
-export function calcMovement() {
-    let ocean = globalOcean.ocean;
-    let sub = globalSub.sub;
+export function calcMovement(ocean, sub) {
     let compVert = ocean.sy + sub.y - INITIAL_Y_POSITION;
     let compLat = ocean.sx + sub.x - SUB_INITIAL_LAT_POS;
     i++;
@@ -75,37 +72,35 @@ export function calcMovement() {
     
 
         let message;
-        if (flag === EUPHOTIC_PELAGIC) {
-            message = iteraterMessage(epMessages);
-            addAndStartAnimation(message);
-            return;
-        } else if (flag === EUPHOTIC_BENTHIC) {
+        if (flag === EUPHOTIC_BENTHIC) {
             message = iteraterMessage(ebMessages);
             addAndStartAnimation(message);
             return;
-        } else if (flag === DYSPHOTIC_PELAGIC) {
-            message = iteraterMessage(dpMessages);
+        } else if (flag === EUPHOTIC_PELAGIC) {
+            message = iteraterMessage(epMessages);
             addAndStartAnimation(message);
             return;
-        }  else if (flag === DYSPHOTIC_BENTHIC) {
+        } else if (flag === DYSPHOTIC_BENTHIC) {
             message = iteraterMessage(dbMessages);
             addAndStartAnimation(message);
             return;
-        }  else if (flag === APHOTIC_PELAGIC) {
-            message = iteraterMessage(apMessages);
-            addAndStartAnimation(message);
-            return;
-        }  else if (flag === APHOTIC_BENTHIC) {
-            message = iteraterMessage(abMessages);
-            addAndStartAnimation(message);
-            return;
         }
+
+
+
+
+
+
+
+
     }
     }
 }
-
+console.log( flag)
 export const getMessage = (ocean, sub) => {
     let flag = calcMovement(ocean, sub);
+   
+   
 };
 
 export const getTimedMessage = (ocean, sub) => {
@@ -115,36 +110,25 @@ export const getTimedMessage = (ocean, sub) => {
     return message;
 };
 
-const epMessages = {
-    length: 4,
-    lastUsed: 0,
-    messages: {
-        1: "EUPHOTIC PELAGIC ZONE",
-        2: "Euphotic means Lots of sunlight",
-        3: "Pelagic means free swimming",
-        4: "This is where tuna, sharks and whales live",
-    }
-};
-
 const ebMessages = {
     length: 4,
     lastUsed: 0,
     messages: {
-        1: "EUPHOTIC BENTHIC ZONE",
+        1: "You are in the Euphotic Benthic zone",
         2: "Euphotic means Lots of sunlight",
         3: "Benthic means bottom dwelling",
         4: "It has some of the most concentrated life in the ocean",
-    }
+    },
 };
 
-const dpMessages = {
+const epMessages = {
     length: 4,
     lastUsed: 0,
     messages: {
-        1: "DYSPHOTIC PELAGIC ZONE",
-        2: "Dysphotic means only a little sunlight",
+        1: "You are in the Euphotic Pelagic zone",
+        2: "Euphotic means Lots of sunlight",
         3: "Pelagic means free swimming",
-        4: "It is becoming very dark",
+        4: "This is where tuna, sharks and whales live",
     },
 };
 
@@ -152,33 +136,11 @@ const dbMessages = {
     length: 4,
     lastUsed: 0,
     messages: {
-        1: "DYSPHOTIC BENTHIC ZONE",
+        1: "You are in the Dysphotic Benthic zone",
         2: "Dysphotic means only a little sunlight",
         3: "Benthic means bottom dwelling",
         4: "It is becoming very dark",
-    }
-};
-
-const apMessages = {
-    length: 4,
-    lastUsed: 0,
-    messages: {
-        1: "APHOTIC PELAGIC ZONE",
-        2: "Dysphotic means no light",
-        3: "Benthic means bottom dwelling",
-        4: "There is NO light",
-    }
-};
-
-const abMessages = {
-    length: 4,
-    lastUsed: 0,
-    messages: {
-        1: "DYSPHOTIC BENTHIC ZONE",
-        2: "There is no light",
-        3: "Benthic means bottom dwelling",
-        4: "Hot water vents supply energy",
-    }
+    },
 };
 
 const iteraterMessage = (messObj) => {
@@ -186,10 +148,15 @@ const iteraterMessage = (messObj) => {
     // start the rotation over again if the end
     // of the messages is used
     if (messNum > messObj.length) {
+<<<<<<< HEAD
        stopMessageAnimation.messFlag = true;
       
         
+=======
+        messNum = 1;
+>>>>>>> main
     }
+
     messObj.lastUsed = messNum;
     let x = messObj.messages[messNum];
     return x;
