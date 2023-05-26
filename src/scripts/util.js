@@ -41,22 +41,22 @@ let messageInterval;
 export function showCanvas1() {
 
   
-  let sub = new Sub({ ctx: ctx1 });
-  let ocean = new Ocean({ ctx: ctx1 });
-  ctx1.onload = () => {
-    ocean.draw();
-    sub.draw();
-    ctx3.onload = () => {
-      cockpit.draw();
-    };
-  };
+  // let sub = new Sub({ ctx: ctx1 });
+  // let ocean = new Ocean({ ctx: ctx1 });
+  // ctx1.onload = () => {
+  //   ocean.draw();
+  //   sub.draw();
+  //   ctx3.onload = () => {
+  //     cockpit.draw();
+  //   };
+  // };
 
 
-  messageInterval =  setInterval(() => {
-    getTimedMessage(ocean, sub)
+  // messageInterval =  setInterval(() => {
+  //   getTimedMessage(ocean, sub)
     
       
-    }, 3000);
+  //   }, 3000);
   //  setInterval(ocean, sub);
   for (let i = 0; i < bubbles.length; i++) {
     const bubble = bubbles[i]; 

@@ -5,7 +5,6 @@ let intervalId;
 let edMessage;
 
 function moveMessage() {
-    console.log("I'm messaging in edMessage moveMessage");
     topPositionEM -= 3; // Adjust the speed of the animation by changing this value
     edMessage.style.top = topPositionEM + 'px';
 

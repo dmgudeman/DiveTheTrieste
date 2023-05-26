@@ -56,30 +56,47 @@ export const getTimedMessage = (ocean, sub) => {
 };
 
 const ebMessages = {
-     length: 4 ,
-     lastUsed: 0 ,
-     messages:{
-     1: "You are in the Euphotic Benthic zone" ,
-     2: "Euphotic means Lots of sunlight" ,
-     3: "Benthic means bottom dwelling" ,
-     4: "It has some of the most concentrated life in the ocean" },
+    length: 4 ,
+    lastUsed: 0 ,
+    messages:{
+        1: "You are in the Euphotic Benthic zone" ,
+        2: "Euphotic means Lots of sunlight" ,
+        3: "Benthic means bottom dwelling" ,
+        4: "It has some of the most concentrated life in the ocean" },
 };
 
-const epMessages = [
-    "You are in the Euphotic Pelagic zone",
-    "Euphotic means Lots of sunlight",
-    "Pelagic means free swimming",
-    "This is where tuna, sharks and whales live",
-];
-const dbMessages = [
-    "You are in the Dysphotic Benthic zone",
-    "Dysphotic means only a little sunlight",
-    "Benthic means bottom dwelling",
-    "It is becoming very dark",
-];
+const epMessages = {
+    length: 4,
+    lastUsed: 0,
+    messages: {
+        1: "You are in the Euphotic Pelagic zone",
+        2: "Euphotic means Lots of sunlight",
+        3: "Pelagic means free swimming",
+        4: "This is where tuna, sharks and whales live",
+    }
+
+
+
+
+}
+    
+
+const dbMessages = {
+    length: 4,
+    lastUsed: 0,
+    messages: {
+       1: "You are in the Dysphotic Benthic zone",
+       2: "Dysphotic means only a little sunlight",
+       3: "Benthic means bottom dwelling",
+       4: "It is becoming very dark",
+    }
+};
+   
 
 const iteraterMessage = (messObj) => {
        let messNum = messObj.lastUsed + 1;
+       // start the rotation over again if the end
+       // of the messages is used
        if (messNum > messObj.length) {
         messNum = 1 ;
        }

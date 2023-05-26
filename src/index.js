@@ -44,21 +44,17 @@ document.addEventListener("DOMContentLoaded", () => {
     let key = new Keymaster({ ctx: ctx1, ocean, sub });
     let cockpit = new Cockpit({ ctx: ctx3, sub, ocean });
 
-    // const rect2 = canvas2.getBoundingClientRect();
+ 
 
     gitHubButton.addEventListener("click", () => {
         window.location.href = "https://github.com/dmgudeman";
     });
 
-    // linkedInButton.addEventListener("click", startAnimation())
-    // () => {
-        // window.location.href = "https://www.linkedin.com/in/davidmgudeman/";
-        
+    linkedInButton.addEventListener("click", () => {
+        window.location.href = "https://www.linkedin.com/in/davidmgudeman/";   
        
-    // });
-    let newText= 'newText'
-    const linkedInButton = document.getElementById('linkedInButton');
-    linkedInButton.addEventListener('click', ()=>addAndStartAnimation(newText));
+    });
+
 
     goToOceanButton.addEventListener("click", () => {
         showCanvas1();
@@ -212,6 +208,9 @@ document.addEventListener("DOMContentLoaded", () => {
             ocean.draw();
             // sub.draw();
             // calcMovement(ocean, sub);
+
+            calcMovement(ocean, sub)
+            // getTimedMessage(ocean, sub);
             showDepth(ocean, sub, canvas1);
             const sprite = sprites[currentFrame];
             ctx1.drawImage(
@@ -235,7 +234,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
 
-    
+
 
     function keyDown(e) {
         if (e.key === "ArrowDown" || e.key === "Down") {

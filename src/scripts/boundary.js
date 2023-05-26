@@ -11,7 +11,7 @@ export function showDepth(ocean, sub) {
     let conversion = SEA_DEPTH / HEIGHT; // 19.64 feet per pixel
     let composite = ocean.sy + sub.y - INITIAL_Y_POSITION;
     let depth = Math.floor(conversion * composite);
-
+     
     if (depth < 0) depth = 0;
     let d = document.getElementById("depth");
     d.innerHTML = `Depth: ${depth} feet`;
