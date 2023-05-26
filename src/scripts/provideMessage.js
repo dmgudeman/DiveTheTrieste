@@ -148,13 +148,11 @@ const iteraterMessage = (messObj) => {
     // start the rotation over again if the end
     // of the messages is used
     if (messNum > messObj.length) {
-<<<<<<< HEAD
+
        stopMessageAnimation.messFlag = true;
       
         
-=======
-        messNum = 1;
->>>>>>> main
+
     }
 
     messObj.lastUsed = messNum;

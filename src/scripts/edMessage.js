@@ -25,10 +25,6 @@ function getRandomPosition(max) {
 }
 
 function addEdMessage(text) {
-<<<<<<< HEAD
-=======
-    const canvasContainer = document.getElementById("canvasContainer");
->>>>>>> main
     edMessage = document.createElement("div");
     edMessage.textContent = text;
     edMessage.id = "edMessage";
