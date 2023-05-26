@@ -1,4 +1,9 @@
-import {INITIAL_Y_POSITION, SUB_INITIAL_LAT_POS} from './constants';
+import {
+    INITIAL_Y_POSITION, 
+    SUB_INITIAL_LAT_POS,
+    LAT_VELOCITY,
+    VERTICAL_VELOCITY
+} from './constants';
 
 class Sub {
 
@@ -9,8 +14,12 @@ class Sub {
         this.y = options.y || INITIAL_Y_POSITION;
         this.w = options.width || 120 ; // size of the sub in px
         this.h = options.height || 120;  // size of the sub in px
-        this.velx = options.velx || 20;
-        this.vely = options.vely || 20;
+        this.vely = options.vely || VERTICAL_VELOCITY;
+        this.velx = options.velx || LAT_VELOCITY;
+        this.velRight = options.velRight || LAT_VELOCITY;
+        this.velLeft = options.velLeft || LAT_VELOCITY;
+        this.velUp = options.velUp || VERTICAL_VELOCITY;
+        this.velDown = options.velDown || VERTICAL_VELOCITY;
         this.dx = options.velx || 0;
         this.dy = options.vely || 0;
         // this.subImage = options.subImage || document.getElementById("sub");

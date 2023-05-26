@@ -4,6 +4,27 @@ import {
     LEFT_EDGE_TRENCH,
     RIGHT_EDGE_TRENCH,
     SEA_DEPTH,
+    STOP_OCEAN_LAT,
+    STOP_SUB_LAT,
+    STOP_OCEAN_VERTICAL,
+    STOP_SUB_VERTICAL,
+
+    OCEAN_DEPTH_LIMIT,
+    OCEAN_LAT_LIMIT,
+    FULL_LAT_LIMIT,
+    FULL_VERTICAL_LIMIT,
+
+    LAT_VELOCITY,
+    VERTICAL_VELOCITY,
+
+    INITIAL_LAT,
+    INITIAL_DEPTH,
+    SUB_INITIAL_LAT_POS,
+    SLOPE_LAT, 
+    SLOPE_DEPTH,
+    SHELF_DEPTH,
+    TRENCH_DEPTH,
+    SURFACE
 } from "./constants";
 import { HEIGHT } from "../index";
 import {globalOcean, globalSub} from '../index';
@@ -13,8 +34,8 @@ export function showDepth(ocean, sub) {
     let conversion = SEA_DEPTH / HEIGHT; // 19.64 feet per pixel
     let composite = ocean.sy + sub.y - INITIAL_Y_POSITION;
     let depth = Math.floor(conversion * composite);
-    console.log('ocean.sx', ocean.sx);
-    console.log('ocean.sy',ocean.sy)
+    // console.log('ocean.sx', ocean.sx);
+    // console.log('ocean.sy',ocean.sy)
     if (depth < 0) depth = 0;
     let d = document.getElementById("depth");
     d.innerHTML = `Depth: ${depth} feet`;
@@ -49,16 +70,61 @@ export function pickImageArray(ocean, sub, ctx) {
     }
 }
 
-export function getMovementFlag(dir) {
+export function getDisplayObjects() {
+    console.log('Im HERE')
   let ocean = globalOcean.ocean;
+
   let sub = globalSub.sub;
   let compVert = ocean.sy + sub.y - INITIAL_Y_POSITION;
   let compLat = ocean.sx + sub.x - SUB_INITIAL_LAT_POS;
-  i++;
+  console.log('compVert', compVert);
+  console.log('SURFACE', SURFACE);
+  console.log('compVert < SURFACE', compVert < SURFACE)
 
-  if (i % 40 === 0 && !stopMessageAnimation.messFlag) {}
+  let displayObjects = {ocean:ocean, sub:sub, mover: null}
+ /// this returns the velocity and which object is to move;
+    if(compLat <= INITIAL_LAT) {
+        if (compVert < 0) {
+          ocean.velRight = LAT_VELOCITY;
+          ocean.velLeft = 0;
+          ocean.velUp = 0;
+          ocean.velDown = 0
+          sub.velRight = 0;
+          sub.velLeft = 0;
+          sub.velUp = 0;
+          sub.velDown = 0;
+          displayObjects.mover= 'ocean';
+        } else if (compVert <= INITIAL_DEPTH){
+          ocean.velRight = LAT_VELOCITY;
+          ocean.velLeft = 0;
+          ocean.velUp = VERTICAL_VELOCITY;
+          ocean.velDown = VERTICAL_VELOCITY;
+          sub.velRight = 0;
+          sub.velLeft = 0;
+          sub.velUp = 0;
+          sub.velDown = 0;
+          displayObjects.mover= 'ocean';
+        } else {
+          ocean.velRight = LAT_VELOCITY;
+          ocean.velLeft = 0;
+          ocean.velUp = VERTICAL_VELOCITY;
+          ocean.velDown = 0;
+          sub.velRight = 0;
+          sub.velLeft = 0;
+          sub.velUp = 0;
+          sub.velDown = 0;
+          displayObjects.mover= 'ocean';
+        }
+    }
+    displayObjects.ocean = ocean;
+    displayObjects.sub = sub;
+    console.log(displayObjects)
+    console.log('sub', sub);
+    console.log('ocean', ocean)
+    return displayObjects;
+  }
   
-}
+
 
 export function detectDepth(ocean, dir) {
     if (dir === "down") {
