@@ -56,7 +56,7 @@ export function showCanvas1() {
     getTimedMessage(ocean, sub)
     
       
-    }, 6000);
+    }, 3000);
   //  setInterval(ocean, sub);
   for (let i = 0; i < bubbles.length; i++) {
     const bubble = bubbles[i]; 

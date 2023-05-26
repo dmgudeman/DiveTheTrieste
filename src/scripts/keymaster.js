@@ -3,8 +3,7 @@ import {HEIGHT} from '../index';
 import {
     DEPTH_CONT_SHELF,
     LEFT_EDGE_TRENCH,
-    RIGHT_EDGE_TRENCH,
-    TRENCH_WIDTH
+    RIGHT_EDGE_TRENCH
 } from "./constants";
 
 class Keymaster {
@@ -19,12 +18,12 @@ class Keymaster {
     newPos(dir) {
         const lat = detectLateral(this.ocean, dir);
         const depth = detectDepth(this.ocean, dir);
-        console.log("LATERAL", lat);
+        // console.log("LATERAL", lat);
         // console.log('this.ocean', this.ocean)
         // console.log('this.sub', this.sub)
         // console.log('this.ctx.canvas', this.ctx.canvas)
         // console.log('dir', dir)
-        console.log("DEPTH", depth);
+        // console.log("DEPTH", depth);
 
         if (dir === "down") {
             if (this.ocean.depthFlag === "OCEAN") {
@@ -39,30 +38,30 @@ class Keymaster {
                 // this.sub.y = this.ocean.sy;
                 // the internal x, y values for the sub start at 0,0
                 if (
-                    this.sub.x > TRENCH_WIDTH 
+                    this.sub.x > RIGHT_EDGE_TRENCH
                 ) {
-                    console.log('I AM IN A')
+                    // console.log('I AM IN A')
                     if (this.sub.y < this.sub.subDepthLimit) {
-                        console.log('I AM IN B this.sub.vely', this.sub.vely)
+                        // console.log('I AM IN B this.sub.vely', this.sub.vely)
                         this.sub.vely += 1;
                          this.sub.y += this.sub.vely;
                     } else {
-                        console.log('I AM IN C')
+                        // console.log('I AM IN C')
                         this.sub.vely = 0;
                     }
                 } else if (this.sub.x > RIGHT_EDGE_TRENCH) {
-                    console.log('I AM IN D')
+                    // console.log('I AM IN D')
                     if (this.sub.y < DEPTH_CONT_SHELF) {
-                        console.log('I AM IN E')
+                        // console.log('I AM IN E')
                         this.sub.vely += 1;
                         this.sub.y += this.sub.vely;
                     } else {
-                        console.log('I AM IN F')
+                        // console.log('I AM IN F')
                         this.sub.vely = 0;
                     }
-                    console.log('I AM IN G')
+                    // console.log('I AM IN G')
                 }
-                console.log('I AM IN F')
+                // console.log('I AM IN F')
             }
         }
 

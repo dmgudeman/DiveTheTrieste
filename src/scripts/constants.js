@@ -23,10 +23,10 @@ export const SUB_INITIAL_LAT_POS = 800;
 
 export const SEA_DEPTH = 36161;
 
-export const APHOTIC_BENTHIC = 5;
-export const APHOTIC_PELAGIC = 4;
-export const DYSPHOTIC_BENTHIC = 3;
-export const DYSPHOTIC_PELAGIC = 2;
-export const EUPHOTIC_BENTHIC = 1;
-export const EUPHOTIC_PELAGIC = 0;
+export const APHOTIC_BENTHIC = 'aphotci_benthic';
+export const APHOTIC_PELAGIC = 'aphotic_pelagic';
+export const DYSPHOTIC_BENTHIC = 'dsyphotic_benthic';
+export const DYSPHOTIC_PELAGIC = 'dysphotic_pelagic';
+export const EUPHOTIC_BENTHIC = 'euphotic_benthic';
+export const EUPHOTIC_PELAGIC = 'euphotic_pelagic';
 

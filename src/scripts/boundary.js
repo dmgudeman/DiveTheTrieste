@@ -58,7 +58,7 @@ export function pickImageArray(ocean, sub, ctx) {
 
 export function detectDepth(ocean, dir) {
     if (dir === "down") {
-        console.log("sx", ocean.sx, "sy", ocean.sy);
+        // console.log("sx", ocean.sx, "sy", ocean.sy);
         if (ocean.sx < LEFT_EDGE_TRENCH || ocean.sx > RIGHT_EDGE_TRENCH) {
             if (ocean.sy <= DEPTH_CONT_SHELF) {
                 return (ocean.depthFlag = "OCEAN");
@@ -88,7 +88,7 @@ export function detectDepth(ocean, dir) {
 }
 
 export function detectLateral(ocean, dir) {
-  console.log('ocean.x in detect lateral', ocean.sx)
+  // console.log('ocean.x in detect lateral', ocean.sx)
     if (dir === "right") {
         if (ocean.sx < ocean.lateralLimit) {
             return (ocean.lateralFlag = "OCEAN");
