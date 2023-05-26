@@ -1,6 +1,7 @@
 import Sub from "./sub";
 import Ocean from "./ocean";
 import { getTimedMessage } from "./provideMessage";
+import { removeMessageElement } from "./edMessage";
 import { WIDTH, HEIGHT } from "../index";
 
 export function clear(ctx) {
@@ -85,14 +86,13 @@ export function showCanvas1() {
   homeButton.classList.remove("can2home");
   homeButton.classList.remove("can3home"); 
   edMessage.classList.remove("hideEdMessage")
-
-
-
+  removeMessageElement();
  
 }
 
 export function showCanvas2() {
   clearInterval(messageInterval);
+  removeMessageElement();
 
   canvas1.style.display = "none";
   canvas2.style.display = "block";
@@ -124,6 +124,7 @@ export function showCanvas2() {
 
 export function showCanvas3() {
   clearInterval(messageInterval)
+  removeMessageElement();
   canvas1.style.display = "none";
   canvas2.style.display = "none";
   canvas3.style.display = "block";
