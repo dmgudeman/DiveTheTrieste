@@ -8,27 +8,23 @@ import {
     STOP_SUB_LAT,
     STOP_OCEAN_VERTICAL,
     STOP_SUB_VERTICAL,
-
     OCEAN_DEPTH_LIMIT,
     OCEAN_LAT_LIMIT,
     FULL_LAT_LIMIT,
     FULL_VERTICAL_LIMIT,
-
     LAT_VELOCITY,
     VERTICAL_VELOCITY,
-
     INITIAL_LAT,
     INITIAL_DEPTH,
     SUB_INITIAL_LAT_POS,
-    SLOPE_LAT, 
+    SLOPE_LAT,
     SLOPE_DEPTH,
     SHELF_DEPTH,
     TRENCH_DEPTH,
-    SURFACE
+    SURFACE,
 } from "./constants";
 import { HEIGHT } from "../index";
-import {globalOcean, globalSub} from '../index';
-
+import { globalOcean, globalSub } from "../index";
 
 export function showDepth(ocean, sub) {
     let conversion = SEA_DEPTH / HEIGHT; // 19.64 feet per pixel
@@ -43,10 +39,7 @@ export function showDepth(ocean, sub) {
     return depth;
 }
 
-
 export function pickImageArray(ocean, sub, ctx) {
-
-
     let x = ocean.sx + sub.x + sub.initialLateralPos;
     let y = ocean.sy + sub.y + sub.initialDepthPos;
     let deep = y / ctx.canvas.height;
@@ -71,60 +64,130 @@ export function pickImageArray(ocean, sub, ctx) {
 }
 
 export function getDisplayObjects() {
-    console.log('Im HERE')
-  let ocean = globalOcean.ocean;
+    console.log("Im HERE");
+    let ocean = globalOcean.ocean;
 
-  let sub = globalSub.sub;
-  let compVert = ocean.sy + sub.y - INITIAL_Y_POSITION;
-  let compLat = ocean.sx + sub.x - SUB_INITIAL_LAT_POS;
-  console.log('compVert', compVert);
-  console.log('SURFACE', SURFACE);
-  console.log('compVert < SURFACE', compVert < SURFACE)
+    let sub = globalSub.sub;
+    let compVert = ocean.sy + sub.y - INITIAL_Y_POSITION;
+    let compLat = ocean.sx + sub.x - SUB_INITIAL_LAT_POS;
+  
+    console.log("compLat", compLat);
+    console.log("compVert", compVert);
+   
 
-  let displayObjects = {ocean:ocean, sub:sub, mover: null}
- /// this returns the velocity and which object is to move;
-    if(compLat <= INITIAL_LAT) {
-        if (compVert < 0) {
-          ocean.velRight = LAT_VELOCITY;
-          ocean.velLeft = 0;
-          ocean.velUp = 0;
-          ocean.velDown = 0
-          sub.velRight = 0;
-          sub.velLeft = 0;
-          sub.velUp = 0;
-          sub.velDown = 0;
-          displayObjects.mover= 'ocean';
-        } else if (compVert <= INITIAL_DEPTH){
-          ocean.velRight = LAT_VELOCITY;
-          ocean.velLeft = 0;
-          ocean.velUp = VERTICAL_VELOCITY;
-          ocean.velDown = VERTICAL_VELOCITY;
-          sub.velRight = 0;
-          sub.velLeft = 0;
-          sub.velUp = 0;
-          sub.velDown = 0;
-          displayObjects.mover= 'ocean';
+    let displayObjects = { ocean: ocean, sub: sub, mover: null };
+    /// this returns the velocity and which object is to move;
+    // Out of bounds to the left
+    if (compLat < 0) {
+      sub.velRight = 0;
+      sub.velLeft = 0;
+      sub.velUp = 0;
+      sub.velDown = 0;
+        // out of bounds above
+        if (compVert <= 0) {
+            ocean.velRight = LAT_VELOCITY;
+            ocean.velLeft = 0;
+            ocean.velUp = 0;
+            ocean.velDown = VERTICAL_VELOCITY;
+            // ocean.sx = 0;
+            displayObjects.mover = "ocean";
+        } else if (compVert <= OCEAN_DEPTH_LIMIT) {
+            ocean.velRight = LAT_VELOCITY;
+            ocean.velLeft = 0;
+            ocean.velUp = VERTICAL_VELOCITY;
+            ocean.velDown = VERTICAL_VELOCITY;
+        } else if (compVert <= FULL_VERTICAL_LIMIT) {
+            ocean.velRight = 0;
+            ocean.velLeft = 0;
+            ocean.velUp = 0;
+            ocean.velDown = 0;
+            sub.velRight = LAT_VELOCITY;
+            sub.velLeft = 0;
+            sub.velUp = VERTICAL_VELOCITY;
+            sub.velDown = VERTICAL_VELOCITY;
         } else {
-          ocean.velRight = LAT_VELOCITY;
-          ocean.velLeft = 0;
-          ocean.velUp = VERTICAL_VELOCITY;
-          ocean.velDown = 0;
-          sub.velRight = 0;
-          sub.velLeft = 0;
-          sub.velUp = 0;
-          sub.velDown = 0;
-          displayObjects.mover= 'ocean';
+            // out of bounds below
+            ocean.velRight = 0;
+            ocean.velLeft = 0;
+            ocean.velUp = 0;
+            ocean.velDown = 0;
+            sub.velRight = LAT_VELOCITY;
+            sub.velLeft = 0;
+            sub.velUp = VERTICAL_VELOCITY;
+            sub.velDown = 0;
+        }
+    } else if (compLat <= INITIAL_LAT && compLat > 0) {
+        //Initial positiion
+        if (compVert <= 0) {
+            ocean.velRight = LAT_VELOCITY;
+            ocean.velLeft = 0;
+            ocean.velUp = 0;
+            ocean.velDown = VERTICAL_VELOCITY;
+            // ocean.sx = 0;
+            displayObjects.mover = "ocean";
+        } else if (compVert < INITIAL_DEPTH) {
+            ocean.velRight = LAT_VELOCITY;
+            ocean.velLeft = 0;
+            ocean.velUp = VERTICAL_VELOCITY;
+            ocean.velDown = VERTICAL_VELOCITY;
+            displayObjects.mover = "ocean";
+        } else {
+            ocean.velRight = LAT_VELOCITY;
+            ocean.velLeft = 0;
+            ocean.velUp = VERTICAL_VELOCITY;
+            ocean.velDown = 0;
+            displayObjects.mover = "ocean";
+        }
+    } else if (compLat <= SLOPE_LAT && compLat> INITIAL_LAT) {
+        if (compVert <= 0) {
+            ocean.velRight = LAT_VELOCITY;
+            ocean.velLeft = LAT_VELOCITY;
+            ocean.velUp = 0;
+            ocean.velDown = VERTICAL_VELOCITY;
+            displayObjects.mover = "ocean";
+        } else if (compVert < SLOPE_DEPTH) {
+            ocean.velRight = LAT_VELOCITY;
+            ocean.velLeft = LAT_VELOCITY;
+            ocean.velUp = VERTICAL_VELOCITY;
+            ocean.velDown = VERTICAL_VELOCITY;
+            displayObjects.mover = "ocean";
+        } else {
+            ocean.velRight = LAT_VELOCITY;
+            ocean.velLeft = LAT_VELOCITY;
+            ocean.velUp = VERTICAL_VELOCITY;
+            ocean.velDown = 0;
+            displayObjects.mover = "ocean";
+        }
+      } else if (compLat <= LEFT_EDGE_TRENCH) {
+        if (compVert <= 0) {
+            ocean.velRight = LAT_VELOCITY;
+            ocean.velLeft = LAT_VELOCITY
+            ocean.velUp = 0;
+            ocean.velDown = VERTICAL_VELOCITY;
+
+            displayObjects.mover = "ocean";
+        } else if (compVert < SHELF_DEPTH) {
+            ocean.velRight = LAT_VELOCITY;
+            ocean.velLeft = LAT_VELOCITY
+            ocean.velUp = VERTICAL_VELOCITY;
+            ocean.velDown = VERTICAL_VELOCITY;
+            displayObjects.mover = "ocean";
+        } else {
+            ocean.velRight = LAT_VELOCITY;
+            ocean.velLeft = LAT_VELOCITY;
+            ocean.velUp = VERTICAL_VELOCITY;
+            ocean.velDown = 0;
+            displayObjects.mover = "ocean";
         }
     }
+
     displayObjects.ocean = ocean;
     displayObjects.sub = sub;
-    console.log(displayObjects)
-    console.log('sub', sub);
-    console.log('ocean', ocean)
+    console.log(displayObjects);
+    console.log("sub", sub);
+    console.log("ocean", ocean);
     return displayObjects;
-  }
-  
-
+}
 
 export function detectDepth(ocean, dir) {
     if (dir === "down") {
@@ -158,7 +221,7 @@ export function detectDepth(ocean, dir) {
 }
 
 export function detectLateral(ocean, dir) {
-  // console.log('ocean.x in detect lateral', ocean.sx)
+    // console.log('ocean.x in detect lateral', ocean.sx)
     if (dir === "right") {
         if (ocean.sx < ocean.lateralLimit) {
             return (ocean.lateralFlag = "OCEAN");

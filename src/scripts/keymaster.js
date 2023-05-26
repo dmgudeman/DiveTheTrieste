@@ -40,6 +40,16 @@ class Keymaster {
                 this.ocean.sy -= this.ocean.velUp;
             }
         }
+        if (dir === "right") {
+            if (mover === 'ocean'){
+                this.ocean.sx += this.ocean.velRight;
+            }
+        }
+        if (dir === "left") {
+            if (mover === 'ocean'){
+                this.ocean.sx -= this.ocean.velLeft;
+            }
+        }
             // } else if (this.ocean.depthFlag === "SHELF_STOP_DESCENT") {
             //     // this.sub.vely = 0;
             // } else if (this.ocean.depthFlag === "STOP_DESCENT") {

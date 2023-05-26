@@ -6,7 +6,7 @@ export const stopMessageAnimation = {
   };
 
 // values
-export const SURFACE = 80;
+export const SURFACE = 100;
 export const DEPTH_CONT_SHELF = 450;
 export const SEA_DEPTH = 36161;
 export const OCEAN_BOTTOM = HEIGHT - 100;
@@ -16,14 +16,12 @@ export const LAT_VELOCITY = 20;
 export const VERTICAL_VELOCITY = 20;
 
 //lateral for setting depths for movement
-export const INITIAL_LAT = 50;
-export const INITIAL_DEPTH = 100;
+export const INITIAL_LAT = 80;
+export const INITIAL_DEPTH = 25;
 export const SLOPE_LAT = 200;
 export const SLOPE_DEPTH = 300;
 export const SHELF_DEPTH = DEPTH_CONT_SHELF;
 export const TRENCH_DEPTH = OCEAN_BOTTOM;
-
-
 export const LEFT_EDGE_TRENCH = 1211;
 export const RIGHT_EDGE_TRENCH = WIDTH - 200;
 //vertical for messages and images
@@ -33,12 +31,12 @@ export const E_D_BARRIER = SURFACE + 200;
 export const D_A_BARRIER = HEIGHT - 400;   // dysphotic_aphotic_barrier
 export const APHOTIC_BENTHIC_BARRIER = OCEAN_BOTTOM - 200;
 
-// object option values
+// OBJECT option values
 export const OCEAN_DEPTH_LIMIT = 820;
 export const OCEAN_LAT_LIMIT = 1271;
 export const FULL_LAT_LIMIT = WIDTH - 100;
 export const FULL_VERTICAL_LIMIT = HEIGHT - 100;
-export const INITIAL_Y_POSITION = 100; // for both objects
+export const INITIAL_Y_POSITION = 80; // for both objects
 export const SUB_INITIAL_LAT_POS = 800;
 
 // flags
