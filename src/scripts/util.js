@@ -31,15 +31,9 @@ const musicNoteButton = document.getElementById("musicNoteButton")
 const bubblesContainer = document.querySelector(".bubblesContainer");
 const bubbles = bubblesContainer.getElementsByClassName('bubble');
 const edMessage = document.getElementById("edMassage");
-
-
 let messageInterval;
 
-
-
-
-
-export function showCanvas1() {
+export function showCanvas1() { //the ocean
 
   stopMessageAnimation.messFlag = false;
   // let sub = new Sub({ ctx: ctx1 });
@@ -73,7 +67,6 @@ export function showCanvas1() {
     
   }
   
-  
   canvas1.style.display = "block";
   canvas2.style.display = "none";
   canvas3.style.display = "none";
@@ -86,15 +79,12 @@ export function showCanvas1() {
   homeButton.classList.remove("can2home");
   homeButton.classList.remove("can3home"); 
   edMessage.classList.remove("hideEdMessage")
- 
- 
 }
 
-export function showCanvas2() {
+export function showCanvas2() { //opening page
   clearInterval(messageInterval);
   stopAnimation();
   stopMessageAnimation.messFlag = true;
-
 
   canvas1.style.display = "none";
   canvas2.style.display = "block";
@@ -119,12 +109,9 @@ export function showCanvas2() {
     bubble.style.animation = '';
     bubble.style.display = '';
   } 
-
-  
-  
 }
 
-export function showCanvas3() {
+export function showCanvas3() {  //cockpit
   stopMessageAnimation.messFlag = true;
   clearInterval(messageInterval)
   stopAnimation();
@@ -157,6 +144,8 @@ export function showCanvas3() {
   
 }
 
+
+// modal code
 const modal = document.getElementById("modal");
 const closeButton = document.getElementsByClassName("close")[0];
 

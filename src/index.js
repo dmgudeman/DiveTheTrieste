@@ -1,18 +1,17 @@
+// dmgudeman.github.io/DiveTheTrieste
+
 // canvas1 is the ocean floor and sub
 // canvas2 is opening
 // canvas3 is the cockpit
 
-// dmgudeman.github.io/DiveTheTrieste
-
 import { showCanvas1, showCanvas2, showCanvas3 } from "./scripts/util";
 import { showDepth, detectLateral} from "./scripts/boundary";
-import { calcMovement, getMessage, getTimedMessage} from './scripts/provideMessage';
+import { calcMovement} from './scripts/provideMessage';
 import Sub from "./scripts/sub";
 import Ocean from "./scripts/ocean";
 import Cockpit from "./scripts/cockpit";
 import { getCursorPosition } from "./scripts/util";
 import Keymaster from "./scripts/keymaster";
-import { addAndStartAnimation } from "./scripts/edMessage";
 
 export const globalSub = {
     sub: null
@@ -31,7 +30,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const canvas2 = document.getElementById("canvas2");
     const canvas3 = document.getElementById("canvas3");
     const gitHubButton = document.getElementById("gitHubButton");
-    // const linkedInButton = document.getElementById("linkedInButton");
+    const linkedInButton = document.getElementById("linkedInButton");
     const musicNoteButton = document.getElementById("musicNoteButton");
     const goToOceanButton = document.getElementById("trieste3Container");
     const homeButton = document.getElementById("homeButton");
@@ -61,19 +60,15 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     linkedInButton.addEventListener("click", () => {
-        window.location.href = "https://www.linkedin.com/in/davidmgudeman/";   
-       
+        window.location.href = "https://www.linkedin.com/in/davidmgudeman/";      
     });
 
-
     goToOceanButton.addEventListener("click", () => {
-        showCanvas1();
-       
+        showCanvas1();    
     });
 
     homeButton.addEventListener("click", () => {
-        showCanvas2();
-        
+        showCanvas2();     
     });
 
     const openModalButton = document.getElementById("openModalButton");
@@ -172,23 +167,6 @@ document.addEventListener("DOMContentLoaded", () => {
         ctx1.clearRect(0, 0, canvas1.width, canvas1.height);
     }
 
-    // // message
-    // const messageElement = document.getElementById("message");
-
-    // function showMessage(message) {
-    //     messageElement.textContent = message;
-    //     messageElement.classList.remove("fade-out");
-    //     // messageElement.classList.remove("hide");
-    //     // messageElement.style.display = 'block';
-    //     messageElement.classList.add("fade-out");
-
-    //     setTimeout(() => {
-    //         messageElement.classList.remove("fade-out");
-    //     }, 2000);
-    // }
-
-    // // showMessage("Hello, world!");
-
     // sprite
     const spriteSheet = new Image();
     spriteSheet.src = "assets/sprite.png";
@@ -208,19 +186,19 @@ document.addEventListener("DOMContentLoaded", () => {
     let lastFrameTime = 0;
     let counter = 0;
     let onOceanFlag = true;
-    // main animation loop
-    function update(currentTime) {
 
-   
+    // MAIN ANIMATION LOOP /////////////////////////////////
+    function update(currentTime) {
+ 
         const elapsedTime = currentTime - lastFrameTime;
         if (elapsedTime > 1000 / 10) {
             clear();
             ocean.draw();
             // sub.draw();
-            // calcMovement(ocean, sub);
-
+          
+            // This is the animation loop for provideMessage
             calcMovement(ocean, sub)
-            // getTimedMessage(ocean, sub);
+         
             showDepth(ocean, sub, canvas1);
             const sprite = sprites[currentFrame];
             ctx1.drawImage(
@@ -243,9 +221,6 @@ document.addEventListener("DOMContentLoaded", () => {
         requestAnimationFrame(update);
     }
 
-
-
-
     function keyDown(e) {
         if (e.key === "ArrowDown" || e.key === "Down") {
             key.newPos("down");
@@ -259,75 +234,6 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
    
-    // let topPositionEM;
-    // let intervalId;
-    // let edMessage;
-    
-    // function moveMessage() {
-    //     console.log("I'm messaging");
-    //     topPositionEM -= 1; // Adjust the speed of the animation by changing the value
-    //     edMessage.style.top = topPositionEM + 'px';
-    
-    //     if (topPositionEM <= -50) { // Adjust the condition for when the message disappears
-    //         clearInterval(intervalId);
-    //         linkedInButton.removeEventListener('click', removeElement);
-    //         linkedInButton.addEventListener('click', addAndStartAnimation);
-    //     }
-    // }
-    
-    // function startAnimation() {
-    //     console.log("Button pressed");
-    //     topPositionEM = 200;
-    //     edMessage.style.display = 'block';
-    //     intervalId = setInterval(moveMessage, 10);
-    // }
-    
-    // function addEdMessage(text) {
-    //     const canvasContainer = document.getElementById('canvasContainer');
-    //     edMessage = document.createElement('div');
-    //     edMessage.textContent = text;
-    //     edMessage.id = 'edMessage';
-    //     edMessage.style.position = 'absolute';
-    //     edMessage.style.top = '200px'; /* Adjust the initial position */
-    //     edMessage.style.left = '50%';
-    //     edMessage.style.transform = 'translateX(-50%)';
-    //     edMessage.style.padding = '10px';
-    //     edMessage.style.backgroundColor = '#fff';
-    //     edMessage.style.border = '1px solid #000';
-    //     edMessage.style.borderRadius = '5px';
-    //     edMessage.style.transition = 'top 1s ease'; /* Transition for the animation */
-    //     edMessage.style.fontSize = '1rem';
-    //     edMessage.style.zIndex = '999';
-    
-    //     canvasContainer.appendChild(edMessage);
-    // }
-    
-    // function removeElement() {
-    //     edMessage.style.display = 'none';
-    //     edMessage.parentNode.removeChild(edMessage);
-    // }
-    
-    // function addAndStartAnimation() {
-    //     addEdMessage("hi there");
-    //     startAnimation();
-    //     linkedInButton.removeEventListener('click', addAndStartAnimation);
-    //     linkedInButton.addEventListener('click', removeElement);
-    // }
-    
-   
-    
-    
-    
- 
- 
- 
- 
-
-    
-    
-    
-    
-
     document.addEventListener("keydown", keyDown);
 });
 
