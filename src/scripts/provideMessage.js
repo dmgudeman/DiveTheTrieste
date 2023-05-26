@@ -27,6 +27,7 @@ import {globalOcean, globalSub, hithere} from '../index';
 // the bubble messages released at a slow pace
 let i = 0;
 let flag;
+let oldFlag;
 // this is being called from the main animation loop in index.js
 export function calcMovement() {
     let ocean = globalOcean.ocean;
@@ -37,6 +38,9 @@ export function calcMovement() {
 
     // console.log("comLat", compLat);
     // console.log("compVert", compVert);
+
+    console.log('oldFlag', oldFlag);
+    console.log('flag', flag)
     if (i % 40 === 0 && !stopMessageAnimation.messFlag) {
         if (compLat < B_P_BARRIER) {
             if (compVert < CONT_SHELF_BENTHIC) {
@@ -70,6 +74,10 @@ export function calcMovement() {
             }
         }
 
+       
+        if (oldFlag !== flag){
+          oldFlag = flag;
+        
     
 
         let message;
@@ -98,6 +106,7 @@ export function calcMovement() {
             addAndStartAnimation(message);
             return;
         }
+    }
     }
 }
 
@@ -183,7 +192,8 @@ const iteraterMessage = (messObj) => {
     // start the rotation over again if the end
     // of the messages is used
     if (messNum > messObj.length) {
-        messNum = 1;
+       stopMessageAnimation.messFlag = true;
+      
         
     }
     messObj.lastUsed = messNum;

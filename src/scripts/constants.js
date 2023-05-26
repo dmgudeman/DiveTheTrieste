@@ -2,7 +2,7 @@ import {WIDTH, HEIGHT} from '../index';
 
 
 export const stopMessageAnimation = {
-    messFlag: false
+    messFlag: true
   };
 
 export const SURFACE = 100;
