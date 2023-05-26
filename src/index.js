@@ -14,16 +14,8 @@ import { getCursorPosition } from "./scripts/util";
 import Keymaster from "./scripts/keymaster";
 import { addAndStartAnimation } from "./scripts/edMessage";
 
-export const globalSub = {
-    sub: null
-  };
-export const globalOcean = {
-    ocean: null
-}
-
 export const WIDTH = window.innerWidth * 2.5; // width of canvases
 export const HEIGHT = window.innerHeight * 1.9;  // height of canvases
-
 
 document.addEventListener("DOMContentLoaded", () => {
     localStorage.setItem("modalDisplayed", false);
@@ -48,9 +40,7 @@ document.addEventListener("DOMContentLoaded", () => {
     canvas3.height = HEIGHT;
 
     let ocean = new Ocean({ ctx: ctx1 });
-    globalOcean.ocean = ocean;
     let sub = new Sub({ ctx: ctx1 });
-    globalSub.sub = sub;
     let key = new Keymaster({ ctx: ctx1, ocean, sub });
     let cockpit = new Cockpit({ ctx: ctx3, sub, ocean });
 

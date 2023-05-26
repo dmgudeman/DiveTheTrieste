@@ -1,9 +1,7 @@
-import { stopMessageAnimation } from "./constants";
-
 let topPositionEM;
 let intervalId;
 let edMessage;
-const canvasContainer = document.getElementById("canvasContainer");
+
 function moveMessage() {
     topPositionEM -= 3; // Adjust the speed of the animation by changing this value
     edMessage.style.top = topPositionEM + "px";
@@ -15,7 +13,6 @@ function moveMessage() {
 }
 // start animation for message bubbles
 function startAnimation() {
-   
     topPositionEM = 200;
     edMessage.style.display = "block";
     intervalId = setInterval(moveMessage, 10);
@@ -27,7 +24,7 @@ function getRandomPosition(max) {
     return Math.floor(Math.random() * max);
 }
 function addEdMessage(text) {
-   
+    const canvasContainer = document.getElementById("canvasContainer");
     edMessage = document.createElement("div");
     edMessage.textContent = text;
     edMessage.id = "edMessage";
@@ -55,27 +52,24 @@ function addEdMessage(text) {
     edMessage.style.overflowWrap = "break-word";
     edMessage.style.fontStyle = "italic";
     edMessage.style.color = "green";
-    edMessage.style.opacity = "0.7";
+    edMessage.style.opacity = "0.5";
 
     canvasContainer.appendChild(edMessage);
 }
 
 export function removeMessageElement() {
-       
+    if (edMessage) {
         edMessage.style.display = "none";
         edMessage.parentNode.removeChild(edMessage);
-        // canvasContainer.removeChild(edMessage)
-
+    }
 }
 
 export function stopAnimation() {
     // Stop the animation
-    
     clearInterval(intervalId);
   }
 
 export function addAndStartAnimation(text) {
-
     addEdMessage(text);
     startAnimation();
 }
