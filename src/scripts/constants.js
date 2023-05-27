@@ -22,7 +22,9 @@ export const INITIAL_DEPTH = 25;
 export const SLOPE_LAT = 200;
 export const SLOPE_DEPTH = 300;
 export const SHELF_DEPTH = DEPTH_CONT_SHELF;
+export const TRENCH_TOP = 500;
 export const TRENCH_DEPTH = OCEAN_BOTTOM;
+
 export const LEFT_EDGE_TRENCH = 1400;
 export const RIGHT_EDGE_TRENCH = 1800;
 //vertical for messages and images

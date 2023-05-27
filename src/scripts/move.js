@@ -1,43 +1,42 @@
 import {
-    DEPTH_CONT_SHELF,
     INITIAL_Y_POSITION,
     LEFT_EDGE_TRENCH,
     RIGHT_EDGE_TRENCH,
-    SEA_DEPTH,
-    STOP_OCEAN_LAT,
-    STOP_SUB_LAT,
-    STOP_OCEAN_VERTICAL,
-    STOP_SUB_VERTICAL,
     OCEAN_DEPTH_LIMIT,
     OCEAN_LAT_LIMIT,
     FULL_LAT_LIMIT,
-    FULL_VERTICAL_LIMIT,
     LAT_VELOCITY,
     VERTICAL_VELOCITY,
-    INITIAL_LAT,
-    INITIAL_DEPTH,
     SUB_INITIAL_LAT_POS,
     SLOPE_LAT,
-    SLOPE_DEPTH,
     SHELF_DEPTH,
-    TRENCH_DEPTH,
-    SURFACE,
+    TRENCH_TOP,
     OCEAN_FLOOR,
 } from "./constants";
 
 let displayObjects;
 export const getMove = (moveObjects) => {
-    let { ocean, sub, mover } = moveObjects;
+    let { ocean, sub} = moveObjects;
+    
+    ocean.velRight=0;
+    ocean.velLeft=0;
+    ocean.velUp=0;
+    ocean.velDown=0;
+    sub.velRight=0;
+    sub.velLeft=0;
+    sub.velUp=0;
+    sub.velDown=0;
+
     let compLat = ocean.sx + sub.x - SUB_INITIAL_LAT_POS;
     let compVert = ocean.sy + sub.y - INITIAL_Y_POSITION;
     console.log('compLat', compLat);
     console.log('compVert', compVert)
 
 
-    displayObjects = { ocean: ocean, sub: sub, mover: mover };
+    displayObjects = { ocean: ocean, sub: sub};
     displayObjects = getLatMove(displayObjects);
  
-
+    // fine tune the depth stop for the slope and the shelves
     if (compLat < SLOPE_LAT) {
         if (compLat < 0) {
             compLat = 1;
@@ -50,11 +49,13 @@ export const getMove = (moveObjects) => {
     } else {
         displayObjects = getVerticalMove(displayObjects);
     }
+
     return displayObjects;
 };
 function getLatMove(moveObjects, varLeft=LEFT_EDGE_TRENCH, varRight=FULL_LAT_LIMIT ) {
-    let { ocean, sub, mover } = moveObjects;
+    let { ocean, sub} = moveObjects;
     let compLat = ocean.sx + sub.x - SUB_INITIAL_LAT_POS;
+    let compVert = ocean.sy + sub.y - INITIAL_Y_POSITION;
 
     const moveOceanLat = () => {
         ocean.velRight = LAT_VELOCITY;
@@ -101,10 +102,16 @@ function getLatMove(moveObjects, varLeft=LEFT_EDGE_TRENCH, varRight=FULL_LAT_LIM
         moveOceanRight();
     } else if (compLat < OCEAN_LAT_LIMIT) {
         moveOceanLat();
+    } else if (compLat < LEFT_EDGE_TRENCH && compVert > TRENCH_TOP) {
+        moveSubRight()
+    } else if (compLat > RIGHT_EDGE_TRENCH && compVert > TRENCH_TOP) {
+        moveSubLeft();
     } else if (compLat < FULL_LAT_LIMIT) {
         moveSubLat();
     } else if (compLat >= FULL_LAT_LIMIT) {
         moveSubLeft();
+    } else {
+        moveSubLat();
     }
     return displayObjects;
 }
