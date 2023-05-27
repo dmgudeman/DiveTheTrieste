@@ -26,7 +26,7 @@ import {
     APHOTIC_BENTHIC_BARRIER,
     OCEAN_BOTTOM,
 } from "./constants";
-import { HEIGHT } from "../index";
+import { WIDTH } from "../index";
 import { globalOcean, globalSub } from "../index";
 
 
@@ -40,60 +40,74 @@ export function getDisplaySub(ocean, sub) {
   
     console.log("compLat2", compLat);
     console.log("compVert2", compVert);
+  
    
 
-    let displayObjects = { ocean: ocean, sub: sub, mover: 'sub'};
-    /// this returns the velocity and which object is to move;
-    // Out of bounds to the left
-    if (compLat < STOP_OCEAN_LAT) {
-      console.log('COMPLAT LESS THAN OCEAN LAT  SUBBBBB', compLat)
-     
-        // out of bounds above
-        if (compVert <= STOP_OCEAN_VERTICAL) { //out of bounds above
-            sub.velRight = LAT_VELOCITY;
+    let displayObjects = { ocean: ocean, sub: sub, mover: null};
+   
+    if (compLat < STOP_OCEAN_LAT) { // out of bounds to the left
+      console.log('COMPLAT LESS THAN OCEAN LAT  SUBBBBB', compLat) 
+        if (compVert < 0 ) { //out of bounds above
+            ocean.velUp = 0;
+            ocean.velDown = VERTICAL_VELOCITY;
+            ocean.velRight=  LAT_VELOCITY;
+            ocean.velLeft = 0;
+            sub.velRight = 0;
             sub.velLeft = 0;
             sub.velUp = 0;
-            sub.velDown = VERTICAL_VELOCITY;
-            sub.y = STOP_OCEAN_VERTICAL;
-            sub.x = STOP_OCEAN_LAT;
-          
+            sub.velDown = 0;  
+            displayObjects.mover = 'ocean';   
+     
+     } else if (compVert <= STOP_OCEAN_VERTICAL) {       
         } else if (compVert <= SHELF_DEPTH) {
-            sub.velRight = LAT_VELOCITY;
+            ocean.velUp = VERTICAL_VELOCITY;
+            ocean.velDown = VERTICAL_VELOCITY;
+            ocean.velRight= LAT_VELOCITY;
+            ocean.velLeft = 0;
+            sub.velRight = 0;
             sub.velLeft = 0;
-            sub.velUp = VERTICAL_VELOCITY;
-            sub.velDown = VERTICAL_VELOCITY;
-            sub.x = STOP_OCEAN_LAT;
-        } else if (compVert > SHELF_DEPTH) { //out of bounds below
-            sub.velRight = LAT_VELOCITY;
-            sub.velLeft = 0;
-            sub.velUp = VERTICAL_VELOCITY;
+            sub.velUp = 0;
             sub.velDown = 0;
-            sub.x = STOP_OCEAN_LAT;
-            sub.y = SHELF_DEPTH
+            displayObjects.mover = 'ocean';   
+        } else if (compVert > SHELF_DEPTH) { //out of bounds below
+            ocean.velUp = VERTICAL_VELOCITY;
+            ocean.velDown = 0;
+            ocean.velRight= LAT_VELOCITY;
+            ocean.velLeft = 0;
+            sub.velRight = 0
+            sub.velLeft = 0;
+            sub.velUp = 0
+            sub.velDown = 0;
+            displayObjects.mover = 'ocean';   
         }
     } else if (compLat <= LEFT_EDGE_TRENCH) {
       console.log('COMPLAT LESS THAN LEFT EDGE TRENCH SUB', compLat)
         
-        if (compVert <= STOP_OCEAN_VERTICAL) { //out of bounds above
+        if (compVert <= STOP_OCEAN_VERTICAL) { 
+            ocean.velUp = VERTICAL_VELOCITY;
+            ocean.velDown = VERTICAL_VELOCITY
+            ocean.velRight= 0
+            ocean.velLeft = 0;
             sub.velRight = LAT_VELOCITY;
             sub.velLeft = LAT_VELOCITY
             sub.velUp = 0;
-            sub.velDown = VERTICAL_VELOCITY;
-            sub.y = STOP_OCEAN_VERTICAL;
-        
+            sub.velDown = 0;
+            displayObjects.mover = 'both';       
         } else if (compVert <= SHELF_DEPTH) {
+            ocean.velUp = 0
+            ocean.velDown = 0
+            ocean.velRight= 0
+            ocean.velLeft = 0;
             sub.velRight = LAT_VELOCITY;
             sub.velLeft = LAT_VELOCITY;
             sub.velUp = VERTICAL_VELOCITY;
             sub.velDown = VERTICAL_VELOCITY;
-            
+            displayObjects.mover = 'sub'; 
         } else if (compVert > SHELF_DEPTH) { //out of bounds below
             sub.velRight = LAT_VELOCITY;
             sub.velLeft = 0;
             sub.velUp = VERTICAL_VELOCITY;
-            sub.velDown = 0;
-            sub.x = STOP_OCEAN_LAT;
-            sub.y = SHELF_DEPTH
+            sub.velDown = 0; 
             sub.velDown = 0;
         }
     } else if (compLat <= RIGHT_EDGE_TRENCH ) {
@@ -103,7 +117,7 @@ export function getDisplaySub(ocean, sub) {
             sub.velLeft = LAT_VELOCITY;
             sub.velUp = 0;
             sub.velDown = VERTICAL_VELOCITY;
-            sub.y = STOP_OCEAN_VERTICAL;
+         
        
         } else if (compVert <= OCEAN_BOTTOM) {
             sub.velRight = LAT_VELOCITY;
@@ -116,7 +130,7 @@ export function getDisplaySub(ocean, sub) {
             sub.velLeft = LAT_VELOCITY;
             sub.velUp = VERTICAL_VELOCITY;
             sub.velDown = 0;
-            sub.y = OCEAN_BOTTOM;
+            // sub.y = OCEAN_BOTTOM;
            
         }
     } else if (compLat <= FULL_LAT_LIMIT) {
@@ -126,7 +140,7 @@ export function getDisplaySub(ocean, sub) {
             sub.velLeft = LAT_VELOCITY
             sub.velUp = 0;
             sub.velDown = VERTICAL_VELOCITY;
-            sub.y = STOP_OCEAN_VERTICAL;
+            // sub.y = STOP_OCEAN_VERTICAL;
         
         } else if (compVert <= SHELF_DEPTH) {
             sub.velRight = LAT_VELOCITY;
@@ -134,24 +148,22 @@ export function getDisplaySub(ocean, sub) {
             sub.velUp = VERTICAL_VELOCITY;
             sub.velDown = VERTICAL_VELOCITY;
             
-        } else if (compVert > SHELF_DEPTH) { //out of bounds below
+        } else if (compVert > OCEAN_BOTTOM) { //out of bounds below
             sub.velRight = LAT_VELOCITY;
-            sub.velLeft = 0;
+            sub.velLeft = LAT_VELOCITY;
             sub.velUp = VERTICAL_VELOCITY;
-            sub.velDown = 0;
-            
-            sub.y = SHELF_DEPTH
-            sub.velDown = 0;
+            sub.velDown = 0;     
+            // sub.y = SHELF_DEPTH
         }
     } else if (compLat > FULL_LAT_LIMIT ) { // out of bounds right
-            ocean.sx = OCEAN_LAT_LIMIT;
-            sub.x = FULL_LAT_LIMIT;
+            console.log('OUT OF BOUNDS RIGHT')
+           
         if (compVert <= STOP_OCEAN_VERTICAL) { //out of bounds above
             sub.velRight =0;
             sub.velLeft = LAT_VELOCITY
             sub.velUp = 0;
             sub.velDown = VERTICAL_VELOCITY;
-            sub.y = STOP_OCEAN_VERTICAL; //reset sub
+            // sub.y = STOP_OCEAN_VERTICAL; //reset sub
         
         } else if (compVert <= SHELF_DEPTH) {
             sub.velRight = 0
@@ -164,7 +176,7 @@ export function getDisplaySub(ocean, sub) {
             sub.velLeft = LAT_VELOCITY;
             sub.velUp = VERTICAL_VELOCITY;
             sub.velDown = 0;
-            sub.y = SHELF_DEPTH
+            // sub.y = SHELF_DEPTH
             
         }
     }

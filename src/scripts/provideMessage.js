@@ -13,10 +13,11 @@ import {
     DYSPHOTIC_BENTHIC,
     DYSPHOTIC_PELAGIC,
     APHOTIC_BENTHIC,
-    APHOTIC_PELAGIC
+    APHOTIC_PELAGIC,
+    stopMessageAnimation
 } from "./constants";
 import { WIDTH, HEIGHT } from "../index";
-import { addAndStartAnimation, stopAnimation, stopMessageAnimation, removeMessageElement } from "./edMessage";
+import { addAndStartAnimation, stopAnimation,  removeMessageElement } from "./edMessage";
 import {globalOcean, globalSub} from '../index';
 
 

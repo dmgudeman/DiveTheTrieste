@@ -1,7 +1,7 @@
 import Sub from "./sub";
 import Ocean from "./ocean";
 import { getMessage } from "./provideMessage";
-import { removeMessageElement, stopAnimation } from "./edMessage";
+import { removeMessageElement, stopMessAnimation } from "./edMessage";
 import { WIDTH, HEIGHT } from "../index";
 import { stopMessageAnimation } from "./constants";
 
@@ -84,7 +84,7 @@ export function showCanvas1() { //the ocean
 
 export function showCanvas2() { //opening page
   clearInterval(messageInterval);
-  stopAnimation();
+  stopMessAnimation();
   stopMessageAnimation.flag = false;
 
   canvas1.style.display = "none";
@@ -115,7 +115,7 @@ export function showCanvas2() { //opening page
 export function showCanvas3() {  //cockpit
   stopMessageAnimation.messFlag = true;
   clearInterval(messageInterval)
-  stopAnimation();
+  stopMessAnimation();
   removeMessageElement();
   canvas1.style.display = "none";
   canvas2.style.display = "none";
@@ -140,7 +140,7 @@ export function showCanvas3() {  //cockpit
   }
   bubblesContainer.classList.add('hide'); 
   clearInterval(messageInterval)
-  stopAnimation();
+  stopMessAnimation();
   removeMessageElement();
   
 }
