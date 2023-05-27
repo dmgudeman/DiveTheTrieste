@@ -1,6 +1,6 @@
 import Sub from "./sub";
 import Ocean from "./ocean";
-import { getMessage } from "./provideMessage";
+import { getMessage } from "./provideMessage1";
 import { removeMessageElement, stopMessAnimation } from "./edMessage";
 import { WIDTH, HEIGHT } from "../index";
 import { stopMessageAnimation } from "./constants";
