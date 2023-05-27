@@ -28,11 +28,26 @@ import {
 let displayObjects;
 export const getMove = (moveObjects) => {
     let { ocean, sub, mover } = moveObjects;
+    let compLat = ocean.sx + sub.x - SUB_INITIAL_LAT_POS;
+    let compVert = ocean.sy + sub.y - INITIAL_Y_POSITION;
+    console.log('compLat', compLat);
+    console.log('compVert', compVert)
+
 
     displayObjects = { ocean: ocean, sub: sub, mover: mover };
     displayObjects = getLatMove(displayObjects);
-    displayObjects = getVerticalMove(displayObjects);
-
+    if (compLat < SLOPE_LAT) {
+        if (compLat < 0) {
+            compLat = 1;
+        }
+        let depth = compLat *2.3;
+        displayObjects = getVerticalMove(displayObjects, depth);
+    }
+    else if (compLat < LEFT_EDGE_TRENCH) {
+        displayObjects = getVerticalMove(displayObjects, SHELF_DEPTH);
+    } else {
+        displayObjects = getVerticalMove(displayObjects);
+    }
     return displayObjects;
 };
 function getLatMove(moveObjects) {
@@ -92,7 +107,7 @@ function getLatMove(moveObjects) {
     return displayObjects;
 }
 
-function getVerticalMove(objects) {
+function getVerticalMove(objects, varDepth = OCEAN_FLOOR) {
     let { ocean, sub } = objects;
     let compVert = ocean.sy + sub.y - INITIAL_Y_POSITION;
 
@@ -140,11 +155,11 @@ function getVerticalMove(objects) {
 
     if (compVert <= 0) {
         moveOceanDown();
-    } else if (compVert <= OCEAN_DEPTH_LIMIT) {
+    } else if (compVert <= OCEAN_DEPTH_LIMIT && compVert <= varDepth) {
         moveOceanVert();
-    } else if (compVert < OCEAN_FLOOR) {
+    } else if (compVert < OCEAN_FLOOR && compVert <= varDepth) {
         moveSubVert();
-    } else if (compVert >= OCEAN_FLOOR) {
+    } else if (compVert >= OCEAN_FLOOR || compVert > varDepth) {
         //below the limit
         moveSubUp();
     }
