@@ -41,7 +41,8 @@ document.addEventListener("DOMContentLoaded", () => {
     canvas3.height = HEIGHT;
 
     let ocean = new Ocean({ ctx: ctx1 });
-    globalOcean.ocean =ocean;
+    console.log('OCEAN IN INDEX>JS', ocean)
+    globalOcean.ocean = ocean;
 
     let sub = new Sub({ ctx: ctx1 });
     globalSub.sub = sub;
@@ -114,7 +115,7 @@ document.addEventListener("DOMContentLoaded", () => {
         backgroundImage.style.zIndex = 100;
 
         const instructions = new Image();
-        instructions.src = "assets/instructions.png";
+        instructions.src = "assets/dtt6.png";
 
         instructions.onload = () => {
             ctx2.drawImage(instructions, 450, 250, 600, 600);
@@ -222,7 +223,6 @@ document.addEventListener("DOMContentLoaded", () => {
         } else if (e.key === "ArrowLeft" || e.key === "Left") {
             key.newPos("left");
         } else if (e.key === "ArrowRight" || e.key === "Rigth") {
-            detectLateral("right")
             key.newPos("right");
         } else {
             key.newPos("up");

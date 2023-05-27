@@ -9,7 +9,8 @@ export const stopMessageAnimation = {
 export const SURFACE = 100;
 export const DEPTH_CONT_SHELF = 450;
 export const SEA_DEPTH = 36161;
-export const OCEAN_BOTTOM = HEIGHT - 100;
+export const OCEAN_BOTTOM = 1560;
+export const OCEAN_FLOOR = 1560;
 
 // velocities
 export const LAT_VELOCITY = 20;

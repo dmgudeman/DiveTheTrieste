@@ -58,8 +58,10 @@ function addEdMessage(text) {
 }
 
 export function removeMessageElement() {   
+    if(edMessage){
         edMessage.style.display = "none";
-        edMessage.parentNode.removeChild(edMessage);       
+        edMessage.parentNode.removeChild(edMessage);   
+    }    
 }
 
 export function stopMessAnimation() {
