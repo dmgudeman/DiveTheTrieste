@@ -24,7 +24,7 @@ export const SLOPE_DEPTH = 300;
 export const SHELF_DEPTH = DEPTH_CONT_SHELF;
 export const TRENCH_DEPTH = OCEAN_BOTTOM;
 export const LEFT_EDGE_TRENCH = 1400;
-export const RIGHT_EDGE_TRENCH = WIDTH - 200;
+export const RIGHT_EDGE_TRENCH = 1800;
 //vertical for messages and images
 export const B_P_BARRIER = 200;
 export const CONT_SHELF_BENTHIC = DEPTH_CONT_SHELF - 150;

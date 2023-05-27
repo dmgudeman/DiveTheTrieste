@@ -36,6 +36,8 @@ export const getMove = (moveObjects) => {
 
     displayObjects = { ocean: ocean, sub: sub, mover: mover };
     displayObjects = getLatMove(displayObjects);
+ 
+
     if (compLat < SLOPE_LAT) {
         if (compLat < 0) {
             compLat = 1;
@@ -43,14 +45,14 @@ export const getMove = (moveObjects) => {
         let depth = compLat *2.3;
         displayObjects = getVerticalMove(displayObjects, depth);
     }
-    else if (compLat < LEFT_EDGE_TRENCH) {
+    else if (compLat < LEFT_EDGE_TRENCH || compLat > RIGHT_EDGE_TRENCH) {
         displayObjects = getVerticalMove(displayObjects, SHELF_DEPTH);
     } else {
         displayObjects = getVerticalMove(displayObjects);
     }
     return displayObjects;
 };
-function getLatMove(moveObjects) {
+function getLatMove(moveObjects, varLeft=LEFT_EDGE_TRENCH, varRight=FULL_LAT_LIMIT ) {
     let { ocean, sub, mover } = moveObjects;
     let compLat = ocean.sx + sub.x - SUB_INITIAL_LAT_POS;
 
