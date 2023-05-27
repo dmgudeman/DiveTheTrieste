@@ -14,12 +14,15 @@ import {
     DYSPHOTIC_PELAGIC,
     APHOTIC_BENTHIC,
     APHOTIC_PELAGIC,
-    stopMessageAnimation
+    stopMessageAnimation,
 } from "./constants";
 import { WIDTH, HEIGHT } from "../index";
-import { addAndStartAnimation, stopAnimation,  removeMessageElement } from "./edMessage";
-import {globalOcean, globalSub} from '../index';
-
+import {
+    addAndStartAnimation,
+    stopAnimation,
+    removeMessageElement,
+} from "./edMessage";
+import { globalOcean, globalSub } from "../index";
 
 // this is to allow calculation of a modelo so that
 // the bubble messages released at a slow pace
@@ -41,10 +44,10 @@ export function calcMovement() {
             } else {
                 flag = DYSPHOTIC_BENTHIC;
             }
-        } else if (compLat < LEFT_EDGE_TRENCH){
+        } else if (compLat < LEFT_EDGE_TRENCH) {
             if (compVert < E_D_BARRIER) {
                 flag = EUPHOTIC_PELAGIC;
-            } else if( compVert < CONT_SHELF_BENTHIC) {
+            } else if (compVert < CONT_SHELF_BENTHIC) {
                 flag = DYSPHOTIC_PELAGIC;
             } else {
                 flag = DYSPHOTIC_BENTHIC;
@@ -52,9 +55,9 @@ export function calcMovement() {
         } else if (compLat < RIGHT_EDGE_TRENCH) {
             if (compVert < E_D_BARRIER) {
                 flag = EUPHOTIC_PELAGIC;
-            } else if ( compVert < D_A_BARRIER) {
+            } else if (compVert < D_A_BARRIER) {
                 flag = DYSPHOTIC_PELAGIC;
-            } else if ( compVert < APHOTIC_BENTHIC_BARRIER){
+            } else if (compVert < APHOTIC_BENTHIC_BARRIER) {
                 flag = APHOTIC_PELAGIC;
             } else {
                 flag = APHOTIC_BENTHIC;
@@ -66,40 +69,30 @@ export function calcMovement() {
                 flag = DYSPHOTIC_BENTHIC;
             }
         }
-    
-        if (oldFlag !== flag){
-          oldFlag = flag;
-    
-        let message;
-        if (flag === EUPHOTIC_BENTHIC) {
-            message = iteraterMessage(ebMessages);
-            addAndStartAnimation(message);
-            return;
-        } else if (flag === EUPHOTIC_PELAGIC) {
-            message = iteraterMessage(epMessages);
-            addAndStartAnimation(message);
-            return;
-        } else if (flag === DYSPHOTIC_BENTHIC) {
-            message = iteraterMessage(dbMessages);
-            addAndStartAnimation(message);
-            return;
+
+        if (oldFlag !== flag) {
+            oldFlag = flag;
+
+            let message;
+            if (flag === EUPHOTIC_BENTHIC) {
+                message = iteraterMessage(ebMessages);
+                addAndStartAnimation(message);
+                return;
+            } else if (flag === EUPHOTIC_PELAGIC) {
+                message = iteraterMessage(epMessages);
+                addAndStartAnimation(message);
+                return;
+            } else if (flag === DYSPHOTIC_BENTHIC) {
+                message = iteraterMessage(dbMessages);
+                addAndStartAnimation(message);
+                return;
+            }
         }
-
-
-
-
-
-
-
-
-    }
     }
 }
 
 export const getMessage = (ocean, sub) => {
     let flag = calcMovement(ocean, sub);
-   
-   
 };
 
 export const getTimedMessage = (ocean, sub) => {
@@ -147,11 +140,7 @@ const iteraterMessage = (messObj) => {
     // start the rotation over again if the end
     // of the messages is used
     if (messNum > messObj.length) {
-
-       stopMessageAnimation.messFlag = true;
-      
-        
-
+        stopMessageAnimation.messFlag = true;
     }
 
     messObj.lastUsed = messNum;
