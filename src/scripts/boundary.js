@@ -1,22 +1,16 @@
-import {
-
-    INITIAL_Y_POSITION,
-    SEA_DEPTH,
- 
-} from "./constants";
+import { INITIAL_Y_POSITION, SEA_DEPTH } from "./constants";
 import { HEIGHT } from "../index";
 
 export function showDepth(ocean, sub) {
     let conversion = SEA_DEPTH / HEIGHT; // 19.64 feet per pixel
-    let conversionShallow = 2 ; // 2 feet per pixel
+    let conversionShallow = 2; // 2 feet per pixel
     let composite = ocean.sy + sub.y - INITIAL_Y_POSITION;
     let depth;
-    
-    if (composite < 500) {
-        depth = Math.floor(conversionShallow * composite)
-    } else {
 
-    depth = Math.floor(conversion * composite);
+    if (composite < 500) {
+        depth = Math.floor(conversionShallow * composite);
+    } else {
+        depth = Math.floor(conversion * composite);
     }
 
     if (depth < 0) depth = 0;

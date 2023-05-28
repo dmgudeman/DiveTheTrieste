@@ -1,5 +1,5 @@
 import Images from "./images";
-import { showCanvas1, showCanvas2, showCanvas3 } from "./util";
+import { showCanvas1, showCanvas2 } from "./util";
 
 class Cockpit {
   constructor(options) {
@@ -22,7 +22,6 @@ class Cockpit {
   draw() {
     const rect = this.canvas.getBoundingClientRect();
     this.canvas.addEventListener("click", (e) => {
-      // const trieste3Container = document.getElementById("trieste3Container")
       const x = e.clientX - rect.left;
       const y = e.clientY - rect.top;
       if (x > 100 && x < 300 && y > 100 && y < 150) {
