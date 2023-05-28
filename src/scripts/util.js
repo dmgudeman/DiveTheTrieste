@@ -36,7 +36,7 @@ let messageInterval;
 
 export function showCanvas1() { //the ocean
 
-  stopMessageAnimation.messFlag = true;
+  stopMessageAnimation.messFlag = false;
   // let sub = new Sub({ ctx: ctx1 });
   // let ocean = new Ocean({ ctx: ctx1 });
   // ctx1.onload = () => {

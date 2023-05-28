@@ -18,7 +18,7 @@ import {
     stopMessageAnimation
 } from "./constants";
 import { WIDTH, HEIGHT } from "../index";
-import { addAndStartAnimation, stopAnimation, removeMessageElement } from "./edMessage";
+import { addAndStartMessAnimation, stopAnimation, removeMessageElement } from "./edMessage";
 import {globalOcean, globalSub, hithere} from '../index';
 
 
@@ -83,27 +83,27 @@ export function calcMovement() {
         let message;
         if (flag === EUPHOTIC_PELAGIC) {
             message = iteraterMessage(epMessages);
-            addAndStartAnimation(message);
+            addAndStartMessAnimation(message);
             return;
         } else if (flag === EUPHOTIC_BENTHIC) {
             message = iteraterMessage(ebMessages);
-            addAndStartAnimation(message);
+            addAndStartMessAnimation(message);
             return;
         } else if (flag === DYSPHOTIC_PELAGIC) {
             message = iteraterMessage(dpMessages);
-            addAndStartAnimation(message);
+            addAndStartMessAnimation(message);
             return;
         }  else if (flag === DYSPHOTIC_BENTHIC) {
             message = iteraterMessage(dbMessages);
-            addAndStartAnimation(message);
+            addAndStartMessAnimation(message);
             return;
         }  else if (flag === APHOTIC_PELAGIC) {
             message = iteraterMessage(apMessages);
-            addAndStartAnimation(message);
+            addAndStartMessAnimation(message);
             return;
         }  else if (flag === APHOTIC_BENTHIC) {
             message = iteraterMessage(abMessages);
-            addAndStartAnimation(message);
+            addAndStartMessAnimation(message);
             return;
         }
     }
