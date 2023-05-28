@@ -20,8 +20,6 @@ export const globalSub = {sub:null}
 
 let audioFlag = true;
 function toggleAudio(audio) {
-    
-
     if (audioFlag) {
         audio.play();
         musicNoteButton.classList.add("redNote");

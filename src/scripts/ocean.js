@@ -1,10 +1,8 @@
 
 import { 
-  OCEAN_OBJECT_DEPTH_LIMIT, 
-  OCEAN_OBJECT_LAT_LIMIT,
-  INITIAL_Y_POSITION,
-  VERTICAL_VELOCITY,
-  LAT_VELOCITY
+  OCEAN_DEPTH_LIMIT, 
+  OCEAN_LAT_LIMIT,
+  INITIAL_Y_POSITION
  } from "./constants";
 import { WIDTH, HEIGHT} from '../index';
 
@@ -33,8 +31,8 @@ class Ocean {
     this.velUp = options.velUp || 0
     this.velDown = options.velDown || 0
     this.surface_y = options.surface_y || INITIAL_Y_POSITION;
-    this.depthLimit = options.depthLimit || OCEAN_OBJECT_DEPTH_LIMIT; // this is where sub movement takes over
-    this.lateralLimit = options.lateralLimit || OCEAN_OBJECT_LAT_LIMIT; // ditto
+    this.depthLimit = options.depthLimit || OCEAN_DEPTH_LIMIT; // this is where sub movement takes over
+    this.lateralLimit = options.lateralLimit || OCEAN_LAT_LIMIT; // ditto
   }
 
   draw (){
