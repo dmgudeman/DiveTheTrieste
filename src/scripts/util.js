@@ -53,9 +53,6 @@ export function showCanvas1() { //the ocean
   }
   bubblesContainer.classList.add('hide'); 
  
-
-
-
   if (!(localStorage.getItem('modalDisplayed') === 'true')) {
     modal.style.display = 'block'; 
   }
@@ -72,7 +69,7 @@ export function showCanvas1() { //the ocean
   homeButton.classList.remove("can2home");
   homeButton.classList.remove("can3home"); 
   edMessage ? edMessage.classList.remove("hideEdMessage") : null;
-  fadeInText();
+  // fadeInText();
 }
 
 export function showCanvas2() { //opening page

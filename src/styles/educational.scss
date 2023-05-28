@@ -2,26 +2,72 @@
 
 
 #fadeInContainer {
-    position: absolute;
+    position: relative;
+    display: flex;
+    flex-direction: column;
     top: 400px;
-    left: 300px;
+    left: 280px;
     display: flex ;
     justify-content: center;
     align-items: center;
     width: 400px;
-    height: 400px;
-    color: var(--three);
-    background-color: var(--two);
-    border: 3px solid var(--three);
+    height: 500px;
+
     border-radius: 30px;
-    z-index: 999;
+    opacity: 0;
+    // transition: opacity 1s ease-in;
+}
+#fadeInTitle {
+  
+    padding-top: 20px;
+    // color: var(--four);
+    font-size: 1.5rem;
+    font-weight: 700;
     opacity: 0;
     transition: opacity 1s ease-in;
-    
+
+}
+#fadeInText {
+ 
+    padding: 20px;
+    padding-top: 10px;
+    // color: var(--three);
+    opacity: 0;
+    transition: opacity 1s ease-in;
+
 }
 
-.fadeInEd {
-    opacity: 1;
+.upperStyleContainer { 
+    background-color: var(--two);
+    border: 3px solid var(--three);
+}
+.upperStyleTitle {
+    color: var(--four);
+}
+.upperStyleText {
+    color: var(--three);
+}
+
+// .middleStyle {
+//     background-color: #0D376F;
+//     color: white;
+//     border: 3px solid white;
+// }
+
+.middleStyleContainer { 
+    background-color:  #0D376F;
+    border: 3px solid lightgoldenrodyellow
+}
+.middleStyleTitle {
+    color: yellow
+}
+.middleStyleText {
+    color: lightgoldenrodyellow
+}
+
+
+.lowerStyle {
+
 }
 
 // #fadeInText {

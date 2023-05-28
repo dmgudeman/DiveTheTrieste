@@ -18,11 +18,12 @@ import {
     stopMessageAnimation,
 } from "./constants";
 import { WIDTH, HEIGHT } from "../index";
-import {
-    addAndStartMessAnimation,
-    stopAnimation,
-    removeMessageElement,
-} from "./edMessage";
+// import {
+//     addAndStartMessAnimation,
+//     stopAnimation,
+//     removeMessageElement,
+// } from "./edMessage1";
+import { changeEducationalText, addMiddleStyle, addUpperStyle} from './educational';
 import { globalOcean, globalSub  } from "../index";
 
 // this is to allow calculation of a modelo so that
@@ -43,7 +44,7 @@ export function calcMovement() {
 
     // console.log("oldFlag", oldFlag);
     // console.log("flag", flag);
-    if (i % 40 === 0 && !stopMessageAnimation.messFlag) {
+    if (i % 1=== 0 && !stopMessageAnimation.messFlag) {
         if (compLat < B_P_BARRIER) {
             if (compVert < CONT_SHELF_BENTHIC) {
                 flag = EUPHOTIC_BENTHIC;
@@ -81,28 +82,41 @@ export function calcMovement() {
 
             let message;
             if (flag === EUPHOTIC_PELAGIC) {
-                message = iteraterMessage(epMessages);
-                addAndStartMessAnimation(message);
+                // message = iteraterMessage(epMessages);
+                // addAndStartMessAnimation(message);
+
+                changeEducationalText(EPTextObject)
+                addUpperStyle();
+
                 return;
             } else if (flag === EUPHOTIC_BENTHIC) {
-                message = iteraterMessage(ebMessages);
-                addAndStartMessAnimation(message);
+                // message = iteraterMessage(ebMessages);
+                // addAndStartMessAnimation(message);
+             
+                changeEducationalText(EBTextObject)
+                addUpperStyle();
                 return;
             } else if (flag === DYSPHOTIC_PELAGIC) {
-                message = iteraterMessage(dpMessages);
-                addAndStartMessAnimation(message);
+                // message = iteraterMessage(dpMessages);
+                // addAndStartMessAnimation(message);
+                changeEducationalText(DPTextObject)
+                addMiddleStyle();
                 return;
             } else if (flag === DYSPHOTIC_BENTHIC) {
-                message = iteraterMessage(dbMessages);
-                addAndStartMessAnimation(message);
+                // message = iteraterMessage(dbMessages);
+                // addAndStartMessAnimation(message);
+                changeEducationalText(DBTextObject);
+                addMiddleStyle();
                 return;
             } else if (flag === APHOTIC_PELAGIC) {
-                message = iteraterMessage(apMessages);
-                addAndStartMessAnimation(message);
+                // message = iteraterMessage(apMessages);
+                // addAndStartMessAnimation(message);
+                changeEducationalText("APHOTIC PELAGIC")
                 return;
             } else if (flag === APHOTIC_BENTHIC) {
-                message = iteraterMessage(abMessages);
-                addAndStartMessAnimation(message);
+                // message = iteraterMessage(abMessages);
+                // addAndStartMessAnimation(message);
+                changeEducationalText("APHOTIC BENTHIC")
                 return;
             }
         }
@@ -119,6 +133,16 @@ export const getTimedMessage = (ocean, sub) => {
     addAndStartMessAnimation(message);
     return message;
 };
+
+
+const EBTextObject = {title: "EUPHOTIC BENTHIC", text: "The euphotic benthic zone is a crucial region in the ocean where sunlight reaches, allowing for photosynthesis. It extends from the ocean surface to around 200 meters deep, supporting diverse flora and fauna. Marine algae, seagrasses, and phytoplankton thrive in this zone, providing oxygen and serving as the foundation of the food web. Zooplankton, corals, and other invertebrates inhabit the benthic habitats, offering food and shelter to various species. Geographically, the euphotic benthic zone is prevalent in coastal areas, influencing adjacent ecosystems like coral reefs and seagrass meadows. It plays a vital role in carbon cycling, nutrient dynamics, and maintaining marine biodiversity. Preserving this zone is crucial for sustaining ocean health and the intricate balance of marine ecosystems."}
+const EPTextObject = {title: "EUPHOTIC PELAGIC", text: "The uppermost layer of the open ocean sunlight can penetrate allowing photosynthesis to occur. Flora consists of phytoplankton, microscopic plant-like organisms that harness sunlight. These microscopic plants serve as the foundation of the marine food web, providing nourishment for a wide range of organisms. They contribute significantly to global oxygen production and carbon dioxide absorption, playing a vital role in regulating the Earth's climate. Fauna includes zooplankton, small fish, squid, and jellyfish. Many species undertake vertical migrations, moving closer to the surface during the night to feed on phytoplankton and descending to deeper depths during the day to avoid predators. Larger marine animals, such as whales and dolphins, often rely on the abundant food resources found in the euphotic pelagic zone.Commercial fisheries, providing a substantial portion of the world's seafood supply. It claims a major role in carbon sequestration balancing global ecosystem. "}
+
+const DBTextObject = {title: "DYSPHOTIC BENTHIC", text: "Here sunlight barely penetrates and darkness prevails. The flora is algae, fungi, and bacteria that have adapted to obtain energy through CHEMOSYNTHESIS or by consuming organic matter settling from above.The fauna includes deep-sea fish, sea cucumbers, sea stars, sea anemones, corals, sponges, and crustaceans. Here is a refuge for numerous species that seek shelter from predators in shallower zones. It is important for nutrient recycling and maintaining the balance of carbon. Remotely operated vehicles (ROVs) and autonomous underwater vehicles (AUVs), are employed to investigate this zone."}
+
+const DPTextObject = {title: "DYPHOTIC PELAGIC", text: "Here the flora is primarily phytoplankton and zooplankton and some diatoms. The fauna is. Fish include the lanternfish, hatchetfish, and dragonfishs. These fish have evolved large eyes and bioluminescent organs, to navigate and communicate in the dimly lit environment. Cephalopods, shrimp, and jellyfish, are also found in this zone, all adapted to low light. It serves as a crucial feeding ground for migratory species, including whales and large predatory fish, as they follow the vertical migration of zooplankton from the depths to the surface. Dead matter drifts down from the euphotic zone sustains sustaining a complex food web. Understanding the dysphotic pelagic zone is essential for comprehending the dynamics of the global carbon cycle. The zone plays a crucial role in the sequestration of carbon dioxide through the biological pump, where carbon is transported from the surface to the deep ocean through sinking particles. This process helps regulate atmospheric carbon levels and mitigates climate change."}
+
+
 
 const epMessages = {
     length: 4,
