@@ -31,8 +31,8 @@ export const RIGHT_EDGE_TRENCH = 1800;
 export const B_P_BARRIER = 200;
 export const CONT_SHELF_BENTHIC = DEPTH_CONT_SHELF - 150;
 export const E_D_BARRIER = SURFACE + 200;
-export const D_A_BARRIER = HEIGHT - 400;   // dysphotic_aphotic_barrier
-export const APHOTIC_BENTHIC_BARRIER = OCEAN_BOTTOM - 200;
+export const D_A_BARRIER = SURFACE + 500;   // dysphotic_aphotic_barrier
+export const APHOTIC_BENTHIC_BARRIER = OCEAN_BOTTOM - 400;
 
 // OBJECT option values
 export const OCEAN_DEPTH_LIMIT = 820;

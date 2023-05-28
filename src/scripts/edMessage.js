@@ -3,28 +3,36 @@ let intervalId;
 let edMessage;
 
 function moveMessage() {
-    topPositionEM -= 3; // Adjust the speed of the animation by changing this value
+    // topPositionEM -= 3; // Adjust the speed of the animation by changing this value
     edMessage.style.top = topPositionEM + "px";
 
-    if (topPositionEM <= -250) {
-        // Adjust the condition for when the message disappears
+    // if (topPositionEM <= -100) {
+    //     // Adjust the condition for when the message disappears
+    //     clearInterval(intervalId);
+    // }
+    setTimeout(() => {
+        removeEdMessage();
         clearInterval(intervalId);
+      }, 2000); // Delay of 2000 milliseconds (2 seconds)
     }
-}
+    // if (topPositionEM <= -window.innerHeight) {
+    //     clearInterval(intervalId);
+    //     removeMessageElement(); 
+    //   }
+
 // start animation for message bubbles
 function startMessAnimation() {
     topPositionEM = 200;
     edMessage.style.display = "block";
-    intervalId = setInterval(moveMessage, 10);
+    intervalId = setInterval(moveMessage, 5);
 }
 
 function getRandomPosition(max) {
-    // Generates a random number between 0 and the specified max value
     // to set the message bubble to appear in different places
     return Math.floor(Math.random() * max);
 }
-
-function addEdMessage(text) {
+// this function makes bubbles
+function addFirstEdMessage(text) {
     edMessage = document.createElement("div");
     edMessage.textContent = text;
     edMessage.id = "edMessage";
@@ -56,11 +64,32 @@ function addEdMessage(text) {
 
     canvasContainer.appendChild(edMessage);
 }
+// this function makes large messages
+function addEdMessage(text) {
+    edMessage = document.createElement("div");
+    edMessage.textContent = text;
+    edMessage.id = "edMessage";
+    edMessage.style.position = "relative"; // Change to relative position
+    edMessage.style.top = '700';
+    edMessage.style.left = '800';
+     
+    // edMessage.style.transform = "translateX(-50%)";
+    // edMessage.style.transition = "top 1s ease-out"; // transition for animation
+    edMessage.style.fontSize = "3rem";
+    edMessage.style.fontWeight = "800";
+    edMessage.style.zIndex = "999";
+    edMessage.style.backgroundColor = "transparent"; 
+    edMessage.style.color = "green";
+    edMessage.style.textShadow = "1px 1px 2px rgba(0, 0, 0, 0.3)"; 
+    edMessage.style.border = "none";
+  
+    canvasContainer.appendChild(edMessage);
+  }
 
-export function removeMessageElement() {   
+export function removeEdMessage() {   
     if(edMessage){
         edMessage.style.display = "none";
-        edMessage.parentNode.removeChild(edMessage);   
+        edMessage.parentNode?.removeChild(edMessage);   
     }    
 }
 
@@ -69,7 +98,6 @@ export function stopMessAnimation() {
   }
 
 export function addAndStartMessAnimation(text) {
-    console.log('add and start')
     addEdMessage(text);
     startMessAnimation();
 }
@@ -78,6 +106,6 @@ document.addEventListener('visibilitychange', () => {
     if (document.visibilityState === 'hidden') {
       stopMessAnimation();
     } else {
-      startAnimation();
+      startMessAnimation();
     }
   });
