@@ -3,7 +3,7 @@ import Ocean from "./ocean";
 import { addAndStartMessAnimation, removeMessageElement, stopMessAnimation } from "./edMessage";
 import { WIDTH, HEIGHT } from "../index";
 import { stopMessageAnimation } from "./constants";
-import { getTimedMessage } from "./provideMessage";
+import { getMessage } from "./provideMessage";
 
 export function clear(ctx) {
   ctx.clearRect(0, 0, WIDTH, HEIGHT);
@@ -49,7 +49,7 @@ export function showCanvas1() { //the ocean
 
 
   messageInterval =  setInterval(() => {
-   getTimedMessage();
+   getMessage();
     
       
     }, 3000);
