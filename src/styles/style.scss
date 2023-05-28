@@ -7,8 +7,9 @@
     top: 10px;
     width: 50px;
     padding-left: 1px;
-    background-color: white;
+    background-color:var(--two);
     z-index: 100;  
+
 }
 
 .linkedIn {
@@ -17,7 +18,8 @@
     top: 10px;
     width: 50px;
     padding-left: 4px;
-    background-color: white;
+    background-color: var(--two);
+    border-radius: 4px;;
     color: #0A66C2;
     z-index: 100;   
 }
@@ -73,12 +75,13 @@
     top: 10px;
     width: 65px;
     height: 65px;
-    padding-left: 6px;
-    padding-top: 8px;
-    background-color: white;
+    padding-left: 4px;
+    padding-top: 6px;
+    background-color: var(--two);
     color: #4CAF50;
     z-index: 100;
-    border-radius: 5px;
+    border-radius: 9px;
+    border: 3px solid var(--three);
 }
 
 .musicNote.redNote {
@@ -100,12 +103,13 @@
     top: 10px;
     width: 65px;
     height: 65px;
-    padding-left: 6px;
-    padding-top: 8px;
-    background-color: white;
+    padding-left: 3px;
+    padding-top: 6px;
+    background-color: var(--two);
     color: #4CAF50;
     z-index: 100;
-    border-radius: 5px;
+    border-radius: 9px;
+    border: 3px solid var(--three);
 }
 .home.can1home{
     left:300px
