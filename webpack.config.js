@@ -4,10 +4,15 @@ const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 const config = {
-  entry: [
-    path.resolve(__dirname, 'src', 'index.js'),
-    path.resolve(__dirname, 'src', 'index.scss')
-  ],
+  entry: {
+    main: [
+      path.resolve(__dirname, 'src', 'index.js'),
+      path.resolve(__dirname, 'src', 'index.scss')
+    ],
+    styles1: path.resolve(__dirname, 'src', 'styles/style.scss'),
+    styles2: path.resolve(__dirname, 'src', 'styles/educational.scss'),
+    // Add more entries for additional SCSS files
+  },
   output: {
     path: path.join(__dirname, 'dist'), // bundled file in dist/
     filename: '[name].js'
@@ -32,7 +37,11 @@ const config = {
       }
     ]
   },
-  plugins: [new MiniCssExtractPlugin()]
+  plugins: [
+    new MiniCssExtractPlugin({
+      filename: '[name].css', // Use [name] placeholder to generate separate CSS files
+    })
+  ]
 };
 
 module.exports = (env, argv) => {
