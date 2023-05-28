@@ -17,7 +17,7 @@ import {
     stopMessageAnimation
 } from "./constants";
 import { WIDTH, HEIGHT } from "../index";
-import { addAndStartAnimation, stopAnimation,  removeMessageElement } from "./edMessage";
+import { addAndStartMessAnimation, stopAnimation,  removeMessageElement } from "./edMessage";
 import {globalOcean, globalSub} from '../index';
 
 
@@ -73,15 +73,15 @@ export function calcMovement() {
         let message;
         if (flag === EUPHOTIC_BENTHIC) {
             message = iteraterMessage(ebMessages);
-            addAndStartAnimation(message);
+            addAndStartMessAnimation(message);
             return;
         } else if (flag === EUPHOTIC_PELAGIC) {
             message = iteraterMessage(epMessages);
-            addAndStartAnimation(message);
+            addAndStartMessAnimation(message);
             return;
         } else if (flag === DYSPHOTIC_BENTHIC) {
             message = iteraterMessage(dbMessages);
-            addAndStartAnimation(message);
+            addAndStartMessAnimation(message);
             return;
         }
 
@@ -105,7 +105,7 @@ export const getMessage = (ocean, sub) => {
 export const getTimedMessage = (ocean, sub) => {
     // let message = calcMovement(ocean, sub);
     console.log("MESSAGE in getTimed", message);
-    addAndStartAnimation(message);
+    addAndStartMessAnimation(message);
     return message;
 };
 

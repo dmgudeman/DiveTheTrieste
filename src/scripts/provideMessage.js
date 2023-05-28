@@ -115,7 +115,8 @@ export const getMessage = (ocean, sub) => {
 };
 
 export const getTimedMessage = (ocean, sub) => {
-    // let message = calcMovement(ocean, sub);
+    let message = calcMovement(ocean, sub);
+    let flag = calcMovement(ocean, sub);
     console.log("MESSAGE in getTimed", message);
     addAndStartAnimation(message);
     return message;

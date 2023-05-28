@@ -12,7 +12,7 @@ function moveMessage() {
     }
 }
 // start animation for message bubbles
-function startAnimation() {
+function startMessAnimation() {
     topPositionEM = 200;
     edMessage.style.display = "block";
     intervalId = setInterval(moveMessage, 10);
@@ -68,14 +68,15 @@ export function stopMessAnimation() {
     clearInterval(intervalId);
   }
 
-export function addAndStartAnimation(text) {
+export function addAndStartMessAnimation(text) {
+    console.log('add and start')
     addEdMessage(text);
-    startAnimation();
+    startMessAnimation();
 }
 
 document.addEventListener('visibilitychange', () => {
     if (document.visibilityState === 'hidden') {
-      stopAnimation();
+      stopMessAnimation();
     } else {
       startAnimation();
     }
