@@ -18,7 +18,22 @@ export const HEIGHT = window.innerHeight * 1.9;  // height of canvases
 export const globalOcean = {ocean:null}
 export const globalSub = {sub:null}
 
+let audioFlag = true;
+function toggleAudio(audio) {
+    
+
+    if (audioFlag) {
+        audio.play();
+        musicNoteButton.classList.add("redNote");
+    } else {
+        audio.pause();
+        musicNoteButton.classList.remove("redNote");
+    }
+    audioFlag = !audioFlag;
+}
 document.addEventListener("DOMContentLoaded", () => {
+    let audio = document.getElementById("music");
+    toggleAudio(audio);
     localStorage.setItem("modalDisplayed", false);
     const canvas1 = document.getElementById("canvas1");
     const canvas2 = document.getElementById("canvas2");
@@ -49,8 +64,6 @@ document.addEventListener("DOMContentLoaded", () => {
     let key = new Keymaster({ ctx: ctx1, ocean, sub });
     let cockpit = new Cockpit({ ctx: ctx3, sub, ocean });
 
- 
-
     gitHubButton.addEventListener("click", () => {
         window.location.href = "https://github.com/dmgudeman";
     });
@@ -71,39 +84,25 @@ document.addEventListener("DOMContentLoaded", () => {
     const modal = document.getElementById("modal");
     const closeButton = document.getElementsByClassName("close")[0];
 
-    // Open the modal when the button is clicked
+    // Open the modal
     openModalButton.addEventListener("click", function () {
         modal.style.display = "block";
     });
 
-    // Close the modal when the close button is clicked
+    // Close the modal 
     closeButton.addEventListener("click", function () {
         modal.style.display = "none";
     });
 
-    // Close the modal when the user clicks outside the modal
+    // Close the modal when the user clicks outside
     window.addEventListener("click", function (event) {
         if (event.target === modal) {
             modal.style.display = "none";
         }
     });
 
-    // music button
-    let audioFlag = true;
-    function toggleAudio() {
-        let audio = document.getElementById("music");
-
-        if (audioFlag) {
-            audio.play();
-            musicNoteButton.classList.add("redNote");
-        } else {
-            audio.pause();
-            musicNoteButton.classList.remove("redNote");
-        }
-        audioFlag = !audioFlag;
-    }
     musicNoteButton.addEventListener("click", (e) => {
-        toggleAudio();
+        toggleAudio(audio);
     });
 
     // make the instruction page canvas
@@ -191,7 +190,7 @@ document.addEventListener("DOMContentLoaded", () => {
             clear();
             ocean.draw();
             // sub.draw();
-          
+        
             // This is the animation loop for provideMessage
             calcMovement(ocean, sub)
          

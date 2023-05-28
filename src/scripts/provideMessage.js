@@ -4,6 +4,7 @@ import {
     D_A_BARRIER,
     CONT_SHELF_BENTHIC,
     OCEAN_BOTTOM,
+    APHOTIC_BENTHIC_BARRIER,
     B_P_BARRIER,
     LEFT_EDGE_TRENCH,
     RIGHT_EDGE_TRENCH,
@@ -18,11 +19,11 @@ import {
 } from "./constants";
 import { WIDTH, HEIGHT } from "../index";
 import {
-    addAndStartAnimation,
+    addAndStartMessAnimation,
     stopAnimation,
     removeMessageElement,
 } from "./edMessage";
-import { globalOcean, globalSub } from "../index";
+import { globalOcean, globalSub  } from "../index";
 
 // this is to allow calculation of a modelo so that
 // the bubble messages released at a slow pace
@@ -37,6 +38,11 @@ export function calcMovement() {
     let compLat = ocean.sx + sub.x - SUB_INITIAL_LAT_POS;
     i++;
 
+    // console.log("comLat", compLat);
+    // console.log("compVert", compVert);
+
+    console.log("oldFlag", oldFlag);
+    console.log("flag", flag);
     if (i % 40 === 0 && !stopMessageAnimation.messFlag) {
         if (compLat < B_P_BARRIER) {
             if (compVert < CONT_SHELF_BENTHIC) {
@@ -74,17 +80,29 @@ export function calcMovement() {
             oldFlag = flag;
 
             let message;
-            if (flag === EUPHOTIC_BENTHIC) {
-                message = iteraterMessage(ebMessages);
-                addAndStartAnimation(message);
-                return;
-            } else if (flag === EUPHOTIC_PELAGIC) {
+            if (flag === EUPHOTIC_PELAGIC) {
                 message = iteraterMessage(epMessages);
-                addAndStartAnimation(message);
+                addAndStartMessAnimation(message);
+                return;
+            } else if (flag === EUPHOTIC_BENTHIC) {
+                message = iteraterMessage(ebMessages);
+                addAndStartMessAnimation(message);
+                return;
+            } else if (flag === DYSPHOTIC_PELAGIC) {
+                message = iteraterMessage(dpMessages);
+                addAndStartMessAnimation(message);
                 return;
             } else if (flag === DYSPHOTIC_BENTHIC) {
                 message = iteraterMessage(dbMessages);
-                addAndStartAnimation(message);
+                addAndStartMessAnimation(message);
+                return;
+            } else if (flag === APHOTIC_PELAGIC) {
+                message = iteraterMessage(apMessages);
+                addAndStartMessAnimation(message);
+                return;
+            } else if (flag === APHOTIC_BENTHIC) {
+                message = iteraterMessage(abMessages);
+                addAndStartMessAnimation(message);
                 return;
             }
         }
@@ -98,29 +116,40 @@ export const getMessage = (ocean, sub) => {
 export const getTimedMessage = (ocean, sub) => {
     // let message = calcMovement(ocean, sub);
     console.log("MESSAGE in getTimed", message);
-    addAndStartAnimation(message);
+    addAndStartMessAnimation(message);
     return message;
-};
-
-const ebMessages = {
-    length: 4,
-    lastUsed: 0,
-    messages: {
-        1: "You are in the Euphotic Benthic zone",
-        2: "Euphotic means Lots of sunlight",
-        3: "Benthic means bottom dwelling",
-        4: "It has some of the most concentrated life in the ocean",
-    },
 };
 
 const epMessages = {
     length: 4,
     lastUsed: 0,
     messages: {
-        1: "You are in the Euphotic Pelagic zone",
+        1: "EUPHOTIC PELAGIC ZONE",
         2: "Euphotic means Lots of sunlight",
         3: "Pelagic means free swimming",
         4: "This is where tuna, sharks and whales live",
+    },
+};
+
+const ebMessages = {
+    length: 4,
+    lastUsed: 0,
+    messages: {
+        1: "EUPHOTIC BENTHIC ZONE",
+        2: "Euphotic means Lots of sunlight",
+        3: "Benthic means bottom dwelling",
+        4: "It has some of the most concentrated life in the ocean",
+    },
+};
+
+const dpMessages = {
+    length: 4,
+    lastUsed: 0,
+    messages: {
+        1: "DYSPHOTIC PELAGIC ZONE",
+        2: "Dysphotic means only a little sunlight",
+        3: "Pelagic means free swimming",
+        4: "It is becoming very dark",
     },
 };
 
@@ -128,10 +157,32 @@ const dbMessages = {
     length: 4,
     lastUsed: 0,
     messages: {
-        1: "You are in the Dysphotic Benthic zone",
+        1: "DYSPHOTIC BENTHIC ZONE",
         2: "Dysphotic means only a little sunlight",
         3: "Benthic means bottom dwelling",
         4: "It is becoming very dark",
+    },
+};
+
+const apMessages = {
+    length: 4,
+    lastUsed: 0,
+    messages: {
+        1: "APHOTIC PELAGIC ZONE",
+        2: "Dysphotic means no light",
+        3: "Benthic means bottom dwelling",
+        4: "There is NO light",
+    },
+};
+
+const abMessages = {
+    length: 4,
+    lastUsed: 0,
+    messages: {
+        1: "DYSPHOTIC BENTHIC ZONE",
+        2: "There is no light",
+        3: "Benthic means bottom dwelling",
+        4: "Hot water vents supply energy",
     },
 };
 
@@ -142,8 +193,7 @@ const iteraterMessage = (messObj) => {
     if (messNum > messObj.length) {
         stopMessageAnimation.messFlag = true;
     }
-
     messObj.lastUsed = messNum;
-    let x = messObj.messages[messNum];
-    return x;
+    return messObj.messages[messNum];
+    
 };

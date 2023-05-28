@@ -1,9 +1,9 @@
 import Sub from "./sub";
 import Ocean from "./ocean";
-import { getMessage } from "./provideMessage";
-import { removeMessageElement, stopMessAnimation } from "./edMessage";
+import { addAndStartMessAnimation, removeMessageElement, stopMessAnimation } from "./edMessage";
 import { WIDTH, HEIGHT } from "../index";
 import { stopMessageAnimation } from "./constants";
+import { getMessage } from "./provideMessage";
 
 export function clear(ctx) {
   ctx.clearRect(0, 0, WIDTH, HEIGHT);
@@ -36,20 +36,9 @@ let messageInterval;
 
 export function showCanvas1() { //the ocean
 
-  stopMessageAnimation.messFlag = true;
-  // let sub = new Sub({ ctx: ctx1 });
-  // let ocean = new Ocean({ ctx: ctx1 });
-  // ctx1.onload = () => {
-  //   ocean.draw();
-  //   sub.draw();
-  //   ctx3.onload = () => {
-  //     cockpit.draw();
-  //   };
-  // };
-
-
+  stopMessageAnimation.messFlag = false;
   messageInterval =  setInterval(() => {
-    getMessage()
+   getMessage();
     
       
     }, 3000);
@@ -83,8 +72,8 @@ export function showCanvas1() { //the ocean
 }
 
 export function showCanvas2() { //opening page
-  clearInterval(messageInterval);
-  stopMessAnimation();
+  // clearInterval(messageInterval);
+  // stopMessAnimation();
   stopMessageAnimation.flag = false;
 
   canvas1.style.display = "none";
@@ -102,21 +91,21 @@ export function showCanvas2() { //opening page
   homeButton.classList.remove("can3home"); 
   edMessage.classList.add("hideEdMessage");
   
-  const bubblesContainer = document.querySelector(".bubblesContainer");
-  const bubbles = bubblesContainer.getElementsByClassName('bubble');
-  bubblesContainer.classList.add('hide'); 
-  for (let i = 0; i < bubbles.length; i++) {
-    const bubble = bubbles[i]; 
-    bubble.style.animation = '';
-    bubble.style.display = '';
-  } 
+  // const bubblesContainer = document.querySelector(".bubblesContainer");
+  // const bubbles = bubblesContainer.getElementsByClassName('bubble');
+  // bubblesContainer.classList.add('hide'); 
+  // for (let i = 0; i < bubbles.length; i++) {
+  //   const bubble = bubbles[i]; 
+  //   bubble.style.animation = '';
+  //   bubble.style.display = '';
+  // } 
 }
 
 export function showCanvas3() {  //cockpit
   stopMessageAnimation.messFlag = true;
-  clearInterval(messageInterval)
-  stopMessAnimation();
-  removeMessageElement();
+  // clearInterval(messageInterval)
+  // stopMessAnimation();
+  // removeMessageElement();
   canvas1.style.display = "none";
   canvas2.style.display = "none";
   canvas3.style.display = "block";
@@ -131,20 +120,19 @@ export function showCanvas3() {  //cockpit
   homeButton.classList.add("can3home"); 
   edMessage.classList.add("hideEdMessage");
  
-  const bubblesContainer = document.querySelector(".bubblesContainer");
-  const bubbles = bubblesContainer.getElementsByClassName('bubble');
-  for (let i = 0; i < bubbles.length; i++) {
-    const bubble = bubbles[i]; 
-    bubble.style.animation = 'none';
-    bubble.style.display = 'none';
-  }
-  bubblesContainer.classList.add('hide'); 
-  clearInterval(messageInterval)
-  stopMessAnimation();
-  removeMessageElement();
+  // const bubblesContainer = document.querySelector(".bubblesContainer");
+  // const bubbles = bubblesContainer.getElementsByClassName('bubble');
+  // for (let i = 0; i < bubbles.length; i++) {
+  //   const bubble = bubbles[i]; 
+  //   bubble.style.animation = 'none';
+  //   bubble.style.display = 'none';
+  // }
+  // bubblesContainer.classList.add('hide'); 
+  // clearInterval(messageInterval)
+  // stopMessAnimation();
+  // removeMessageElement();
   
 }
-
 
 // modal code
 const modal = document.getElementById("modal");
