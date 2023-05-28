@@ -422,33 +422,41 @@ input {
   border-radius: 0;
 }
 
-.fadeInContainer {
+#fadeInContainer {
   position: absolute;
-  top: 500px;
+  top: 400px;
   left: 300px;
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 500px;
-  height: 500px;
-  background-color: white;
-}
-
-.fadeIn {
+  width: 400px;
+  height: 400px;
+  color: var(--three);
+  background-color: var(--two);
+  border: 3px solid var(--three);
+  border-radius: 30px;
+  z-index: 999;
   opacity: 0;
-  transition: opacity 2s ease-in-out;
+  transition: opacity 1s ease-in;
 }
 
-.show {
-  position: absolute;
-  top: 500px;
-  left: 300px;
+.fadeInEd {
+  opacity: 1;
+}
+
+#educationalText {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 500px;
+  width: 300px;
   height: 500px;
-  background-color: white;
+}
+
+:root {
+  --one: #E0AE7D;
+  --two: wheat;
+  --three: rgb(58, 19, 19);
+  --four: #4CAF50;
 }
 
 body {
@@ -459,5 +467,6 @@ body {
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   vertical-align: baseline;
   overflow: hidden;
+  /* background-color: aquamarine; */
   background-color: transparent;
 }

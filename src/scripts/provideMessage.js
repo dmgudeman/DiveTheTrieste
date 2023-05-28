@@ -41,8 +41,8 @@ export function calcMovement() {
     // console.log("comLat", compLat);
     // console.log("compVert", compVert);
 
-    console.log("oldFlag", oldFlag);
-    console.log("flag", flag);
+    // console.log("oldFlag", oldFlag);
+    // console.log("flag", flag);
     if (i % 40 === 0 && !stopMessageAnimation.messFlag) {
         if (compLat < B_P_BARRIER) {
             if (compVert < CONT_SHELF_BENTHIC) {

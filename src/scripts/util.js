@@ -4,7 +4,8 @@
 import { WIDTH, HEIGHT } from "../index";
 import { stopMessageAnimation } from "./constants";
 import { getMessage } from "./provideMessage";
-import { fadeInText} from "./educational";
+import { fadeInText} from './educational';
+
 
 export function clear(ctx) {
   ctx.clearRect(0, 0, WIDTH, HEIGHT);
@@ -35,11 +36,11 @@ const edMessage = document.getElementById("edMassage");
 let messageInterval;
 
 export function showCanvas1() { //the ocean
-
+  
   stopMessageAnimation.messFlag = false;
   messageInterval =  setInterval(() => {
    getMessage();
-    
+  
       
     }, 3000);
   //  setInterval(ocean, sub);
@@ -52,7 +53,7 @@ export function showCanvas1() { //the ocean
   }
   bubblesContainer.classList.add('hide'); 
  
-  fadeInText();
+
 
 
   if (!(localStorage.getItem('modalDisplayed') === 'true')) {
@@ -71,6 +72,7 @@ export function showCanvas1() { //the ocean
   homeButton.classList.remove("can2home");
   homeButton.classList.remove("can3home"); 
   edMessage ? edMessage.classList.remove("hideEdMessage") : null;
+  fadeInText();
 }
 
 export function showCanvas2() { //opening page

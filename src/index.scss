@@ -3,8 +3,15 @@
 @import 'styles/style.scss';
 @import 'styles/css_reset.scss';
 @import 'styles/educational.scss';
+@import 'styles/text';
 
-
+:root {
+    --one: #E0AE7D;
+	--two: wheat;
+    --three: rgb(58, 19, 19);;
+    --four: #4CAF50;
+    
+}
 body {
     margin: 0;
 	padding: 0;
@@ -13,8 +20,7 @@ body {
 	font-family: Verdana, Geneva, Tahoma, sans-serif;
 	vertical-align: baseline;
     overflow: hidden;
-    // background-color: aquamarine;
+    /* background-color: aquamarine; */
 	background-color: transparent;
 }
-
 

@@ -12,7 +12,8 @@ import Ocean from "./scripts/ocean";
 import Cockpit from "./scripts/cockpit";
 import { getCursorPosition } from "./scripts/util";
 import Keymaster from "./scripts/keymaster";
-import { fadeInText } from "./scripts/educational";
+
+
 
 export const WIDTH = window.innerWidth * 2.5; // width of canvases
 export const HEIGHT = window.innerHeight * 1.9;  // height of canvases
@@ -31,8 +32,8 @@ function toggleAudio(audio) {
     }
     audioFlag = !audioFlag;
 }
+
 document.addEventListener("DOMContentLoaded", () => {
-    
     let audio = document.getElementById("music");
     toggleAudio(audio);
     localStorage.setItem("modalDisplayed", false);
@@ -44,7 +45,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const musicNoteButton = document.getElementById("musicNoteButton");
     const goToOceanButton = document.getElementById("trieste3Container");
     const homeButton = document.getElementById("homeButton");
-    const educational = document.getElementById("fadeInContainer");
+
     
 
     const ctx1 = canvas1.getContext("2d");
@@ -82,7 +83,7 @@ document.addEventListener("DOMContentLoaded", () => {
     homeButton.addEventListener("click", () => {
         showCanvas2();     
     });
-    fadeInContainer.addEventListener("load", ()=> fadeInText());
+ 
 
     const openModalButton = document.getElementById("openModalButton");
     const modal = document.getElementById("modal");
@@ -234,5 +235,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
    
     document.addEventListener("keydown", keyDown);
+
+  
 });
 
