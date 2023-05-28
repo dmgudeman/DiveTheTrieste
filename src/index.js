@@ -6,7 +6,7 @@
 
 import { showCanvas1, showCanvas2, showCanvas3 } from "./scripts/util";
 import { showDepth, detectLateral} from "./scripts/boundary";
-import { calcMovement} from './scripts/provideOlderMessage';
+import { calcMovement} from './scripts/provideMessage';
 import Sub from "./scripts/sub";
 import Ocean from "./scripts/ocean";
 import Cockpit from "./scripts/cockpit";
@@ -191,7 +191,7 @@ document.addEventListener("DOMContentLoaded", () => {
             clear();
             ocean.draw();
             // sub.draw();
-          
+        
             // This is the animation loop for provideMessage
             calcMovement(ocean, sub)
          
