@@ -4,6 +4,7 @@
 import { WIDTH, HEIGHT } from "../index";
 import { stopMessageAnimation } from "./constants";
 import { getMessage } from "./provideMessage";
+import { fadeInText} from "./educational";
 
 export function clear(ctx) {
   ctx.clearRect(0, 0, WIDTH, HEIGHT);
@@ -50,10 +51,12 @@ export function showCanvas1() { //the ocean
     bubble.style.display = 'none';
   }
   bubblesContainer.classList.add('hide'); 
+ 
+  fadeInText();
+
 
   if (!(localStorage.getItem('modalDisplayed') === 'true')) {
-    modal.style.display = 'block';
-    
+    modal.style.display = 'block'; 
   }
   
   canvas1.style.display = "block";
