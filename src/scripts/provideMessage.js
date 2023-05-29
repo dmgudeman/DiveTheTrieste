@@ -86,7 +86,7 @@ export function calcMovement() {
                 // addAndStartMessAnimation(message);
 
                 changeEducationalText(EPTextObject)
-                addEdTextStyle('upper');
+                addEdTextStyle('upperPelagic');
 
                 return;
             } else if (flag === EUPHOTIC_BENTHIC) {

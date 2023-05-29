@@ -1,7 +1,7 @@
 
 
 
-#fadeInContainer {
+.fadeInContainer {
     position: relative;
     display: flex;
     flex-direction: column;
@@ -19,7 +19,7 @@
     // transition: opacity 1s ease-in;
     box-shadow: 3px 3px 4px rgba(0, 0, 0, 0.5);
 }
-#fadeInTitle {
+.fadeInTitle {
   
     padding-top: 20px;
     // color: var(--four);
@@ -29,7 +29,7 @@
     transition: opacity 1s ease-in;
 
 }
-#fadeInText {
+.fadeInText {
  
     padding: 20px;
     padding-top: 10px;
@@ -50,7 +50,7 @@
     color: var(--three);
 }
 
-.upperStyleContainer.pelagic { 
+.upperPelagicStyleContainer { 
     background-color: var(--two);
     border: 3px solid var(--three);
     top: 600px;
@@ -61,10 +61,10 @@
     width: 650px;
 
 }
-.upperStyleTitlePelagic {
+.upperPelagicStyleTitle {
     color: var(--four);
 }
-.upperStyleTextPelagic {
+.upperPelagicStyleText {
     color: var(--three);
 }
 

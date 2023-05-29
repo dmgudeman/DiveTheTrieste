@@ -40,75 +40,26 @@ export function addEdTextStyle(flag) {
     const textElStrings = ['Text', 'Title', 'Container'];
     const textElStyles = ["upper", "middle", "lower"];
     Container.style.opacity = "1";
+
+    // remove all class lists 
     textEls.forEach((textEl, idx) => {
-        textElStyles.forEach((textElStyle, jdx) => {
-            const className = textElStyles[jdx] + 'Style' + textElStrings[idx];
-           console.log(className);
-           console.log(textElStyles[idx])
-           console.log(flag)
-           console.log((textElStyles[idx] === flag))
-           console.log(textElStyle)
-
-
-            if (textElStyle === flag) {
-              textEl.classList.add(className)
-            } else {
-               textEl.classList.remove(className)
-            }
-       
-        })
-        
-           
+        const className = "fadeIn" + textElStrings[idx];
+        textEl.classList = className;         
     });
 
 
-    // if (flag === "upper") {
-    //     title.classList.add("upperStyleTitle");
-    //     text.classList.add("upperStyleText");
-    //     container.classList.add("upperStyleContainer");
-    //     title.classList.remove("middleStyleTitle");
-    //     text.classList.remove("middleStyleText");
-    //     container.classList.remove("middleStyleContainer");
-    //     title.classList.remove("lowerStyleTitle");
-    //     text.classList.remove("lowerStyleText");
-    //     container.classList.remove("lowerStyleContainer");
-    // } else if (flag === "upperPelagic") {
-    //     title.classList.add("upperStyleTitle");
-    //     text.classList.add("upperStyleText");
-    //     container.classList.add("upperStyleContainerPelagic");
-    //     title.classList.remove("middleStyleTitle");
-    //     text.classList.remove("middleStyleText");
-    //     container.classList.remove("middleStyleContainer");
-    //     title.classList.remove("lowerStyleTitle");
-    //     text.classList.remove("lowerStyleText");
-    //     container.classList.remove("lowerStyleContainer");
-    // } else if (flag === "middle") {
-    //     title.classList.remove("upperStyleTitle");
-    //     text.classList.remove("upperStyleText");
-    //     container.classList.remove("upperStyleContainer");
-    //     title.classList.add("middleStyleTitle");
-    //     text.classList.add("middleStyleText");
-    //     container.classList.add("middleStyleContainer");
-    //     title.classList.remove("lowerStyleTitle");
-    //     text.classList.remove("lowerStyleText");
-    //     container.classList.remove("lowerStyleContainer");
-    // } else {
-    //     title.classList.remove("upperStyleTitle");
-    //     text.classList.remove("upperStyleText");
-    //     container.classList.remove("upperStyleContainer");
-    //     title.classList.remove("middleStyleTitle");
-    //     text.classList.remove("middleStyleText");
-    //     container.classList.remove("middleStyleContainer");
-    //     title.classList.add("lowerStyleTitle");
-    //     text.classList.add("lowerStyleText");
-    //     container.classList.add("lowerStyleContainer");
-    // }
+    textEls.forEach((textEl, idx) => {   
+            const className = flag + 'Style' + textElStrings[idx];
+            console.log(className)
+          
+              textEl.classList.add(className);    
+                  
+    });
 }
 
 export function changeEducationalText(newText) {
     const title = document.getElementById("fadeInTitle");
     const text = document.getElementById("fadeInText");
-
     title.textContent = newText.title;
     text.textContent = newText.text;
 
