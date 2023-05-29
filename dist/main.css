@@ -529,7 +529,6 @@ input {
   color: lightsalmon;
 }
 
-<<<<<<< HEAD
 .hitBottomContainer {
   position: fixed;
   display: flex;
@@ -553,8 +552,6 @@ input {
   display: none;
 }
 
-=======
->>>>>>> main
 :root {
   --one: #E0AE7D;
   --two: wheat;

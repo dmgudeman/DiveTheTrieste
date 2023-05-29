@@ -29,6 +29,7 @@ export const getMove = (moveObjects) => {
     clearHitBottom();
     let { ocean, sub } = moveObjects;
 
+
     ocean.velRight = 0;
     ocean.velLeft = 0;
     ocean.velUp = 0;
@@ -40,7 +41,7 @@ export const getMove = (moveObjects) => {
 
     let compLat = ocean.sx + sub.x - SUB_INITIAL_LAT_POS;
     let compVert = ocean.sy + sub.y - INITIAL_Y_POSITION;
-
+    console.log('COMPLAT', compLat)
     let variableDepth = calcDepthLimit(compLat);
 
     // let variableDepth = getVariableDepth(compLat);
@@ -109,8 +110,9 @@ function getLatMove(moveObjects, variableDepth) {
     };
 
     if (compLat <= 0) {
-        ocean.sx = 1; // reset to 0 if over the limit
+        ocean.sx = 0; // reset to 0 if over the limit
         moveOceanRight();
+        return displayObjects;
     } else if (compLat < OCEAN_LAT_LIMIT) {
         if (compVert < variableDepth) {
             moveOceanLat();
@@ -123,7 +125,7 @@ function getLatMove(moveObjects, variableDepth) {
         if (compVert < variableDepth) {
             moveSubLat();
         } else {
-            sub.sy -= VERTICAL_VELOCITY;
+            sub.sy -= LATERAL_VELOCITY;
             moveSubLeft();
             hitBottom();
         }
