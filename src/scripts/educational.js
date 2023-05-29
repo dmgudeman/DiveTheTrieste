@@ -1,25 +1,22 @@
-export function fadeInText() {
-    const container = document.getElementById("fadeInContainer");
-    container.style.opacity = "1";
+export function fadeInText(Title, Text ) {
+    const Container = document.getElementById("fadeInContainer");
+    Container.style.opacity = "1";
 
-    const title = document.getElementById("fadeInTitle");
-    const text = document.getElementById("fadeInText");
-
-    title.style.opacity = "0";
-    text.style.opacity = "0";
+    Title.style.opacity = "0";
+    Text.style.opacity = "0";
 
     function animate() {
-        let titleOpacity = parseFloat(title.style.opacity);
-        let textOpacity = parseFloat(text.style.opacity);
+        let titleOpacity = parseFloat(Title.style.opacity);
+        let textOpacity = parseFloat(Text.style.opacity);
 
         if (titleOpacity < 1) {
             titleOpacity += 0.01;
-            title.style.opacity = titleOpacity.toString();
+            Title.style.opacity = titleOpacity.toString();
         }
 
         if (textOpacity < 1) {
             textOpacity += 0.01;
-            text.style.opacity = textOpacity.toString();
+            Text.style.opacity = textOpacity.toString();
         }
 
         if (titleOpacity < 1 || textOpacity < 1) {
@@ -30,40 +27,37 @@ export function fadeInText() {
     requestAnimationFrame(animate);
 }
 
-const textElStyles = ["upper", "middle", "lower"];
-
 export function addEdTextStyle(flag) {
     const Text = document.getElementById("fadeInText");
     const Title = document.getElementById("fadeInTitle");
     const Container = document.getElementById("fadeInContainer");
+  
     const textEls = [Text, Title, Container];
-    const textElStrings = ['Text', 'Title', 'Container'];
-    const textElStyles = ["upper", "middle", "lower"];
+    const textElStrings = ["Text", "Title", "Container"];
     Container.style.opacity = "1";
 
-    // remove all class lists 
+    // reset classList
     textEls.forEach((textEl, idx) => {
         const className = "fadeIn" + textElStrings[idx];
-        textEl.classList = className;         
+        textEl.classList = className;
     });
 
-
-    textEls.forEach((textEl, idx) => {   
-            const className = flag + 'Style' + textElStrings[idx];
-            console.log(className)
-          
-              textEl.classList.add(className);    
-                  
+    textEls.forEach((textEl, idx) => {
+        const className = flag + "Style" + textElStrings[idx];
+        textEl.classList.add(className);
     });
+    fadeInText(Container, Title, Text);
 }
 
 export function changeEducationalText(newText) {
+
     const title = document.getElementById("fadeInTitle");
     const text = document.getElementById("fadeInText");
+
     title.textContent = newText.title;
     text.textContent = newText.text;
 
-    fadeInText();
+    fadeInText(title, text);
 }
 
 export function fadeOutText(callback) {
@@ -84,18 +78,3 @@ export function fadeOutText(callback) {
 
     animate();
 }
-
-//   export function changeEducationalText(newText) {
-//     const text = document.getElementById("fadeInText");
-//     console.log (newText.title);
-//     console.log(newText.text)
-//     text.textContent = newText.text;
-//     fadeInText();
-//   }
-
-//   window.addEventListener("DOMContentLoaded", fadeInText);
-
-const changeTextButton = document.getElementById("changeTextButton");
-changeTextButton.addEventListener("click", function () {
-    fadeOutText(changeText);
-});

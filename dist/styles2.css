@@ -5,7 +5,7 @@
   position: relative;
   display: flex;
   flex-direction: column;
-  top: 400px;
+  top: 450px;
   left: 280px;
   display: flex;
   justify-content: center;
@@ -14,11 +14,17 @@
   padding-bottom: 20px;
   border-radius: 30px;
   opacity: 0;
+  transition: opacity 1s ease-in;
   box-shadow: 3px 3px 4px rgba(0, 0, 0, 0.5);
+}
+
+.fadeInContainer.hide {
+  display: none;
 }
 
 .fadeInTitle {
   padding-top: 20px;
+  color: var(--four);
   font-size: 1.5rem;
   font-weight: 700;
   opacity: 0;
@@ -28,6 +34,7 @@
 .fadeInText {
   padding: 20px;
   padding-top: 10px;
+  color: var(--three);
   opacity: 0;
   transition: opacity 1s ease-in;
 }
@@ -48,12 +55,14 @@
 .upperPelagicStyleContainer {
   background-color: var(--two);
   border: 3px solid var(--three);
-  top: 600px;
+  top: 720px;
   left: 200px;
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 650px;
+  width: 1200px;
+  height: 200px;
+  padding-bottom: 5px;
 }
 
 .upperPelagicStyleTitle {

@@ -29,8 +29,7 @@ export const getMove = (moveObjects) => {
 
     let compLat = ocean.sx + sub.x - SUB_INITIAL_LAT_POS;
     let compVert = ocean.sy + sub.y - INITIAL_Y_POSITION;
-    console.log('compLat', compLat);
-    console.log('compVert', compVert)
+
 
 
     displayObjects = { ocean: ocean, sub: sub};

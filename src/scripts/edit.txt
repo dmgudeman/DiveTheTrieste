@@ -1,12 +1,6 @@
-In the absence of sunlight, this zone has low temperatures, high pressure, and limited nutrient availability. 
-Despite these challenges, the zone is not devoid of life. Unique and highly adapted 
-organisms inhabit this realm, relying on alternative energy sources and survival strategies.
-In this zone, the primary producers are CHEMOSYNTHETIC bacteria that derive energy 
-from inorganic compounds, such as hydrogen sulfide or methane. 
-These bacteria serve as the foundation of the food chain, supporting a variety of organisms that are 
-adapted to survive in extreme conditions. Deep-sea fish, cephalopods, and other invertebrates, 
-some with bioluminescent abilities, are found here.
-The aphotic pelagic zone plays a significant role in the cycling of organic matter
-and the global carbon cycle. Organic particles, called marine snow, sink from the surface waters 
-providing sustenance. The marine snow transports carbon from the surface to the deep ocean, sequestering it for long 
-periods and influencing the planet's carbon balance.
+There is no light. It is usually just above freezing and over 1000 times the pressure of the atmosphere. 
+Most of this zone is nutrient poor however there is also the remarkable  presence of deep-sea vents. These hydrothermal 
+vents are geological formations that spew forth mineral-rich, superheated water into the surrounding environment. 
+They create a haven for unique ecosystems, sustained, again, not by sunlight but by chemosynthesis. Bacteria and other 
+organisms near these vents convert chemicals, such as hydrogen sulfide, into energy, forming the basis of a 
+food chain that supports a variety of organisms, including tube worms, clams, and unique species found nowhere else on Earth.

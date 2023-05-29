@@ -33,10 +33,11 @@ const musicNoteButton = document.getElementById("musicNoteButton")
 const bubblesContainer = document.querySelector(".bubblesContainer");
 const bubbles = bubblesContainer.getElementsByClassName('bubble');
 const edMessage = document.getElementById("edMassage");
+const edTextContainer = document.getElementById("fadeInContainer");
 let messageInterval;
 
 export function showCanvas1() { //the ocean
-  
+  edTextContainer.classList.remove('hide')
   stopMessageAnimation.messFlag = false;
   messageInterval =  setInterval(() => {
    getMessage();
@@ -73,6 +74,7 @@ export function showCanvas1() { //the ocean
 }
 
 export function showCanvas2() { //opening page
+  edTextContainer.classList.add('hide');
   stopMessageAnimation.flag = false;
 
   canvas1.style.display = "none";
@@ -88,10 +90,13 @@ export function showCanvas2() { //opening page
   homeButton.classList.remove("can1home");
   homeButton.classList.add("can2home");
   homeButton.classList.remove("can3home"); 
-  edMessage.classList.add("hideEdMessage");  
+  edMessage.classList.add("hideEdMessage"); 
+  
+  
 }
 
 export function showCanvas3() {  //cockpit
+  edTextContainer.classList.add('hide')
   stopMessageAnimation.messFlag = true;
  
   canvas1.style.display = "none";
@@ -107,6 +112,7 @@ export function showCanvas3() {  //cockpit
   homeButton.classList.remove("can2home");
   homeButton.classList.add("can3home"); 
   edMessage.classList.add("hideEdMessage");
+  edTextContainer.classList = '';
   
 }
 

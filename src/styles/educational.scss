@@ -5,38 +5,36 @@
     position: relative;
     display: flex;
     flex-direction: column;
-    top: 400px;
+    top: 450px;
     left: 280px;
     display: flex ;
     justify-content: center;
     align-items: center;
     width: 400px;
     padding-bottom: 20px;
-    
-
     border-radius: 30px;
     opacity: 0;
-    // transition: opacity 1s ease-in;
+    transition: opacity 1s ease-in;
     box-shadow: 3px 3px 4px rgba(0, 0, 0, 0.5);
 }
-.fadeInTitle {
-  
+.fadeInContainer.hide {
+    display: none;
+}
+.fadeInTitle { 
     padding-top: 20px;
-    // color: var(--four);
+    color: var(--four);
     font-size: 1.5rem;
     font-weight: 700;
     opacity: 0;
     transition: opacity 1s ease-in;
-
 }
+
 .fadeInText {
- 
     padding: 20px;
     padding-top: 10px;
-    // color: var(--three);
+    color: var(--three);
     opacity: 0;
     transition: opacity 1s ease-in;
-
 }
 
 .upperStyleContainer { 
@@ -53,34 +51,33 @@
 .upperPelagicStyleContainer { 
     background-color: var(--two);
     border: 3px solid var(--three);
-    top: 600px;
+    top: 720px;
     left: 200px;
     display: flex ;
     justify-content: center;
     align-items: center;
-    width: 650px;
-
+    width:1200px;
+    height: 200px;
+    padding-bottom: 5px;
 }
+
 .upperPelagicStyleTitle {
     color: var(--four);
 }
+
 .upperPelagicStyleText {
     color: var(--three);
 }
-
-// .middleStyle {
-//     background-color: #0D376F;
-//     color: white;
-//     border: 3px solid white;
-// }
 
 .middleStyleContainer { 
     background-color:  #0D376F;
     border: 3px solid lightgoldenrodyellow
 }
+
 .middleStyleTitle {
     color: yellow
 }
+
 .middleStyleText {
     color: lightgoldenrodyellow
 }
@@ -89,36 +86,12 @@
     background-color:  black;
     border: 3px solid lightgreen
 }
+
 .lowerStyleTitle {
     color: lightgreen
 }
+
 .lowerStyleText {
     color: lightsalmon
 }
-
-// #fadeInText {
-//     opacity: 0;
-//     transition-property: opacity ;
-//     transition-duration: 2s;
-//     transition-timing-function: ease-in-out;
-//     transition-delay: 0s;
-//   }
-  
-// .fadeInContainer.show {
-//     top: 400px;
-//     left: 300px;
-//     display: flex ;
-//     justify-content: center;
-//     align-items: center;
-//     width: 400px;
-//     height: 400px;
-//     color: var(--three);
-//     background-color: var(--two);
-//     border: 3px solid var(--three);
-//     border-radius: 30px;
-// }
-
-// .fadeInContainer.hide {
-//     display: none;
-// }
 

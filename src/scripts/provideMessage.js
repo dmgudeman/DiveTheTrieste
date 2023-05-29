@@ -80,21 +80,14 @@ export function calcMovement() {
         if (oldFlag !== flag) {
             oldFlag = flag;
 
-            let message;
-            if (flag === EUPHOTIC_PELAGIC) {
-                // message = iteraterMessage(epMessages);
-                // addAndStartMessAnimation(message);
 
+            if (flag === EUPHOTIC_PELAGIC) {
                 changeEducationalText(EPTextObject)
                 addEdTextStyle('upperPelagic');
 
                 return;
             } else if (flag === EUPHOTIC_BENTHIC) {
-                // message = iteraterMessage(ebMessages);
-                // addAndStartMessAnimation(message);
-             
                 changeEducationalText(EBTextObject)
-                // addEdTextStyle('upperPelagic');
                 addEdTextStyle('upper');
 
                 return;
@@ -119,7 +112,7 @@ export function calcMovement() {
             } else if (flag === APHOTIC_BENTHIC) {
                 // message = iteraterMessage(abMessages);
                 // addAndStartMessAnimation(message);
-                changeEducationalText("APHOTIC BENTHIC");
+                changeEducationalText(ABTextObject);
                 addEdTextStyle('lower');
                 return;
             }
@@ -147,6 +140,8 @@ const DBTextObject = {title: "DYSPHOTIC BENTHIC", text: "Here sunlight barely pe
 const DPTextObject = {title: "DYPHOTIC PELAGIC", text: "Here the flora is primarily phytoplankton and zooplankton and some diatoms. The fauna is. Fish include the lanternfish, hatchetfish, and dragonfishs. These fish have evolved large eyes and bioluminescent organs, to navigate and communicate in the dimly lit environment. Cephalopods, shrimp, and jellyfish, are also found in this zone, all adapted to low light. It serves as a crucial feeding ground for migratory species, including whales and large predatory fish, as they follow the vertical migration of zooplankton from the depths to the surface. Dead matter drifts down from the euphotic zone sustains sustaining a complex food web. Understanding the dysphotic pelagic zone is essential for comprehending the dynamics of the global carbon cycle. The zone plays a crucial role in the sequestration of carbon dioxide through the biological pump, where carbon is transported from the surface to the deep ocean through sinking particles. This process helps regulate atmospheric carbon levels and mitigates climate change."}
 
 const APTextObject = {title: "APHOTIC PELAGIC", text: "In the absence of sunlight, this zone has low temperatures, high pressure, and limited nutrient availability. Despite these challenges, the zone is not devoid of life. Unique and highly adapted organisms inhabit this realm, relying on alternative energy sources and survival strategies. In this zone, the primary producers are CHEMOSYNTHETIC bacteria that derive energy from inorganic compounds, such as hydrogen sulfide or methane. These bacteria serve as the foundation of the food chain, supporting a variety of organisms that are adapted to survive in extreme conditions. Deep-sea fish, cephalopods, and other invertebrates, some with bioluminescent abilities, are found here.The aphotic pelagic zone plays a significant role in the cycling of organic matteand the global carbon cycle. Organic particles, called marine snow, sink from the surface waters providing sustenance. The marine snow transports carbon from the surface to the deep ocean, sequestering it for long periods and influencing the planet's carbon balance."}
+
+const ABTextObject = {title: "APHOTIC BENTHIC", text:"There is no light. It is usually just above freezing and over 1000 times the pressure of the atmosphere. Most of this zone is nutrient poor however there is also the remarkable  presence of deep-sea vents. These hydrothermal vents are geological formations that spew forth mineral-rich, superheated water into the surrounding environment. They create a haven for unique ecosystems, sustained, again, not by sunlight but by chemosynthesis. Bacteria and other organisms near these vents convert chemicals, such as hydrogen sulfide, into energy, forming the basis of a food chain that supports a variety of organisms, including tube worms, clams, and unique species found nowhere else on Earth."}
 
 
 const epMessages = {
