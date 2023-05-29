@@ -1,9 +1,11 @@
 export function fadeInText(Title, Text ) {
     const Container = document.getElementById("fadeInContainer");
+    const hitBottom = document.getElementById("hitBottomContainer")
     Container.style.opacity = "1";
 
     Title.style.opacity = "0";
     Text.style.opacity = "0";
+    
 
     function animate() {
         let titleOpacity = parseFloat(Title.style.opacity);

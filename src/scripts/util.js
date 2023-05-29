@@ -34,6 +34,7 @@ const bubblesContainer = document.querySelector(".bubblesContainer");
 const bubbles = bubblesContainer.getElementsByClassName('bubble');
 const edMessage = document.getElementById("edMassage");
 const edTextContainer = document.getElementById("fadeInContainer");
+const hitBottom = document.getElementById("hitBottomContainer")
 let messageInterval;
 
 export function showCanvas1() { //the ocean
@@ -72,6 +73,7 @@ export function showCanvas1() { //the ocean
   homeButton.classList.remove("can2home");
   homeButton.classList.remove("can3home"); 
   edMessage ? edMessage.classList.remove("hideEdMessage") : null;
+ 
   // fadeInText();
 }
 

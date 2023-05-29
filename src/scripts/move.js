@@ -25,6 +25,7 @@ import {
 
 let displayObjects;
 export const getMove = (moveObjects) => {
+    clearHitBottom()
     let { ocean, sub } = moveObjects;
 
     ocean.velRight = 0;
@@ -39,10 +40,6 @@ export const getMove = (moveObjects) => {
     let compLat = ocean.sx + sub.x - SUB_INITIAL_LAT_POS;
     let compVert = ocean.sy + sub.y - INITIAL_Y_POSITION;
     let variableDepth = getVariableDepth(compLat);
-    console.log("OCEAN_SY", ocean.sy);
-    console.log("OCEAN_SX", ocean.sx);
-    console.log("variableDepth", variableDepth);
-
     displayObjects = { ocean: ocean, sub: sub };
     displayObjects = getLatMove(displayObjects,variableDepth);
 
@@ -114,7 +111,7 @@ function getLatMove(moveObjects, variableDepth) {
         if (compVert < variableDepth) {
             moveOceanLat();
         } else {
-            moveOceanRight();
+            hitBottom();
         }
     } else if (compLat < LEFT_EDGE_TRENCH && compVert > TRENCH_TOP) {
         moveSubRight();
@@ -247,4 +244,15 @@ function calcDepthLimit(point1, point2, lat) {
     let depthLimit = point1[1] + vertDepthModifier;
     console.log('depthLimit', depthLimit)
     return depthLimit;
+}
+
+export const hitBottom = () => {
+    let hitBottom = document.getElementById('hitBottomContainer');
+    hitBottom.classList.remove('hide');
+  
+}
+export const clearHitBottom = () => {
+    let hitBottom = document.getElementById('hitBottomContainer');
+    hitBottom.classList.add('hide');
+  
 }

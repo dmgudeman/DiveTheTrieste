@@ -10,7 +10,8 @@ const config = {
       path.resolve(__dirname, 'src', 'index.scss')
     ],
     styles1: path.resolve(__dirname, 'src', 'styles/style.scss'),
-    styles2: path.resolve(__dirname, 'src', 'styles/educational.scss')
+    styles2: path.resolve(__dirname, 'src', 'styles/educational.scss'),
+    styles3: path.resolve(__dirname, 'src', 'styles/hitBottom.scss'),
     // Add more entries for additional SCSS files
   },
   output: {
