@@ -39,6 +39,9 @@ export const getMove = (moveObjects) => {
 
     let compLat = ocean.sx + sub.x - SUB_INITIAL_LAT_POS;
     let compVert = ocean.sy + sub.y - INITIAL_Y_POSITION;
+
+    console.log('COMPLAT', compLat);
+    console.log('COMPVERT', compVert)
     let variableDepth = getVariableDepth(compLat);
     displayObjects = { ocean: ocean, sub: sub };
     displayObjects = getLatMove(displayObjects,variableDepth);
@@ -193,15 +196,15 @@ function getVerticalMove(objects, varDepth = OCEAN_FLOOR) {
 }
 
 const getVariableDepth = (lat) => {
-    console.log("LLLAAATTT in getLeftVariable Depth", lat);
+    // console.log("LLLAAATTT in getLeftVariable Depth", lat);
     if (lat < LAT_LIMIT_01_220_420[0]) {
        let depth = calcDepthLimit(LAT_LIMIT_00_0_0, LAT_LIMIT_01_220_420, lat);
-       console.log('DEPTH', depth)
+    //    console.log('DEPTH', depth)
        return depth
     } else if (lat < LAT_LIMIT_02_620_480[0]) {
 
         let depth = calcDepthLimit(LAT_LIMIT_01_220_420, LAT_LIMIT_02_620_480, lat);
-        console.log('DEPTH', depth)
+        // console.log('DEPTH', depth)
         return depth
         
     } else if (lat < LAT_LIMIT_03_720_380[0]) {
@@ -235,15 +238,15 @@ const getVariableDepth = (lat) => {
 };
 
 function calcDepthLimit(point1, point2, lat) {
-    console.log(point1, point2, lat)
+    // console.log(point1, point2, lat)
     let slope  = (point2[0] - point1[1])/ (point2[1] - point1[1]);
-    console.log('slope', slope)
+    // console.log('slope', slope)
     
     let distanceFromLastPoint = lat - point1[0];
     let vertDepthModifier = distanceFromLastPoint / slope;
-    console.log('verticalChange', vertDepthModifier);
+    // console.log('verticalChange', vertDepthModifier);
     let depthLimit = point1[1] + vertDepthModifier;
-    console.log('depthLimit', depthLimit)
+    // console.log('depthLimit', depthLimit)
     return depthLimit;
 }
 

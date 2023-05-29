@@ -67,4 +67,19 @@ export const LAT_LIMIT_07_1200_460 = [1200, 420];
 export const LAT_LIMIT_08_1280_480= [1400, 440]; //same as LEFT_EDGE_TRENCH
 
 
+export const LAT_LIMITS = {
+  0:{'id':0, 'name':'INITIAL_POSITION', x:0, y:0},
+  1:{'id':1, 'name':'SLOPE_LIMIT',      x:220, y:380},
+  2:{'id':2, 'name':'START_BUMP',       x:600, y:420},
+  3:{'id':3, 'name':'BUMP_PEAK',        x:720, y:300},
+  4:{'id':4, 'name':'END_BUMP',         x:800, y:460},
+  5:{'id':5, 'name':'START_DBL',        x:880, y:460},
+  6:{'id':6, 'name':'DBL_PEAK_1',       x:980, y:200},
+  7:{'id':7, 'name':'DBL_PEAK_2',       x:1120, y:240},
+  8:{'id':8, 'name':'END_DBL',          x:1180, y:420},
+  9:{'id':9, 'name':'START_TRENCH',     x:1320, y:480},
+
+}
+
+
 
