@@ -1,8 +1,6 @@
 import { INITIAL_Y_POSITION, SEA_DEPTH, SUB_INITIAL_LAT_POS } from "./constants";
 import { HEIGHT } from "../index";
 
-
-
 export  function showMouseAsSub(event) {
     var x = event.clientX - SUB_INITIAL_LAT_POS;
     var y = event.clientY - INITIAL_Y_POSITION;

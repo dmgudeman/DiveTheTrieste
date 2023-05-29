@@ -34,8 +34,6 @@ class Cockpit {
       const y = e.clientY - rect.top;
       if (x > 100 && x < 300 && y > 200 && y < 250) {
         showCanvas2();
-
-
       }
     });
 
