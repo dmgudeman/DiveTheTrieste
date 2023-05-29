@@ -111,6 +111,7 @@ function getLatMove(moveObjects, variableDepth) {
         if (compVert < variableDepth) {
             moveOceanLat();
         } else {
+            ocean.sy -= VERTICAL_VELOCITY;
             hitBottom();
         }
     } else if (compLat < LEFT_EDGE_TRENCH && compVert > TRENCH_TOP) {
