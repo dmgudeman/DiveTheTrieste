@@ -11,11 +11,13 @@
     justify-content: center;
     align-items: center;
     width: 400px;
-    height: 500px;
+    padding-bottom: 20px;
+    
 
     border-radius: 30px;
     opacity: 0;
     // transition: opacity 1s ease-in;
+    box-shadow: 3px 3px 4px rgba(0, 0, 0, 0.5);
 }
 #fadeInTitle {
   
@@ -48,6 +50,24 @@
     color: var(--three);
 }
 
+.upperStyleContainer.pelagic { 
+    background-color: var(--two);
+    border: 3px solid var(--three);
+    top: 600px;
+    left: 200px;
+    display: flex ;
+    justify-content: center;
+    align-items: center;
+    width: 650px;
+
+}
+.upperStyleTitlePelagic {
+    color: var(--four);
+}
+.upperStyleTextPelagic {
+    color: var(--three);
+}
+
 // .middleStyle {
 //     background-color: #0D376F;
 //     color: white;
@@ -65,9 +85,15 @@
     color: lightgoldenrodyellow
 }
 
-
-.lowerStyle {
-
+.lowerStyleContainer { 
+    background-color:  black;
+    border: 3px solid lightgreen
+}
+.lowerStyleTitle {
+    color: lightgreen
+}
+.lowerStyleText {
+    color: lightsalmon
 }
 
 // #fadeInText {
