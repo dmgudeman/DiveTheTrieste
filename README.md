@@ -22,7 +22,9 @@ transition was  accomplished by updating coordinates on both the submarine
 as well as the background. Dynamic calculation
 of the depth allows the sub to avoid crashing into the bottom. The bottom
 was first mapped with lateral constants. 
-![constants]('./assets/code/constants.png)
+<div style="float: right; margin-right: 10px;">
+<img src="./constants.png" alt="constants" width="500" height="300">
+</div>
 Storing objects were stored in an
 array to allowed the use of array methods. The y coordinate of the ocean
 floor was  calculated using the classic y intercept method.
