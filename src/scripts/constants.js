@@ -36,7 +36,7 @@ export const APHOTIC_BENTHIC_BARRIER = OCEAN_BOTTOM - 400;
 
 // OBJECT option values
 export const OCEAN_DEPTH_LIMIT = 820;
-export const OCEAN_LAT_LIMIT = 1271;
+export const OCEAN_LAT_LIMIT = 1280;
 export const FULL_LAT_LIMIT = 2200;
 export const FULL_VERTICAL_LIMIT = HEIGHT - 100;
 export const INITIAL_Y_POSITION = 80; // for both objects

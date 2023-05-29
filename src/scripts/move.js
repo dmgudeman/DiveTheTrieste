@@ -56,6 +56,8 @@ function getLatMove(moveObjects, varLeft=LEFT_EDGE_TRENCH, varRight=FULL_LAT_LIM
     let compLat = ocean.sx + sub.x - SUB_INITIAL_LAT_POS;
     let compVert = ocean.sy + sub.y - INITIAL_Y_POSITION;
 
+    console.log('OCEAN_SY', ocean.sy)
+
     const moveOceanLat = () => {
         ocean.velRight = LAT_VELOCITY;
         ocean.velLeft = LAT_VELOCITY;
@@ -104,10 +106,13 @@ function getLatMove(moveObjects, varLeft=LEFT_EDGE_TRENCH, varRight=FULL_LAT_LIM
     } else if (compLat < LEFT_EDGE_TRENCH && compVert > TRENCH_TOP) {
         moveSubRight()
     } else if (compLat > RIGHT_EDGE_TRENCH && compVert > TRENCH_TOP) {
+        ocean.sx = OCEAN_LAT_LIMIT - LAT_VELOCITY; // reset the limits empirically
         moveSubLeft();
     } else if (compLat < FULL_LAT_LIMIT) {
+        ocean.sx = OCEAN_LAT_LIMIT; // reset the limits empirically
         moveSubLat();
     } else if (compLat >= FULL_LAT_LIMIT) {
+        ocean.sx = OCEAN_LAT_LIMIT; // reset the limits empirically
         moveSubLeft();
     } else {
         moveSubLat();
@@ -163,9 +168,10 @@ function getVerticalMove(objects, varDepth = OCEAN_FLOOR) {
 
     if (compVert <= 0) {
         moveOceanDown();
-    } else if (compVert <= OCEAN_DEPTH_LIMIT && compVert <= varDepth) {
+    } else if (compVert < OCEAN_DEPTH_LIMIT && compVert <= varDepth) {
         moveOceanVert();
     } else if (compVert < OCEAN_FLOOR && compVert <= varDepth) {
+        ocean.sy = OCEAN_DEPTH_LIMIT - VERTICAL_VELOCITY; // reset the limits empirically
         moveSubVert();
     } else if (compVert >= OCEAN_FLOOR || compVert > varDepth) {
         //below the limit
