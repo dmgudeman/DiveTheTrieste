@@ -21,12 +21,12 @@ import {
     LAT_LIMIT_06_1100_200,
     LAT_LIMIT_07_1200_460,
     LAT_LIMIT_08_1280_480,
-    LAT_LIMITS
+    LAT_LIMITS,
 } from "./constants";
 
 let displayObjects;
 export const getMove = (moveObjects) => {
-    clearHitBottom()
+    clearHitBottom();
     let { ocean, sub } = moveObjects;
 
     ocean.velRight = 0;
@@ -41,14 +41,14 @@ export const getMove = (moveObjects) => {
     let compLat = ocean.sx + sub.x - SUB_INITIAL_LAT_POS;
     let compVert = ocean.sy + sub.y - INITIAL_Y_POSITION;
 
-    // console.log('COMPLAT', compLat);
-    // console.log('COMPVERT', compVert)
-   let variableDepth =  calcDepthLimitDynamic(compLat)
+    console.log("COMPLAT", compLat);
+    console.log("COMPVERT", compVert);
+    let variableDepth = calcDepthLimit(compLat);
 
-   console.log('llllllllll', variableDepth)
+    console.log("llllllllll", variableDepth);
     // let variableDepth = getVariableDepth(compLat);
     displayObjects = { ocean: ocean, sub: sub };
-    displayObjects = getLatMove(displayObjects,variableDepth);
+    displayObjects = getLatMove(displayObjects, variableDepth);
 
     // fine tune the depth stop for the slope and the shelves
     if (compLat < SLOPE_LAT) {
@@ -58,7 +58,7 @@ export const getMove = (moveObjects) => {
         let depth = compLat * 2.3;
         displayObjects = getVerticalMove(displayObjects, depth);
     } else if (compLat < LEFT_EDGE_TRENCH || compLat > RIGHT_EDGE_TRENCH) {
-        displayObjects = getVerticalMove(displayObjects,variableDepth);
+        displayObjects = getVerticalMove(displayObjects, variableDepth);
     } else {
         displayObjects = getVerticalMove(displayObjects);
     }
@@ -121,20 +121,35 @@ function getLatMove(moveObjects, variableDepth) {
             ocean.sy -= VERTICAL_VELOCITY;
             hitBottom();
         }
-    } else if (compLat < LEFT_EDGE_TRENCH && compVert > TRENCH_TOP) {
-        moveSubRight();
-    } else if (compLat > RIGHT_EDGE_TRENCH && compVert > TRENCH_TOP) {
-        ocean.sx = OCEAN_LAT_LIMIT - LAT_VELOCITY; // reset the limits empirically
-        moveSubLeft();
-    } else if (compLat < FULL_LAT_LIMIT) {
-        ocean.sx = OCEAN_LAT_LIMIT; // reset the limits empirically
-        moveSubLat();
-    } else if (compLat >= FULL_LAT_LIMIT) {
-        ocean.sx = OCEAN_LAT_LIMIT; // reset the limits empirically
-        moveSubLeft();
+    } else if (compLat < FULL_LAT_LIMIT){
+        if (compVert < variableDepth) {
+            moveSubLat();
+        } else {
+            sub.sy -= VERTICAL_VELOCITY;
+            hitBottom();
+        }
+
     } else {
-        moveSubLat();
+        moveSubLeft();
+        moveSubUp();
     }
+    
+    
+    
+    // (compLat < LEFT_EDGE_TRENCH && compVert > TRENCH_TOP) {
+    //     moveSubRight();
+    // } else if (compLat > RIGHT_EDGE_TRENCH && compVert > TRENCH_TOP) {
+    //     ocean.sx = OCEAN_LAT_LIMIT - LAT_VELOCITY; // reset the limits empirically
+    //     moveSubLeft();
+    // } else if (compLat < FULL_LAT_LIMIT) {
+    //     ocean.sx = OCEAN_LAT_LIMIT; // reset the limits empirically
+    //     moveSubLat();
+    // } else if (compLat >= FULL_LAT_LIMIT) {
+    //     ocean.sx = OCEAN_LAT_LIMIT; // reset the limits empirically
+    //     moveSubLeft();
+    // } else {
+    //     moveSubLat();
+    // }
     return displayObjects;
 }
 
@@ -202,47 +217,80 @@ function getVerticalMove(objects, varDepth = OCEAN_FLOOR) {
 const getVariableDepth = (lat) => {
     // console.log("LLLAAATTT in getLeftVariable Depth", lat);
     if (lat < LAT_LIMIT_01_220_420[0]) {
-       let depth = calcDepthLimit(LAT_LIMIT_00_0_0, LAT_LIMIT_01_220_420, lat);
-    //    console.log('DEPTH', depth)
-       return depth
+        let depth = calcDepthLimit(LAT_LIMIT_00_0_0, LAT_LIMIT_01_220_420, lat);
+        //    console.log('DEPTH', depth)
+        return depth;
     } else if (lat < LAT_LIMIT_02_620_480[0]) {
-
-        let depth = calcDepthLimit(LAT_LIMIT_01_220_420, LAT_LIMIT_02_620_480, lat);
+        let depth = calcDepthLimit(
+            LAT_LIMIT_01_220_420,
+            LAT_LIMIT_02_620_480,
+            lat
+        );
         // console.log('DEPTH', depth)
-        return depth
-        
+        return depth;
     } else if (lat < LAT_LIMIT_03_720_380[0]) {
-        let depth = calcDepthLimit(LAT_LIMIT_02_620_480, LAT_LIMIT_03_720_380, lat);
-        console.log('DEPTH', depth)
-        return depth
-                
+        let depth = calcDepthLimit(
+            LAT_LIMIT_02_620_480,
+            LAT_LIMIT_03_720_380,
+            lat
+        );
+        console.log("DEPTH", depth);
+        return depth;
     } else if (lat < LAT_LIMIT_04_860_500[0]) {
-        let depth = calcDepthLimit(LAT_LIMIT_03_720_380, LAT_LIMIT_04_860_500, lat);
-        console.log('DEPTH', depth)
-        return depth
-     
+        let depth = calcDepthLimit(
+            LAT_LIMIT_03_720_380,
+            LAT_LIMIT_04_860_500,
+            lat
+        );
+        console.log("DEPTH", depth);
+        return depth;
     } else if (lat < LAT_LIMIT_05_1000_200[0]) {
-        let depth = calcDepthLimit(LAT_LIMIT_04_860_500, LAT_LIMIT_05_1000_200, lat);
-        console.log('DEPTH', depth)
-        return depth
+        let depth = calcDepthLimit(
+            LAT_LIMIT_04_860_500,
+            LAT_LIMIT_05_1000_200,
+            lat
+        );
+        console.log("DEPTH", depth);
+        return depth;
     } else if (lat < LAT_LIMIT_06_1100_200[0]) {
-        let depth = calcDepthLimit(LAT_LIMIT_05_1000_200, LAT_LIMIT_06_1100_200, lat);
-        console.log('DEPTH', depth)
-        return depth
+        let depth = calcDepthLimit(
+            LAT_LIMIT_05_1000_200,
+            LAT_LIMIT_06_1100_200,
+            lat
+        );
+        console.log("DEPTH", depth);
+        return depth;
     } else if (lat < LAT_LIMIT_07_1200_460[0]) {
-        let depth = calcDepthLimit(LAT_LIMIT_06_1100_200, LAT_LIMIT_07_1200_460, lat);
-        console.log('DEPTH', depth)
-        return depth
+        let depth = calcDepthLimit(
+            LAT_LIMIT_06_1100_200,
+            LAT_LIMIT_07_1200_460,
+            lat
+        );
+        console.log("DEPTH", depth);
+        return depth;
     } else if (lat < LAT_LIMIT_08_1280_480[0]) {
-        let depth = calcDepthLimit(LAT_LIMIT_07_1200_460, LAT_LIMIT_08_1280_480, lat);
-        console.log('DEPTH', depth)
-        return depth
+        let depth = calcDepthLimit(
+            LAT_LIMIT_07_1200_460,
+            LAT_LIMIT_08_1280_480,
+            lat
+        );
+        console.log("DEPTH", depth);
+        return depth;
     }
     return OCEAN_FLOOR;
 };
 
-function calcDepthLimit(depthObject, lat) {
-    console.log('ggggggg', depthObject)
+const calcDepthLimitDynamic = (lat) => {
+    let array = [...LAT_LIMITS];
+    const result = array.filter((obj) => obj.x >= lat && obj.xll <= lat);
+    return calcDepthLimit(result[0], lat);
+};
+
+function calcDepthLimit(lat) {
+    const result = LAT_LIMITS.filter((obj) => obj.x >= lat && obj.xll <= lat);
+    let depthObject = result[0];
+  
+
     let startX = depthObject.xll;
     let endX = depthObject.x;
     let startY = depthObject.yll;
@@ -250,53 +298,25 @@ function calcDepthLimit(depthObject, lat) {
     let x = lat;
     if (depthObject.id === 0) return 21;
 
+    // handles vertical line
     if (startX === endX) {
-        // Line is vertical
         if (x >= Math.min(startX, endX) && x <= Math.max(startX, endX)) {
-          // x-coordinate falls within the range of the line
-          return startY; // Return any y-coordinate on the line
+            return startY; 
         } else {
-          // x-coordinate is outside the range of the line
-          return null; // Or any other value to indicate that the coordinate is invalid
+            return null; 
         }
-      }
-      console.log('xxxxxxj diff',endX - startX)
-       console.log('yyyyyy diff ',endY - startY)
-
-       console.log( 'gdgdgdgdgdg', (endY - startY) / (endX - startX))
-
-      // Calculate the slope (m)
-      const slope = (endY - startY) / (endX - startX);
-      console.log("slope ", slope)
-      // Calculate the y-intercept (b)
-      const yIntercept = startY - slope * startX;
-     console.log('yIntercept', yIntercept);
-     console.log('xxxxxxx', x)
-      // Calculate the y-coordinate using the equation y = mx + b
-      const y = slope * x + yIntercept;
-       console.log('yhyhyhyhyh', y)
-       console.log('latlat', lat)
-      return y;
     }
+    const slope = (endY - startY) / (endX - startX);
+    const yIntercept = startY - slope * startX;
+    const y = slope * x + yIntercept;
+    return y;
+}
 
 export const hitBottom = () => {
-    let hitBottom = document.getElementById('hitBottomContainer');
-    hitBottom.classList.remove('hide');
-  
-}
+    let hitBottom = document.getElementById("hitBottomContainer");
+    hitBottom.classList.remove("hide");
+};
 export const clearHitBottom = () => {
-    let hitBottom = document.getElementById('hitBottomContainer');
-    hitBottom.classList.add('hide');
-  
-}
-
-const calcDepthLimitDynamic = (lat) => {
-    let array = [...LAT_LIMITS];
-   
-    const result = array.filter(obj => obj.x >= lat && obj.xll <= lat);
-    console.log('result',  result[0])
-    return calcDepthLimit(result[0], lat)
-
-
-
-}
+    let hitBottom = document.getElementById("hitBottomContainer");
+    hitBottom.classList.add("hide");
+};

@@ -75,10 +75,12 @@ export const LAT_LIMITS = [
   {'id':4, 'name':'END_BUMP',         x:800, xll: 721, y:460, yll: 301},
   {'id':5, 'name':'START_DBL',        x:840, xll: 801, y:460, yll: 461},
   {'id':6, 'name':'DBL_PEAK_1',       x:980, xll: 841, y:200, yll: 461},
-  {'id':7, 'name':'DBL_PEAK_2',       x:1120,xll: 981, y:240, yll: 200},
-  {'id':8, 'name':'END_DBL',          x:1180,xll: 1121,y:420, yll: 241},
-  {'id':9, 'name':'START_TRENCH',     x:1320,xll: 1181,y:480, yll: 421},
-
+  {'id':7, 'name':'DBL_PEAK_2',       x:1120,xll: 981, y:240, yll: 199},
+  {'id':8, 'name':'END_DBL',          x:1180,xll: 1121,y:420, yll: 239},
+  {'id':9, 'name':'START_TRENCH',     x:1320,xll: 1181,y:480, yll: 419},
+  {'id':10,'name':'TRENCH_BOTTOM',    x:1460,xll: 1321,y:1540, yll: 479},
+  {'id':11, 'name':'END_TRENCH',      x:1760,xll: 1461,y:480, yll: 1539},
+  {'id':12, 'name':'END_POSITION',    x:2200,xll: 1761,y:485, yll: 481},
 ]
 
 
