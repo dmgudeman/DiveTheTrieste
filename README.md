@@ -18,8 +18,14 @@ At first the submarine moves across the screen first due the background
 moving. At screen, the background stops moving and the state is transferred
 to the submarine object which moves ontop the background
 to the edge. The difficult job of maintaining state and creating a smooth
-transition was  accomplished by updating
-coordinates on both the submarine as well as the background.
+transition was  accomplished by updating coordinates on both the submarine 
+as well as the background. Dynamic calculation
+of the depth allows the sub to avoid crashing into the bottom. The bottom
+was first mapped with lateral constants. 
+![constants]('./assets/code/constants.png)
+Storing objects were stored in an
+array to allowed the use of array methods. The y coordinate of the ocean
+floor was  calculated using the classic y intercept method.
 
 ### Flora and Fauna are shown from different areas of ocean
 The submarine position in ocean is used to filter subsets of images

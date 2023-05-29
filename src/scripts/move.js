@@ -12,15 +12,6 @@ import {
     SHELF_DEPTH,
     TRENCH_TOP,
     OCEAN_FLOOR,
-    LAT_LIMIT_00_0_0,
-    LAT_LIMIT_01_220_420,
-    LAT_LIMIT_02_620_480,
-    LAT_LIMIT_03_720_380,
-    LAT_LIMIT_04_860_500,
-    LAT_LIMIT_05_1000_200,
-    LAT_LIMIT_06_1100_200,
-    LAT_LIMIT_07_1200_460,
-    LAT_LIMIT_08_1280_480,
     LAT_LIMITS,
 } from "./constants";
 
@@ -198,84 +189,12 @@ function getVerticalMove(objects, varDepth = OCEAN_FLOOR) {
     return displayObjects;
 }
 
-// const getVariableDepth = (lat) => {
-//     // console.log("LLLAAATTT in getLeftVariable Depth", lat);
-//     if (lat < LAT_LIMIT_01_220_420[0]) {
-//         let depth = calcDepthLimit(LAT_LIMIT_00_0_0, LAT_LIMIT_01_220_420, lat);
-//         //    console.log('DEPTH', depth)
-//         return depth;
-//     } else if (lat < LAT_LIMIT_02_620_480[0]) {
-//         let depth = calcDepthLimit(
-//             LAT_LIMIT_01_220_420,
-//             LAT_LIMIT_02_620_480,
-//             lat
-//         );
-//         // console.log('DEPTH', depth)
-//         return depth;
-//     } else if (lat < LAT_LIMIT_03_720_380[0]) {
-//         let depth = calcDepthLimit(
-//             LAT_LIMIT_02_620_480,
-//             LAT_LIMIT_03_720_380,
-//             lat
-//         );
-//         console.log("DEPTH", depth);
-//         return depth;
-//     } else if (lat < LAT_LIMIT_04_860_500[0]) {
-//         let depth = calcDepthLimit(
-//             LAT_LIMIT_03_720_380,
-//             LAT_LIMIT_04_860_500,
-//             lat
-//         );
-//         console.log("DEPTH", depth);
-//         return depth;
-//     } else if (lat < LAT_LIMIT_05_1000_200[0]) {
-//         let depth = calcDepthLimit(
-//             LAT_LIMIT_04_860_500,
-//             LAT_LIMIT_05_1000_200,
-//             lat
-//         );
-//         console.log("DEPTH", depth);
-//         return depth;
-//     } else if (lat < LAT_LIMIT_06_1100_200[0]) {
-//         let depth = calcDepthLimit(
-//             LAT_LIMIT_05_1000_200,
-//             LAT_LIMIT_06_1100_200,
-//             lat
-//         );
-//         console.log("DEPTH", depth);
-//         return depth;
-//     } else if (lat < LAT_LIMIT_07_1200_460[0]) {
-//         let depth = calcDepthLimit(
-//             LAT_LIMIT_06_1100_200,
-//             LAT_LIMIT_07_1200_460,
-//             lat
-//         );
-//         console.log("DEPTH", depth);
-//         return depth;
-//     } else if (lat < LAT_LIMIT_08_1280_480[0]) {
-//         let depth = calcDepthLimit(
-//             LAT_LIMIT_07_1200_460,
-//             LAT_LIMIT_08_1280_480,
-//             lat
-//         );
-//         console.log("DEPTH", depth);
-//         return depth;
-//     }
-//     return OCEAN_FLOOR;
-// };
-
-// const calcDepthLimitDynamic = (lat) => {
-//     let array = [...LAT_LIMITS];
-//     const result = array.filter((obj) => obj.x >= lat && obj.xll <= lat);
-//     return calcDepthLimit(result[0], lat);
-// };
-
 function calcDepthLimit(lat) {
     if (lat <0) return 0;
     if (lat > FULL_LAT_LIMIT) return lat = FULL_LAT_LIMIT;
+    // The correct constant is filtered out
     const result = LAT_LIMITS.filter((obj) => obj.x >= lat && obj.xll <= lat);
     let depthObject = result[0];
-  
 
     let startX = depthObject.xll;
     let endX = depthObject.x;
@@ -283,7 +202,6 @@ function calcDepthLimit(lat) {
     let endY = depthObject.y;
     let x = lat;
     if (depthObject.id === 0) return 21;
-
     // handles vertical line
     if (startX === endX) {
         if (x >= Math.min(startX, endX) && x <= Math.max(startX, endX)) {
