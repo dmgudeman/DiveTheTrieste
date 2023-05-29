@@ -5,7 +5,7 @@
 // canvas3 is the cockpit
 
 import { showCanvas1, showCanvas2, showCanvas3 } from "./scripts/util";
-import { showDepth, detectLateral} from "./scripts/boundary";
+import { showDepth, showMouseAsSub} from "./scripts/boundary";
 import { calcMovement} from './scripts/provideMessage';
 import Sub from "./scripts/sub";
 import Ocean from "./scripts/ocean";
@@ -34,6 +34,10 @@ function toggleAudio(audio) {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
+    // document.addEventListener("mousemove", function(event) {
+    //     showMouseAsSub(event);
+    //   });
+   
     let audio = document.getElementById("music");
     toggleAudio(audio);
     localStorage.setItem("modalDisplayed", false);

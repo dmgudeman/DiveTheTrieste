@@ -19,7 +19,7 @@ export const VERTICAL_VELOCITY = 20;
 //lateral for setting depths for movement
 export const INITIAL_LAT = 80;
 export const INITIAL_DEPTH = 25;
-export const SLOPE_LAT = 200;
+export const SLOPE_LAT = 190;
 export const SLOPE_DEPTH = 300;
 export const SHELF_DEPTH = DEPTH_CONT_SHELF;
 export const TRENCH_TOP = 500;
@@ -54,4 +54,17 @@ export const DYSPHOTIC_PELAGIC = 'dysphotic_pelagic';
 export const DYSPHOTIC_BENTHIC = 'dsyphotic_benthic';
 export const EUPHOTIC_PELAGIC = 'euphotic_pelagic';
 export const EUPHOTIC_BENTHIC = 'euphotic_benthic';
+
+
+export const LAT_LIMIT_00_0_0= [0,0];
+export const LAT_LIMIT_01_220_420= [220, 380];
+export const LAT_LIMIT_02_620_480 = [620, 420];
+export const LAT_LIMIT_03_720_380 = [720, 260];
+export const LAT_LIMIT_04_860_500 = [860, 460];
+export const LAT_LIMIT_05_1000_200 = [1000, 160];
+export const LAT_LIMIT_06_1100_200 = [1100, 160];
+export const LAT_LIMIT_07_1200_460 = [1200, 420];
+export const LAT_LIMIT_08_1280_480= [1400, 440]; //same as LEFT_EDGE_TRENCH
+
+
 

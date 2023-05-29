@@ -44,6 +44,8 @@ export function showCanvas1() { //the ocean
   
       
     }, 3000);
+
+  
   //  setInterval(ocean, sub);
   for (let i = 0; i < bubbles.length; i++) {
     const bubble = bubbles[i]; 

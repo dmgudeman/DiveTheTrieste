@@ -1,5 +1,13 @@
-import { INITIAL_Y_POSITION, SEA_DEPTH } from "./constants";
+import { INITIAL_Y_POSITION, SEA_DEPTH, SUB_INITIAL_LAT_POS } from "./constants";
 import { HEIGHT } from "../index";
+
+
+
+export  function showMouseAsSub(event) {
+    var x = event.clientX - SUB_INITIAL_LAT_POS;
+    var y = event.clientY - INITIAL_Y_POSITION;
+    console.log("X: " + x + ", Y: " + y);
+  }
 
 export function showDepth(ocean, sub) {
     let conversion = SEA_DEPTH / HEIGHT; // 19.64 feet per pixel
