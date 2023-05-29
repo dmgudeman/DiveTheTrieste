@@ -109,13 +109,14 @@ function getLatMove(moveObjects, variableDepth) {
     };
 
     if (compLat <= 0) {
-        ocean.sx = 0; // reset to 0 if over the limit
+        ocean.sx = 1; // reset to 0 if over the limit
         moveOceanRight();
     } else if (compLat < OCEAN_LAT_LIMIT) {
         if (compVert < variableDepth) {
             moveOceanLat();
         } else {
             ocean.sy -= VERTICAL_VELOCITY;
+            moveSubRight();
             hitBottom();
         }
     } else if (compLat < FULL_LAT_LIMIT){
@@ -123,12 +124,12 @@ function getLatMove(moveObjects, variableDepth) {
             moveSubLat();
         } else {
             sub.sy -= VERTICAL_VELOCITY;
+            moveSubLeft();
             hitBottom();
         }
 
     } else {
         moveSubLeft();
-        moveSubUp();
     }
     
     return displayObjects;
@@ -268,6 +269,8 @@ function getVerticalMove(objects, varDepth = OCEAN_FLOOR) {
 // };
 
 function calcDepthLimit(lat) {
+    if (lat <0) return 0;
+    if (lat > FULL_LAT_LIMIT) return lat = FULL_LAT_LIMIT;
     const result = LAT_LIMITS.filter((obj) => obj.x >= lat && obj.xll <= lat);
     let depthObject = result[0];
   

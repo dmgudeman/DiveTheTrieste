@@ -79,7 +79,7 @@ export const LAT_LIMITS = [
   {'id':8, 'name':'END_DBL',          x:1180,xll: 1121,y:420, yll: 239},
   {'id':9, 'name':'START_TRENCH',     x:1320,xll: 1181,y:480, yll: 419},
   {'id':10,'name':'TRENCH_BOTTOM',    x:1600,xll: 1321,y:1560, yll: 479},
-  {'id':11, 'name':'END_TRENCH',      x:1760,xll: 1601,y:480, yll: 1539},
+  {'id':11, 'name':'END_TRENCH',      x:1760,xll: 1601,y:480, yll: 1561},
   {'id':12, 'name':'END_POSITION',    x:2200,xll: 1761,y:485, yll: 481},
 ]
 

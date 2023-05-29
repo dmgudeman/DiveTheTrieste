@@ -194,17 +194,19 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // MAIN ANIMATION LOOP /////////////////////////////////
     function update(currentTime) {
+
+       
+        // sub.draw();
+    
+        // This is the animation loop for provideMessage
+        calcMovement(ocean, sub)
+     
+        showDepth(ocean, sub, canvas1);
  
         const elapsedTime = currentTime - lastFrameTime;
         if (elapsedTime > 1000 / 10) {
             clear();
-            ocean.draw();
-            // sub.draw();
-        
-            // This is the animation loop for provideMessage
-            calcMovement(ocean, sub)
-         
-            showDepth(ocean, sub, canvas1);
+        ocean.draw();
             const sprite = sprites[currentFrame];
             ctx1.drawImage(
                 spriteSheet,
