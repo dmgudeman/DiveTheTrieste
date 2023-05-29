@@ -67,19 +67,19 @@ export const LAT_LIMIT_07_1200_460 = [1200, 420];
 export const LAT_LIMIT_08_1280_480= [1400, 440]; //same as LEFT_EDGE_TRENCH
 
 
-export const LAT_LIMITS = {
-  0:{'id':0, 'name':'INITIAL_POSITION', x:0, y:0},
-  1:{'id':1, 'name':'SLOPE_LIMIT',      x:220, y:380},
-  2:{'id':2, 'name':'START_BUMP',       x:600, y:420},
-  3:{'id':3, 'name':'BUMP_PEAK',        x:720, y:300},
-  4:{'id':4, 'name':'END_BUMP',         x:800, y:460},
-  5:{'id':5, 'name':'START_DBL',        x:880, y:460},
-  6:{'id':6, 'name':'DBL_PEAK_1',       x:980, y:200},
-  7:{'id':7, 'name':'DBL_PEAK_2',       x:1120, y:240},
-  8:{'id':8, 'name':'END_DBL',          x:1180, y:420},
-  9:{'id':9, 'name':'START_TRENCH',     x:1320, y:480},
+export const LAT_LIMITS = [
+  {'id':0, 'name':'INITIAL_POSITION', x:0,   xll: 0,   y:0,   yll: 0},
+  {'id':1, 'name':'SLOPE_LIMIT',      x:180, xll: 1,   y:380, yll: 1},
+  {'id':2, 'name':'START_BUMP',       x:600, xll: 181, y:420, yll: 381},
+  {'id':3, 'name':'BUMP_PEAK',        x:720, xll: 601, y:300, yll: 421},
+  {'id':4, 'name':'END_BUMP',         x:800, xll: 721, y:460, yll: 301},
+  {'id':5, 'name':'START_DBL',        x:840, xll: 801, y:460, yll: 461},
+  {'id':6, 'name':'DBL_PEAK_1',       x:980, xll: 841, y:200, yll: 461},
+  {'id':7, 'name':'DBL_PEAK_2',       x:1120,xll: 981, y:240, yll: 200},
+  {'id':8, 'name':'END_DBL',          x:1180,xll: 1121,y:420, yll: 241},
+  {'id':9, 'name':'START_TRENCH',     x:1320,xll: 1181,y:480, yll: 421},
 
-}
+]
 
 
 
