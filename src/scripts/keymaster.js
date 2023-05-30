@@ -1,6 +1,8 @@
 
 import { globalOcean, globalSub } from "../index";
 import { getMove } from "./move";
+import { getCurrentCanvas } from "./constants"
+import { showCanvas1, showCanvas2,  showCanvas3 } from "./util";
 
 class Keymaster {
     constructor(options) {
@@ -10,17 +12,39 @@ class Keymaster {
         this.sub = globalSub.sub;
     }
 
-
     navigate(navigate) {
+        let currentCanvas = getCurrentCanvas()
         if (navigate === "Enter") {
-            console.log("ENTER")
-        } else if (navigate === "Esc") {
-            console.log("ESC")
+            switch(currentCanvas){
+                case 1:
+                    showCanvas3();
+                    break;
+                case 2:
+                    showCanvas1();
+                    break;
+                case 3:
+                    showCanvas1();
+                default:
+                    return;
+            }
+            
+        } else if (navigate === "Escape") {
+                switch(currentCanvas){
+                    case 1:
+                        showCanvas2();
+                        break;
+                    case 2:
+                        showCanvas1();
+                        break;
+                    case 3:
+                        showCanvas2();
+                    default:
+                        return;
+                }
         }
     }
 
-    newPos(dir) {
-       
+    newPos(dir) { 
         getMove({
             ocean: this.ocean,
             sub: this.sub,

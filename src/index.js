@@ -13,12 +13,11 @@ import Cockpit from "./scripts/cockpit";
 import { getCursorPosition } from "./scripts/util";
 import Keymaster from "./scripts/keymaster";
 
-
-
 export const WIDTH = window.innerWidth * 2.5; // width of canvases
 export const HEIGHT = window.innerHeight * 1.9;  // height of canvases
-export const globalOcean = {ocean:null}
-export const globalSub = {sub:null}
+export const globalOcean = {ocean:null};
+export const globalSub = {sub:null};
+export const globalCockpit = {cockpit:null};
 
 let audioFlag = false;//change this to true for production
 
@@ -62,11 +61,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
     let ocean = new Ocean({ ctx: ctx1 });
     globalOcean.ocean = ocean;
-
     let sub = new Sub({ ctx: ctx1 });
     globalSub.sub = sub;
-    let key = new Keymaster({ ctx: ctx1, ocean, sub });
     let cockpit = new Cockpit({ ctx: ctx3, sub, ocean });
+    globalCockpit.cockpit = cockpit;
+    let key = new Keymaster({ ctx: ctx1, ocean, sub });
+   
 
     gitHubButton.addEventListener("click", () => {
         window.location.href = "https://github.com/dmgudeman";
@@ -231,9 +231,9 @@ document.addEventListener("DOMContentLoaded", () => {
         } else if (e.key === "ArrowUp" || e.key === "Up") {
             key.newPos("up");
         } else if (e.key === "Enter") {
-            key.navigate("enter")
+            key.navigate("Enter")
         } else if (e.key === "Escape") {
-            key.navigate("esc")
+            key.navigate("Escape")
         }
     }
    
