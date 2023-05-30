@@ -9,6 +9,7 @@ import {
 } from "./constants";
 import { getMessage } from "./provideMessage";
 import { fadeInText } from "./educational";
+import { globalCockpit } from "../index";
 
 export function clear(ctx) {
     ctx.clearRect(0, 0, WIDTH, HEIGHT);
@@ -120,6 +121,7 @@ export function showCanvas2() {
 
 export function showCanvas3() {
     //cockpit
+    globalCockpit.cockpit.draw()
     setCurrentCanvas(3);
     edTextContainer.classList.add("hide");
     stopMessageAnimation.messFlag = true;
