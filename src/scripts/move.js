@@ -42,19 +42,19 @@ export const getMove = (moveObjects) => {
     // let variableDepth = getVariableDepth(compLat);
     displayObjects = { ocean: ocean, sub: sub };
     displayObjects = getLatMove(displayObjects, variableDepth);
-
-    // fine tune the depth stop for the slope and the shelves
-    if (compLat < SLOPE_LAT) {
-        if (compLat < 0) {
-            compLat = 1;
-        }
-        let depth = compLat * 2.3;
-        displayObjects = getVerticalMove(displayObjects, depth);
-    } else if (compLat < LEFT_EDGE_TRENCH || compLat > RIGHT_EDGE_TRENCH) {
-        displayObjects = getVerticalMove(displayObjects, variableDepth);
-    } else {
-        displayObjects = getVerticalMove(displayObjects);
-    }
+    displayObjects = getVerticalMove(displayObjects, variableDepth);
+    // // fine tune the depth stop for the slope and the shelves
+    // if (compLat < SLOPE_LAT) {
+    //     if (compLat < 0) {
+    //         compLat = 1;
+    //     }
+    //     let depth = compLat * 2.3;
+    //     displayObjects = getVerticalMove(displayObjects, depth);
+    // } else if (compLat < LEFT_EDGE_TRENCH || compLat > RIGHT_EDGE_TRENCH) {
+    //     displayObjects = getVerticalMove(displayObjects, variableDepth);
+    // } else {
+    //     displayObjects = getVerticalMove(displayObjects);
+    // }
 
     return displayObjects;
 };
@@ -62,49 +62,8 @@ function getLatMove(objects, variableDepth) {
     let { ocean, sub } = objects;
     let compLat = ocean.sx + sub.x - SUB_INITIAL_LAT_POS;
     let compVert = ocean.sy + sub.y - INITIAL_Y_POSITION;
-    const moveOceanLat = () => {
-        ocean.velRight = LAT_VELOCITY;
-        ocean.velLeft = LAT_VELOCITY;
-        sub.velRight = 0;
-        sub.velLeft = 0;
-    };
-    const moveOceanRight = () => {
-        ocean.velRight = LAT_VELOCITY;
-        ocean.velLeft = 0;
-        sub.velRight = 0;
-        sub.velLeft = 0;
-    };
-
-    const moveOceanLeft = () => {
-        ocean.velRight = 0;
-        ocean.velLeft = LAT_VELOCITY;
-        sub.velRight = 0;
-        sub.velLeft = 0;
-    };
-
-    const moveSubLat = () => {
-        ocean.velRight = 0;
-        ocean.velLeft = 0;
-        sub.velRight = LAT_VELOCITY;
-        sub.velLeft = LAT_VELOCITY;
-    };
-
-    const moveSubRight = () => {
-        ocean.velRight = 0;
-        ocean.velLeft = 0;
-        sub.velRight = LAT_VELOCITY;
-        sub.velLeft = 0;
-    };
-
-    const moveSubLeft = () => {
-        ocean.velRight = 0;
-        ocean.velLeft = 0;
-        sub.velRight = 0;
-        sub.velLeft = LAT_VELOCITY;
-    };
 
     if (compLat < LAT_VELOCITY) {
-        // ocean.sx = 0; // reset to 0 if over the limit
        configureMoveLateral(objects, 'O', 'R')
         return displayObjects;
     } else if (
@@ -112,31 +71,25 @@ function getLatMove(objects, variableDepth) {
         compLat < OCEAN_LAT_LIMIT - LAT_VELOCITY
     ) {
         configureMoveLateral(objects, 'O', 'B')
-        // moveOceanLat();
     } else if (compLat < OCEAN_LAT_LIMIT) {
-        if (compVert < variableDepth) {
+        if (compVert < variableDepth - VERTICAL_VELOCITY) {
             configureMoveLateral(objects, 'O', 'B')
-            // moveOceanLat();
         } else {
             // ocean.sy -= VERTICAL_VELOCITY;
-            configureMoveLateral(objects, 'O', 'R')
-            // moveSubRight();
+            // configureMoveLateral(objects, 'O', 'R')
             configureHitBottom(compLat, objects, 'S');
         }
     } else if (compLat < FULL_LAT_LIMIT) {
-        if (compVert < variableDepth) {
+        if (compVert < variableDepth - VERTICAL_VELOCITY) {
             configureMoveLateral(objects, 'S', 'B')
-            // moveSubLat();
+         
         } else {
             // sub.sy -= LAT_VELOCITY;
-            configureMoveLateral(objects, 'O', 'L')
+            // configureMoveLateral(objects, 'O', 'L')
             // moveSubLeft();
             configureHitBottom(compLat, objects, 'S');
         }
-    } else {
-        configureMoveLateral(objects, 'O', 'L')
-        // moveSubLeft();
-    }
+    } 
 
     return displayObjects;
 }
@@ -146,47 +99,6 @@ function getVerticalMove(objects, varDepth = OCEAN_FLOOR) {
     let compLat = ocean.sx + sub.x - SUB_INITIAL_LAT_POS;
     let compVert = ocean.sy + sub.y - INITIAL_Y_POSITION;
     console.log('VARDEPTH ', varDepth)
-    const moveOceanVert = () => {
-        ocean.velUp = VERTICAL_VELOCITY;
-        ocean.velDown = VERTICAL_VELOCITY;
-        sub.velUp = 0;
-        sub.velDown = 0;
-    };
-
-    const moveOceanUp = () => {
-        ocean.velUp = VERTICAL_VELOCITY;
-        ocean.velDown = 0;
-        sub.velUp = 0;
-        sub.velDown = 0;
-    };
-
-    const moveOceanDown = () => {
-        ocean.velUp = 0;
-        ocean.velDown = VERTICAL_VELOCITY;
-        sub.velUp = 0;
-        sub.velDown = 0;
-    };
-
-    const moveSubVert = () => {
-        ocean.velUp = 0;
-        ocean.velDown = 0;
-        sub.velUp = VERTICAL_VELOCITY;
-        sub.velDown = VERTICAL_VELOCITY;
-    };
-
-    const moveSubUp = () => {
-        ocean.velUp = 0;
-        ocean.velDown = 0;
-        sub.velUp = VERTICAL_VELOCITY;
-        sub.velDown = 0;
-    };
-
-    const moveSubDown = () => {
-        ocean.velUp = 0;
-        ocean.velDown = 0;
-        sub.velUp = 0;
-        sub.velDown = VERTICAL_VELOCITY;
-    };
 
     if (compVert <= 0) {
         console.log('11111111111111')
@@ -212,17 +124,17 @@ function getVerticalMove(objects, varDepth = OCEAN_FLOOR) {
         compVert > varDepth - VERTICAL_VELOCITY
     ) {
         // hit limit
-        ocean.sy -= VERTICAL_VELOCITY  // reset the limits empirically
+        // ocean.sy -= VERTICAL_VELOCITY  // reset the limits empirically
         configureHitBottom(compLat, objects, 'O');
     } else if (
         compVert <= OCEAN_FLOOR - VERTICAL_VELOCITY ||
-        compVert <= varDepth - VERTICAL_VELOCITY
+        compVert <= varDepth -VERTICAL_VELOCITY
     ) {
         console.log('55555555555555555')
  
         configureMoveVertical(objects, 'S', 'B')   
     } else if (
-        compVert >= OCEAN_FLOOR - VERTICAL_VELOCITY ||
+        compVert <= OCEAN_FLOOR - VERTICAL_VELOCITY ||
         compVert >= varDepth - VERTICAL_VELOCITY
     ) {
         console.log('55555555555555555')
@@ -291,6 +203,7 @@ const configureMoveVertical = (objects, object, dir) => {
     sub.velDown = 0;
 
     if (object === "O") {
+        sub.y = INITIAL_Y_POSITION;
         if (dir === "U") {
             ocean.velUp = VERTICAL_VELOCITY;
         } else if (dir === "D") {
