@@ -4,6 +4,7 @@
     <img src="https://github.com/devicons/devicon/blob/master/icons/javascript/javascript-original.svg" title="JavaScript" alt="JavaScript" width="40" height="40"/>&nbsp;
     <img src="https://github.com/devicons/devicon/blob/master/icons/html5/html5-original.svg" title="HTML5" alt="HTML" width="40" height="40"/>&nbsp;
     <img src="https://github.com/devicons/devicon/blob/master/icons/css3/css3-plain-wordmark.svg"  title="CSS3" alt="CSS" width="40" height="40"/>&nbsp;
+    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/webpack/webpack-original.svg" title="Webpack" alt="Webpack" width="40" height="40"/>&nbsp;
 </div>
 
 <!-- [![GitHub Streak](http://github-readme-streak-stats.herokuapp.com?user=dmgudeman)](https://git.io/streak-stats) -->
@@ -33,7 +34,7 @@ was first mapped with lateral constants.
 <div style="float: left; margin-right: 10px;">
 <img src="./assets/code/constants.png" alt="constants" width="600" height="300">
 </div>
-Storing objects in an array to allowed the use of array filtr method. The y coordinate of the ocean
+Storing objects in an array to allowed the use of array filter method. The y coordinate of the ocean
 floor was  calculated using the classic y intercept method calculated with points stored
 in the objects.
 <div style="float: left; margin-right: 10px;">
