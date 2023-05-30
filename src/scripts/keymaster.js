@@ -10,13 +10,24 @@ class Keymaster {
         this.sub = globalSub.sub;
     }
 
+
+    navigate(navigate) {
+        if (navigate === "Enter") {
+            console.log("ENTER")
+        } else if (navigate === "Esc") {
+            console.log("ESC")
+        }
+    }
+
     newPos(dir) {
+       
         getMove({
             ocean: this.ocean,
             sub: this.sub,
         });
-
+       
         if (dir === "down") {
+            console.log('DIRRRR', dir)
             this.ocean.sy += this.ocean.velDown;
             this.sub.y += this.sub.velDown;
         }
@@ -31,7 +42,7 @@ class Keymaster {
         if (dir === "left") {
             this.ocean.sx -= this.ocean.velLeft;
             this.sub.x -= this.sub.velLeft;
-        }
+        } 
     }
 }
 

@@ -49,9 +49,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const musicNoteButton = document.getElementById("musicNoteButton");
     const goToOceanButton = document.getElementById("trieste3Container");
     const homeButton = document.getElementById("homeButton");
-
-    
-
     const ctx1 = canvas1.getContext("2d");
     const ctx2 = canvas2.getContext("2d");
     const ctx3 = canvas3.getContext("2d");
@@ -64,7 +61,6 @@ document.addEventListener("DOMContentLoaded", () => {
     canvas3.height = HEIGHT;
 
     let ocean = new Ocean({ ctx: ctx1 });
-    console.log('OCEAN IN INDEX>JS', ocean)
     globalOcean.ocean = ocean;
 
     let sub = new Sub({ ctx: ctx1 });
@@ -175,7 +171,6 @@ document.addEventListener("DOMContentLoaded", () => {
     // sprite
     const spriteSheet = new Image();
     spriteSheet.src = "assets/sprite.png";
-
     spriteSheet.onload = () => {
         ctx1.drawImage(spriteSheet, 0, 0, 500, 500);
     };
@@ -189,15 +184,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
     let currentFrame = 0;
     let lastFrameTime = 0;
-    let counter = 0;
-    let onOceanFlag = true;
+    // let counter = 0;
+    // let onOceanFlag = true;
 
     // MAIN ANIMATION LOOP /////////////////////////////////
     function update(currentTime) {
 
-       
-        // sub.draw();
-    
         // This is the animation loop for provideMessage
         calcMovement(ocean, sub)
      
@@ -229,14 +221,19 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     function keyDown(e) {
+        console.log(e.key)
         if (e.key === "ArrowDown" || e.key === "Down") {
             key.newPos("down");
         } else if (e.key === "ArrowLeft" || e.key === "Left") {
             key.newPos("left");
         } else if (e.key === "ArrowRight" || e.key === "Rigth") {
             key.newPos("right");
-        } else {
+        } else if (e.key === "ArrowUp" || e.key === "Up") {
             key.newPos("up");
+        } else if (e.key === "Enter") {
+            key.navigate("enter")
+        } else if (e.key === "Escape") {
+            key.navigate("esc")
         }
     }
    

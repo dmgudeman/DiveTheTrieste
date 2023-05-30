@@ -34,7 +34,9 @@ const bubblesContainer = document.querySelector(".bubblesContainer");
 const bubbles = bubblesContainer.getElementsByClassName('bubble');
 const edMessage = document.getElementById("edMassage");
 const edTextContainer = document.getElementById("fadeInContainer");
-const hitBottom = document.getElementById("hitBottomContainer")
+const hitBottom = document.getElementById("hitBottomContainer");
+const enterKey = document.getElementById('enterKey');
+const escKey = document.getElementById('escKey');
 let messageInterval;
 
 export function showCanvas1() { //the ocean
@@ -75,6 +77,23 @@ export function showCanvas1() { //the ocean
   edMessage ? edMessage.classList.remove("hideEdMessage") : null;
  
   // fadeInText();
+  // document.addEventListener('keydown', function(event) {
+  //   if (event.key === 'Escape') {
+  //     event.preventDefault(); 
+      
+  //     // Add your desired functionality or code here
+  //     console.log('Escape key was pressed');
+  //   }
+  // });
+  // document.addEventListener('keydown', function(event) {
+  //   if (event.key === 'Escape') {
+  //     event.preventDefault(); 
+      
+  //     // Add your desired functionality or code here
+  //     console.log('Escape key was pressed');
+  //   }
+  // });
+  
 }
 
 export function showCanvas2() { //opening page
