@@ -1,8 +1,7 @@
-
 import { globalOcean, globalSub } from "../index";
 import { getMove } from "./move";
-import { getCurrentCanvas } from "./constants"
-import { showCanvas1, showCanvas2,  showCanvas3 } from "./util";
+import { getCurrentCanvas } from "./constants";
+import { showCanvas1, showCanvas2, showCanvas3 } from "./util";
 
 class Keymaster {
     constructor(options) {
@@ -10,12 +9,17 @@ class Keymaster {
         this.dir = options.dir;
         this.ocean = globalOcean.ocean;
         this.sub = globalSub.sub;
+        this.modal  = document.getElementById("modal");
     }
 
     navigate(navigate) {
-        let currentCanvas = getCurrentCanvas()
+        let currentCanvas = getCurrentCanvas();
+        if (localStorage.modalDisplayed === false) {
+            
+                this.addModalEventListener(navigate)
+        }
         if (navigate === "Enter") {
-            switch(currentCanvas){
+            switch (currentCanvas) {
                 case 1:
                     showCanvas3();
                     break;
@@ -27,31 +31,30 @@ class Keymaster {
                 default:
                     return;
             }
-            
         } else if (navigate === "Escape") {
-                switch(currentCanvas){
-                    case 1:
-                        showCanvas2();
-                        break;
-                    case 2:
-                        showCanvas1();
-                        break;
-                    case 3:
-                        showCanvas2();
-                    default:
-                        return;
-                }
+            switch (currentCanvas) {
+                case 1:
+                    showCanvas2();
+                    break;
+                case 2:
+                    showCanvas1();
+                    break;
+                case 3:
+                    showCanvas2();
+                default:
+                    return;
+            }
         }
     }
 
-    newPos(dir) { 
+    newPos(dir) {
         getMove({
             ocean: this.ocean,
             sub: this.sub,
         });
-       
+
         if (dir === "down") {
-            console.log('DIRRRR', dir)
+            console.log("DIRRRR", dir);
             this.ocean.sy += this.ocean.velDown;
             this.sub.y += this.sub.velDown;
         }
@@ -66,7 +69,17 @@ class Keymaster {
         if (dir === "left") {
             this.ocean.sx -= this.ocean.velLeft;
             this.sub.x -= this.sub.velLeft;
-        } 
+        }
+    }
+
+    closeModal = () => {
+     
+        window.addEventListener("click", function (event) {
+            if (event.target === modal) {
+                modal.style.display = "none";
+                localStorage.setItem("modalDisplayed", true);
+            }
+        });
     }
 }
 
