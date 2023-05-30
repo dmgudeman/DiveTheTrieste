@@ -159,8 +159,8 @@ export const configureHitBottom = (lat, objects,  object) => {
     let depthObject = calcLatConstant(lat);
     console.log("OBJECTS", objects)
     console.log(" HITBOTTOM DEPTHOBJECT",  depthObject)
-    configureMoveLateral(objects, object, depthObject.mvmtL);
-    configureMoveVertical(objects, object, depthObject.mvmtV)
+    configureMoveLateral(objects, object, depthObject.mvmtLat);
+    configureMoveVertical(objects, object, depthObject.mvmtVert)
 };
 export const clearHitBottom = () => {
     let hitBottom = document.getElementById("hitBottomContainer");
@@ -259,13 +259,28 @@ const clearObjectsVelocity = (moveObjects) => {
 
 }
 const resetMoveObjectsLateral = (moveObjects) => {
-    moveObjects.ocean.sx = 0;
-    moveObjects.sub.x = SUB_INITIAL_LAT_POS;
+    const {ocean, sub} = moveObjects;
+    ocean.sx = 0;
+    ocean.velRight = 0;
+    ocean.velLeft = 0;
+
+    sub.x = SUB_INITIAL_LAT_POS;
+    sub.velRight = 0;
+    sub.velLeft = 0;
+    moveObjects.vert = null;
+
     return moveObjects;
 }
 const resetMoveObjectsVertical = (moveObjects) => {
-    moveObjects.ocean.sy = 0;
-    moveObjects.sub.y = INITIAL_Y_POSITION;
+    const {ocean, sub} = moveObjects;
+    ocean.sy = 0;
+    ocean.velUp = 0;
+    ocean.velDown = 0;
+
+    sub.y = INITIAL_Y_POSITION;
+    sub.velUp = 0;
+    sub.velDown = 0;
+    moveObjects.lat = null;
     return moveObjects;
 
 }
@@ -283,30 +298,94 @@ const printCoordinates = (moveObjects) => {
 }
 
 
-const prepareMoveObjects = (lat, vert, moveObjects) => {
-    
+const pickMoveObjects = (lat, vert, moveObjects) => {
+  
     if ( lat < OCEAN_LAT_LIMIT) {
-        moveObjects.lat = moveObjects.ocean;
+        moveObjects.lat = "OCEAN";
     } else if (lat < FULL_LAT_LIMIT) {
-        moveObjects.lat = moveObjects.sub;
+        moveObjects.lat = "SUB";
     } else {
          moveObjects.lat = null;
     }
 
     if ( vert < OCEAN_DEPTH_LIMIT ) {
-        moveObjects.vert = moveObjects.ocean;
+        moveObjects.vert = "OCEAN";
     } else if ( vert < OCEAN_FLOOR) {
-        moveObjects.vert = moveObjects.sub;
+        moveObjects.vert = "SUB";
     } else {
-        moveObjects.vert = null
+        moveObjects.vert = null;
     }
-
     return moveObjects;
-
 }
 
-const prepareMove = (moveObjects, lat, vert,  depth) =>  {
+const prepareMove = (objects, lat, vert) =>  {
+    const moveObjects = resetMoveObjectsLateral(objects);
+    moveObjects = resetMoveObjectsVertical(moveObjects);
+  
+    let depth = calcDepthLimit(lat);
     
-     console.log(depth)
+    moveObjects = pickMoveObjects(moveObjects, lat, vert);
+    const constantObject = calcLatConstant(lat);
+
+    if (vert < depth ) { // hit bottom
+        if (moveObjects.vert === 'OCEAN') {
+            moveObjects.ocean.velUp = VERTICAL_VELOCITY;
+            moveObjects.ocean.velDown = VERTICAL_VELOCITY;
+
+        } else if ( moveObjects.vert === 'SUB') {
+            moveObjects.sub.velUp = VERTICAL_VELOCITY;
+            moveObjects.sub.velDown = VERTICAL_VELOCITY;
+        }
+        
+        if (moveObjects.lat === 'OCEAN') {
+            moveObjects.ocean.velRight = LAT_VELOCITY;
+            moveObjects.ocean.velLeft = LAT_VELOCITY;
+        } else if ( moveObjects.lat === 'SUB') {
+            moveObjects.sub.velRight = LAT_VELOCITY;
+            moveObjects.sub.velLeft = LAT_VELOCITY;
+        }
+       
+
+    } else if (vert >= depth){
+    if (constantObject.mvmtVert === 'U'){
+        if (moveObjects.vert === 'OCEAN') {
+            moveObjects.ocean.velUp = VERTICAL_VELOCITY;
+
+        } else if ( moveObjects.vert === 'SUB') {
+            moveObjects.sub.velUp = VERTICAL_VELOCITY;
+        }
+    }
+    
+    if (constantObject.mvmtLat === 'R'){
+        if (moveObjects.lat === 'OCEAN') {
+            moveObjects.ocean.velRight = LAT_VELOCITY;
+            
+        } else if ( moveObjects.lat === 'SUB') {
+            moveObjects.sub.velRight = LAT_VELOCITY;
+           
+        }
+    } else if (constantObject.mvmtLat === 'L'){
+        if (moveObjects.lat === 'OCEAN') {
+            moveObjects.ocean.velLeft = LAT_VELOCITY;
+            
+        } else if ( moveObjects.lat === 'SUB') {
+            moveObjects.sub.velLeft = LAT_VELOCITY;
+           
+        }
+    } else if (constantObject.mvmtLat === 'B'){
+        if (moveObjects.lat === 'OCEAN') {
+            moveObjects.ocean.velRight = LAT_VELOCITY;
+            moveObjects.ocean.velLeft = LAT_VELOCITY;
+            
+        } else if ( moveObjects.lat === 'SUB') {
+            moveObjects.sub.velRight = LAT_VELOCITY;
+            moveObjects.sub.velLeft = LAT_VELOCITY;
+           
+        }
+    }
+}
+     
+    
+     
    
 }
