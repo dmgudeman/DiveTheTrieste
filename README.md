@@ -1,9 +1,17 @@
 [link to view project](https://dmgudeman.github.io/DiveTheTrieste/)
 
+<div>
+    <img src="https://github.com/devicons/devicon/blob/master/icons/javascript/javascript-original.svg" title="JavaScript" alt="JavaScript" width="40" height="40"/>&nbsp;
+    <img src="https://github.com/devicons/devicon/blob/master/icons/html5/html5-original.svg" title="HTML5" alt="HTML" width="40" height="40"/>&nbsp;
+    <img src="https://github.com/devicons/devicon/blob/master/icons/css3/css3-plain-wordmark.svg"  title="CSS3" alt="CSS" width="40" height="40"/>&nbsp;
+</div>
 
+<!-- [![GitHub Streak](http://github-readme-streak-stats.herokuapp.com?user=dmgudeman)](https://git.io/streak-stats) -->
+[![GitHub Streak](http://github-readme-streak-stats.herokuapp.com?user=dmgudeman&exclude_days=Sun%2CSat)](https://git.io/streak-stats)
 ## Dive The Trieste!
-Dive the Trieste! is a app to allow the user to explore
-the ocean's depths.  The app opens with a submarine
+Dive the Trieste! is an educational app to allow the user to explore
+the ocean's depths. It is evocative of the historic, 1960,  bathyscape
+dive into the Mariana Trench.  The app opens with a submarine
 icon at the surface.  With the use of arrows the submarine
 starts its descent. It travels down the depths and the 
 sub allows the screen to travel to new and unseen places.
@@ -15,19 +23,19 @@ animals (pelagic) depending on where the sub is located.
 
 ### The submarine moves on a classic cross section of the ocean
 At first the submarine moves across the screen first due the background
-moving. At screen, the background stops moving and the state is transferred
+moving. At one point the background stops moving and the state is transferred
 to the submarine object which moves ontop the background
 to the edge. The difficult job of maintaining state and creating a smooth
 transition was  accomplished by updating coordinates on both the submarine 
-as well as the background. Dynamic calculation
-of the depth allows the sub to avoid crashing into the bottom. The bottom
+as well as the background objects. Layered onto this mechanism, is the dynamic calculation
+of the depth allowing the sub to avoid crashing into the bottom. The bottom
 was first mapped with lateral constants. 
 <div style="float: left; margin-right: 10px;">
 <img src="./assets/code/constants.png" alt="constants" width="600" height="300">
 </div>
-Storing objects were stored in an
-array to allowed the use of array methods. The y coordinate of the ocean
-floor was  calculated using the classic y intercept method.
+Storing objects in an array to allowed the use of array filtr method. The y coordinate of the ocean
+floor was  calculated using the classic y intercept method calculated with points stored
+in the objects.
 <div style="float: left; margin-right: 10px;">
 <img src="./assets/code/yIntercept.png" alt="constants" width="600" height="300">
 </div>
