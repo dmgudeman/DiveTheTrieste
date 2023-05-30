@@ -116,7 +116,7 @@ function getLatMove(moveObjects, variableDepth) {
         if (compVert < variableDepth) {
             moveSubLat();
         } else {
-            sub.sy -= LATERAL_VELOCITY;
+            sub.sy -= LAT_VELOCITY;
             moveSubLeft();
             hitBottom();
         }
@@ -201,9 +201,8 @@ function calcDepthLimit(lat) {
     let startY = depthObject.yll;
     let endY = depthObject.y;
     let x = lat;
-    if (depthObject.id === 0) return 21;
-    // handles vertical line
-    if (startX === endX) {
+    if (depthObject.id === 0) return 21;  
+    if (startX === endX) { // handles vertical line
         if (x >= Math.min(startX, endX) && x <= Math.max(startX, endX)) {
             return startY; 
         } else {

@@ -23,7 +23,7 @@ as well as the background. Dynamic calculation
 of the depth allows the sub to avoid crashing into the bottom. The bottom
 was first mapped with lateral constants. 
 <div style="float: right; margin-right: 10px;">
-<img src="./constants.png" alt="constants" width="500" height="300">
+<img src="./constants.png" alt="constants" width="600" height="300">
 </div>
 Storing objects were stored in an
 array to allowed the use of array methods. The y coordinate of the ocean
@@ -37,8 +37,7 @@ submarine viewport.
 
 ### Hand drawn sprite
 A controversial area for some people. I like the animated hand drawn quality of
-it and chose this over a polished sprite taken from the internet.  I did indeed 
-draw this myself one evening. 
+it, especially  over a polished sprite taken from the internet.   
 
 ### Music
 The built in music is a critical aspect to enjoy the user experience.
