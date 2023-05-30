@@ -1,9 +1,24 @@
-import {WIDTH, HEIGHT} from '../index';
+// canvas1 is the ocean
+// canvas2 is the opening page
+// canvas3 is the cockpit
 
+import {WIDTH, HEIGHT} from '../index';
 
 export const stopMessageAnimation = {
     messFlag: true
   };
+  
+  let _CURRENT_CANVAS = 2;
+  export const getCurrentCanvas = () => _CURRENT_CANVAS; 
+  export const setCurrentCanvas = (value) => {
+    if (value === 1 || value === 2 || value === 3) {
+      _CURRENT_CANVAS = value;
+    } else {
+      console.error('Invalid canvas value. Please provide a value of 1, 2, or 3.');
+    }
+  };
+
+
 
 // values
 export const SURFACE = 100;

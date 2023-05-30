@@ -1,5 +1,4 @@
 import Images from "./images";
-import { showCanvas1, showCanvas2 } from "./util";
 
 class Cockpit {
   constructor(options) {
@@ -20,22 +19,22 @@ class Cockpit {
   }
   
   draw() {
-    const rect = this.canvas.getBoundingClientRect();
-    this.canvas.addEventListener("click", (e) => {
-      const x = e.clientX - rect.left;
-      const y = e.clientY - rect.top;
-      if (x > 100 && x < 300 && y > 100 && y < 150) {
-        showCanvas1();     
-      }
-    });
+    // const rect = this.canvas.getBoundingClientRect();
+    // this.canvas.addEventListener("click", (e) => {
+    //   const x = e.clientX - rect.left;
+    //   const y = e.clientY - rect.top;
+    //   if (x > 100 && x < 300 && y > 100 && y < 150) {
+    //     showCanvas1();     
+    //   }
+    // });
 
-    this.canvas.addEventListener("click", (e) => {
-      const x = e.clientX - rect.left;
-      const y = e.clientY - rect.top;
-      if (x > 100 && x < 300 && y > 200 && y < 250) {
-        showCanvas2();
-      }
-    });
+    // this.canvas.addEventListener("click", (e) => {
+    //   const x = e.clientX - rect.left;
+    //   const y = e.clientY - rect.top;
+    //   if (x > 100 && x < 300 && y > 200 && y < 250) {
+    //     showCanvas2();
+    //   }
+    // });
 
     // make first image
     let ui = new Image();
