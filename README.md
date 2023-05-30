@@ -22,12 +22,15 @@ transition was  accomplished by updating coordinates on both the submarine
 as well as the background. Dynamic calculation
 of the depth allows the sub to avoid crashing into the bottom. The bottom
 was first mapped with lateral constants. 
-<div style="float: right; margin-right: 10px;">
-<img src="./constants.png" alt="constants" width="600" height="300">
+<div style="float: left; margin-right: 10px;">
+<img src="./assets/code/constants.png" alt="constants" width="600" height="300">
 </div>
 Storing objects were stored in an
 array to allowed the use of array methods. The y coordinate of the ocean
 floor was  calculated using the classic y intercept method.
+<div style="float: left; margin-right: 10px;">
+<img src="./assets/code/yIntercept.png" alt="constants" width="600" height="300">
+</div>
 
 ### Flora and Fauna are shown from different areas of ocean
 The submarine position in ocean is used to filter subsets of images

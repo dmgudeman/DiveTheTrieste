@@ -185,7 +185,6 @@ function getVerticalMove(objects, varDepth = OCEAN_FLOOR) {
         //below the limit
         moveSubUp();
     }
-
     return displayObjects;
 }
 
