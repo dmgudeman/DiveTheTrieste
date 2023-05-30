@@ -12,6 +12,7 @@ import Ocean from "./scripts/ocean";
 import Cockpit from "./scripts/cockpit";
 import { getCursorPosition } from "./scripts/util";
 import Keymaster from "./scripts/keymaster";
+import MoveObjects from "./scripts/moveObjects";
 
 export const WIDTH = window.innerWidth * 2.5; // width of canvases
 export const HEIGHT = window.innerHeight * 1.9;  // height of canvases
@@ -63,9 +64,10 @@ document.addEventListener("DOMContentLoaded", () => {
     globalOcean.ocean = ocean;
     let sub = new Sub({ ctx: ctx1 });
     globalSub.sub = sub;
+    let moveObjects = new MoveObjects({ocean, sub})
     let cockpit = new Cockpit({ ctx: ctx3, sub, ocean });
     globalCockpit.cockpit = cockpit;
-    let key = new Keymaster({ ctx: ctx1, ocean, sub });
+    let key = new Keymaster({ ctx: ctx1, moveObjects});
    
 
     gitHubButton.addEventListener("click", () => {

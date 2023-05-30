@@ -1,5 +1,6 @@
 import { globalOcean, globalSub } from "../index";
-import { getMove } from "./move";
+import { getMove, omnibusMove } from "./move";
+import MoveObjects from "./moveObjects";
 import { getCurrentCanvas } from "./constants";
 import { showCanvas1, showCanvas2, showCanvas3 } from "./util";
 
@@ -7,11 +8,12 @@ class Keymaster {
     constructor(options) {
         this.ctx = options.ctx;
         this.dir = options.dir;
-        this.ocean = globalOcean.ocean;
-        this.sub = globalSub.sub;
+        // this.ocean = globalOcean.ocean;
+        // this.sub = globalSub.sub;
         this.modal  = document.getElementById("modal");
+        this.moveObjects = options.moveObjects;
     }
-
+    
     navigate(navigate) {
         let currentCanvas = getCurrentCanvas();
         if (navigate === "Enter") {
@@ -44,10 +46,13 @@ class Keymaster {
     }
 
     newPos(dir) {
-        getMove({
-            ocean: this.ocean,
-            sub: this.sub,
-        });
+       let processedObjects =  omnibusMove(this.moveObjects);
+       console.log('PROCESSED OBJETCTA', processedObjects);
+       this.moveObjects.setOcean(processedObjects.ocean);
+       this.moveObjects.setSub(processedObjects.sub)
+    //    this.moveObjects.setSub(processedObjects.sub)
+
+    console.log('2222222222222244444444444', this.moveObjects.ocean.sx)
 
         if (dir === "down") {
             console.log("DIRRRR", dir);
@@ -59,17 +64,15 @@ class Keymaster {
             this.sub.y -= this.sub.velUp;
         }
         if (dir === "right") {
-            this.ocean.sx += this.ocean.velRight;
-            this.sub.x += this.sub.velRight;
+            this.moveObjects.ocean.sx += this.moveObjects.ocean.velRight;
+            this.moveObjects.sub.x += this.moveObjects.ocean.velRight;
         }
         if (dir === "left") {
-            this.ocean.sx -= this.ocean.velLeft;
-            this.sub.x -= this.sub.velLeft;
+            this.moveObjects.ocean.sx -= this.moveObjects.ocean.velLeft;
+            this.moveObjects.sub.x -= this.moveObjects.ocean.velLeft;
         }
-        getMove({
-            ocean: this.ocean,
-            sub: this.sub,
-        });
+        console.log('2222222222222255555555555', this.moveObjects.ocean.sx)
+     
     }
 
 }
