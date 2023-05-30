@@ -14,10 +14,6 @@ class Keymaster {
 
     navigate(navigate) {
         let currentCanvas = getCurrentCanvas();
-        if (localStorage.modalDisplayed === false) {
-            
-                this.addModalEventListener(navigate)
-        }
         if (navigate === "Enter") {
             switch (currentCanvas) {
                 case 1:
@@ -70,17 +66,12 @@ class Keymaster {
             this.ocean.sx -= this.ocean.velLeft;
             this.sub.x -= this.sub.velLeft;
         }
-    }
-
-    closeModal = () => {
-     
-        window.addEventListener("click", function (event) {
-            if (event.target === modal) {
-                modal.style.display = "none";
-                localStorage.setItem("modalDisplayed", true);
-            }
+        getMove({
+            ocean: this.ocean,
+            sub: this.sub,
         });
     }
+
 }
 
 export default Keymaster;

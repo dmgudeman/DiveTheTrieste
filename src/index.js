@@ -207,7 +207,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     function keyDown(e) {
-        console.log(e.key)
         if (e.key === "ArrowDown" || e.key === "Down") {
             key.newPos("down");
         } else if (e.key === "ArrowLeft" || e.key === "Left") {
