@@ -13,6 +13,7 @@ import {
     TRENCH_TOP,
     OCEAN_FLOOR,
     LAT_LIMITS,
+
 } from "./constants";
 
 let displayObjects;
@@ -27,22 +28,10 @@ export const getMove = (moveObjects) => {
                                                          
     let variableDepth = calcDepthLimit(compLat);
 
-    // let variableDepth = getVariableDepth(compLat);
     displayObjects = { ocean: ocean, sub: sub };
     displayObjects = getLatMove(displayObjects, variableDepth);
     displayObjects = getVerticalMove(displayObjects, variableDepth);
-    // // fine tune the depth stop for the slope and the shelves
-    // if (compLat < SLOPE_LAT) {
-    //     if (compLat < 0) {
-    //         compLat = 1;
-    //     }
-    //     let depth = compLat * 2.3;
-    //     displayObjects = getVerticalMove(displayObjects, depth);
-    // } else if (compLat < LEFT_EDGE_TRENCH || compLat > RIGHT_EDGE_TRENCH) {
-    //     displayObjects = getVerticalMove(displayObjects, variableDepth);
-    // } else {
-    //     displayObjects = getVerticalMove(displayObjects);
-    // }
+ 
 
     return displayObjects;
 };
@@ -248,10 +237,11 @@ const omnibusMove = (moveObjects) =>  {
                                                         
     let variableDepth = calcDepthLimit(compLat);
 
-    // let variableDepth = getVariableDepth(compLat);
     displayObjects = { ocean: ocean, sub: sub };
     displayObjects = getLatMove(displayObjects, variableDepth);
     displayObjects = getVerticalMove(displayObjects, variableDepth);
+
+    
 }
 
 const clearObjectsVelocity = (moveObjects) => {
@@ -277,4 +267,26 @@ const printCoordinates = (moveObjects) => {
     console.log("OCEANNNNNNN", ocean.sx, ocean.sy);
     console.log("SUBBBBBBBBB", sub.x, sub.y);
     console.log("                           "); 
+}
+
+
+const getLatMoveObject = (lat, moveObjects) => {
+    
+    if ( lat < OCEAN_LAT_LIMIT) {
+        return moveObjects.ocean
+    } else if (lat < FULL_LAT_LIMIT) {
+        return moveObjects.sub
+    } else {
+        return null;
+    }
+}
+
+const getVerticalMoveObject = (lat, vert, moveObjects) => {
+
+    let calcDepth = calcDepthLimit(lat);
+
+    if ( vert < OCEAN_LAT_LIMIT ) {
+        return moveObjects.ocean;
+    } else if ( vert )
+
 }
