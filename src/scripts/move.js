@@ -19,24 +19,12 @@ let displayObjects;
 export const getMove = (moveObjects) => {
     clearHitBottom();
     let { ocean, sub } = moveObjects;
-
-    ocean.velRight = 0;
-    ocean.velLeft = 0;
-    ocean.velUp = 0;
-    ocean.velDown = 0;
-    sub.velRight = 0;
-    sub.velLeft = 0;
-    sub.velUp = 0;
-    sub.velDown = 0;
+    clearObjectsVelocity(moveObjects);
+    printCoordinates(moveObjects);
 
     let compLat = ocean.sx + sub.x - SUB_INITIAL_LAT_POS;
     let compVert = ocean.sy + sub.y - INITIAL_Y_POSITION;
-    console.log("=========================================================");
-    console.log("COORDINATES", compLat, compVert);
-    console.log("=========================================================");
-    console.log("OCEANNNNNNN", ocean.sx, ocean.sy);
-    console.log("SUBBBBBBBBB", sub.x, sub.y);
-    console.log("                                                           .");
+                                                         
     let variableDepth = calcDepthLimit(compLat);
 
     // let variableDepth = getVariableDepth(compLat);
@@ -65,13 +53,8 @@ function getLatMove(objects, variableDepth) {
 
     if (compLat < LAT_VELOCITY) {
        configureMoveLateral(objects, 'O', 'R')
-        return displayObjects;
-    } else if (
-        compLat >= LAT_VELOCITY &&
-        compLat < OCEAN_LAT_LIMIT - LAT_VELOCITY
-    ) {
-        configureMoveLateral(objects, 'O', 'B')
-    } else if (compLat < OCEAN_LAT_LIMIT) {
+  
+    } else if (compLat < OCEAN_LAT_LIMIT - LAT_VELOCITY) {
         if (compVert < variableDepth - VERTICAL_VELOCITY) {
             configureMoveLateral(objects, 'O', 'B')
         } else {
@@ -79,7 +62,7 @@ function getLatMove(objects, variableDepth) {
             // configureMoveLateral(objects, 'O', 'R')
             configureHitBottom(compLat, objects, 'S');
         }
-    } else if (compLat < FULL_LAT_LIMIT) {
+    } else if (compLat < FULL_LAT_LIMIT ) {
         if (compVert < variableDepth - VERTICAL_VELOCITY) {
             configureMoveLateral(objects, 'S', 'B')
          
@@ -251,3 +234,47 @@ const configureMoveLateral = (objects, object, dir) => {
         }
     }
 };
+
+
+const omnibusMove = (moveObjects) =>  {
+    clearObjectsVelocity(moveObjects)
+    clearHitBottom();
+    let { ocean, sub } = moveObjects;
+    printCoordinates(moveObjects);
+    
+
+    let compLat = ocean.sx + sub.x - SUB_INITIAL_LAT_POS;
+    let compVert = ocean.sy + sub.y - INITIAL_Y_POSITION;
+                                                        
+    let variableDepth = calcDepthLimit(compLat);
+
+    // let variableDepth = getVariableDepth(compLat);
+    displayObjects = { ocean: ocean, sub: sub };
+    displayObjects = getLatMove(displayObjects, variableDepth);
+    displayObjects = getVerticalMove(displayObjects, variableDepth);
+}
+
+const clearObjectsVelocity = (moveObjects) => {
+    let { ocean, sub } = moveObjects;
+    ocean.velRight = 0;
+    ocean.velLeft = 0;
+    ocean.velUp = 0;
+    ocean.velDown = 0;
+    sub.velRight = 0;
+    sub.velLeft = 0;
+    sub.velUp = 0;
+    sub.velDown = 0;
+
+}
+
+const printCoordinates = (moveObjects) => {
+    let { ocean, sub } = moveObjects;
+    let compLat = ocean.sx + sub.x - SUB_INITIAL_LAT_POS;
+    let compVert = ocean.sy + sub.y - INITIAL_Y_POSITION;
+    console.log("=========================================================");
+    console.log("COORDINATES", compLat, compVert);
+    console.log("=========================================================");
+    console.log("OCEANNNNNNN", ocean.sx, ocean.sy);
+    console.log("SUBBBBBBBBB", sub.x, sub.y);
+    console.log("                           "); 
+}
