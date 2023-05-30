@@ -19,8 +19,8 @@ class Sub {
         this.dx = options.velx || 0;
         this.dy = options.vely || 0;
         // this.subImage = options.subImage || document.getElementById("sub"); // regular sub image
-        this.initialLateralPos = options.initialLateralPos || SUB_INITIAL_LAT_POS;
-        this.initialDepthPos = options.initialDepthPos || INITIAL_Y_POSITION;
+        // this.initialLateralPos = options.initialLateralPos || SUB_INITIAL_LAT_POS;
+        // this.initialDepthPos = options.initialDepthPos || INITIAL_Y_POSITION;
         this.subDepthLimit = options.subDepthLimit || 820;
         this.subLateralLimit = options.subLateralLimit || 1700;   
     }

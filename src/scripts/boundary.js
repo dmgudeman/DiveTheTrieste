@@ -27,8 +27,8 @@ export function showDepth(ocean, sub) {
 }
 
 export function pickImageArray(ocean, sub, ctx) {
-    let x = ocean.sx + sub.x + sub.initialLateralPos;
-    let y = ocean.sy + sub.y + sub.initialDepthPos;
+    let x = ocean.sx + sub.x + SUB_INITIAL_LAT_POS;
+    let y = ocean.sy + sub.y + INITIAL_Y_POSITION;
     let deep = y / ctx.canvas.height;
     let lat = x / ctx.canvas.width;
     if (lat < 0.5) {
