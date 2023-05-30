@@ -1,7 +1,7 @@
 // import Sub from "./sub";
 // import Ocean from "./ocean";
 // import { addAndStartMessAnimation, removeMessageElement, stopMessAnimation } from "./edMessage";
-import { WIDTH, HEIGHT } from "../index";
+import { WIDTH, HEIGHT } from "../index.ts";
 import {
     setCurrentCanvas,
     getCurrentCanvas,
@@ -9,7 +9,7 @@ import {
 } from "./constants";
 import { getMessage } from "./provideMessage";
 import { fadeInText } from "./educational";
-import { globalCockpit } from "../index";
+import { globalCockpit } from "../index.ts";
 
 export function clear(ctx) {
     ctx.clearRect(0, 0, WIDTH, HEIGHT);

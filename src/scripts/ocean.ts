@@ -3,10 +3,50 @@ import {
     OCEAN_LAT_LIMIT,
     INITIAL_Y_POSITION,
 } from "./constants";
-import { WIDTH, HEIGHT } from "../index";
+import { WIDTH, HEIGHT } from "../index.ts";
 
 class Ocean {
-    constructor(options) {
+    private ctx: CanvasRenderingContext2D;
+    private sx: number;
+    private sy: number;
+    private sWidth: number;
+    private sHeight: number;
+    private dx: number;
+    private dy: number;
+    private dWidth: number;
+    private dHeight: number;
+    private oceanImage: HTMLImageElement | null;
+    private vely: number;
+    private velx: number;
+    private velRight: number;
+    private velLeft: number;
+    private velUp: number;
+    private velDown: number;
+    private surface_y: number;
+    private depthLimit: number;
+    private lateralLimit: number;
+  
+    constructor(options: {
+        ctx: CanvasRenderingContext2D;
+        sx?: number;
+        sy?: number;
+        sWidth?: number;
+        sHeight?: number;
+        dx?: number;
+        dy?: number;
+        dWidth?: number;
+        dHeight?: number;
+        oceanImage?: HTMLImageElement | null;
+        vely?: number;
+        velx?: number;
+        velRight?: number;
+        velLeft?: number;
+        velUp?: number;
+        velDown?: number;
+        surface_y?: number;
+        depthLimit?: number;
+        lateralLimit?: number;
+      }) {
         this.ctx = options.ctx;
         // keeps track of the movement of the background
         this.sx = options.sx || 0;
@@ -18,8 +58,7 @@ class Ocean {
         // is the position on the canvas
         this.dWidth = options.dWidth || WIDTH;
         this.dHeight = options.dHeight || HEIGHT;
-        this.oceanImage =
-            options.oceanImage || document.getElementById("crossSection");
+        this.oceanImage = options.oceanImage || document.getElementById("crossSection") as HTMLImageElement | null
         this.vely = options.vely || 0;
         this.velx = options.velx || 0;
         this.velRight = options.velRight || 0;

@@ -1,7 +1,36 @@
 import Images from "./images";
+import Sub from "./sub.ts";
+
+interface CockpitOptions {
+  ctx: CanvasRenderingContext2D;
+  ocean: Ocean;
+  sub: Sub;
+  x?: number;
+  y?: number;
+  width?: number;
+  height?: number;
+  cockpitImage?: HTMLImageElement;
+  cockpitImageUrl?: string;
+  imageUrls?: string[];
+  underImageUrl?: string;
+}
+
 
 class Cockpit {
-  constructor(options) {
+  private ctx: CanvasRenderingContext2D;
+  private canvas: HTMLCanvasElement;
+  private ocean: Ocean;
+  private sub: Sub;
+  private x: number;
+  private y: number;
+  private w: number;
+  private h: number;
+  private cockpitImage: HTMLImageElement;
+  private cockpitImageUrl: string;
+  private imageUrls: string[];
+  private underImageUrl: string;
+
+  constructor(options: CockpitOptions) {
     this.ctx = options.ctx;
     this.canvas = this.ctx.canvas;
     this.ocean = options.ocean;
@@ -10,31 +39,17 @@ class Cockpit {
     this.y = options.y || 0;
     this.w = options.width || window.innerWidth;
     this.h = options.height || window.innerHeight;
-    this.cockpitImage =
-      options.cockpitImage || document.getElementById("cockpit");
+    this.cockpitImage = options.cockpitImage || document.getElementById("cockpit") as HTMLImageElement;
     this.cockpitImageUrl = options.cockpitImageUrl || "assets/cockpit.png";
     this.imageUrls = options.imageUrls;
-    this.underImageUrl =
-      options.underImageUrl || "assets/life/ep/001_shark.jpg";
+    this.underImageUrl = options.underImageUrl || "assets/life/ep/001_shark.jpg";
   }
+
+
+
+
   
   draw() {
-    // const rect = this.canvas.getBoundingClientRect();
-    // this.canvas.addEventListener("click", (e) => {
-    //   const x = e.clientX - rect.left;
-    //   const y = e.clientY - rect.top;
-    //   if (x > 100 && x < 300 && y > 100 && y < 150) {
-    //     showCanvas1();     
-    //   }
-    // });
-
-    // this.canvas.addEventListener("click", (e) => {
-    //   const x = e.clientX - rect.left;
-    //   const y = e.clientY - rect.top;
-    //   if (x > 100 && x < 300 && y > 200 && y < 250) {
-    //     showCanvas2();
-    //   }
-    // });
 
     // make first image
     let ui = new Image();
@@ -54,7 +69,7 @@ class Cockpit {
       cpi.onload = () => {
         // draw cockpit image
         this.ctx.drawImage(cpi, this.x, this.y, this.w, this.h);
-        cpi.style.zIndex = 55;
+        cpi.style.zIndex = "55";
       };
     };
   }
