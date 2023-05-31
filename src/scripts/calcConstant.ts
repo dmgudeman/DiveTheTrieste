@@ -18,6 +18,13 @@ class CalcConstant {
     getFullLatLimit() {
         return this.width *(-0.7)
     }
+
+
+    calcDepth(lat:number) {
+
+        
+
+    }
    
 }
 

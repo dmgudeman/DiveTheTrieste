@@ -87,7 +87,6 @@ function getLatMove(ocean:Ocean, sub:Sub, dir:string, lat: number, depth:number,
 
 function getVerticalMove(ocean:Ocean, sub:Sub, dir:string, vert: number, depth:number, oceanLatLimit:number, fullLatLimit: number) {
     
-
     const moveOceanUp = () => {
         ocean.setY( ocean.getY() - VERTICAL_VELOCITY);
     };
@@ -163,3 +162,6 @@ const resetVelocities = (ocean: Ocean, sub: Sub) => {
     sub.setVelUp(0);
     sub.setVelDown(0);
 };
+
+
+
