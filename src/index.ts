@@ -4,7 +4,7 @@
 // canvas2 is opening
 // canvas3 is the cockpit
 
-import { showCanvas1, showCanvas2, showCanvas3 } from "./scripts/util.ts";
+import { showCanvas1, showCanvas2, showCanvas3 } from "./scripts/util";
 import { showDepth, showMouseAsSub} from "./scripts/boundary";
 import { calcMovement} from './scripts/provideMessage';
 import Sub from "./scripts/sub";
@@ -12,7 +12,7 @@ import Ocean from "./scripts/ocean";
 import Cockpit from "./scripts/cockpit";
 import { getCursorPosition } from "./scripts/util";
 import Keymaster from "./scripts/keymaster";
-import MoveObjects from "./scripts/moveObjects.ts";
+import MoveObjects from "./scripts/moveObjects";
 
 export const WIDTH = window.innerWidth * 2.5; // width of canvases
 export const HEIGHT = window.innerHeight * 1.9;  // height of canvases
@@ -25,12 +25,20 @@ let audioFlag = false;//change this to true for production
 
 
 document.addEventListener("DOMContentLoaded", () => {
-    // document.addEventListener("mousemove", function(event) {
-    //     showMouseAsSub(event);
-    //   });
+    // function toggleAudio(audio) {
+    //     if (audioFlag) {
+    //         audio.play();
+    //         musicNoteButton.classList.add("redNote");
+    //     } else {
+    //         audio.pause();
+    //         musicNoteButton.classList.remove("redNote");
+    //     }
+    //     audioFlag = !audioFlag;
+    // }
+  
    
-    let audio = document.getElementById("music");
-    toggleAudio(audio);
+    // let audio = document.getElementById("music");
+    // toggleAudio(audio);
     localStorage.setItem("modalDisplayed", false.toString());
     const canvas1:HTMLCanvasElement = document.getElementById("canvas1") as HTMLCanvasElement;;
     const canvas2:HTMLCanvasElement = document.getElementById("canvas2") as HTMLCanvasElement;
@@ -217,16 +225,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
    
     document.addEventListener("keydown", keyDown);
-    function toggleAudio(audio) {
-        if (audioFlag) {
-            audio.play();
-            musicNoteButton.classList.add("redNote");
-        } else {
-            audio.pause();
-            musicNoteButton.classList.remove("redNote");
-        }
-        audioFlag = !audioFlag;
-    }
-  
+   
 });
 

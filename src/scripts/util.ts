@@ -1,15 +1,15 @@
 // import Sub from "./sub";
 // import Ocean from "./ocean";
 // import { addAndStartMessAnimation, removeMessageElement, stopMessAnimation } from "./edMessage";
-import { WIDTH, HEIGHT } from "../index.ts";
+import { WIDTH, HEIGHT } from "../index";
 import {
     setCurrentCanvas,
     getCurrentCanvas,
     stopMessageAnimation,
 } from "./constants";
-import { getMessage } from "./provideMessage";
+// import { getMessage } from "./provideMessage";
 import { fadeInText } from "./educational";
-import { globalCockpit } from "../index.ts";
+import { globalCockpit } from "../index";
 
 export function clear(ctx:CanvasRenderingContext2D) {
     ctx.clearRect(0, 0, WIDTH, HEIGHT);

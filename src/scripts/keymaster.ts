@@ -1,9 +1,9 @@
-import { globalOcean, globalSub } from "../index.ts";
+import { globalOcean, globalSub } from "../index";
 import { getMove } from "./move";
 import { getCurrentCanvas } from "./constants";
 import { showCanvas1, showCanvas2, showCanvas3 } from "./util";
-import Ocean from './ocean.ts';
-import Sub from './sub.ts';
+import Ocean from './ocean';
+import Sub from './sub';
 
 class Keymaster {
   private ctx: CanvasRenderingContext2D;

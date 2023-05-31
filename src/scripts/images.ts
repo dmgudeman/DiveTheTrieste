@@ -21,7 +21,7 @@ class Images {
     this.images = [this.eb, this.ep, this.db, this.dp, this.ab, this.ap];
   }
 
-  private pickRandomImage(): string {
+  public pickRandomImage(): string {
     const arrNum = pickImageArray(this.ocean, this.sub, this.ctx);
     const arr = this.images[arrNum];
     const x = Math.floor(Math.random() * arr.length);

@@ -1,6 +1,6 @@
 import Images from "./images";
-import Ocean from "./ocean.ts";
-import Sub from "./sub.ts";
+import Ocean from "./ocean";
+import Sub from "./sub";
 
 interface CockpitOptions {
   ctx: CanvasRenderingContext2D;

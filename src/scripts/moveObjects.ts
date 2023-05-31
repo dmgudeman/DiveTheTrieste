@@ -1,51 +1,46 @@
-import { StringOptionsWithImporter } from "sass";
-import { globalOcean, globalSub } from "../index.ts";
-import { Ocean } from './ocean.ts'; 
-import { Sub } from './sub.ts';
+
+import Ocean from './ocean';
+import Sub from './sub';
+
 
 class MoveObjects {
-  private ocean: Ocean; // Update the type to the appropriate type
-  private sub: Sub; // Update the type to the appropriate type
+  private ocean: Ocean;
+  private sub: Sub;
   private lat: string;
   private vert: string;
 
-  constructor(ocean: Ocean, sub: Sub, lat: string, vert: string) {
-    this.ocean = ocean || globalOcean
-    this.sub = sub || globalSub
-    this.lat = lat || '';
-    this.vert = vert || '';
-  }
-
-  setOcean(ocean: any) {
+  constructor(ocean: Ocean, sub: Sub) {
     this.ocean = ocean;
-    return this.ocean;
+    this.sub =sub;
+    this.lat = '';
+    this.vert = '';
   }
 
+  setOcean(ocean: Ocean): void {
+    this.ocean = ocean;
+  }
   getOcean() {
     return this.ocean;
   }
 
-  setSub(sub: any) {
+  setSub(sub: Sub): void {
     this.sub = sub;
-    return this.sub;
   }
 
   getSub() {
     return this.sub;
   }
 
-  setLat(lat: string) {
+  setLat(lat: string): void {
     this.lat = lat;
-    return this.lat;
   }
 
   getLat() {
     return this.lat;
   }
 
-  setVert(vert: string) {
+  setVert(vert: string): void {
     this.vert = vert;
-    return this.vert;
   }
 
   getVert() {

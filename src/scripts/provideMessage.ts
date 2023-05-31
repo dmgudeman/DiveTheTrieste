@@ -121,16 +121,16 @@ export function calcMovement(ocean:Ocean, sub: Sub) {
     }
 }
 
-export const getMessage = (ocean, sub) => {
-    let flag = calcMovement(ocean, sub);
-};
+// export const getMessage = (ocean : Ocean, sub: Sub) => {
+//     let flag = calcMovement(ocean, sub);
+// };
 
-export const getTimedMessage = (ocean, sub) => {
-    // let message = calcMovement(ocean, sub);
-    console.log("MESSAGE in getTimed", message);
-    addAndStartMessAnimation(message);
-    return message;
-};
+// export const getTimedMessage = (ocean:Ocean, sub:Sub) => {
+//     let message = calcMovement(ocean, sub);
+//     console.log("MESSAGE in getTimed", message);
+//     // addAndStartMessAnimation(message);
+//     return message;
+// };
 
 
 const EBTextObject = {title: "EUPHOTIC BENTHIC", text: "The euphotic benthic zone is a crucial region in the ocean where sunlight reaches, allowing for photosynthesis. It extends from the ocean surface to around 200 meters deep, supporting diverse flora and fauna. Marine algae, seagrasses, and phytoplankton thrive in this zone, providing oxygen and serving as the foundation of the food web. Zooplankton, corals, and other invertebrates inhabit the benthic habitats, offering food and shelter to various species. Geographically, the euphotic benthic zone is prevalent in coastal areas, influencing adjacent ecosystems like coral reefs and seagrass meadows. It plays a vital role in carbon cycling, nutrient dynamics, and maintaining marine biodiversity. Preserving this zone is crucial for sustaining ocean health and the intricate balance of marine ecosystems."}

@@ -3,7 +3,7 @@ import {
     OCEAN_LAT_LIMIT,
     INITIAL_Y_POSITION,
 } from "./constants";
-import { WIDTH, HEIGHT } from "../index.ts";
+import { WIDTH, HEIGHT } from "../index";
 
 class Ocean {
     private ctx: CanvasRenderingContext2D;
