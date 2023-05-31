@@ -12,6 +12,7 @@ import Ocean from "./scripts/ocean";
 import Cockpit from "./scripts/cockpit";
 import { getCursorPosition } from "./scripts/util";
 import Keymaster from "./scripts/keymaster";
+import MoveObjects from "./scripts/moveObjects.ts";
 
 export const WIDTH = window.innerWidth * 2.5; // width of canvases
 export const HEIGHT = window.innerHeight * 1.9;  // height of canvases
@@ -30,7 +31,7 @@ document.addEventListener("DOMContentLoaded", () => {
    
     let audio = document.getElementById("music");
     toggleAudio(audio);
-    localStorage.setItem("modalDisplayed", false);
+    localStorage.setItem("modalDisplayed", false.toString());
     const canvas1:HTMLCanvasElement = document.getElementById("canvas1") as HTMLCanvasElement;;
     const canvas2:HTMLCanvasElement = document.getElementById("canvas2") as HTMLCanvasElement;
     const canvas3:HTMLCanvasElement = document.getElementById("canvas3") as HTMLCanvasElement;
@@ -56,7 +57,8 @@ document.addEventListener("DOMContentLoaded", () => {
     globalSub.sub = sub;
     let cockpit = new Cockpit({ ctx: ctx3, sub, ocean });
     globalCockpit.cockpit = cockpit;
-    let key = new Keymaster({ ctx: ctx1, ocean, sub });
+
+    let key = new Keymaster({ctx:ctx1, ocean:ocean, sub:sub, dir: ''});
    
 
     gitHubButton.addEventListener("click", () => {
@@ -94,7 +96,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     backgroundImage.onload = function () {
         ctx2.drawImage(backgroundImage, 0, 0, canvas2.width, canvas2.height);
-        backgroundImage.style.zIndex = 100;
+        backgroundImage.style.zIndex = '100';
 
         const instructions = new Image();
         instructions.src = "assets/dtt6.png";
@@ -163,14 +165,14 @@ document.addEventListener("DOMContentLoaded", () => {
     let lastFrameTime = 0;
     // let counter = 0;
     // let onOceanFlag = true;
-
+  
     // MAIN ANIMATION LOOP /////////////////////////////////
-    function update(currentTime) {
-
+    function update() {
+        const currentTime = Date.now(); 
         // This is the animation loop for provideMessage
         calcMovement(ocean, sub)
      
-        showDepth(ocean, sub, canvas1);
+        showDepth(ocean, sub);
  
         const elapsedTime = currentTime - lastFrameTime;
         if (elapsedTime > 1000 / 10) {
@@ -183,10 +185,10 @@ document.addEventListener("DOMContentLoaded", () => {
                 sprite.y,
                 sprite.width,
                 sprite.height,
-                sub.x,
-                sub.y,
-                sub.w,
-                sub.h
+                sub.getX(),
+                sub.getY(),
+                sub.getW(),
+                sub.getH()
             );
             currentFrame++;
             if (currentFrame >= sprites.length) {

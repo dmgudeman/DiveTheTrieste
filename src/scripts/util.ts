@@ -11,11 +11,11 @@ import { getMessage } from "./provideMessage";
 import { fadeInText } from "./educational";
 import { globalCockpit } from "../index.ts";
 
-export function clear(ctx) {
+export function clear(ctx:CanvasRenderingContext2D) {
     ctx.clearRect(0, 0, WIDTH, HEIGHT);
 }
 
-export function getCursorPosition(canvas, event) {
+export function getCursorPosition(canvas:HTMLElement, event:MouseEvent):void {
     const rect = canvas.getBoundingClientRect();
     const x = event.clientX - rect.left;
     const y = event.clientY - rect.top;
@@ -24,22 +24,17 @@ export function getCursorPosition(canvas, event) {
 // canvas1 is the ocean
 // canvas2 is the opening page
 // canvas3 is the cockpit
-const canvas1 = document.getElementById("canvas1");
-// const ctx1 = canvas1.getContext("2d");
-const canvas2 = document.getElementById("canvas2");
-const canvas3 = document.getElementById("canvas3");
-// const ctx3 = canvas1.getContext("2d");
-const gauge = document.querySelector(".gaugeContainer");
-const trieste3Container = document.getElementById("trieste3Container");
-const homeButton = document.getElementById("homeButton");
-const musicNoteButton = document.getElementById("musicNoteButton");
-const bubblesContainer = document.querySelector(".bubblesContainer");
-const bubbles = bubblesContainer.getElementsByClassName("bubble");
-const edMessage = document.getElementById("edMassage");
-const edTextContainer = document.getElementById("fadeInContainer");
-const hitBottom = document.getElementById("hitBottomContainer");
-const enterKey = document.getElementById("enterKey");
-const escKey = document.getElementById("escKey");
+const canvas1 = document.getElementById("canvas1") as HTMLCanvasElement;
+const canvas2 = document.getElementById("canvas2") as HTMLCanvasElement;
+const canvas3 = document.getElementById("canvas3") as HTMLCanvasElement;
+const gauge = document.querySelector(".gaugeContainer") as HTMLElement;
+const trieste3Container = document.getElementById("trieste3Container") as HTMLElement;
+const homeButton = document.getElementById("homeButton") as HTMLElement;
+const musicNoteButton = document.getElementById("musicNoteButton") as HTMLElement;
+const bubblesContainer = document.querySelector(".bubblesContainer") as HTMLElement;
+const bubbles = bubblesContainer.getElementsByClassName("bubble")  as HTMLCollectionOf<Element>;
+const edMessage = document.getElementById("edMassage") as HTMLElement;
+const edTextContainer = document.getElementById("fadeInContainer") as HTMLElement;
 let messageInterval;
 
 export function showCanvas1() {
@@ -47,13 +42,13 @@ export function showCanvas1() {
     setCurrentCanvas(1);
     edTextContainer.classList.remove("hide");
     stopMessageAnimation.messFlag = false;
-    messageInterval = setInterval(() => {
-        getMessage();
-    }, 3000);
+    // messageInterval = setInterval(() => {
+    //     getMessage();
+    // }, 3000);
 
     //  setInterval(ocean, sub);
     for (let i = 0; i < bubbles.length; i++) {
-        const bubble = bubbles[i];
+        const bubble = bubbles[i] as HTMLElement;
         // Stop the animation
         bubble.style.animation = "none";
         // Hide the div
@@ -101,7 +96,7 @@ export function showCanvas2() {
     //opening page
     setCurrentCanvas(2);
     edTextContainer.classList.add("hide");
-    stopMessageAnimation.flag = false;
+    stopMessageAnimation.messFlag = false;
 
     canvas1.style.display = "none";
     canvas2.style.display = "block";
@@ -138,7 +133,10 @@ export function showCanvas3() {
     homeButton.classList.remove("can2home");
     homeButton.classList.add("can3home");
     edMessage ? edMessage.classList.remove("hideEdMessage") : null;
-    edTextContainer.classList = "";
+    edTextContainer.classList.forEach(className => {
+        edTextContainer.classList.remove(className);
+      });
+      
 }
 
 // modal code
@@ -147,12 +145,12 @@ const closeButton = document.getElementsByClassName("close")[0];
 
 closeButton.addEventListener("click", function () {
     modal.style.display = "none";
-    localStorage.setItem("modalDisplayed", true);
+    localStorage.setItem("modalDisplayed", 'true');
 });
 
 window.addEventListener("click", function (event) {
     if (event.target === modal) {
         modal.style.display = "none";
-        localStorage.setItem("modalDisplayed", true);
+        localStorage.setItem("modalDisplayed", 'true');
     }
 });

@@ -2,12 +2,14 @@ import { globalOcean, globalSub } from "../index.ts";
 import { getMove } from "./move";
 import { getCurrentCanvas } from "./constants";
 import { showCanvas1, showCanvas2, showCanvas3 } from "./util";
+import Ocean from './ocean.ts';
+import Sub from './sub.ts';
 
 class Keymaster {
   private ctx: CanvasRenderingContext2D;
   private dir: string;
-  private ocean: any;
-  private sub: any;
+  private ocean: Ocean;
+  private sub: Sub;
   private modal: HTMLElement;
 
   constructor(options: KeymasterOptions) {
@@ -62,20 +64,20 @@ class Keymaster {
 
     if (dir === "down") {
       console.log("DIRRRR", dir);
-      this.ocean.sy += this.ocean.velDown;
-      this.sub.y += this.sub.velDown;
+      this.ocean.setSy(this.ocean.getSy() + this.ocean.getVelDown());
+      this.sub.setY(this.sub.getY() + this.sub.getVelDown());
     }
     if (dir === "up") {
-      this.ocean.sy -= this.ocean.velUp;
-      this.sub.y -= this.sub.velUp;
+        this.ocean.setSy(this.ocean.getSy() - this.ocean.getVelDown());
+        this.sub.setY(this.sub.getY() - this.sub.getVelDown());
     }
     if (dir === "right") {
-      this.ocean.sx += this.ocean.velRight;
-      this.sub.x += this.sub.velRight;
+        this.ocean.setSx(this.ocean.getSx() + this.ocean.getVelRight());
+        this.sub.setX(this.sub.getX() + this.sub.getVelRight());
     }
     if (dir === "left") {
-      this.ocean.sx -= this.ocean.velLeft;
-      this.sub.x -= this.sub.velLeft;
+        this.ocean.setSx(this.ocean.getSx() - this.ocean.getVelLeft());
+        this.sub.setX(this.sub.getX() - this.sub.getVelLeft());
     }
   }
 
@@ -101,6 +103,8 @@ class Keymaster {
 interface KeymasterOptions {
   ctx: CanvasRenderingContext2D;
   dir: string;
+  ocean: Ocean;
+  sub: Sub;
 }
 
 export default Keymaster;

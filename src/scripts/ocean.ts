@@ -83,5 +83,51 @@ class Ocean {
             this.dHeight
         );
     }
+
+    public getSx(): number {
+        return this.sx;
+    }
+
+    public setSx(sx: number): void {
+        this.sx = sx;
+    }
+    public getSy(): number {
+        return this.sy;
+    }
+
+    public setSy(sy: number): void {
+        this.sy = sy;
+    }
+
+
+    public getVelRight(): number {
+        return this.velRight;
+    }
+
+    public setVelx(velRight: number): void {
+        this.velRight = velRight;
+    }
+
+    public getVelLeft(): number {
+        return this.velLeft;
+    }
+
+    public setVelLeft(velLeft: number): void {
+        this.velLeft = velLeft;
+    }
+    public getVelUp(): number {
+        return this.velUp;
+    }
+
+    public setVelUp(velUp: number): void {
+        this.velUp = velUp;
+    }
+    public getVelDown(): number {
+        return this.velDown;
+    }
+
+    public setVelDown(velDown: number): void {
+        this.velDown = velDown;
+    }
 }
 export default Ocean;

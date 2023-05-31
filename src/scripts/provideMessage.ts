@@ -25,6 +25,8 @@ import { WIDTH, HEIGHT } from "../index";
 // } from "./edMessage1";
 import { changeEducationalText, addEdTextStyle} from './educational';
 import { globalOcean, globalSub  } from "../index";
+import Ocean from "./ocean";
+import Sub from "./sub";
 
 // this is to allow calculation of a modelo so that
 // the bubble messages released at a slow pace
@@ -32,11 +34,10 @@ let i = 0;
 let flag;
 let oldFlag;
 // this is being called from the main animation loop in index.js
-export function calcMovement() {
-    let ocean = globalOcean.ocean;
-    let sub = globalSub.sub;
-    let compVert = ocean.sy + sub.y - INITIAL_Y_POSITION;
-    let compLat = ocean.sx + sub.x - SUB_INITIAL_LAT_POS;
+export function calcMovement(ocean:Ocean, sub: Sub) {
+  
+    let compVert = ocean.getSy() + sub.getY() - INITIAL_Y_POSITION;
+    let compLat = ocean.getSx() + sub.getX() - SUB_INITIAL_LAT_POS;
     i++;
 
     // console.log("comLat", compLat);

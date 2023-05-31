@@ -1,4 +1,5 @@
 import Images from "./images";
+import Ocean from "./ocean.ts";
 import Sub from "./sub.ts";
 
 interface CockpitOptions {
