@@ -58,10 +58,7 @@ class Keymaster {
   }
 
   newPos(dir: string) {
-    getMove({
-      ocean: this.ocean,
-      sub: this.sub,
-    });
+    getMove(dir);
 
     if (dir === "down") {
       console.log("DIRRRR", dir);

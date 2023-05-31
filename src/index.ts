@@ -14,8 +14,8 @@ import { getCursorPosition } from "./scripts/util";
 import Keymaster from "./scripts/keymaster";
 import MoveObjects from "./scripts/moveObjects";
 
-export const WIDTH = window.innerWidth * 2.5; // width of canvases
-export const HEIGHT = window.innerHeight * 1.9;  // height of canvases
+export const WIDTH = window.innerWidth * 2; // width of canvases
+export const HEIGHT = window.innerHeight * 2;  // height of canvases
 export const globalCockpit = {cockpit:null};
 
 let audioFlag = false;//change this to true for production
@@ -201,12 +201,11 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     function keyDown(e) {
-        console.log(e.key)
         if (e.key === "ArrowDown" || e.key === "Down") {
             key.newPos("down");
         } else if (e.key === "ArrowLeft" || e.key === "Left") {
             key.newPos("left");
-        } else if (e.key === "ArrowRight" || e.key === "Rigth") {
+        } else if (e.key === "ArrowRight" || e.key === "Right") {
             key.newPos("right");
         } else if (e.key === "ArrowUp" || e.key === "Up") {
             key.newPos("up");

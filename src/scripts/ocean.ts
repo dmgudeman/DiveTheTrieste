@@ -39,7 +39,7 @@ class Ocean {
         this.velDown = velDown || 0;
     }
     public static getInstance(
-        ctx: CanvasRenderingContext2D,
+        ctx?: CanvasRenderingContext2D,
         x?: number,
         y?: number,
         width?: number,
@@ -51,7 +51,10 @@ class Ocean {
         velDown?: number,
     ): Ocean {
         if (!Ocean.instance) {
-            Ocean.instance = new Ocean(ctx, x, y, width,height, oceanImage, velRight, velLeft, velUp, velDown);
+            if (!ctx) {
+                throw new Error('A context must be provided when creating a new instance.');
+            }
+            Ocean.instance = new Ocean(ctx, x, y, width, height, oceanImage, velRight, velLeft, velUp, velDown);
         }
         return Ocean.instance;
     }
@@ -85,7 +88,7 @@ class Ocean {
         return this.velRight;
     }
 
-    public setVelx(velRight: number): void {
+    public setVelRight(velRight: number): void {
         this.velRight = velRight;
     }
 

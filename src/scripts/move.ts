@@ -14,25 +14,19 @@ import {
     OCEAN_FLOOR,
     LAT_LIMITS,
 } from "./constants";
+import Ocean from "./ocean";
+import Sub from "./sub";
+import { MoveObjects } from "./types";
 
 let displayObjects;
-export const getMove = (moveObjects) => {
+export const getMove = (dir) => {
     clearHitBottom();
-    let { ocean, sub } = moveObjects;
+    let ocean = Ocean.getInstance()
+    resetVelocities(ocean, sub);
 
-
-    ocean.velRight = 0;
-    ocean.velLeft = 0;
-    ocean.velUp = 0;
-    ocean.velDown = 0;
-    sub.velRight = 0;
-    sub.velLeft = 0;
-    sub.velUp = 0;
-    sub.velDown = 0;
-
-    let compLat = ocean.sx + sub.x - SUB_INITIAL_LAT_POS;
-    let compVert = ocean.sy + sub.y - INITIAL_Y_POSITION;
-    console.log('COMPLAT', compLat)
+    let compLat = ocean.getX() + sub.getX() - SUB_INITIAL_LAT_POS;
+    let compVert = ocean.getY() + sub.getY() - INITIAL_Y_POSITION;
+    console.log("COMPLAT", compLat);
     let variableDepth = calcDepthLimit(compLat);
 
     // let variableDepth = getVariableDepth(compLat);
@@ -112,7 +106,7 @@ function getLatMove(moveObjects, variableDepth) {
             moveSubRight();
             hitBottom();
         }
-    } else if (compLat < FULL_LAT_LIMIT){
+    } else if (compLat < FULL_LAT_LIMIT) {
         if (compVert < variableDepth) {
             moveSubLat();
         } else {
@@ -120,11 +114,10 @@ function getLatMove(moveObjects, variableDepth) {
             moveSubLeft();
             hitBottom();
         }
-
     } else {
         moveSubLeft();
     }
-    
+
     return displayObjects;
 }
 
@@ -189,8 +182,8 @@ function getVerticalMove(objects, varDepth = OCEAN_FLOOR) {
 }
 
 function calcDepthLimit(lat) {
-    if (lat <0) return 0;
-    if (lat > FULL_LAT_LIMIT) return lat = FULL_LAT_LIMIT;
+    if (lat < 0) return 0;
+    if (lat > FULL_LAT_LIMIT) return (lat = FULL_LAT_LIMIT);
     // The correct constant is filtered out
     const result = LAT_LIMITS.filter((obj) => obj.x >= lat && obj.xll <= lat);
     let depthObject = result[0];
@@ -200,12 +193,13 @@ function calcDepthLimit(lat) {
     let startY = depthObject.yll;
     let endY = depthObject.y;
     let x = lat;
-    if (depthObject.id === 0) return 21;  
-    if (startX === endX) { // handles vertical line
+    if (depthObject.id === 0) return 21;
+    if (startX === endX) {
+        // handles vertical line
         if (x >= Math.min(startX, endX) && x <= Math.max(startX, endX)) {
-            return startY; 
+            return startY;
         } else {
-            return null; 
+            return null;
         }
     }
     const slope = (endY - startY) / (endX - startX);
@@ -221,4 +215,15 @@ export const hitBottom = () => {
 export const clearHitBottom = () => {
     let hitBottom = document.getElementById("hitBottomContainer");
     hitBottom.classList.add("hide");
+};
+
+const resetVelocities = (ocean: Ocean, sub: Sub) => {
+    ocean.setVelRight(0);
+    ocean.setVelLeft(0);
+    ocean.setVelUp(0);
+    ocean.setVelDown(0);
+    sub.setVelRight(0);
+    sub.setVelLeft(0);
+    sub.setVelUp(0);
+    sub.setVelDown(0);
 };
