@@ -8,49 +8,35 @@ class Ocean {
     private sy: number;
     private sWidth: number;
     private sHeight: number;
-    private dx: number;
-    private dy: number;
-    private dWidth: number;
-    private dHeight: number;
     private oceanImage: HTMLImageElement | null;
     private velRight: number;
     private velLeft: number;
     private velUp: number;
     private velDown: number;
   
-    private constructor(options: {
-        ctx: CanvasRenderingContext2D;
-        sx?: number;
-        sy?: number;
-        sWidth?: number;
-        sHeight?: number;
-        dx?: number;
-        dy?: number;
-        dWidth?: number;
-        dHeight?: number;
-        oceanImage?: HTMLImageElement | null;
-        velRight?: number;
-        velLeft?: number;
-        velUp?: number;
-        velDown?: number;
+    private constructor(
+        ctx: CanvasRenderingContext2D,
+        sx?: number,
+        sy?: number,
+        sWidth?: number,
+        sHeight?: number,
+        oceanImage?: HTMLImageElement | null,
+        velRight?: number,
+        velLeft?: number,
+        velUp?: number,
+        velDown?: number,
        
-      }) {
-        this.ctx = options.ctx;
-        // keeps track of the movement of the background
-        this.sx = options.sx || 0;
-        this.sy = options.sy || 0;
-        this.sWidth = options.sWidth || WIDTH;
-        this.sHeight = options.sHeight || HEIGHT;
-        this.dx = options.dx || 0;
-        this.dy = options.dy || 0;
-        // is the position on the canvas
-        this.dWidth = options.dWidth || WIDTH;
-        this.dHeight = options.dHeight || HEIGHT;
-        this.oceanImage = options.oceanImage || document.getElementById("crossSection") as HTMLImageElement | null
-        this.velRight = options.velRight || 0;
-        this.velLeft = options.velLeft || 0;
-        this.velUp = options.velUp || 0;
-        this.velDown = options.velDown || 0;
+      ) {
+        this.ctx = ctx;
+        this.sx = sx || 0;
+        this.sy = sy || 0;
+        this.sWidth = sWidth || WIDTH;
+        this.sHeight = sHeight || HEIGHT;
+        this.oceanImage = oceanImage || document.getElementById("crossSection") as HTMLImageElement | null
+        this.velRight = velRight || 0;
+        this.velLeft = velLeft || 0;
+        this.velUp = velUp || 0;
+        this.velDown = velDown || 0;
     }
     public static getInstance(options: {
         ctx: CanvasRenderingContext2D;
@@ -58,10 +44,6 @@ class Ocean {
         sy?: number;
         sWidth?: number;
         sHeight?: number;
-        dx?: number;
-        dy?: number;
-        dWidth?: number;
-        dHeight?: number;
         oceanImage?: HTMLImageElement | null;
         velRight?: number;
         velLeft?: number;
@@ -80,10 +62,6 @@ class Ocean {
             this.sy,
             this.sWidth,
             this.sHeight,
-            this.dx,
-            this.dy,
-            this.dWidth,
-            this.dHeight
         );
     }
 

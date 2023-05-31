@@ -58,7 +58,8 @@ document.addEventListener("DOMContentLoaded", () => {
     canvas2.height = HEIGHT;
     canvas3.width = WIDTH;
     canvas3.height = HEIGHT;
-
+     
+    
     let ocean = new Ocean({ ctx: ctx1 });
     globalOcean.ocean = ocean;
     let sub = new Sub({ ctx: ctx1 });
