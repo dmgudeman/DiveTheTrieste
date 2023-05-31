@@ -1,5 +1,7 @@
 import { INITIAL_Y_POSITION, SEA_DEPTH, SUB_INITIAL_LAT_POS } from "./constants";
 import { HEIGHT } from "../index";
+import Ocean from './ocean';
+import Sub from './sub';
 
 export  function showMouseAsSub(event) {
     var x = event.clientX - SUB_INITIAL_LAT_POS;
@@ -7,18 +9,19 @@ export  function showMouseAsSub(event) {
     console.log("X: " + x + ", Y: " + y);
   }
 
-export function showDepth(ocean, sub) {
+export function showDepth() {
+    let ocean = Ocean.getInstance();
+    let sub = Sub.getInstance();
     let conversion = SEA_DEPTH / HEIGHT; // 19.64 feet per pixel
     let conversionShallow = 2; // 2 feet per pixel
-    let composite = ocean.sy + sub.y - INITIAL_Y_POSITION;
-    let depth;
+    let composite = ocean.getY() + sub.getY() - INITIAL_Y_POSITION;
+    let depth: number;
 
     if (composite < 500) {
         depth = Math.floor(conversionShallow * composite);
     } else {
         depth = Math.floor(conversion * composite);
     }
-
     if (depth < 0) depth = 0;
     let d = document.getElementById("depth");
     d.innerHTML = `Depth: ${depth} feet`;

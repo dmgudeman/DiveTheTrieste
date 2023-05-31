@@ -7,3 +7,13 @@ export interface MoveObjects {
     lat: string,
     vert: string
 }
+
+export interface LatMoveLimit {
+    id: number;
+    name: string;
+    x: number;
+    xll: number;
+    y: number;
+    yll: number;
+  }
+  

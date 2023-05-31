@@ -46,7 +46,7 @@ import {
     }
 
     public static getInstance(
-        ctx: CanvasRenderingContext2D,
+        ctx?: CanvasRenderingContext2D,
         x: number = SUB_INITIAL_LAT_POS,
         y: number = INITIAL_Y_POSITION,
         width: number = 120,
@@ -59,6 +59,9 @@ import {
         initialDepthPos: number = INITIAL_Y_POSITION,
     ): Sub {
         if (!Sub.instance) {
+            if (!ctx) {
+                throw new Error('A context must be provided when creating a new instance.');
+            }
             Sub.instance = new Sub(ctx, x, y, width, height, velRight, velLeft, velUp, velDown, initialLateralPos, initialDepthPos);
         }
         return Sub.instance;
@@ -94,7 +97,7 @@ import {
         return this.velRight;
     }
 
-    public setVelx(velRight: number): void {
+    public setVelRight(velRight: number): void {
         this.velRight = velRight;
     }
 

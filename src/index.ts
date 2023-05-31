@@ -13,14 +13,16 @@ import Cockpit from "./scripts/cockpit";
 import { getCursorPosition } from "./scripts/util";
 import Keymaster from "./scripts/keymaster";
 import MoveObjects from "./scripts/moveObjects";
+import { OCEAN_LAT_LIMIT } from "./scripts/constants";
 
 export const WIDTH = window.innerWidth * 2; // width of canvases
-export const HEIGHT = window.innerHeight * 2;  // height of canvases
+export const HEIGHT = window.innerHeight * 2.05;  // height of canvases
 export const globalCockpit = {cockpit:null};
 
 let audioFlag = false;//change this to true for production
 
 document.addEventListener("DOMContentLoaded", () => {
+    
     // function toggleAudio(audio) {
     //     if (audioFlag) {
     //         audio.play();
@@ -173,12 +175,14 @@ document.addEventListener("DOMContentLoaded", () => {
         // This is the animation loop for provideMessage
         calcMovement(ocean, sub)
      
-        showDepth(ocean, sub);
+        showDepth();
  
         const elapsedTime = currentTime - lastFrameTime;
+ 
         if (elapsedTime > 1000 / 10) {
             clear();
-        ocean.draw();
+            ocean.draw();
+        
             const sprite = sprites[currentFrame];
             ctx1.drawImage(
                 spriteSheet,
@@ -197,10 +201,15 @@ document.addEventListener("DOMContentLoaded", () => {
             }
             lastFrameTime = currentTime;
         }
-        requestAnimationFrame(update);
+       
+    
+    requestAnimationFrame(update);
     }
 
+    
+
     function keyDown(e) {
+        console.log("ocean X in keydown index.js", ocean.getX())
         if (e.key === "ArrowDown" || e.key === "Down") {
             key.newPos("down");
         } else if (e.key === "ArrowLeft" || e.key === "Left") {

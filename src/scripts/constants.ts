@@ -3,6 +3,7 @@
 // canvas3 is the cockpit
 
 import {WIDTH, HEIGHT} from '../index';
+import { LatMoveLimit } from './types';
 
 export const stopMessageAnimation = {
     messFlag: true
@@ -51,9 +52,9 @@ export const APHOTIC_BENTHIC_BARRIER = OCEAN_BOTTOM - 400;
 
 // OBJECT option values
 export const OCEAN_DEPTH_LIMIT = 820;
-export const OCEAN_LAT_LIMIT = 1280;
-export const FULL_LAT_LIMIT = 2200;
-export const FULL_VERTICAL_LIMIT = HEIGHT - 100;
+export let OCEAN_LAT_LIMIT: number  = null;
+export const FULL_LAT_LIMIT = -2200;
+export const FULL_VERTICAL_LIMIT = HEIGHT + 100;
 export const INITIAL_Y_POSITION = 80; // for both objects
 export const SUB_INITIAL_LAT_POS = 800;
 
@@ -82,7 +83,7 @@ export const LAT_LIMIT_07_1200_460 = [1200, 420];
 export const LAT_LIMIT_08_1280_480= [1400, 440]; //same as LEFT_EDGE_TRENCH
 
 
-export const LAT_LIMITS = [
+export const LAT_LIMITS: LatMoveLimit[] = [
   {'id':0, 'name':'INITIAL_POSITION', x:0,   xll: 0,   y:0,   yll: 0},
   {'id':1, 'name':'SLOPE_LIMIT',      x:180, xll: 1,   y:400, yll: 1},
   {'id':2, 'name':'START_BUMP',       x:600, xll: 181, y:450, yll: 401},

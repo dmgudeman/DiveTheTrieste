@@ -3,7 +3,6 @@ import {
     LEFT_EDGE_TRENCH,
     RIGHT_EDGE_TRENCH,
     OCEAN_DEPTH_LIMIT,
-    OCEAN_LAT_LIMIT,
     FULL_LAT_LIMIT,
     LAT_VELOCITY,
     VERTICAL_VELOCITY,
@@ -16,177 +15,114 @@ import {
 } from "./constants";
 import Ocean from "./ocean";
 import Sub from "./sub";
-import { MoveObjects } from "./types";
+import { MoveObjects, LatMoveLimit } from "./types";
+import CalcConstant from "./calcConstant";
+import {WIDTH} from '../index';
 
 let displayObjects;
-export const getMove = (dir) => {
-    clearHitBottom();
-    let ocean = Ocean.getInstance()
-    resetVelocities(ocean, sub);
 
-    let compLat = ocean.getX() + sub.getX() - SUB_INITIAL_LAT_POS;
+
+export const getMove = (dir:string) => {
+    clearHitBottom();
+    let ocean = Ocean.getInstance();
+    let sub = Sub.getInstance();
+    resetVelocities(ocean, sub);
+    const constants = new CalcConstant()
+    let compLat = ocean.getX() - sub.getX() + SUB_INITIAL_LAT_POS;
+    let latOcean = ocean.getX();
+    let oceanLatLimit = constants.getOceanLatLimit();
+    const fullLatLimit = constants.getFullLatLimit();
+    let latSub = sub.getX();
     let compVert = ocean.getY() + sub.getY() - INITIAL_Y_POSITION;
     console.log("COMPLAT", compLat);
+    console.log("OCEAN LAT LIMIT", constants.getOceanLatLimit())
+  
     let variableDepth = calcDepthLimit(compLat);
+    
+    console.log('OCEAN X', ocean.getX())
+    console.log('SUB X', sub.getX())
+    
 
-    // let variableDepth = getVariableDepth(compLat);
-    displayObjects = { ocean: ocean, sub: sub };
-    displayObjects = getLatMove(displayObjects, variableDepth);
+    getLatMove(ocean, sub, dir, compLat, variableDepth, oceanLatLimit, fullLatLimit);
 
-    // fine tune the depth stop for the slope and the shelves
-    if (compLat < SLOPE_LAT) {
-        if (compLat < 0) {
-            compLat = 1;
-        }
-        let depth = compLat * 2.3;
-        displayObjects = getVerticalMove(displayObjects, depth);
-    } else if (compLat < LEFT_EDGE_TRENCH || compLat > RIGHT_EDGE_TRENCH) {
-        displayObjects = getVerticalMove(displayObjects, variableDepth);
-    } else {
-        displayObjects = getVerticalMove(displayObjects);
-    }
-
-    return displayObjects;
 };
-function getLatMove(moveObjects, variableDepth) {
-    let { ocean, sub } = moveObjects;
-    let compLat = ocean.sx + sub.x - SUB_INITIAL_LAT_POS;
-    let compVert = ocean.sy + sub.y - INITIAL_Y_POSITION;
-
-    const moveOceanLat = () => {
-        ocean.velRight = LAT_VELOCITY;
-        ocean.velLeft = LAT_VELOCITY;
-        sub.velRight = 0;
-        sub.velLeft = 0;
-    };
+function getLatMove(ocean:Ocean, sub:Sub, dir:string, lat: number, depth:number, oceanLatLimit:number, fullLatLimit: number) {
+  
     const moveOceanRight = () => {
-        ocean.velRight = LAT_VELOCITY;
-        ocean.velLeft = 0;
-        sub.velRight = 0;
-        sub.velLeft = 0;
+        ocean.setX( ocean.getX() - LAT_VELOCITY);
     };
 
     const moveOceanLeft = () => {
-        ocean.velRight = 0;
-        ocean.velLeft = LAT_VELOCITY;
-        sub.velRight = 0;
-        sub.velLeft = 0;
+        ocean.setX(ocean.getX() + LAT_VELOCITY);
+    };
+    const moveSubRight = () => {   
+        sub.setX(sub.getX() + LAT_VELOCITY);    
+    };
+    const moveSubLeft = () => { 
+        sub.setX(sub.getX() - LAT_VELOCITY);
     };
 
-    const moveSubLat = () => {
-        ocean.velRight = 0;
-        ocean.velLeft = 0;
-        sub.velRight = LAT_VELOCITY;
-        sub.velLeft = LAT_VELOCITY;
-    };
-
-    const moveSubRight = () => {
-        ocean.velRight = 0;
-        ocean.velLeft = 0;
-        sub.velRight = LAT_VELOCITY;
-        sub.velLeft = 0;
-    };
-
-    const moveSubLeft = () => {
-        ocean.velRight = 0;
-        ocean.velLeft = 0;
-        sub.velRight = 0;
-        sub.velLeft = LAT_VELOCITY;
-    };
-
-    if (compLat <= 0) {
-        ocean.sx = 0; // reset to 0 if over the limit
+    if (lat > 0) { 
         moveOceanRight();
-        return displayObjects;
-    } else if (compLat < OCEAN_LAT_LIMIT) {
-        if (compVert < variableDepth) {
-            moveOceanLat();
-        } else {
-            ocean.sy -= VERTICAL_VELOCITY;
+    } else if (lat > oceanLatLimit) {
+        
+        if (dir === 'right') {
+            moveOceanRight();
+        } else if (dir === 'left'){
+           moveOceanLeft();
+        }
+    } else if (lat > fullLatLimit) {
+        if (dir === 'right') {
             moveSubRight();
-            hitBottom();
+        } else if (dir === 'left'){
+           moveSubLeft();
         }
-    } else if (compLat < FULL_LAT_LIMIT) {
-        if (compVert < variableDepth) {
-            moveSubLat();
-        } else {
-            sub.sy -= LAT_VELOCITY;
+    } else if (lat < fullLatLimit) {
+        if (dir === 'left') {
             moveSubLeft();
-            hitBottom();
-        }
-    } else {
-        moveSubLeft();
+        }     
     }
 
-    return displayObjects;
 }
 
-function getVerticalMove(objects, varDepth = OCEAN_FLOOR) {
-    let { ocean, sub } = objects;
-    let compVert = ocean.sy + sub.y - INITIAL_Y_POSITION;
-
-    const moveOceanVert = () => {
-        ocean.velUp = VERTICAL_VELOCITY;
-        ocean.velDown = VERTICAL_VELOCITY;
-        sub.velUp = 0;
-        sub.velDown = 0;
-    };
+function getVerticalMove(ocean:Ocean, sub:Sub, dir:string, vert: number, depth:number, oceanLatLimit:number, fullLatLimit: number) {
+    
 
     const moveOceanUp = () => {
-        ocean.velUp = VERTICAL_VELOCITY;
-        ocean.velDown = 0;
-        sub.velUp = 0;
-        sub.velDown = 0;
+        ocean.setY( ocean.getY() - VERTICAL_VELOCITY);
     };
 
     const moveOceanDown = () => {
-        ocean.velUp = 0;
-        ocean.velDown = VERTICAL_VELOCITY;
-        sub.velUp = 0;
-        sub.velDown = 0;
+        ocean.setY(ocean.getY() + VERTICAL_VELOCITY);
+    };
+    const moveSubUp = () => {   
+        sub.setY(sub.getY() + VERTICAL_VELOCITY);    
+    };
+    const moveSubDown = () => { 
+        sub.setY(sub.getY() - VERTICAL_VELOCITY);
     };
 
-    const moveSubVert = () => {
-        ocean.velUp = 0;
-        ocean.velDown = 0;
-        sub.velUp = VERTICAL_VELOCITY;
-        sub.velDown = VERTICAL_VELOCITY;
-    };
-
-    const moveSubUp = () => {
-        ocean.velUp = 0;
-        ocean.velDown = 0;
-        sub.velUp = VERTICAL_VELOCITY;
-        sub.velDown = 0;
-    };
-
-    const moveSubDown = () => {
-        ocean.velUp = 0;
-        ocean.velDown = 0;
-        sub.velUp = 0;
-        sub.velDown = VERTICAL_VELOCITY;
-    };
-
-    if (compVert <= 0) {
+    if (vert <= 0) {
         moveOceanDown();
-    } else if (compVert < OCEAN_DEPTH_LIMIT && compVert <= varDepth) {
+    } else if (vert < OCEAN_DEPTH_LIMIT && vert <= varDepth) {
         moveOceanVert();
-    } else if (compVert < OCEAN_FLOOR && compVert <= varDepth) {
+    } else if (vert < OCEAN_FLOOR && vert <= varDepth) {
         ocean.sy = OCEAN_DEPTH_LIMIT - VERTICAL_VELOCITY; // reset the limits empirically
         moveSubVert();
-    } else if (compVert >= OCEAN_FLOOR || compVert > varDepth) {
+    } else if (vert >= OCEAN_FLOOR || vert > varDepth) {
         //below the limit
         moveSubUp();
     }
     return displayObjects;
 }
 
-function calcDepthLimit(lat) {
+function calcDepthLimit(lat:number) {
     if (lat < 0) return 0;
     if (lat > FULL_LAT_LIMIT) return (lat = FULL_LAT_LIMIT);
     // The correct constant is filtered out
-    const result = LAT_LIMITS.filter((obj) => obj.x >= lat && obj.xll <= lat);
+    const result = LAT_LIMITS.filter((obj:LatMoveLimit) => obj.x >= lat && obj.xll <= lat);
     let depthObject = result[0];
+    console.log("depthObject", depthObject)
 
     let startX = depthObject.xll;
     let endX = depthObject.x;
