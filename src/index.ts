@@ -16,13 +16,9 @@ import MoveObjects from "./scripts/moveObjects";
 
 export const WIDTH = window.innerWidth * 2.5; // width of canvases
 export const HEIGHT = window.innerHeight * 1.9;  // height of canvases
-export const globalOcean = {ocean:null};
-export const globalSub = {sub:null};
 export const globalCockpit = {cockpit:null};
 
 let audioFlag = false;//change this to true for production
-
-
 
 document.addEventListener("DOMContentLoaded", () => {
     // function toggleAudio(audio) {
@@ -59,15 +55,11 @@ document.addEventListener("DOMContentLoaded", () => {
     canvas3.width = WIDTH;
     canvas3.height = HEIGHT;
      
-    
-    let ocean = new Ocean({ ctx: ctx1 });
-    globalOcean.ocean = ocean;
-    let sub = new Sub({ ctx: ctx1 });
-    globalSub.sub = sub;
+    let ocean = Ocean.getInstance( ctx1 ); 
+    let sub = Sub.getInstance( ctx1 );
     let cockpit = new Cockpit({ ctx: ctx3, sub, ocean });
     globalCockpit.cockpit = cockpit;
-
-    let key = new Keymaster({ctx:ctx1, ocean:ocean, sub:sub, dir: ''});
+    let key = new Keymaster(ocean, sub);
    
 
     gitHubButton.addEventListener("click", () => {
@@ -96,7 +88,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     musicNoteButton.addEventListener("click", (e) => {
-        toggleAudio(audio);
+    //     toggleAudio(audio);
     });
 
     // make the instruction page canvas

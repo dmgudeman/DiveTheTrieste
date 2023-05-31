@@ -4,10 +4,10 @@ import { WIDTH, HEIGHT } from "../index";
 class Ocean {
     private static instance: Ocean;
     private ctx: CanvasRenderingContext2D;
-    private sx: number;
-    private sy: number;
-    private sWidth: number;
-    private sHeight: number;
+    private x: number;
+    private y: number;
+    private width: number;
+    private height: number;
     private oceanImage: HTMLImageElement | null;
     private velRight: number;
     private velLeft: number;
@@ -16,10 +16,10 @@ class Ocean {
   
     private constructor(
         ctx: CanvasRenderingContext2D,
-        sx?: number,
-        sy?: number,
-        sWidth?: number,
-        sHeight?: number,
+        x?: number,
+        y?: number,
+        width?: number,
+        height?: number,
         oceanImage?: HTMLImageElement | null,
         velRight?: number,
         velLeft?: number,
@@ -28,56 +28,56 @@ class Ocean {
        
       ) {
         this.ctx = ctx;
-        this.sx = sx || 0;
-        this.sy = sy || 0;
-        this.sWidth = sWidth || WIDTH;
-        this.sHeight = sHeight || HEIGHT;
+        this.x = x || 0;
+        this.y = y || 0;
+        this.width = width || WIDTH;
+        this.height = height || HEIGHT;
         this.oceanImage = oceanImage || document.getElementById("crossSection") as HTMLImageElement | null
         this.velRight = velRight || 0;
         this.velLeft = velLeft || 0;
         this.velUp = velUp || 0;
         this.velDown = velDown || 0;
     }
-    public static getInstance(options: {
-        ctx: CanvasRenderingContext2D;
-        sx?: number;
-        sy?: number;
-        sWidth?: number;
-        sHeight?: number;
-        oceanImage?: HTMLImageElement | null;
-        velRight?: number;
-        velLeft?: number;
-        velUp?: number;
-        velDown?: number;
-    }): Ocean {
+    public static getInstance(
+        ctx: CanvasRenderingContext2D,
+        x?: number,
+        y?: number,
+        width?: number,
+        height?: number,
+        oceanImage?: HTMLImageElement | null,
+        velRight?: number,
+        velLeft?: number,
+        velUp?: number,
+        velDown?: number,
+    ): Ocean {
         if (!Ocean.instance) {
-            Ocean.instance = new Ocean(options);
+            Ocean.instance = new Ocean(ctx, x, y, width,height, oceanImage, velRight, velLeft, velUp, velDown);
         }
         return Ocean.instance;
     }
     public draw() {
         this.ctx.drawImage(
             this.oceanImage,
-            this.sx,
-            this.sy,
-            this.sWidth,
-            this.sHeight,
+            this.x,
+            this.y,
+            this.width,
+            this.height,
         );
     }
 
-    public getSx(): number {
-        return this.sx;
+    public getX(): number {
+        return this.x;
     }
 
-    public setSx(sx: number): void {
-        this.sx = sx;
+    public setX(x: number): void {
+        this.x = x;
     }
-    public getSy(): number {
-        return this.sy;
+    public getY(): number {
+        return this.y;
     }
 
-    public setSy(sy: number): void {
-        this.sy = sy;
+    public setY(y: number): void {
+        this.y = y;
     }
 
 

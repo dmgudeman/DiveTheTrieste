@@ -4,6 +4,7 @@ import {
   } from './constants';
   
   class Sub {
+    private static instance: Sub;
     private ctx: CanvasRenderingContext2D;
     private x: number;
     private y: number;
@@ -18,18 +19,49 @@ import {
     private initialDepthPos: number;
 
   
-    constructor(options: SubOptions) {
-      this.ctx = options.ctx;
-      this.x = options.x || SUB_INITIAL_LAT_POS;
-      this.y = options.y || INITIAL_Y_POSITION;
-      this.w = options.width || 120; // size of the sub in px
-      this.h = options.height || 120; // size of the sub in px
-      this.velRight = options.velRight || 0;
-      this.velLeft = options.velLeft || 0;
-      this.velUp = options.velUp || 0;
-      this.velDown = options.velDown || 0;
-      this.initialLateralPos = options.initialLateralPos || SUB_INITIAL_LAT_POS;
-      this.initialDepthPos = options.initialDepthPos || INITIAL_Y_POSITION;
+    private constructor(
+        ctx: CanvasRenderingContext2D,
+        x?: number,
+        y?: number,
+        width?: number ,
+        height?: number,
+        velRight?: number,
+        velLeft?: number,
+        velUp?: number,
+        velDown?: number,
+        initialLateralPos?: number,
+        initialDepthPos?: number
+    ) {
+      this.ctx = ctx;
+      this.x = x || SUB_INITIAL_LAT_POS;
+      this.y = y || INITIAL_Y_POSITION;
+      this.w = width || 120; // size of the sub in px
+      this.h = height || 120; // size of the sub in px
+      this.velRight = velRight || 0;
+      this.velLeft = velLeft || 0;
+      this.velUp = velUp || 0;
+      this.velDown = velDown || 0;
+      this.initialLateralPos = initialLateralPos || SUB_INITIAL_LAT_POS;
+      this.initialDepthPos = initialDepthPos || INITIAL_Y_POSITION;
+    }
+
+    public static getInstance(
+        ctx: CanvasRenderingContext2D,
+        x: number = SUB_INITIAL_LAT_POS,
+        y: number = INITIAL_Y_POSITION,
+        width: number = 120,
+        height: number = 120,
+        velRight: number = 0,
+        velLeft: number = 0,
+        velUp: number = 0,
+        velDown: number = 0,
+        initialLateralPos: number = SUB_INITIAL_LAT_POS,
+        initialDepthPos: number = INITIAL_Y_POSITION,
+    ): Sub {
+        if (!Sub.instance) {
+            Sub.instance = new Sub(ctx, x, y, width, height, velRight, velLeft, velUp, velDown, initialLateralPos, initialDepthPos);
+        }
+        return Sub.instance;
     }
   
     draw() {
@@ -92,19 +124,6 @@ import {
 
   }
   
-  interface SubOptions {
-    ctx: CanvasRenderingContext2D;
-    x?: number;
-    y?: number;
-    width?: number;
-    height?: number;
-    velRight?: number;
-    velLeft?: number;
-    velUp?: number;
-    velDown?: number;
-    initialLateralPos?: number;
-    initialDepthPos?: number;
-  }
   
   export default Sub;
 

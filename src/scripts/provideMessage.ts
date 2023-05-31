@@ -24,7 +24,7 @@ import { WIDTH, HEIGHT } from "../index";
 //     removeMessageElement,
 // } from "./edMessage1";
 import { changeEducationalText, addEdTextStyle} from './educational';
-import { globalOcean, globalSub  } from "../index";
+
 import Ocean from "./ocean";
 import Sub from "./sub";
 
@@ -36,8 +36,8 @@ let oldFlag;
 // this is being called from the main animation loop in index.js
 export function calcMovement(ocean:Ocean, sub: Sub) {
   
-    let compVert = ocean.getSy() + sub.getY() - INITIAL_Y_POSITION;
-    let compLat = ocean.getSx() + sub.getX() - SUB_INITIAL_LAT_POS;
+    let compVert = ocean.getY() + sub.getY() - INITIAL_Y_POSITION;
+    let compLat = ocean.getX() + sub.getX() - SUB_INITIAL_LAT_POS;
     i++;
 
     // console.log("comLat", compLat);

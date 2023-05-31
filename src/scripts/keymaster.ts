@@ -1,4 +1,4 @@
-import { globalOcean, globalSub } from "../index";
+
 import { getMove } from "./move";
 import { getCurrentCanvas } from "./constants";
 import { showCanvas1, showCanvas2, showCanvas3 } from "./util";
@@ -6,17 +6,18 @@ import Ocean from './ocean';
 import Sub from './sub';
 
 class Keymaster {
-  private ctx: CanvasRenderingContext2D;
-  private dir: string;
+
+
   private ocean: Ocean;
   private sub: Sub;
+  private dir: string;
   private modal: HTMLElement;
 
-  constructor(options: KeymasterOptions) {
-    this.ctx = options.ctx;
-    this.dir = options.dir;
-    this.ocean = globalOcean.ocean;
-    this.sub = globalSub.sub;
+  constructor(ocean:Ocean , sub:Sub, dir?:string) {
+    this.dir = dir;
+    this.ocean = ocean;
+    this.sub = sub;
+
     this.modal = document.getElementById("modal") as HTMLElement;
   }
 
@@ -64,19 +65,19 @@ class Keymaster {
 
     if (dir === "down") {
       console.log("DIRRRR", dir);
-      this.ocean.setSy(this.ocean.getSy() + this.ocean.getVelDown());
+      this.ocean.setY(this.ocean.getY() + this.ocean.getVelDown());
       this.sub.setY(this.sub.getY() + this.sub.getVelDown());
     }
     if (dir === "up") {
-        this.ocean.setSy(this.ocean.getSy() - this.ocean.getVelDown());
+        this.ocean.setY(this.ocean.getY() - this.ocean.getVelDown());
         this.sub.setY(this.sub.getY() - this.sub.getVelDown());
     }
     if (dir === "right") {
-        this.ocean.setSx(this.ocean.getSx() + this.ocean.getVelRight());
+        this.ocean.setY(this.ocean.getY() + this.ocean.getVelRight());
         this.sub.setX(this.sub.getX() + this.sub.getVelRight());
     }
     if (dir === "left") {
-        this.ocean.setSx(this.ocean.getSx() - this.ocean.getVelLeft());
+        this.ocean.setY(this.ocean.getY() - this.ocean.getVelLeft());
         this.sub.setX(this.sub.getX() - this.sub.getVelLeft());
     }
   }
@@ -100,11 +101,5 @@ class Keymaster {
   }
 }
 
-interface KeymasterOptions {
-  ctx: CanvasRenderingContext2D;
-  dir: string;
-  ocean: Ocean;
-  sub: Sub;
-}
 
 export default Keymaster;
