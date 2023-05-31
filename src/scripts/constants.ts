@@ -83,20 +83,42 @@ export const LAT_LIMIT_07_1200_460 = [1200, 420];
 export const LAT_LIMIT_08_1280_480= [1400, 440]; //same as LEFT_EDGE_TRENCH
 
 
+// export const LAT_LIMITS: LatMoveLimit[] = [
+//   {'id':0, 'name':'OVER_LIMIT_R',     x: 0   ,    xll: -0,    y: -0,    yll: -0},
+//   {'id':1, 'name':'INITIAL_POSITION', x: 0,    xll: -0,    y: -0,    yll: -0},
+//   {'id':2, 'name':'SLOPE_LIMIT',      x: 0.039,    xll: -0,    y: -0,    yll: -0},
+//   {'id':3, 'name':'START_BUMP',      x: 0.169,  xll: 1,    y: 400,  yll: 1},
+//   {'id':4, 'name':'START_BUMP',       x: 0.214,  xll: 141,  y: 450,  yll: 401},
+//   {'id':5, 'name':'BUMP_PEAK',        x: 0.233,  xll: 541,  y: 300,  yll: 451},
+//   {'id':6, 'name':'END_BUMP',         x: 0.259,  xll: 721,  y: 460,  yll: 301},
+//   {'id':7, 'name':'START_DBL',        x: 0.272,  xll: 801,  y: 460,  yll: 461},
+//   {'id':8, 'name':'DBL_PEAK_1',       x: 0.318,  xll: 841,  y: 200,  yll: 461},
+//   {'id':9, 'name':'DBL_PEAK_2',       x: 0.363, xll: 981,  y: 240,  yll: 199},
+//   {'id':10, 'name':'END_DBL',          x: 0.423, xll: 1121, y: 420,  yll: 239},
+//   {'id':11, 'name':'START_TRENCH',    x: 0.506, xll: 1181, y: 480,  yll: 419},
+//   {'id':12,'name':'TRENCH_BOTTOM',    x: 0.525, xll: 1321, y: 1560, yll: 479},
+//   {'id':13, 'name':'END_TRENCH',      x: 0.700, xll: 1601, y: 480,  yll: 1561},
+//   {'id':14, 'name':'END_POSITION',    x: 0.713, xll: 1761, y: 485,  yll: 481},
+//   {'id':15, 'name':'OVER_LIMIT_L',    x: 0.713, xll: 1761, y: 485,  yll: 481},
+// ]
+
+
 export const LAT_LIMITS: LatMoveLimit[] = [
-  {'id':0, 'name':'INITIAL_POSITION', x:0,   xll: 0,   y:0,   yll: 0},
-  {'id':1, 'name':'SLOPE_LIMIT',      x:180, xll: 1,   y:400, yll: 1},
-  {'id':2, 'name':'START_BUMP',       x:600, xll: 181, y:450, yll: 401},
-  {'id':3, 'name':'BUMP_PEAK',        x:720, xll: 601, y:300, yll: 451},
-  {'id':4, 'name':'END_BUMP',         x:800, xll: 721, y:460, yll: 301},
-  {'id':5, 'name':'START_DBL',        x:840, xll: 801, y:460, yll: 461},
-  {'id':6, 'name':'DBL_PEAK_1',       x:980, xll: 841, y:200, yll: 461},
-  {'id':7, 'name':'DBL_PEAK_2',       x:1120,xll: 981, y:240, yll: 199},
-  {'id':8, 'name':'END_DBL',          x:1180,xll: 1121,y:420, yll: 239},
-  {'id':9, 'name':'START_TRENCH',     x:1320,xll: 1181,y:480, yll: 419},
-  {'id':10,'name':'TRENCH_BOTTOM',    x:1600,xll: 1321,y:1560, yll: 479},
-  {'id':11, 'name':'END_TRENCH',      x:1760,xll: 1601,y:480, yll: 1561},
-  {'id':12, 'name':'END_POSITION',    x:2200,xll: 1761,y:485, yll: 481},
+  {'id':0, 'name':'OVER_LIMIT_R',     x: -0,    xll: -0,    y: -0,    yll: -0},
+  {'id':1, 'name':'INITIAL_POSITION', x: -0,    xll: -0,    y: -0,    yll: -0},
+  {'id':2, 'name':'SLOPE_LIMIT',      x: -140,  xll: -1,    y: -400,  yll: -1},
+  {'id':3, 'name':'START_BUMP',       x: -540,  xll: -141,  y: -450,  yll: -401},
+  {'id':4, 'name':'BUMP_PEAK',        x: -720,  xll: -541,  y: -300,  yll: -451},
+  {'id':5, 'name':'END_BUMP',         x: -800,  xll: -721,  y: -460,  yll: -301},
+  {'id':6, 'name':'START_DBL',        x: -840,  xll: -801,  y: -460,  yll: -461},
+  {'id':7, 'name':'DBL_PEAK_1',       x: -980,  xll: -841,  y: -200,  yll: -461},
+  {'id':8, 'name':'DBL_PEAK_2',       x: -1120, xll: -981,  y: -240,  yll: -199},
+  {'id':9, 'name':'END_DBL',          x: -1180, xll: -1121, y: -460,  yll: -239},
+  {'id':10, 'name':'START_TRENCH',    x: -1280, xll: -1181, y: -480,  yll: -461},
+  {'id':11,'name':'TRENCH_BOTTOM',    x: -1600, xll: -1281, y: -1700, yll: -479},
+  {'id':12, 'name':'END_TRENCH',      x: -1760, xll: -1601, y: -480,  yll: -1701},
+  {'id':13, 'name':'END_POSITION',    x: -2600, xll: -1761, y: -485,  yll: -481},
+  {'id':14, 'name':'OVER_LIMIT_L',    x: -2602, xll: -2601, y: -485,  yll: -481},
 ]
 
 

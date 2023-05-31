@@ -107,6 +107,7 @@ class Ocean {
         this.velUp = velUp;
     }
     public getVelDown(): number {
+        console.log('IN OCEAN VELDOWN',this.velDown)
         return this.velDown;
     }
 

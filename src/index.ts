@@ -17,11 +17,14 @@ import { OCEAN_LAT_LIMIT } from "./scripts/constants";
 
 export const WIDTH = window.innerWidth * 2; // width of canvases
 export const HEIGHT = window.innerHeight * 2.05;  // height of canvases
+
 export const globalCockpit = {cockpit:null};
 
 let audioFlag = false;//change this to true for production
 
 document.addEventListener("DOMContentLoaded", () => {
+    console.log("WWWWWW", WIDTH)
+    console.log('HHHHH',HEIGHT)
     
     // function toggleAudio(audio) {
     //     if (audioFlag) {
@@ -38,6 +41,9 @@ document.addEventListener("DOMContentLoaded", () => {
     // let audio = document.getElementById("music");
     // toggleAudio(audio);
     localStorage.setItem("modalDisplayed", false.toString());
+
+    console.log('HEIGHT', HEIGHT);
+    console.log('WIDTH', WIDTH)
     const canvas1:HTMLCanvasElement = document.getElementById("canvas1") as HTMLCanvasElement;;
     const canvas2:HTMLCanvasElement = document.getElementById("canvas2") as HTMLCanvasElement;
     const canvas3:HTMLCanvasElement = document.getElementById("canvas3") as HTMLCanvasElement;
@@ -201,15 +207,11 @@ document.addEventListener("DOMContentLoaded", () => {
             }
             lastFrameTime = currentTime;
         }
-       
-    
+           
     requestAnimationFrame(update);
     }
 
-    
-
     function keyDown(e) {
-        console.log("ocean X in keydown index.js", ocean.getX())
         if (e.key === "ArrowDown" || e.key === "Down") {
             key.newPos("down");
         } else if (e.key === "ArrowLeft" || e.key === "Left") {
