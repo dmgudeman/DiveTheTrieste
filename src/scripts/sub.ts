@@ -2,7 +2,8 @@ import {
     INITIAL_Y_POSITION,
     SUB_INITIAL_LAT_POS,
   } from './constants';
-  
+import {WIDTH, HEIGHT} from '../index';
+
   class Sub {
     private static instance: Sub;
     private ctx: CanvasRenderingContext2D;
@@ -14,7 +15,9 @@ import {
     private velLeft: number;
     private velUp: number;
     private velDown: number;
-    private subImage: HTMLImageElement;
+    private spriteSheet: HTMLImageElement;
+    private currentFrame: number;
+    private lastFrameTime: number;
     private initialLateralPos: number;
     private initialDepthPos: number;
 
@@ -29,8 +32,10 @@ import {
         velLeft?: number,
         velUp?: number,
         velDown?: number,
-        initialLateralPos?: number,
-        initialDepthPos?: number
+        spriteSheet: HTMLImageElement,
+        currentFrame: number,
+        lastFrameTime: number,
+    
     ) {
       this.ctx = ctx;
       this.x = x || SUB_INITIAL_LAT_POS;
@@ -41,6 +46,10 @@ import {
       this.velLeft = velLeft || 0;
       this.velUp = velUp || 0;
       this.velDown = velDown || 0;
+      this.spriteSheet = spriteSheet || null;
+      this.spriteSheet.src = "assets/sprite.png";
+      this.currentFrame = currentFrame || 0;
+      this.lastFrameTime = lastFrameTime || 0;
     //   this.initialLateralPos = initialLateralPos || SUB_INITIAL_LAT_POS;
     //   this.initialDepthPos = initialDepthPos || INITIAL_Y_POSITION;
     //   this.initialDepthPos = 0;
@@ -56,6 +65,9 @@ import {
         velLeft: number = 0,
         velUp: number = 0,
         velDown: number = 0,
+        spriteSheet: HTMLImageElement = new Image(),
+        currentFrame: number = 0,
+        lastFrameTime: number = 0,
         // initialLateralPos: number = SUB_INITIAL_LAT_POS,
         // initialDepthPos: number = INITIAL_Y_POSITION,
         // initialDepthPos: number = 0,
@@ -65,14 +77,14 @@ import {
             if (!ctx) {
                 throw new Error('A context must be provided when creating a new instance.');
             }
-            Sub.instance = new Sub(ctx, x, y, width, height, velRight, velLeft, velUp, velDown);
+            Sub.instance = new Sub(ctx, x, y, width, height, velRight, velLeft, velUp, velDown, spriteSheet, currentFrame, lastFrameTime);
         }
         return Sub.instance;
     }
   
-    draw() {
-      this.ctx.drawImage(this.subImage, this.x, this.y, this.w, this.h);
-    }
+    // draw() {
+    //   this.ctx.drawImage(this.subImage, this.x, this.y, this.w, this.h);
+    // }
     
     public getX(): number {
         return this.x;
@@ -128,6 +140,57 @@ import {
 
     public setVelDown(velDown: number): void {
         this.velDown = velDown;
+    }
+
+
+
+    clear() {
+        this.ctx.clearRect(0, 0, WIDTH, HEIGHT);
+    }
+
+    // sprite
+    
+    
+    
+
+    sprites = [
+        { x: 0, y: 0, width: 125, height: 200 },
+        { x: 135, y: 0, width: 135, height: 200 },
+        { x: 280, y: 0, width: 125, height: 200 },
+        { x: 410, y: 0, width: 140, height: 200 },
+    ];
+
+    
+   
+
+  update() {
+        const currentTime = Date.now(); 
+        const elapsedTime = currentTime - this.lastFrameTime;
+        
+ 
+        if (elapsedTime > 1000 / 10) {
+      
+        
+            const sprite = this.sprites[this.currentFrame];
+            this.ctx.drawImage(
+                this.spriteSheet,
+                sprite.x,
+                sprite.y,
+                sprite.width,
+                sprite.height,
+                this.getX(),
+                this.getY(),
+                this.getW(),
+                this.getH()
+            );
+            this.currentFrame++;
+            if (this.currentFrame >= this.sprites.length) {
+                this.currentFrame = 0;
+            }
+            this.lastFrameTime = currentTime;
+        }
+           
+    requestAnimationFrame(this.update);
     }
 
   }
