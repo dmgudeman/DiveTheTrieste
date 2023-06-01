@@ -25,7 +25,6 @@ export function showDepth() {
     if (depth < 0) depth = 0;
     let d = document.getElementById("depth");
     d.innerHTML = `Depth: ${depth} feet`;
-    console.log('DEPTH', ocean.getY())
 
     return depth;
 }

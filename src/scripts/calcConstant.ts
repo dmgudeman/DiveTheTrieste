@@ -36,6 +36,13 @@ class CalcConstant {
             console.error("calcDepth did not work for lat = ", lat);
         }
     }
+    
+    getOorS(lat:number, vert: number):string {
+         if (lat > this.getOceanLatLimit() && vert > this.getOceanVertLimit())  return 'OO';
+         if (lat < this.getOceanLatLimit() && vert > this.getOceanVertLimit())  return 'SO';
+         if (lat > this.getOceanLatLimit() && vert < this.getOceanVertLimit())  return 'OS';
+         if (lat < this.getOceanLatLimit() && vert < this.getOceanVertLimit())  return 'SS';
+    }
   
 
    // to calculate ratios lateer

@@ -51,12 +51,12 @@ export const D_A_BARRIER = SURFACE + 500;   // dysphotic_aphotic_barrier
 export const APHOTIC_BENTHIC_BARRIER = OCEAN_BOTTOM - 400;
 
 // OBJECT option values
-export const OCEAN_DEPTH_LIMIT = 820;
+export const OCEAN_DEPTH_LIMIT: number = 820;
 export let OCEAN_LAT_LIMIT: number  = null;
-export const FULL_LAT_LIMIT = -2200;
-export const FULL_VERTICAL_LIMIT = HEIGHT + 100;
-export const INITIAL_Y_POSITION = 80; // for both objects
-export const SUB_INITIAL_LAT_POS = 800;
+export const FULL_LAT_LIMIT: number = -2200;
+export const FULL_VERTICAL_LIMIT: number = HEIGHT + 100;
+export const INITIAL_Y_POSITION: number = 80; // for both objects
+export const SUB_INITIAL_LAT_POS: number = 800;
 
 // flags
 export const STOP_OCEAN_LAT = 'stop_ocean_lateral';

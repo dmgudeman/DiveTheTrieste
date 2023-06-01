@@ -27,7 +27,7 @@ export const getMove = (dir: string) => {
     clearHitBottom();
     const ocean:Ocean = Ocean.getInstance();
     const sub:Sub = Sub.getInstance();
-    const constants:CalConstant = new CalcConstant();
+    const constants:CalcConstant = new CalcConstant();
     const oceanLatLimit:number = constants.getOceanLatLimit();
     const fullLatLimit:number = constants.getFullLatLimit();
     const oceanVertLimit:number = constants.getOceanVertLimit();
@@ -122,12 +122,13 @@ function getVerticalMove(
     };
 
     const moveOceanDown = () => {
-        console.log("AAAAAAAAAAAAAAAAA");
         ocean.setY(ocean.getY() - VERTICAL_VELOCITY);
     };
+
     const moveSubUp = () => {
         sub.setY(sub.getY() - VERTICAL_VELOCITY);
     };
+
     const moveSubDown = () => {
         sub.setY(sub.getY() + VERTICAL_VELOCITY);
     };
@@ -140,12 +141,12 @@ function getVerticalMove(
             moveOceanDown();
         }
     } else if (vert > depth) {
-        console.log("INNNEEERRRRRRR PRE");
+        // console.log("INNNEEERRRRRRR PRE");
         if (vert >= oceanVertLimit + VERTICAL_VELOCITY) {
             // less than ocean limit
-            console.log("OCEANNNNNNNNNNNNNNNNN");
-            if (vert >= depth) {
-                console.log("OCEAN44444444 NORMAL");
+            // console.log("OCEANNNNNNNNNNNNNNNNN");
+            if (vert >= depth) {    // overLimit
+                // console.log("OCEAN44444444 NORMAL");
                 if (dir === "down") {
                     moveOceanDown();
                 } else if (dir === "up") {
@@ -153,13 +154,13 @@ function getVerticalMove(
                 }
             } else if (vert <= depth + VERTICAL_VELOCITY) {
                 // over depth limit
-                console.log("OCEAN7777777 OVER", vert);
+                // console.log("OCEAN7777777 OVER", vert);
                 if (dir === "up") {
                     moveOceanUp();
                 }
             }
         } else if (vert > depth + VERTICAL_VELOCITY) {
-            console.log("SUBBBBBBBBB NORMAL"); // over ocean limit under depth limit
+            // console.log("SUBBBBBBBBB NORMAL"); // over ocean limit under depth limit
             if (dir === "down") {
                 moveSubDown();
             } else if (dir === "up") {
@@ -168,7 +169,7 @@ function getVerticalMove(
         }
     } else if (vert < depth + VERTICAL_VELOCITY) {
         // over the limit
-        console.log("XXXXXXXXXXXXBOTTOM");
+        // console.log("XXXXXXXXXXXXBOTTOM");
         if (vert >= oceanVertLimit) {
             if (dir === "up") {
                 moveOceanUp();
@@ -230,7 +231,6 @@ const calcVertical = (vert: number, ocean: Ocean, sub: Sub): void => {
         ocean.setY(0);
         sub.setY(80);
     }
-    console.log("calcVertical fired", Math.abs(Y - vert) > 20 && vert < -100);
 };
 
 const configureMoveVertical = (

@@ -1,4 +1,9 @@
-import { INITIAL_Y_POSITION, SUB_INITIAL_LAT_POS } from "./constants";
+import {
+    INITIAL_Y_POSITION,
+    SUB_INITIAL_LAT_POS,
+    LAT_VELOCITY,
+    VERTICAL_VELOCITY,
+} from "./constants";
 import { WIDTH, HEIGHT } from "../index";
 import { ISprite } from "./types";
 
@@ -19,7 +24,7 @@ class Sub {
     private velRight: number;
     private velLeft: number;
     private velUp: number;
-    private velDown: number; 
+    private velDown: number;
     private subImageSrc: string; // this is the sprite sheet
     private spriteSheet: HTMLImageElement;
     private sprites: ISprite[];
@@ -129,32 +134,45 @@ class Sub {
         return this.velRight;
     }
 
-    public setVelRight(velRight: number): void {
-        this.velRight = velRight;
+    public setVelRight(): void {
+        this.velRight = LAT_VELOCITY;
     }
 
     public getVelLeft(): number {
         return this.velLeft;
     }
 
-    public setVelLeft(velLeft: number): void {
-        this.velLeft = velLeft;
+    public setVelLeft(): void {
+        this.velLeft = LAT_VELOCITY;
     }
-
     public getVelUp(): number {
         return this.velUp;
     }
 
-    public setVelUp(velUp: number): void {
-        this.velUp = velUp;
+    public setVelUp(): void {
+        this.velUp = VERTICAL_VELOCITY;
     }
-
     public getVelDown(): number {
         return this.velDown;
     }
 
-    public setVelDown(velDown: number): void {
-        this.velDown = velDown;
+    public setVelDown(): void {
+        this.velDown = VERTICAL_VELOCITY;
+    }
+    public zeroVelRight(): void {
+        this.velRight = 0;
+    }
+
+    public zeroVelLeft(): void {
+        this.velLeft = 0;
+    }
+
+    public zeroVelUp(): void {
+        this.velUp = 0;
+    }
+
+    public zeroVelDown(): void {
+        this.velDown = 0;
     }
 
     clear() {
