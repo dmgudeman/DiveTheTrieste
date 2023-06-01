@@ -1,5 +1,5 @@
 
-import { getMove } from "./move";
+import Move from './move';
 import { getCurrentCanvas } from "./constants";
 import { showCanvas1, showCanvas2, showCanvas3 } from "./util";
 import Ocean from './ocean';
@@ -12,15 +12,16 @@ class Keymaster {
   private sub: Sub;
   private dir: string;
   private modal: HTMLElement;
+  private move: Move;
 
   constructor(ocean:Ocean , sub:Sub, dir?:string) {
     this.dir = dir;
     this.ocean = ocean;
     this.sub = sub;
-
     this.modal = document.getElementById("modal") as HTMLElement;
+    this.move = new Move(this.ocean, this.sub);
   }
-
+  
   navigate(navigate: string) {
     let currentCanvas = getCurrentCanvas();
     if (localStorage.modalDisplayed === "false") {
@@ -58,7 +59,7 @@ class Keymaster {
   }
 
   newPos(dir: string) {
-    getMove(dir);
+    this.move.getMove(dir);
     
     // if (dir === "down") {
     //   console.log("DIRRRR", dir);
