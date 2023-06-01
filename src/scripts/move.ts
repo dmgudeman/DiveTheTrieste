@@ -41,21 +41,35 @@ class Move {
         this.sub = sub;
         this.dir = dir || null;
         this.constants = CalcConstant = new CalcConstant() || null;
-        this.oceanLatLimit = this.constants.getOceanLatLimit() || null;
-        this.oceanVertLimit = this.constants.getOceanVertLimit() || null;
-        this.fullLatLimit = this.constants.getFullLatLimit() || null;
-        this.fullVertLimit = this.constants.getFullVertLimit() || null;
+        this.oceanLatLimit = this.constants.getOceanLatLimit() ?? null;
+        this.oceanVertLimit = this.constants.getOceanVertLimit() ?? null;
+        this.fullLatLimit = this.constants.getFullLatLimit() ?? null;
+        this.fullVertLimit = this.constants.getFullVertLimit() ?? null;
         this.compLat =
-            this.ocean.getX() - this.sub.getX() + SUB_INITIAL_LAT_POS || null;
+            this.ocean.getX() - this.sub.getX() + SUB_INITIAL_LAT_POS ?? null;
         this.compVert =
-            this.ocean.getY() - this.sub.getY() + INITIAL_Y_POSITION || null;
+            this.ocean.getY() - this.sub.getY() + INITIAL_Y_POSITION ?? null;
         this.depthObject = this.constants.getDepthObject(this.compLat) || null;
         this.varDepth = this.constants.calcDepthLimit(this.compLat) || null;
         this.OorS = this.constants.getOorS(this.compLat, this.compVert) || null;
     }
 
+
+    upDateCoordinates() {
+        this.compLat = this.ocean.getX() - this.sub.getX() + SUB_INITIAL_LAT_POS;
+        this.compVert = this.ocean.getY() - this.sub.getY() + INITIAL_Y_POSITION 
+        this.oceanLatLimit = this.constants.getOceanLatLimit();
+        this.oceanVertLimit = this.constants.getOceanVertLimit();
+        this.fullLatLimit = this.constants.getFullLatLimit();
+        this.fullVertLimit = this.constants.getFullVertLimit() ;
+        this.depthObject = this.constants.getDepthObject(this.compLat);
+        this.varDepth = this.constants.calcDepthLimit(this.compLat);
+        this.OorS = this.constants.getOorS(this.compLat, this.compVert);
+    }
+
     getMove = (dir: string) => {
         this.setDir(dir);
+        this.upDateCoordinates();
         this.getLatMove();
         this.getVerticalMove();
     };
