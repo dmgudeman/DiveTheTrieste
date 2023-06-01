@@ -18,6 +18,7 @@ import Ocean from "./ocean";
 import Sub from "./sub";
 import { MoveObjects, LatMoveLimit, DepthObject } from "./types";
 import CalcConstant from "./calcConstant";
+import MoveUtils from "./moveUtils";
 import { WIDTH } from "../index";
 
 
@@ -40,6 +41,7 @@ export const getMove = (dir: string) => {
     if (variableDepth === null) {
         variableDepth = fullVertLimit;
     }
+    const moveUtils:MoveUtils = new MoveUtils(ocean, sub, compLat, compVert)
 
     getLatMove(
         ocean,
@@ -50,17 +52,18 @@ export const getMove = (dir: string) => {
         oceanLatLimit,
         fullLatLimit
     );
-    getVerticalMove(
-        ocean,
-        sub,
-        dir,
-        compVert,
-        variableDepth,
-        oceanVertLimit,
-        fullVertLimit,
-        depthObjectName,
-        compLat
-    );
+    moveUtils.configureMoveVertical()
+    // getVerticalMove(
+    //     ocean,
+    //     sub,
+    //     dir,
+    //     compVert,
+    //     variableDepth,
+    //     oceanVertLimit,
+    //     fullVertLimit,
+    //     depthObjectName,
+    //     compLat
+    // );
 };
 function getLatMove(
     ocean: Ocean,
@@ -215,14 +218,14 @@ export const clearHitBottom = () => {
 };
 
 const resetVelocities = (ocean: Ocean, sub: Sub) => {
-    ocean.setVelRight(0);
-    ocean.setVelLeft(0);
-    ocean.setVelUp(0);
-    ocean.setVelDown(0);
-    sub.setVelRight(0);
-    sub.setVelLeft(0);
-    sub.setVelUp(0);
-    sub.setVelDown(0);
+    ocean.zeroVelRight();
+    ocean.zeroVelLeft();
+    ocean.zeroVelUp();
+    ocean.zeroVelDown();
+    sub.zeroVelRight();
+    sub.zeroVelLeft();
+    sub.zeroVelUp();
+    sub.zeroVelDown();
 };
 
 const calcVertical = (vert: number, ocean: Ocean, sub: Sub): void => {
@@ -239,29 +242,29 @@ const configureMoveVertical = (
     OorS: string,
     dir: string
 ) => {
-    ocean.setVelUp(0);
-    ocean.setVelDown(0);
-    sub.setVelUp(0);
-    sub.setVelDown(0);
+    ocean.zeroVelUp();
+    ocean.zeroVelDown();
+    sub.zeroVelUp();
+    sub.zeroVelDown();
 
     if (OorS === "O") {
         sub.setY(INITIAL_Y_POSITION);
         if (dir === "U") {
-            ocean.setVelUp(VERTICAL_VELOCITY);
+            ocean.setVelUp();
         } else if (dir === "D") {
-            ocean.setVelDown(VERTICAL_VELOCITY);
+            ocean.setVelDown();
         } else {
-            ocean.setVelUp(VERTICAL_VELOCITY);
-            ocean.setVelDown(VERTICAL_VELOCITY);
+            ocean.setVelUp();
+            ocean.setVelDown();
         }
     } else if (OorS === "S") {
         if (dir === "U") {
-            sub.setVelUp(VERTICAL_VELOCITY);
+            sub.setVelUp();
         } else if (dir === "D") {
-            sub.setVelDown(VERTICAL_VELOCITY);
+            sub.setVelDown();
         } else {
-            sub.setVelUp(VERTICAL_VELOCITY);
-            sub.setVelDown(VERTICAL_VELOCITY);
+            sub.setVelUp();
+            sub.setVelDown();
         }
     }
 };

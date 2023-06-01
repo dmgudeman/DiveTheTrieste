@@ -9,7 +9,7 @@ class MoveUtils {
     private sub: Sub;
     private constants: CalcConstant;
     private lat: number;
-    private vert:number;
+    private vert: number;
     private OorS: string;
 
     private depthObject: DepthObject;
@@ -18,8 +18,7 @@ class MoveUtils {
         ocean: Ocean,
         sub: Sub,
         lat: number,
-        vert:number,
-        OorS: string
+        vert: number,
         // vert: number,
         // SorO: string,
         // mvmtLat: string,
@@ -32,28 +31,20 @@ class MoveUtils {
         this.constants = new CalcConstant();
         this.OorS = this.constants.getOorS(this.lat, this.vert);
         this.depthObject = this.constants.getDepthObject(this.lat);
-
-        // this.vert = vert || null;
-        // this.SorO = SorO || null;
-        // this.mvmtLat = mvmtLat || null;
-        // this.mvmtVert = mvmtVert || null;
     }
-     
 
-    configureHitBottom = (lat:number) => {
-      let hitBottom = document.getElementById("hitBottomContainer");
-      hitBottom.classList.remove("hide");
-     
-     
-    //   this.configureMoveLateral(objects, object, depthObject.mvmtLat);
-     this.configureMoveVertical();
-  };
-    configureMoveVertical = ( ) => {
-        
-        this.ocean.setVelUp(0);
-        this.sub.setVelDown(0);
-        this.sub.setVelUp(0);
-        this.sub.setVelDown(0);
+    configureHitBottom = (lat: number) => {
+        let hitBottom = document.getElementById("hitBottomContainer");
+        hitBottom.classList.remove("hide");
+        this.configureMoveVertical();
+    };
+    configureMoveVertical = () => {
+        this.ocean.zeroVelUp();
+        this.ocean.zeroVelDown();
+        this.sub.zeroVelUp();
+        this.sub.zeroVelDown();
+        console.log('DEPTH_OBJECT_CONFIG_VERT', this.depthObject)
+        let dir = this.depthObject.mvmtVert;
 
         if (this.OorS === "OO") {
             this.sub.setY(INITIAL_Y_POSITION);
@@ -65,7 +56,7 @@ class MoveUtils {
                 this.ocean.setVelUp();
                 this.ocean.setVelDown();
             }
-        } else if (object === "S") {
+        } else if (this.OorS === "S") {
             if (dir === "U") {
                 this.sub.setVelUp();
             } else if (dir === "D") {
