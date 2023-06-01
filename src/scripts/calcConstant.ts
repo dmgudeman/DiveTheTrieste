@@ -37,11 +37,11 @@ class CalcConstant {
         }
     }
     
-    getOorS(lat:number, vert: number):string {
-         if (lat > this.getOceanLatLimit() && vert > this.getOceanVertLimit())  return 'OO';
-         if (lat < this.getOceanLatLimit() && vert > this.getOceanVertLimit())  return 'SO';
-         if (lat > this.getOceanLatLimit() && vert < this.getOceanVertLimit())  return 'OS';
-         if (lat < this.getOceanLatLimit() && vert < this.getOceanVertLimit())  return 'SS';
+    getOorS(lat:number, vert: number):string[] {
+         if (lat > this.getOceanLatLimit() && vert > this.getOceanVertLimit())  return ['O', 'O'];
+         if (lat < this.getOceanLatLimit() && vert > this.getOceanVertLimit())  return ['S', 'O'];
+         if (lat > this.getOceanLatLimit() && vert < this.getOceanVertLimit())  return ['O', 'S'];
+         if (lat < this.getOceanLatLimit() && vert < this.getOceanVertLimit())  return ['S', 'S'];
     }
   
 

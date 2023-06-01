@@ -129,6 +129,8 @@ class Ocean {
         this.velDown = VERTICAL_VELOCITY;
     }
 
+    
+
     public zeroVelRight(): void {
         this.velRight = 0;
     }
@@ -144,5 +146,6 @@ class Ocean {
     public zeroVelDown(): void {
         this.velDown = 0;
     }
+
 }
 export default Ocean;
