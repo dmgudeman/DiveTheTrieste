@@ -28,6 +28,7 @@ class Move {
     private constants: CalcConstant;
     private oceanLatLimit: number;
     private oceanVertLimit: number;
+    private  fullLatLimit: number;
     private fullVertLimit: number;
     private compLat: number;
     private compVert: number;
@@ -51,37 +52,36 @@ class Move {
         this.variableDepth = this.constants.calcDepthLimit(this.compLat);
         this.OorS = this.constants.getOorS(this.compLat, this.compVert);
     }
-
+   moveOceanRight = () => {
+        this.ocean.setX(this.ocean.getX() - LAT_VELOCITY);
+    };
+    moveOceanLeft = () => {
+        this.ocean.setX(this.ocean.getX() + LAT_VELOCITY);
+    };
+    moveSubRight = () => {
+        this.sub.setX(this.sub.getX() + LAT_VELOCITY);
+    };
+  moveSubLeft = () => {
+        this.sub.setX(this.sub.getX() - LAT_VELOCITY);
+    };
 
 getMove = (dir: string) => {
-    clearHitBottom();
+   
   
 
-    getLatMove(
-        ocean,
-        sub,
+    this.getLatMove(
+
         dir,
-        compLat,
-        compVert,
-        variableDepth,
-        oceanLatLimit,
-        fullLatLimit
+
     );
 
     getVerticalMove(
-        ocean,
-        sub,
+
         dir,
-        compVert,
-        variableDepth,
-        oceanVertLimit,
-        fullVertLimit,
-        depthObjectName,
-        compLat,
-        OorS
+
     );
 };
-function getLatMove(
+getLatMove(
     ocean: Ocean,
     sub: Sub,
     dir: string,
@@ -91,42 +91,31 @@ function getLatMove(
     oceanLatLimit: number,
     fullLatLimit: number
 ) {
-    let moveUtils = new MoveUtils(ocean, sub, lat, vert);
-    const moveOceanRight = () => {
-        ocean.setX(ocean.getX() - LAT_VELOCITY);
-    };
-    const moveOceanLeft = () => {
-        ocean.setX(ocean.getX() + LAT_VELOCITY);
-    };
-    const moveSubRight = () => {
-        sub.setX(sub.getX() + LAT_VELOCITY);
-    };
-    const moveSubLeft = () => {
-        sub.setX(sub.getX() - LAT_VELOCITY);
-    };
+    
+    
 
-    if (lat > 0) {
-        moveOceanRight();
-    } else if (lat > oceanLatLimit) {
-        if (dir === "right") {
-            moveOceanRight();
-        } else if (dir === "left") {
-            moveOceanLeft();
+    if (this.compLat > 0) {
+        this.moveOceanRight();
+    } else if (this.compLat > oceanLatLimit) {
+        if (this.dir === "right") {
+            this.moveOceanRight();
+        } else if (this.dir === "left") {
+            this.moveOceanLeft();
         }
-    } else if (lat > fullLatLimit) {
+    } else if (this.compLat > this.fullLatLimit) {
         if (dir === "right") {
-            moveSubRight();
+            this.moveSubRight();
         } else if (dir === "left") {
-            moveSubLeft();
+            this.moveSubLeft();
         }
     } else if (lat < fullLatLimit) {
         if (dir === "left") {
-            moveSubLeft();
+            this.moveSubLeft();
         }
     }
 }
 
-function getVerticalMove(
+getVerticalMove(
     ocean: Ocean,
     sub: Sub,
     dir: string,
@@ -220,12 +209,12 @@ function getVerticalMove(
 //     let hitBottom = document.getElementById("hitBottomContainer");
 //     hitBottom.classList.remove("hide");
 // };
-export const clearHitBottom = () => {
+clearHitBottom = () => {
     let hitBottom = document.getElementById("hitBottomContainer");
     hitBottom.classList.add("hide");
 };
 
-const resetVelocities = (ocean: Ocean, sub: Sub) => {
+resetVelocities = (ocean: Ocean, sub: Sub) => {
     ocean.zeroVelRight();
     ocean.zeroVelLeft();
     ocean.zeroVelUp();
