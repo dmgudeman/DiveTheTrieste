@@ -263,3 +263,34 @@ const calcVertical = (vert: number, ocean: Ocean, sub:Sub ):void=> {
 }
 
 
+// from configure hitbottom
+
+// function getLatMove(objects, variableDepth) {
+//     let { ocean, sub } = objects;
+//     let compLat = ocean.sx + sub.x - SUB_INITIAL_LAT_POS;
+//     let compVert = ocean.sy + sub.y - INITIAL_Y_POSITION;
+
+//     if (compLat < LAT_VELOCITY) {
+//         configureMoveLateral(objects, "O", "R");
+//     } else if (compLat < OCEAN_LAT_LIMIT - LAT_VELOCITY) {
+//         if (compVert < variableDepth - VERTICAL_VELOCITY) {
+//             configureMoveLateral(objects, "O", "B");
+//         } else {
+//             // ocean.sy -= VERTICAL_VELOCITY;
+//             // configureMoveLateral(objects, 'O', 'R')
+//             configureHitBottom(compLat, objects, "S");
+//         }
+//     } else if (compLat < FULL_LAT_LIMIT) {
+//         if (compVert < variableDepth - VERTICAL_VELOCITY) {
+//             configureMoveLateral(objects, "S", "B");
+//         } else {
+//             // sub.sy -= LAT_VELOCITY;
+//             // configureMoveLateral(objects, 'O', 'L')
+//             // moveSubLeft();
+//             configureHitBottom(compLat, objects, "S");
+//         }
+//     }
+
+//     return displayObjects;
+// }
+
