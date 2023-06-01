@@ -18,11 +18,11 @@ class CalcConstant {
         return this.width * -0.7;
     }
     getOceanVertLimit() {
-        return this.height * -0.45;
+        return this.height * -0.55;
     }
 
     getFullVertLimit() {
-        return this.height * 0.9;
+        return this.height * -0.95;
     }
 
     getDepthObject(lat: number): LatMoveLimit {

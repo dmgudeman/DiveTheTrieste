@@ -115,8 +115,8 @@ export const LAT_LIMITS: LatMoveLimit[] = [
   {'id':8, 'name':'DBL_PEAK_2',       x: -1120, xll: -981,  y: -240,  yll: -199},
   {'id':9, 'name':'END_DBL',          x: -1180, xll: -1121, y: -460,  yll: -239},
   {'id':10, 'name':'START_TRENCH',    x: -1280, xll: -1181, y: -480,  yll: -461},
-  {'id':11,'name':'TRENCH_BOTTOM',    x: -1600, xll: -1281, y: -1700, yll: -479},
-  {'id':12, 'name':'END_TRENCH',      x: -1760, xll: -1601, y: -480,  yll: -1701},
+  {'id':11,'name':'TRENCH_BOTTOM',    x: -1560, xll: -1281, y: -1800, yll: -479},
+  {'id':12, 'name':'END_TRENCH',      x: -1760, xll: -1561, y: -480,  yll: -1801},
   {'id':13, 'name':'END_POSITION',    x: -2600, xll: -1761, y: -485,  yll: -481},
   {'id':14, 'name':'OVER_LIMIT_L',    x: -2602, xll: -2601, y: -485,  yll: -481},
 ]

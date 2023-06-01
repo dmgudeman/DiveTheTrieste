@@ -40,7 +40,7 @@ export const getMove = (dir: string) => {
     
     let variableDepth = calcDepthLimit(compLat);
     const depthObject = constants.getDepthObject(compLat);
-    const depthObjectName = depthObject.name 
+    const depthObjectName = depthObject?.name 
     if (variableDepth === null) {
         variableDepth = fullVertLimit;
     }
@@ -116,8 +116,12 @@ function getVerticalMove(
     depthObjectName,
     lat: number
 ) {
-    
+   
+
+   
+
     console.log('==============')
+    console.log('IIIMMM HERE', vert, (vert < -100))
     console.log('depthObjectName', depthObjectName)
     console.log("COMPLAT",  lat)
     console.log("COMPVERT", vert);
@@ -141,12 +145,11 @@ function getVerticalMove(
         sub.setY(sub.getY() + VERTICAL_VELOCITY);
     };
 /////////////////////////////////////////
-console.log('TESTTTTTTTTTTTTTTTTT', vert , (-VERTICAL_VELOCITY - 1 ), ( vert > (-VERTICAL_VELOCITY - 1 )) )
+// 
+
+calcVertical(vert, ocean, sub)
     if (vert  > 0) {
-        console.log('OUTERRRRR CONDITION')
-        ocean.setY(0);
-        sub.setY(80);
-        vert = 0;
+      moveSubDown()
     } else if ( vert > (-VERTICAL_VELOCITY - 1 )) {
     
         if(dir === 'down') {        
@@ -246,5 +249,17 @@ const resetVelocities = (ocean: Ocean, sub: Sub) => {
     sub.setVelUp(0);
     sub.setVelDown(0);
 };
+
+
+const calcVertical = (vert: number, ocean: Ocean, sub:Sub ):void=> {
+    let Y = ocean.getY()
+    if (Math.abs(Y - vert) > 10 && vert > -100) {
+       
+        ocean.setY(0);
+        sub.setY(80);
+
+    }
+   console.log( 'calcVertical fired', (Math.abs(Y - vert) > 20 && vert < -100) )
+}
 
 
