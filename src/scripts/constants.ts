@@ -123,3 +123,22 @@ export const LAT_LIMITS: LatMoveLimit[] = [
 
 
 
+// from refactorHitBottom
+// export const LAT_LIMITS = [  // the x, xll, y, yll are for slope, the mvmt are to control movement when hit bottom
+//   {'id':0, 'name':'INITIAL_POSITION', x:0,   xll: 0,   y:0,   yll: 0,    mvmtLat: 'R', mvmtVert:  null},
+//   {'id':1, 'name':'SLOPE_LIMIT',      x:180, xll: 1,   y:400, yll: 1,    mvmtLat: 'R', mvmtVert: 'U'},
+//   {'id':2, 'name':'START_BUMP',       x:630, xll: 181, y:475, yll: 401,  mvmtLat: 'L', mvmtVert: 'U'}, 
+//   {'id':3, 'name':'BUMP_PEAK',        x:720, xll: 631, y:380, yll: 476,  mvmtLat: 'B', mvmtVert: 'U'},
+//   {'id':4, 'name':'END_BUMP',         x:800, xll: 721, y:485, yll: 381,  mvmtLat: 'R', mvmtVert: 'U'},
+//   {'id':5, 'name':'START_DBL',        x:840, xll: 801, y:460, yll: 486,  mvmtLat: 'B', mvmtVert: 'U'},
+//   {'id':6, 'name':'DBL_PEAK_1',       x:980, xll: 841, y:200, yll: 461,  mvmtLat: 'B', mvmtVert: 'U'},
+//   {'id':7, 'name':'DBL_PEAK_2',       x:1120,xll: 981, y:240, yll: 199,  mvmtLat: 'B', mvmtVert: 'U'},
+//   {'id':8, 'name':'END_DBL',          x:1180,xll: 1121,y:450, yll: 239,  mvmtLat: 'R', mvmtVert: 'U'},
+//   {'id':9, 'name':'START_TRENCH',     x:1320,xll: 1181,y:500, yll: 451,  mvmtLat: 'B', mvmtVert: 'U'},
+//   {'id':10,'name':'TRENCH_BOTTOM',    x:1600,xll: 1321,y:1560, yll: 501, mvmtLat: 'R', mvmtVert: 'U'},
+//   {'id':11, 'name':'END_TRENCH',      x:1740,xll: 1601,y:480, yll: 1561, mvmtLat: 'L', mvmtVert: 'U'},
+//   {'id':12, 'name':'END_POSITION',    x:2200,xll: 1741,y:485, yll: 481,  mvmtLat: 'L', mvmtVert: 'U'},
+// ]
+
+
+
