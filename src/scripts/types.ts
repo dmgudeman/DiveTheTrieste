@@ -16,4 +16,11 @@ export interface LatMoveLimit {
     y: number;
     yll: number;
   }
+
+  export interface ISprite {
+    x: number; 
+    y: number;  
+    width: number;
+    height: number;
+  }
   

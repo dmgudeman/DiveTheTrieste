@@ -156,57 +156,16 @@ document.addEventListener("DOMContentLoaded", () => {
         ctx1.clearRect(0, 0, canvas1.width, canvas1.height);
     }
 
-    // sprite
-    const spriteSheet = new Image();
-    spriteSheet.src = "assets/sprite.png";
-    spriteSheet.onload = () => {
-        ctx1.drawImage(spriteSheet, 0, 0, 500, 500);
-    };
-
-    const sprites = [
-        { x: 0, y: 0, width: 125, height: 200 },
-        { x: 135, y: 0, width: 135, height: 200 },
-        { x: 280, y: 0, width: 125, height: 200 },
-        { x: 410, y: 0, width: 140, height: 200 },
-    ];
-
-    let currentFrame = 0;
-    let lastFrameTime = 0;
+   
     // let counter = 0;
     // let onOceanFlag = true;
   
     // MAIN ANIMATION LOOP /////////////////////////////////
     function update() {
-        const currentTime = Date.now(); 
-        // This is the animation loop for provideMessage
+      
         calcMovement(ocean, sub)
      
         showDepth();
- 
-        const elapsedTime = currentTime - lastFrameTime;
- 
-        if (elapsedTime > 1000 / 10) {
-            clear();
-            ocean.draw();
-        
-            const sprite = sprites[currentFrame];
-            ctx1.drawImage(
-                spriteSheet,
-                sprite.x,
-                sprite.y,
-                sprite.width,
-                sprite.height,
-                sub.getX(),
-                sub.getY(),
-                sub.getW(),
-                sub.getH()
-            );
-            currentFrame++;
-            if (currentFrame >= sprites.length) {
-                currentFrame = 0;
-            }
-            lastFrameTime = currentTime;
-        }
            
     requestAnimationFrame(update);
     }

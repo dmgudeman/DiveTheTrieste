@@ -1,12 +1,19 @@
-import {
-    INITIAL_Y_POSITION,
-    SUB_INITIAL_LAT_POS,
-  } from './constants';
-import {WIDTH, HEIGHT} from '../index';
+import { INITIAL_Y_POSITION, SUB_INITIAL_LAT_POS } from "./constants";
+import { WIDTH, HEIGHT } from "../index";
+import { ISprite } from "./types";
 
-  class Sub {
+const sprites = [
+    { x: 0, y: 0, width: 125, height: 200 },
+    { x: 135, y: 0, width: 135, height: 200 },
+    { x: 280, y: 0, width: 125, height: 200 },
+    { x: 410, y: 0, width: 140, height: 200 },
+];
+
+class Sub {
     private static instance: Sub;
     private ctx: CanvasRenderingContext2D;
+    private subImageSrc: string; // this is the sprite sheet
+    private sprites: ISprite[];
     private x: number;
     private y: number;
     private w: number;
@@ -21,42 +28,41 @@ import {WIDTH, HEIGHT} from '../index';
     private initialLateralPos: number;
     private initialDepthPos: number;
 
-  
     private constructor(
         ctx: CanvasRenderingContext2D,
+        subImageSrc?: string,
+        sprites?: ISprite[],
         x?: number,
         y?: number,
-        width?: number ,
+        width?: number,
         height?: number,
         velRight?: number,
         velLeft?: number,
         velUp?: number,
         velDown?: number,
-        spriteSheet: HTMLImageElement,
-        currentFrame: number,
-        lastFrameTime: number,
-    
+        currentFrame?: number,
+        lastFrameTime?: number
     ) {
-      this.ctx = ctx;
-      this.x = x || SUB_INITIAL_LAT_POS;
-      this.y = y || INITIAL_Y_POSITION;
-      this.w = width || 120; // size of the sub in px
-      this.h = height || 120; // size of the sub in px
-      this.velRight = velRight || 0;
-      this.velLeft = velLeft || 0;
-      this.velUp = velUp || 0;
-      this.velDown = velDown || 0;
-      this.spriteSheet = spriteSheet || null;
-      this.spriteSheet.src = "assets/sprite.png";
-      this.currentFrame = currentFrame || 0;
-      this.lastFrameTime = lastFrameTime || 0;
-    //   this.initialLateralPos = initialLateralPos || SUB_INITIAL_LAT_POS;
-    //   this.initialDepthPos = initialDepthPos || INITIAL_Y_POSITION;
-    //   this.initialDepthPos = 0;
+        this.ctx = ctx;
+        this.spriteSheet = new Image();
+        this.subImageSrc = "assets/sprite.png";
+        this.sprites = sprites;
+        this.x = x || SUB_INITIAL_LAT_POS;
+        this.y = y || INITIAL_Y_POSITION;
+        this.w = width || 120; // size of the sub in px
+        this.h = height || 120; // size of the sub in px
+        this.velRight = velRight || 0;
+        this.velLeft = velLeft || 0;
+        this.velUp = velUp || 0;
+        this.velDown = velDown || 0;
+        this.currentFrame = currentFrame || 0;
+        this.lastFrameTime = lastFrameTime || 0;
+        this.updateSprite = this.updateSprite.bind(this);
     }
 
     public static getInstance(
         ctx?: CanvasRenderingContext2D,
+        subImageSrc = "assets/sprite.png",
         x: number = SUB_INITIAL_LAT_POS,
         y: number = 0,
         width: number = 120,
@@ -65,27 +71,38 @@ import {WIDTH, HEIGHT} from '../index';
         velLeft: number = 0,
         velUp: number = 0,
         velDown: number = 0,
-        spriteSheet: HTMLImageElement = new Image(),
         currentFrame: number = 0,
-        lastFrameTime: number = 0,
-        // initialLateralPos: number = SUB_INITIAL_LAT_POS,
-        // initialDepthPos: number = INITIAL_Y_POSITION,
-        // initialDepthPos: number = 0,
-        
+        lastFrameTime: number = 0
     ): Sub {
         if (!Sub.instance) {
             if (!ctx) {
-                throw new Error('A context must be provided when creating a new instance.');
+                throw new Error(
+                    "A context must be provided when creating a new instance."
+                );
             }
-            Sub.instance = new Sub(ctx, x, y, width, height, velRight, velLeft, velUp, velDown, spriteSheet, currentFrame, lastFrameTime);
+            Sub.instance = new Sub(
+                ctx,
+                subImageSrc,
+                sprites,
+                x,
+                y,
+                width,
+                height,
+                velRight,
+                velLeft,
+                velUp,
+                velDown,
+                currentFrame,
+                lastFrameTime
+            );
         }
         return Sub.instance;
     }
-  
+
     // draw() {
     //   this.ctx.drawImage(this.subImage, this.x, this.y, this.w, this.h);
     // }
-    
+
     public getX(): number {
         return this.x;
     }
@@ -142,35 +159,15 @@ import {WIDTH, HEIGHT} from '../index';
         this.velDown = velDown;
     }
 
-
-
     clear() {
         this.ctx.clearRect(0, 0, WIDTH, HEIGHT);
     }
 
-    // sprite
-    
-    
-    
-
-    sprites = [
-        { x: 0, y: 0, width: 125, height: 200 },
-        { x: 135, y: 0, width: 135, height: 200 },
-        { x: 280, y: 0, width: 125, height: 200 },
-        { x: 410, y: 0, width: 140, height: 200 },
-    ];
-
-    
-   
-
-  update() {
-        const currentTime = Date.now(); 
+    updateSprite() {
+        const currentTime = Date.now();
         const elapsedTime = currentTime - this.lastFrameTime;
-        
- 
+
         if (elapsedTime > 1000 / 10) {
-      
-        
             const sprite = this.sprites[this.currentFrame];
             this.ctx.drawImage(
                 this.spriteSheet,
@@ -189,15 +186,9 @@ import {WIDTH, HEIGHT} from '../index';
             }
             this.lastFrameTime = currentTime;
         }
-           
-    requestAnimationFrame(this.update);
+
+        requestAnimationFrame(this.updateSprite);
     }
+}
 
-  }
-  
-  
-  export default Sub;
-
-
-
- 
+export default Sub;
