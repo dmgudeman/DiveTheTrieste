@@ -24,7 +24,9 @@ import { WIDTH, HEIGHT } from "../index";
 //     removeMessageElement,
 // } from "./edMessage1";
 import { changeEducationalText, addEdTextStyle} from './educational';
-import { globalOcean, globalSub  } from "../index";
+
+import Ocean from "./ocean";
+import Sub from "./sub";
 
 // this is to allow calculation of a modelo so that
 // the bubble messages released at a slow pace
@@ -32,11 +34,10 @@ let i = 0;
 let flag;
 let oldFlag;
 // this is being called from the main animation loop in index.js
-export function calcMovement() {
-    let ocean = globalOcean.ocean;
-    let sub = globalSub.sub;
-    let compVert = ocean.sy + sub.y - INITIAL_Y_POSITION;
-    let compLat = ocean.sx + sub.x - SUB_INITIAL_LAT_POS;
+export function calcMovement(ocean:Ocean, sub: Sub) {
+  
+    let compVert = ocean.getY() + sub.getY() - INITIAL_Y_POSITION;
+    let compLat = ocean.getX() + sub.getX() - SUB_INITIAL_LAT_POS;
     i++;
 
     // console.log("comLat", compLat);
@@ -120,16 +121,16 @@ export function calcMovement() {
     }
 }
 
-export const getMessage = (ocean, sub) => {
-    let flag = calcMovement(ocean, sub);
-};
+// export const getMessage = (ocean : Ocean, sub: Sub) => {
+//     let flag = calcMovement(ocean, sub);
+// };
 
-export const getTimedMessage = (ocean, sub) => {
-    // let message = calcMovement(ocean, sub);
-    console.log("MESSAGE in getTimed", message);
-    addAndStartMessAnimation(message);
-    return message;
-};
+// export const getTimedMessage = (ocean:Ocean, sub:Sub) => {
+//     let message = calcMovement(ocean, sub);
+//     console.log("MESSAGE in getTimed", message);
+//     // addAndStartMessAnimation(message);
+//     return message;
+// };
 
 
 const EBTextObject = {title: "EUPHOTIC BENTHIC", text: "The euphotic benthic zone is a crucial region in the ocean where sunlight reaches, allowing for photosynthesis. It extends from the ocean surface to around 200 meters deep, supporting diverse flora and fauna. Marine algae, seagrasses, and phytoplankton thrive in this zone, providing oxygen and serving as the foundation of the food web. Zooplankton, corals, and other invertebrates inhabit the benthic habitats, offering food and shelter to various species. Geographically, the euphotic benthic zone is prevalent in coastal areas, influencing adjacent ecosystems like coral reefs and seagrass meadows. It plays a vital role in carbon cycling, nutrient dynamics, and maintaining marine biodiversity. Preserving this zone is crucial for sustaining ocean health and the intricate balance of marine ecosystems."}

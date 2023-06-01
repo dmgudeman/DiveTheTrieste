@@ -1,4 +1,4 @@
-export function fadeInText(Title, Text ) {
+export function fadeInText(Title:HTMLElement, Text:HTMLElement ) {
     const Container = document.getElementById("fadeInContainer");
     const hitBottom = document.getElementById("hitBottomContainer")
     Container.style.opacity = "1";
@@ -6,7 +6,6 @@ export function fadeInText(Title, Text ) {
     Title.style.opacity = "0";
     Text.style.opacity = "0";
     
-
     function animate() {
         let titleOpacity = parseFloat(Title.style.opacity);
         let textOpacity = parseFloat(Text.style.opacity);
@@ -41,14 +40,14 @@ export function addEdTextStyle(flag) {
     // reset classList
     textEls.forEach((textEl, idx) => {
         const className = "fadeIn" + textElStrings[idx];
-        textEl.classList = className;
+        textEl.classList.add(className);
     });
 
     textEls.forEach((textEl, idx) => {
         const className = flag + "Style" + textElStrings[idx];
         textEl.classList.add(className);
     });
-    fadeInText(Container, Title, Text);
+    fadeInText(Title, Text);
 }
 
 export function changeEducationalText(newText) {

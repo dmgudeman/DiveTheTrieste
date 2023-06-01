@@ -1,23 +1,34 @@
-import {pickImageArray} from './boundary';
-
+import { pickImageArray } from './boundary';
+import Ocean from './ocean';
+import Sub from './sub';
 
 class Images {
-    constructor (options){
-        this.ctx = options.ctx;
-        this.ocean = options.ocean;
-        this.sub = options.sub;
-        // this assigns a number to the arrays
-        this.images = [this.eb, this.ep, this.db, this.dp, this.ab, this.ap]        
-    }
-   
-    pickRandomImage () {
-        let arrNum =  pickImageArray(this.ocean, this.sub, this.ctx)
-        let arr = this.images[arrNum]
-        let x = Math.floor(Math.random() * arr.length);
-        return arr[x]   
-    }
+  private ctx: CanvasRenderingContext2D;
+  private ocean: Ocean;
+  private sub: Sub;
+  private images: string[][];
+
+  constructor(options: {
+    ctx: CanvasRenderingContext2D;
+    ocean: Ocean;
+    sub: Sub;
+  }) {
+    this.ctx = options.ctx;
+    this.ocean = options.ocean;
+    this.sub = options.sub;
+
+    // Assign a number to the arrays
+    this.images = [this.eb, this.ep, this.db, this.dp, this.ab, this.ap];
+  }
+
+  public pickRandomImage(): string {
+    const arrNum = pickImageArray(this.ocean, this.sub, this.ctx);
+    const arr = this.images[arrNum];
+    const x = Math.floor(Math.random() * arr.length);
+    return arr[x];
+  }
  
-    ab = [
+  private ab: string[] = [
         './assets/life/ab/001.jpeg',
         './assets/life/ab/002.jpeg',
         './assets/life/ab/003.png',
@@ -33,7 +44,7 @@ class Images {
         './assets/life/ab/013.jpeg',
         './assets/life/ab/014.jpeg'
     ];
-    ap = [
+    private ap: string[] = [
         './assets/life/ap/001.jpeg',
         './assets/life/ap/002.jpeg',
         './assets/life/ap/003.jpg',
@@ -51,7 +62,7 @@ class Images {
         './assets/life/ap/015.jpeg',
         './assets/life/ap/016.jpeg',
     ]
-   db = [
+    private db: string[] = [
         './assets/life/db/001.png',
         './assets/life/db/002.jpeg',
         './assets/life/db/003.jpeg',
@@ -67,7 +78,7 @@ class Images {
         './assets/life/db/013.jpeg',
         './assets/life/db/014.jpeg'
    ];
-    dp = [
+   private dp: string[] = [
         './assets/life/dp/001.jpeg',
         './assets/life/dp/002.jpeg',
         './assets/life/dp/003.jpg',
@@ -86,7 +97,7 @@ class Images {
 
 
     ];
-    eb = [
+    private eb: string[] = [
         './assets/life/eb/001.jpeg',
         './assets/life/eb/002.jpeg',
         './assets/life/eb/003.jpeg',
@@ -102,7 +113,7 @@ class Images {
         './assets/life/eb/013.webp',
         './assets/life/eb/014.jpeg'
     ];
-    ep = [
+    private ep: string[] = [
         './assets/life/ep/001.jpg',
         './assets/life/ep/002.jpeg',
         './assets/life/ep/003.jpeg',
