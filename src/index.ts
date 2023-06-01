@@ -12,12 +12,9 @@ import Ocean from "./scripts/ocean";
 import Cockpit from "./scripts/cockpit";
 import { getCursorPosition } from "./scripts/util";
 import Keymaster from "./scripts/keymaster";
-import MoveObjects from "./scripts/moveObjects";
-import { OCEAN_LAT_LIMIT } from "./scripts/constants";
 
 export const WIDTH = window.innerWidth * 2; // width of canvases
 export const HEIGHT = window.innerHeight * 2.05; // height of canvases
-
 export const globalCockpit = { cockpit: null };
 
 let audioFlag = false; //change this to true for production
@@ -170,7 +167,7 @@ document.addEventListener("DOMContentLoaded", () => {
         ctx1.clearRect(0, 0, canvas1.width, canvas1.height);
     }
 
-    // MAIN ANIMATION LOOP /////////////////////////////////
+    // MAIN ANIMATION LOOP //////
     function update() {
         clear();
         calcMovement(ocean, sub);
@@ -179,6 +176,7 @@ document.addEventListener("DOMContentLoaded", () => {
         sub.draw();
         requestAnimationFrame(update);
     }
+    // start the seperate animation loop in the sub
     function animateSprite() {
         sub.updateSprite();
         requestAnimationFrame(animateSprite);
