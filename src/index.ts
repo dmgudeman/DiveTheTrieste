@@ -5,8 +5,8 @@
 // canvas3 is the cockpit
 
 import { showCanvas1, showCanvas2, showCanvas3 } from "./scripts/util";
-import { showDepth, showMouseAsSub} from "./scripts/boundary";
-import { calcMovement} from './scripts/provideMessage';
+import { showDepth, showMouseAsSub } from "./scripts/boundary";
+import { calcMovement } from "./scripts/provideMessage";
 import Sub from "./scripts/sub";
 import Ocean from "./scripts/ocean";
 import Cockpit from "./scripts/cockpit";
@@ -16,16 +16,16 @@ import MoveObjects from "./scripts/moveObjects";
 import { OCEAN_LAT_LIMIT } from "./scripts/constants";
 
 export const WIDTH = window.innerWidth * 2; // width of canvases
-export const HEIGHT = window.innerHeight * 2.05;  // height of canvases
+export const HEIGHT = window.innerHeight * 2.05; // height of canvases
 
-export const globalCockpit = {cockpit:null};
+export const globalCockpit = { cockpit: null };
 
-let audioFlag = false;//change this to true for production
+let audioFlag = false; //change this to true for production
 
 document.addEventListener("DOMContentLoaded", () => {
-    console.log("WWWWWW", WIDTH)
-    console.log('HHHHH',HEIGHT)
-    
+    console.log("WIDTH INDEX.TS", WIDTH);
+    console.log("HEIGHT INDEX.TS", HEIGHT);
+
     // function toggleAudio(audio) {
     //     if (audioFlag) {
     //         audio.play();
@@ -36,22 +36,37 @@ document.addEventListener("DOMContentLoaded", () => {
     //     }
     //     audioFlag = !audioFlag;
     // }
-  
-   
+
     // let audio = document.getElementById("music");
     // toggleAudio(audio);
     localStorage.setItem("modalDisplayed", false.toString());
 
-    console.log('HEIGHT', HEIGHT);
-    console.log('WIDTH', WIDTH)
-    const canvas1:HTMLCanvasElement = document.getElementById("canvas1") as HTMLCanvasElement;;
-    const canvas2:HTMLCanvasElement = document.getElementById("canvas2") as HTMLCanvasElement;
-    const canvas3:HTMLCanvasElement = document.getElementById("canvas3") as HTMLCanvasElement;
-    const gitHubButton:HTMLElement = document.getElementById("gitHubButton") as HTMLElement;
-    const linkedInButton:HTMLElement = document.getElementById("linkedInButton") as HTMLElement;
-    const musicNoteButton:HTMLElement = document.getElementById("musicNoteButton") as HTMLElement;
-    const goToOceanButton:HTMLElement = document.getElementById("trieste3Container") as HTMLElement;
-    const homeButton:HTMLElement = document.getElementById("homeButton")as HTMLElement;
+    console.log("HEIGHT", HEIGHT);
+    console.log("WIDTH", WIDTH);
+    const canvas1: HTMLCanvasElement = document.getElementById(
+        "canvas1"
+    ) as HTMLCanvasElement;
+    const canvas2: HTMLCanvasElement = document.getElementById(
+        "canvas2"
+    ) as HTMLCanvasElement;
+    const canvas3: HTMLCanvasElement = document.getElementById(
+        "canvas3"
+    ) as HTMLCanvasElement;
+    const gitHubButton: HTMLElement = document.getElementById(
+        "gitHubButton"
+    ) as HTMLElement;
+    const linkedInButton: HTMLElement = document.getElementById(
+        "linkedInButton"
+    ) as HTMLElement;
+    const musicNoteButton: HTMLElement = document.getElementById(
+        "musicNoteButton"
+    ) as HTMLElement;
+    const goToOceanButton: HTMLElement = document.getElementById(
+        "trieste3Container"
+    ) as HTMLElement;
+    const homeButton: HTMLElement = document.getElementById(
+        "homeButton"
+    ) as HTMLElement;
     const ctx1 = canvas1.getContext("2d");
     const ctx2 = canvas2.getContext("2d");
     const ctx3 = canvas3.getContext("2d");
@@ -62,32 +77,31 @@ document.addEventListener("DOMContentLoaded", () => {
     canvas2.height = HEIGHT;
     canvas3.width = WIDTH;
     canvas3.height = HEIGHT;
-     
-    let ocean = Ocean.getInstance( ctx1 ); 
-    let sub = Sub.getInstance( ctx1 );
+
+    let ocean = Ocean.getInstance(ctx1);
+    let sub = Sub.getInstance(ctx1);
     let cockpit = new Cockpit({ ctx: ctx3, sub, ocean });
     globalCockpit.cockpit = cockpit;
     let key = new Keymaster(ocean, sub);
-   
 
     gitHubButton.addEventListener("click", () => {
         window.location.href = "https://github.com/dmgudeman";
     });
 
     linkedInButton.addEventListener("click", () => {
-        window.location.href = "https://www.linkedin.com/in/davidmgudeman/";      
+        window.location.href = "https://www.linkedin.com/in/davidmgudeman/";
     });
 
     goToOceanButton.addEventListener("click", () => {
-        showCanvas1();    
+        showCanvas1();
     });
 
     homeButton.addEventListener("click", () => {
-        showCanvas2();     
+        showCanvas2();
     });
- 
+
     const modal = document.getElementById("modal");
-  
+
     // Close the modal when the user clicks outside
     window.addEventListener("click", function (event) {
         if (event.target === modal) {
@@ -96,7 +110,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     musicNoteButton.addEventListener("click", (e) => {
-    //     toggleAudio(audio);
+        //     toggleAudio(audio);
     });
 
     // make the instruction page canvas
@@ -105,7 +119,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     backgroundImage.onload = function () {
         ctx2.drawImage(backgroundImage, 0, 0, canvas2.width, canvas2.height);
-        backgroundImage.style.zIndex = '100';
+        backgroundImage.style.zIndex = "100";
 
         const instructions = new Image();
         instructions.src = "assets/dtt6.png";
@@ -156,19 +170,20 @@ document.addEventListener("DOMContentLoaded", () => {
         ctx1.clearRect(0, 0, canvas1.width, canvas1.height);
     }
 
-   
-    // let counter = 0;
-    // let onOceanFlag = true;
-  
     // MAIN ANIMATION LOOP /////////////////////////////////
     function update() {
-      
-        calcMovement(ocean, sub)
-     
+        clear();
+        calcMovement(ocean, sub);
         showDepth();
-           
-    requestAnimationFrame(update);
+        ocean.draw();
+        sub.draw();
+        requestAnimationFrame(update);
     }
+    function animateSprite() {
+        sub.updateSprite();
+        requestAnimationFrame(animateSprite);
+    }
+    animateSprite();
 
     function keyDown(e) {
         if (e.key === "ArrowDown" || e.key === "Down") {
@@ -180,13 +195,11 @@ document.addEventListener("DOMContentLoaded", () => {
         } else if (e.key === "ArrowUp" || e.key === "Up") {
             key.newPos("up");
         } else if (e.key === "Enter") {
-            key.navigate("Enter")
+            key.navigate("Enter");
         } else if (e.key === "Escape") {
-            key.navigate("Escape")
+            key.navigate("Escape");
         }
     }
-   
-    document.addEventListener("keydown", keyDown);
-   
-});
 
+    document.addEventListener("keydown", keyDown);
+});

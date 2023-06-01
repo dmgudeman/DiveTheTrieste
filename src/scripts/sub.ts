@@ -12,8 +12,6 @@ const sprites = [
 class Sub {
     private static instance: Sub;
     private ctx: CanvasRenderingContext2D;
-    private subImageSrc: string; // this is the sprite sheet
-    private sprites: ISprite[];
     private x: number;
     private y: number;
     private w: number;
@@ -21,17 +19,14 @@ class Sub {
     private velRight: number;
     private velLeft: number;
     private velUp: number;
-    private velDown: number;
+    private velDown: number; 
+    private subImageSrc: string; // this is the sprite sheet
     private spriteSheet: HTMLImageElement;
+    private sprites: ISprite[];
     private currentFrame: number;
     private lastFrameTime: number;
-    private initialLateralPos: number;
-    private initialDepthPos: number;
-
     private constructor(
         ctx: CanvasRenderingContext2D,
-        subImageSrc?: string,
-        sprites?: ISprite[],
         x?: number,
         y?: number,
         width?: number,
@@ -40,13 +35,12 @@ class Sub {
         velLeft?: number,
         velUp?: number,
         velDown?: number,
+        subImageSrc?: string,
+        sprites?: ISprite[],
         currentFrame?: number,
         lastFrameTime?: number
     ) {
         this.ctx = ctx;
-        this.spriteSheet = new Image();
-        this.subImageSrc = "assets/sprite.png";
-        this.sprites = sprites;
         this.x = x || SUB_INITIAL_LAT_POS;
         this.y = y || INITIAL_Y_POSITION;
         this.w = width || 120; // size of the sub in px
@@ -55,6 +49,10 @@ class Sub {
         this.velLeft = velLeft || 0;
         this.velUp = velUp || 0;
         this.velDown = velDown || 0;
+        this.subImageSrc = subImageSrc || "assets/sprite.png";
+        this.spriteSheet = new Image();
+        this.spriteSheet.src = this.subImageSrc;
+        this.sprites = sprites;
         this.currentFrame = currentFrame || 0;
         this.lastFrameTime = lastFrameTime || 0;
         this.updateSprite = this.updateSprite.bind(this);
@@ -62,7 +60,6 @@ class Sub {
 
     public static getInstance(
         ctx?: CanvasRenderingContext2D,
-        subImageSrc = "assets/sprite.png",
         x: number = SUB_INITIAL_LAT_POS,
         y: number = 0,
         width: number = 120,
@@ -72,7 +69,8 @@ class Sub {
         velUp: number = 0,
         velDown: number = 0,
         currentFrame: number = 0,
-        lastFrameTime: number = 0
+        lastFrameTime: number = 0,
+        subImageSrc = "assets/sprite.png"
     ): Sub {
         if (!Sub.instance) {
             if (!ctx) {
@@ -82,8 +80,6 @@ class Sub {
             }
             Sub.instance = new Sub(
                 ctx,
-                subImageSrc,
-                sprites,
                 x,
                 y,
                 width,
@@ -92,6 +88,8 @@ class Sub {
                 velLeft,
                 velUp,
                 velDown,
+                subImageSrc,
+                sprites,
                 currentFrame,
                 lastFrameTime
             );
@@ -161,6 +159,20 @@ class Sub {
 
     clear() {
         this.ctx.clearRect(0, 0, WIDTH, HEIGHT);
+    }
+    draw() {
+        const sprite = this.sprites[this.currentFrame];
+        this.ctx.drawImage(
+            this.spriteSheet,
+            sprite.x,
+            sprite.y,
+            sprite.width,
+            sprite.height,
+            this.getX(),
+            this.getY(),
+            this.getW(),
+            this.getH()
+        );
     }
 
     updateSprite() {
