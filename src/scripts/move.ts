@@ -142,39 +142,36 @@ function getVerticalMove(
     };
 
     // calcVertical(vert, ocean, sub);
-    // if (vert > 0) {
-    //     moveSubDown();
-    // } else if (vert > -VERTICAL_VELOCITY - 1) {
+   
+    // else if (vert > -VERTICAL_VELOCITY - 1) {
     //     if (dir === "down") {
     //         moveOceanDown();
     //     }
     // } else if (vert > depth) {
         // console.log("INNNEEERRRRRRR PRE");
-        if (OorS[1] == "O") {
-            // less than ocean limit
-            // console.log("OCEANNNNNNNNNNNNNNNNN");
-            console.log(depth, vert)
-
-            if (vert > depth) {
-                // console.log("NORMAL");
+       if (OorS[1] == "O") {
+            if ( vert > 0){
+               moveOceanDown();
+            } else if ( vert > -VERTICAL_VELOCITY){
+                if(dir === "down") {
+                    moveOceanDown()
+                }
+            } else if (vert > depth ) {
                 if (dir === "down") {
                     console.log("OCEAN5555555555NORMAL");
                     moveOceanDown();
                 } else if (dir === "up") {
                     console.log("OCEAN66666666666NORMAL");
                     moveOceanUp();
-
-                    // moveOceanUp();
                 }
-            } else if (vert < depth) {
-                // over depth limit
+            } else if (vert < depth + VERTICAL_VELOCITY) {
+                if (dir === "up") {
+                    moveOceanUp();
+                }            
+            } else if (vert < depth ) {    // if (dir === "up") {
                 console.log("OCEAN7777777 OVER", vert);
 
                 moveUtils.hitBottomMoveVertical(dir);
-                // if (dir === "up") {
-
-                // moveOceanUp();
-                // }
             }
 
         }

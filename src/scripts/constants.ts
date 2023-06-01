@@ -124,7 +124,7 @@ export const LAT_LIMITS: LatMoveLimit[] = [
 
 export const LAT_LIMITS_EXT: DepthObject[] = [  // the x, xll, y, yll are for slope, the mvmt are to control movement when hit bottom
   {'id':0, 'name':'INITIAL_POSITION', x: -0,    xll: -0,    y: -0,    yll: -0,    mvmtLat: 'right', mvmtVert: 'down'},
-  {'id':1, 'name':'SLOPE_LIMIT',      x: -180,  xll: -1,    y: -400,  yll: -1,    mvmtLat: 'right', mvmtVert: 'down'},
+  {'id':1, 'name':'SLOPE_LIMIT',      x: -180,  xll: -1,    y: -400,  yll: -1,    mvmtLat: 'right', mvmtVert: 'up'},
   {'id':2, 'name':'START_BUMP',       x: -630,  xll: -181,  y: -475,  yll: -401,  mvmtLat: 'left', mvmtVert: 'up'}, 
   {'id':3, 'name':'BUMP_PEAK',        x: -720,  xll: -631,  y: -380,  yll: -476,  mvmtLat: 'both', mvmtVert: 'up'},
   {'id':4, 'name':'END_BUMP',         x: -800,  xll: -721,  y: -485,  yll: -381,  mvmtLat: 'right', mvmtVert: 'up'},
