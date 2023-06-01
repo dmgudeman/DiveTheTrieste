@@ -1,11 +1,11 @@
-import Ocean from './ocean';
-import Sub from './sub';
+import Ocean from "./ocean";
+import Sub from "./sub";
 
 export interface MoveObjects {
-    ocean: Ocean,
-    sub: Sub,
-    lat: string,
-    vert: string
+    ocean: Ocean;
+    sub: Sub;
+    lat: string;
+    vert: string;
 }
 
 export interface LatMoveLimit {
@@ -15,12 +15,22 @@ export interface LatMoveLimit {
     xll: number;
     y: number;
     yll: number;
-  }
+}
 
-  export interface ISprite {
-    x: number; 
-    y: number;  
+export interface ISprite {
+    x: number;
+    y: number;
     width: number;
     height: number;
-  }
-  
+}
+
+export interface DepthObject {
+    id: number;
+    name: string;
+    x: number;
+    xll: number;
+    y: number;
+    yll: number;
+    mvmtLat: string;
+    mvmtVert: string;
+}

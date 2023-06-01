@@ -1,6 +1,6 @@
 import { WIDTH, HEIGHT } from "../index";
-import { LAT_LIMITS } from "./constants";
-import { LatMoveLimit } from "./types";
+import { LAT_LIMITS_EXT } from "./constants";
+import { LatMoveLimit, DepthObject } from "./types";
 
 class CalcConstant {
     private width: number;
@@ -25,12 +25,12 @@ class CalcConstant {
         return this.height * -0.95;
     }
 
-    getDepthObject(lat: number): LatMoveLimit {
+    getDepthObject(lat: number): DepthObject {
         try {
-            const result = LAT_LIMITS.filter(
-                (obj) => obj.x <= lat && obj.xll >= lat
+            const result:DepthObject[] = LAT_LIMITS_EXT.filter(
+                (obj:DepthObject) => obj.x <= lat && obj.xll >= lat
             );
-            let depthObject = result[0];
+            let depthObject:DepthObject = result[0];
             return depthObject;
         } catch (error) {
             console.error("calcDepth did not work for lat = ", lat);
