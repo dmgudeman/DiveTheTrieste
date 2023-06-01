@@ -83,6 +83,7 @@ class Move {
     }
 
     getVerticalMove() {
+        this.printStandard(86)
         if (this.OorS[1] == "O") {
             if (this.compVert > 0) {
                 this.moveOceanDown();
@@ -203,21 +204,14 @@ class Move {
     //     console.log("                           ");
     // };
 
-    printStandard = (
-        ocean: Ocean,
-        sub: Sub,
-        lat: number,
-        vert: number,
-        varDepth: number,
-        depthObject: DepthObject
-    ) => {
-        console.log("==============");
-        console.log("COMPLAT", lat);
-        console.log("COMPVERT", vert);
-        console.log("OCEAN Y", ocean.getY());
-        console.log("SUB Y", sub.getY());
-        console.log("VARIABLE DEPTH", varDepth);
-        console.log("depthObjectName", depthObject);
+    printStandard = (where: string) => {
+        console.log(`${where}`);
+        console.log("COMPLAT", this.compLat);
+        console.log("COMPVERT", this.compVert);
+        console.log("OCEAN Y", this.ocean.getY());
+        console.log("SUB Y", this.sub.getY());
+        console.log("VARIABLE DEPTH", this.varDepth);
+        console.log("depthObjectName", this.depthObject);
         console.log("==============");
     };
 
