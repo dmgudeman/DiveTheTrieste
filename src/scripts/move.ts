@@ -21,27 +21,41 @@ import CalcConstant from "./calcConstant";
 import MoveUtils from "./moveUtils";
 import { WIDTH } from "../index";
 
-let displayObjects;
+class Move {
+    private ocean: Ocean;
+    private sub: Sub;
+    private dir: string;
+    private constants: CalcConstant;
+    private oceanLatLimit: number;
+    private oceanVertLimit: number;
+    private fullVertLimit: number;
+    private compLat: number;
+    private compVert: number;
+    private variableDepth: number;
+    private depthObject: DepthObject;
+    private OorS: string[];
 
-export const getMove = (dir: string) => {
-    clearHitBottom();
-    const ocean: Ocean = Ocean.getInstance();
-    const sub: Sub = Sub.getInstance();
-    const constants: CalcConstant = new CalcConstant();
-    const oceanLatLimit: number = constants.getOceanLatLimit();
-    const fullLatLimit: number = constants.getFullLatLimit();
-    const oceanVertLimit: number = constants.getOceanVertLimit();
-    const fullVertLimit: number = constants.getFullVertLimit();
-    let compLat: number = ocean.getX() - sub.getX() + SUB_INITIAL_LAT_POS;
-    let compVert: number = ocean.getY() - sub.getY() + INITIAL_Y_POSITION;
-    let variableDepth: number = calcDepthLimit(compLat);
-    const depthObject: DepthObject = constants.getDepthObject(compLat);
-    const depthObjectName: string | undefined = depthObject?.name;
-    if (variableDepth === null) {
-        variableDepth = fullVertLimit;
+    constructor(ocean: Ocean, sub: Sub, dir?: string) {
+        this.ocean = ocean;
+        this.sub = sub;
+        this.dir = dir;
+        this.constants = CalcConstant = new CalcConstant();
+        this.oceanLatLimit = this.constants.getOceanLatLimit();
+        this.oceanVertLimit = this.constants.getOceanVertLimit();
+        this.fullVertLimit = this.constants.getFullVertLimit();
+        this.compLat =
+            this.ocean.getX() - this.sub.getX() + SUB_INITIAL_LAT_POS;
+        this.compVert =
+            this.ocean.getY() - this.sub.getY() + INITIAL_Y_POSITION;
+        this.depthObject = this.constants.getDepthObject(this.compLat);
+        this.variableDepth = this.constants.calcDepthLimit(this.compLat);
+        this.OorS = this.constants.getOorS(this.compLat, this.compVert);
     }
-    const moveUtils: MoveUtils = new MoveUtils(ocean, sub, compLat, compVert);
-    const OorS = constants.getOorS(compLat, compVert);
+
+
+getMove = (dir: string) => {
+    clearHitBottom();
+  
 
     getLatMove(
         ocean,
@@ -142,48 +156,49 @@ function getVerticalMove(
     };
 
     // calcVertical(vert, ocean, sub);
-   
+
     // else if (vert > -VERTICAL_VELOCITY - 1) {
     //     if (dir === "down") {
     //         moveOceanDown();
     //     }
     // } else if (vert > depth) {
-        // console.log("INNNEEERRRRRRR PRE");
-       if (OorS[1] == "O") {
-            if ( vert > 0){
-               moveOceanDown();
-            } else if ( vert > -VERTICAL_VELOCITY){
-                if(dir === "down") {
-                    moveOceanDown()
-                }
-            } else if (vert > depth ) {
-                if (dir === "down") {
-                    console.log("OCEAN5555555555NORMAL");
-                    moveOceanDown();
-                } else if (dir === "up") {
-                    console.log("OCEAN66666666666NORMAL");
-                    moveOceanUp();
-                }
-            } else if (vert < depth + VERTICAL_VELOCITY) {
-                if (dir === "up") {
-                    moveOceanUp();
-                }            
-            } else if (vert < depth ) {    // if (dir === "up") {
-                console.log("OCEAN7777777 OVER", vert);
-
-                moveUtils.hitBottomMoveVertical(dir);
+    // console.log("INNNEEERRRRRRR PRE");
+    if (OorS[1] == "O") {
+        if (vert > 0) {
+            moveOceanDown();
+        } else if (vert > -VERTICAL_VELOCITY) {
+            if (dir === "down") {
+                moveOceanDown();
             }
+        } else if (vert > depth) {
+            if (dir === "down") {
+                console.log("OCEAN5555555555NORMAL");
+                moveOceanDown();
+            } else if (dir === "up") {
+                console.log("OCEAN66666666666NORMAL");
+                moveOceanUp();
+            }
+        } else if (vert < depth + VERTICAL_VELOCITY) {
+            if (dir === "up") {
+                moveOceanUp();
+            }
+        } else if (vert < depth) {
+            // if (dir === "up") {
+            console.log("OCEAN7777777 OVER", vert);
 
+            moveUtils.hitBottomMoveVertical(dir);
         }
-        // } else if (vert > depth + VERTICAL_VELOCITY) {
-        //     moveUtils.hitBottomMoveVertical(dir);
-        //     console.log("SUBBBBBBBBB NORMAL"); // over ocean limit under depth limit
-        //     if (dir === "down") {
-        //         moveSubDown();
-        //     } else if (dir === "up") {
-        //         moveSubUp();
-        //     }
-        // }
+    } else if ((OorS[1] = "S")) {
+    }
+    // } else if (vert > depth + VERTICAL_VELOCITY) {
+    //     moveUtils.hitBottomMoveVertical(dir);
+    //     console.log("SUBBBBBBBBB NORMAL"); // over ocean limit under depth limit
+    //     if (dir === "down") {
+    //         moveSubDown();
+    //     } else if (dir === "up") {
+    //         moveSubUp();
+    //     }
+    // }
     // } else if (vert < depth + VERTICAL_VELOCITY) {
     //     // over the limit
     //     // console.log("XXXXXXXXXXXXBOTTOM");
@@ -199,28 +214,6 @@ function getVerticalMove(
     // }
 }
 
-function calcDepthLimit(lat: number) {
-    const constants = new CalcConstant();
-    // if (lat < 0) return 0;
-    // if (lat > FULL_LAT_LIMIT) return (lat = FULL_LAT_LIMIT);
-    // The correct constant is filtered out
-    const depthObject: LatMoveLimit = constants.getDepthObject(lat);
-    if (!depthObject) return null;
-    let startX = depthObject.xll;
-    let endX = depthObject.x;
-    let startY = depthObject.yll;
-    let endY = depthObject.y;
-    let x = lat;
-    if (depthObject.id === 0) return 21;
-    if (startX === endX) {
-        // handles vertical line
-        endX = endX + 1;
-    }
-    const slope = (endY - startY) / (endX - startX);
-    const yIntercept = startY - slope * startX;
-    const y = slope * x + yIntercept;
-    return y;
-}
 
 // export const hitBottom = (dir) => {
 //     console.log('clear hit bottom dir', dir)
@@ -243,71 +236,50 @@ const resetVelocities = (ocean: Ocean, sub: Sub) => {
     sub.zeroVelDown();
 };
 
-const calcVertical = (vert: number, ocean: Ocean, sub: Sub): void => {
-    let Y = ocean.getY();
-    if (Math.abs(Y - vert) > 10 && vert > -100) {
-        ocean.setY(0);
-        sub.setY(80);
+configureMoveVertical = (
+  
+) => {
+   
+
+    if (this.OorS === "O") {
+        this.sub.setY(INITIAL_Y_POSITION);
+        if (this.dir === "U") {
+            this.ocean.setVelUp();
+        } else if (this.dir === "D") {
+            this.ocean.setVelDown();
+        } else {
+            this.ocean.setVelUp();
+            this.ocean.setVelDown();
+        }
+    } else if (this.OorS === "S") {
+        if (this.dir === "U") {
+            this.sub.setVelUp();
+        } else if (dir === "D") {
+            this.sub.setVelDown();
+        } else {
+            this.sub.setVelUp();
+            this.sub.setVelDown();
+        }
     }
 };
 
-const configureMoveVertical = (
+
+
+const printCoordinates = (
     ocean: Ocean,
     sub: Sub,
-    OorS: string,
-    dir: string
+    lat: number,
+    vert: number,
+    oceanVarDepth: number,
+    varDepth: number,
+    where: string
 ) => {
-    ocean.zeroVelUp();
-    ocean.zeroVelDown();
-    sub.zeroVelUp();
-    sub.zeroVelDown();
-
-    if (OorS === "O") {
-        sub.setY(INITIAL_Y_POSITION);
-        if (dir === "U") {
-            ocean.setVelUp();
-        } else if (dir === "D") {
-            ocean.setVelDown();
-        } else {
-            ocean.setVelUp();
-            ocean.setVelDown();
-        }
-    } else if (OorS === "S") {
-        if (dir === "U") {
-            sub.setVelUp();
-        } else if (dir === "D") {
-            sub.setVelDown();
-        } else {
-            sub.setVelUp();
-            sub.setVelDown();
-        }
-    }
-};
-
-function calcLatConstant(lat: number) {
-    if (lat < 0) return 0;
-    if (lat > FULL_LAT_LIMIT) return (lat = FULL_LAT_LIMIT);
-    // The correct constant is filtered out
-
-    const result: DepthObject[] | undefined = LAT_LIMITS_EXT.filter(
-        (obj: DepthObject) => obj.x >= lat && obj.xll <= lat
-    );
-    if (result === undefined) {
-        return null;
-    }
-    let depthObject: DepthObject = result[0];
-    return depthObject;
-}
-
-const printCoordinates = (moveObjects, where) => {
-    let { ocean, sub } = moveObjects;
-    let compLat = ocean.sx + sub.x - SUB_INITIAL_LAT_POS;
-    let compVert = ocean.sy + sub.y - INITIAL_Y_POSITION;
     console.log(`=${where}==============`);
-    console.log("COORDINATES", compLat, compVert);
-
-    console.log("OCEANNNNNNN", ocean.sx, ocean.sy);
-    console.log("SUBBBBBBBBB", sub.x, sub.y);
+    console.log("COORDINATES", lat, vert);
+    console.log("OCEAN VAR DEPTH", oceanVarDepth);
+    console.log("VARIABLE DEPTH", varDepth);
+    console.log("OCEAN X, Y", ocean.getX(), ocean.getY());
+    console.log("SUB X, Y", sub.getX(), sub.getY());
     console.log("========================");
     console.log("                           ");
 };
@@ -345,3 +317,5 @@ const printStandard = (
     console.log("depthObjectName", depthObject);
     console.log("==============");
 };
+
+}
