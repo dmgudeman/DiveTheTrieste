@@ -7,16 +7,19 @@ import {
     APHOTIC_PELAGIC,
     APHOTIC_BENTHIC,
 } from "./constants";
-import { LAT_LIMITS_EXT, FULL_LAT_LIMIT, VERTICAL_VELOCITY } from "./constants";
-import { LatMoveLimit, DepthObject } from "./types";
+import { LAT_LIMITS_EXT, FULL_LAT_LIMIT, VERTICAL_VELOCITY, textObjects } from "./constants";
+import { LatMoveLimit, DepthObject, ITextObject } from "./types";
+
 
 class CalcConstant {
     private width: number;
     private height: number;
+    private textObjects: ITextObject[];
 
     constructor() {
         this.width = WIDTH;
         this.height = HEIGHT;
+        this.textObjects = textObjects
     }
 
     getOceanLatLimit() {
@@ -29,7 +32,7 @@ class CalcConstant {
         return this.roundDownToNearestVel(this.height * -0.55);
     }
 
-    getZone(vert: number, depth: number): string {
+    getZone(vert: number, depth: number): number {
         console.log("vert  depth", vert, depth);
 
         if (vert > this.roundDownToNearestVel(this.height * -0.211)) {
@@ -45,7 +48,7 @@ class CalcConstant {
                 return DYSPHOTIC_BENTHIC;
             }
         } else {
-            if (vert - depth < 1 * VERTICAL_VELOCITY) {
+            if (vert - depth > 1 * VERTICAL_VELOCITY) {
                 return APHOTIC_PELAGIC;
             } else {
                 return APHOTIC_BENTHIC;
@@ -111,7 +114,9 @@ class CalcConstant {
     //     let res = lats.map(el =>(el/ 3084).toFixed(3));
     //     console.log( res)
     // }
-
+    getTextObject(num: number) {
+        return  textObjects[num]
+    }
     printCalcConstant = (lat: number, vert: number, where: string) => {
         console.log(`=${where}==============`);
         console.log("OorS", this.getOorS(lat, vert));

@@ -1,3 +1,7 @@
+import { textObjects } from "./constants";
+import CalcConstant from "./calcConstant";
+import { ITextObject } from "./types";
+
 class EdText {
     private cssOne = [
         "upperPelagic",
@@ -13,7 +17,10 @@ class EdText {
     private textEls: HTMLElement[];
     private textElStrings: string[];
     private textElSuffixes: string[];
+    private textElTypes: string[];
     private zoneFlag: string;
+    private textObjects: ITextObject[];
+    private calcConstants: CalcConstant;
 
     constructor() {
         this.edContainer = document.getElementById("edContainer") || null;
@@ -21,19 +28,33 @@ class EdText {
         this.edText = document.getElementById("edText") || null;
         this.textEls = [this.edContainer, this.edTitle, this.edText];
         this.textElStrings = ["edContainer", "edTitle", "edText"];
-        this.textElSuffixes = ["EdContainer", "EdTitle", "EdText"]
+        this.textElSuffixes = ["EdContainer", "EdTitle", "EdText"];
+        this.textElTypes = ["id", "title", "text"];
+        this.textObjects = textObjects;
+        this.calcConstants = new CalcConstant();
     }
 
     updateEdText(num: number) {
-            this.textEls.forEach((textEl, idx) => {
-                this.clearClassList(textEl)
-                let className = this.textElStrings[idx];
-                let className2 = this.cssOne[num] + "Style" + this.textElSuffixes[idx];
-                console.log("CLASSNAME", className);
-                textEl.classList.add(className);
-                textEl.classList.add(className2);
-            });
-        
+        this.setEdStyle(num);
+        this.setEdText(num);
+    }
+
+    setEdStyle(num: number) {
+        this.textEls.forEach((textEl, idx) => {
+            this.clearClassList(textEl);
+            let className = this.textElStrings[idx];
+            let className2 =
+                this.cssOne[num] + "Style" + this.textElSuffixes[idx];
+            console.log("CLASSNAME", className);
+            textEl.classList.add(className);
+            textEl.classList.add(className2);
+        });
+    }
+
+    setEdText(num: number) {
+        let textObject = this.calcConstants.getTextObject(num);
+        this.edTitle.textContent = textObject.title;
+        this.edText.textContent = textObject.text;
     }
     clearClassList(element: HTMLElement) {
         while (element.classList.length > 0) {
@@ -41,47 +62,5 @@ class EdText {
         }
     }
 }
-
-// export function addEdTextStyle(flag) {
-//     const Text = document.getElementById("fadeInText");
-//     const Title = document.getElementById("fadeInTitle");
-//     const Container = document.getElementById("fadeInContainer");
-
-//     const textEls = [Text, Title, Container];
-//     const textElStrings = ["Text", "Title", "Container"];
-//     Container.style.opacity = "1";
-
-//     // reset classList
-//     textEls.forEach((textEl, idx) => {
-//         const className = "fadeIn" + textElStrings[idx];
-//         textEl.classList.add(className);
-//     });
-
-//     textEls.forEach((textEl, idx) => {
-//         const className = flag + "Style" + textElStrings[idx];
-//         textEl.classList.add(className);
-//     });
-//     fadeInText(Title, Text);
-// }
-
-// if (this.flag === EUPHOTIC_PELAGIC) {
-//     this.edText.changeEducationalText(textObjects[0]);
-//     this.edText.addEdTextStyle("upperPelagic");
-// } else if (this.flag === EUPHOTIC_BENTHIC) {
-//     this.edText.changeEducationalText(textObjects[1]);
-//     this.edText.addEdTextStyle("upper");
-// } else if (this.flag === DYSPHOTIC_PELAGIC) {
-//     this.edText.changeEducationalText(textObjects[2]);
-//     this.edText.addEdTextStyle("middle");
-// } else if (this.flag === DYSPHOTIC_BENTHIC) {
-//     this.edText.changeEducationalText(textObjects[3]);
-//     this.edText.addEdTextStyle("middle");
-// } else if (this.flag === APHOTIC_PELAGIC) {
-//     this.edText.changeEducationalText(textObjects[4]);
-//     this.edText.addEdTextStyle("lower");
-// } else if (this.flag === APHOTIC_BENTHIC) {
-//     this.edText.changeEducationalText(textObjects[5]);
-//     this.edText.addEdTextStyle("lower");
-// }
 
 export default EdText;

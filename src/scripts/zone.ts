@@ -15,8 +15,8 @@ class Zone {
     private vert: number;
     private depth: number;
     private calcConstants: CalcConstant;
-    private flag: string;
-    private oldFlag: string;
+    private flag: number;
+    private oldFlag: number;
     private edText: EdText
 
     constructor(vert: number, depth: number) {
@@ -24,14 +24,13 @@ class Zone {
         this.depth = depth;
         this.calcConstants = new CalcConstant();
         this.flag = this.calcConstants.getZone(this.vert, this.depth);
-        this.oldFlag = "";
+        this.oldFlag = null;
         this.edText = new EdText();
     }
 
     upDateZoneFlag(vertical: number, varDepth: number) {
         this.flag = this.calcConstants.getZone(vertical, varDepth);
-        console.log("THIS FLAG", this.flag);
-
+       
         if (this.oldFlag !== this.flag) {
             this.oldFlag = this.flag;
 

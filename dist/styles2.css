@@ -27,7 +27,7 @@
   font-weight: 700;
 }
 
-#edText {
+.edText {
   padding: 20px;
   padding-top: 10px;
   color: var(--three);

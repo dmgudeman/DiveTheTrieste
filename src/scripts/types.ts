@@ -35,7 +35,7 @@ export interface DepthObject {
 }
 
 export interface ITextObject {
-    id: string;
+    id: number;
     title: string;
     text: string;
 }

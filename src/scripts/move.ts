@@ -76,7 +76,7 @@ class Move {
         // } else if ( dir === 'up' || dir === 'down') {
             this.getVerticalMove()
         // }    
-        this.printCoordinates('IN GET MOVE')
+        // this.printCoordinates('IN GET MOVE')
         this.zone.upDateZoneFlag(this.compVert, this.varDepth);
         // this.constants.printCalcConstant(this.compLat, this.compVert, "IN MOVE getMove")
 
