@@ -24,11 +24,18 @@ class EdText {
             console.log('88888888888888', this.cssOne[num]);
             console.log('77777777',this.textEls)
             let className = this.cssOne[num] ;
-            this.textEls.forEach((textEl, idx) => {
-                  className = className ;
-               console.log('9999999999', className)
+            //     // reset classList
+        this.textEls.forEach((textEl, idx) => {
+            const className = "fadeIn" + textElStrings[idx];
             textEl.classList.add(className);
         });
+    
+        textEls.forEach((textEl, idx) => {
+            const className = flag + "Style" + textElStrings[idx];
+            textEl.classList.add(className);
+        });
+        fadeInText(Title, Text);
+    }
         }
 
 
