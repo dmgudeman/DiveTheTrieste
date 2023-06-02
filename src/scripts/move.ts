@@ -77,27 +77,36 @@ class Move {
     getMove = (dir: string) => {
         this.setDir(dir);
         this.upDateCoordinates();
-        this.getLatMove();
-        this.getVerticalMove();
         this.checkToIncreaseVel(dir);
+        if(dir === 'right' || dir === 'left') {
+            if (this.compVert === this.varDepth){
+                this.configureMoveLateral(dir)
+            } else {
+                this.getLatMove();
+            }
+           
+        } else if ( dir === 'up' || dir === 'down') {
+            this.getVerticalMove()
+        }    
+        this.printStandard('IN GET MOVE')
     };
 
     getLatMove() {
-        console.log('xxxxxxxxxxxxxx')
+        // console.log('xxxxxxxxxxxxxx')
         if (this.OorS[0] == "O") {
             this.sub.setX(this.sub.getInitialLatPos())
-            console.log('LATERAL 0000000 LAT');
+            // console.log('LATERAL 0000000 LAT');
             if (this.compLat > 0) {
-                console.log('LATERAL 1111111 LAT');
+                // console.log('LATERAL 1111111 LAT');
                 this.moveOceanRight(this.latVel);
             } else if (this.compLat > -LAT_VELOCITY) {
                 // stop one vertical vel upon rising
                 if (this.dir === "right") {
-                    console.log("1010101010101");
+                    // console.log("1010101010101");
                     this.moveOceanRight(this.latVel);
                 }
             } else if (this.compLat >= this.oceanLatLimit) {
-                console.log('LATERAL 2222222 LAT');
+                // console.log('LATERAL 2222222 LAT');
                 if (this.dir === "right") {
                     console.log('LATERAL 3333333 LAT');
                     this.moveOceanRight(this.latVel);
@@ -218,25 +227,28 @@ class Move {
         this.sub.zeroVelDown();
     };
 
-    configureMoveVertical = () => {
+    configureMoveLateral = (dir:string) => {
+      
+        let mvmt = this.depthObject.mvmtLat;
         if (this.OorS[1] === "O") {
-            this.sub.setY(INITIAL_Y_POSITION);
-            if (this.dir === "U") {
-                this.ocean.setVelUp();
-            } else if (this.dir === "D") {
-                this.ocean.setVelDown();
-            } else {
-                this.ocean.setVelUp();
-                this.ocean.setVelDown();
+            if (dir === 'right') {
+                if(mvmt === 'right' || mvmt === 'both') {
+                    this.moveOceanRight(this.latVel)
+                }
+            } else if ( dir === 'left') {
+                if(mvmt === 'left' || mvmt === 'both') {
+                    this.moveOceanLeft(this.latVel)
+                }
             }
         } else if (this.OorS[1] === "S") {
-            if (this.dir === "U") {
-                this.sub.setVelUp();
-            } else if (this.dir === "D") {
-                this.sub.setVelDown();
-            } else {
-                this.sub.setVelUp();
-                this.sub.setVelDown();
+            if (dir === 'right') {
+                if(mvmt === 'right' || mvmt === 'both') {
+                    this.moveSubRight()
+                }
+            } else if ( dir === 'left') {
+                if(mvmt === 'left' || mvmt === 'both') {
+                    this.moveSubLeft()
+                }
             }
         }
     };
