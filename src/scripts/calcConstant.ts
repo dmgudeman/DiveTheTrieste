@@ -22,7 +22,7 @@ class CalcConstant {
         return this.roundDownToNearestVel(this.height * -0.55);
     }
     
-    getZone(vert: number, depth:number) {
+    getZone(vert: number, depth:number):string {
         if (vert < this.roundDownToNearestVel(this.height * -0.211)) {
             if (vert - depth > 2 * VERTICAL_VELOCITY ) {
                 return EUPHOTIC_PELAGIC;
@@ -44,13 +44,13 @@ class CalcConstant {
         }
     }
 
-    getBenthicOrPelagic(vert:number, depth:number) {
-        if (vert - depth > 2 * VERTICAL_VELOCITY ) {
-            return "PELAGIC"
-        } else {
-            return "BENTHIC"
-        }
-    }
+    // getBenthicOrPelagic(vert:number, depth:number) {
+    //     if (vert - depth > 2 * VERTICAL_VELOCITY ) {
+    //         return "PELAGIC"
+    //     } else {
+    //         return "BENTHIC"
+    //     }
+    // }
 
     getFullVertLimit() {
         return this.roundDownToNearestVel(this.height * -0.95);
@@ -104,9 +104,7 @@ class CalcConstant {
         return Math.floor(num / VERTICAL_VELOCITY) * VERTICAL_VELOCITY;
     }
 
-    calcZone() {
-        let fullDepth = this.getFullVertLimit;
-    }
+   
     // to calculate ratios lateer
     // calcX() {
     //     let lats  = [120,520,660,760,840,940,1040,1140,1240,1460,1620,2160,]
