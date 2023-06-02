@@ -18,7 +18,7 @@ import Ocean from "./ocean";
 import Sub from "./sub";
 import { MoveObjects, LatMoveLimit, DepthObject } from "./types";
 import CalcConstant from "./calcConstant";
-import ProvideMessage from './provideMessage';
+import ProvideMessage from './zone';
 // import MoveUtils from "./moveUtils";
 import { WIDTH } from "../index";
 

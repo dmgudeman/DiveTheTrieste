@@ -1,38 +1,17 @@
 import {
-    INITIAL_Y_POSITION,
-    E_D_BARRIER,
-    D_A_BARRIER,
-    CONT_SHELF_BENTHIC,
-    OCEAN_BOTTOM,
-    APHOTIC_BENTHIC_BARRIER,
-    B_P_BARRIER,
-    LEFT_EDGE_TRENCH,
-    RIGHT_EDGE_TRENCH,
-    SUB_INITIAL_LAT_POS,
+    
     EUPHOTIC_BENTHIC,
     EUPHOTIC_PELAGIC,
     DYSPHOTIC_BENTHIC,
     DYSPHOTIC_PELAGIC,
     APHOTIC_BENTHIC,
     APHOTIC_PELAGIC,
-    stopMessageAnimation,
     textObjects,
 } from "./constants";
-import { WIDTH, HEIGHT } from "../index";
-// import {
-//     addAndStartMessAnimation,
-//     stopAnimation,
-//     removeMessageElement,
-// } from "./edMessage1";
 import { changeEducationalText, addEdTextStyle } from "./educational";
-
-import Ocean from "./ocean";
-import Sub from "./sub";
-import { ITextObject } from "./types";
 import CalcConstant from "./calcConstant";
 
-class ProvideMessage {
-    private messages: ITextObject[];
+class Zone {
     private vert: number;
     private depth: number;
     private calcConstants: CalcConstant;
@@ -40,7 +19,6 @@ class ProvideMessage {
     private oldFlag: string;
 
     constructor(vert: number, depth: number) {
-        this.messages = textObjects;
         this.vert = vert;
         this.depth = depth;
         this.calcConstants = new CalcConstant();
@@ -77,4 +55,4 @@ class ProvideMessage {
         }
     }
 }
-export default ProvideMessage;
+export default Zone;

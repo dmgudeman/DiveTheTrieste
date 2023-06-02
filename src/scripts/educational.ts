@@ -76,3 +76,12 @@ export function fadeOutText(callback) {
 
     animate();
 }
+
+
+class Educational {
+
+
+
+
+    
+}
