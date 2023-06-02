@@ -1,26 +1,14 @@
 import {
     INITIAL_Y_POSITION,
-    LEFT_EDGE_TRENCH,
-    RIGHT_EDGE_TRENCH,
-    OCEAN_DEPTH_LIMIT,
-    FULL_LAT_LIMIT,
     LAT_VELOCITY,
     VERTICAL_VELOCITY,
     SUB_INITIAL_LAT_POS,
-    SLOPE_LAT,
-    SHELF_DEPTH,
-    TRENCH_TOP,
-    OCEAN_FLOOR,
-    LAT_LIMITS,
-    LAT_LIMITS_EXT,
 } from "./constants";
 import Ocean from "./ocean";
 import Sub from "./sub";
-import { MoveObjects, LatMoveLimit, DepthObject } from "./types";
+import { DepthObject } from "./types";
 import CalcConstant from "./calcConstant";
 import ProvideMessage from './zone';
-// import MoveUtils from "./moveUtils";
-import { WIDTH } from "../index";
 
 class Move {
     private ocean: Ocean;
@@ -30,7 +18,6 @@ class Move {
     private oceanLatLimit: number;
     private oceanVertLimit: number;
     private fullLatLimit: number;
-    private fullVertLimit: number;
     private compLat: number;
     private compVert: number;
     private varDepth: number;
@@ -49,7 +36,6 @@ class Move {
         this.oceanLatLimit = this.constants.getOceanLatLimit() ?? null;
         this.oceanVertLimit = this.constants.getOceanVertLimit() ?? null;
         this.fullLatLimit = this.constants.getFullLatLimit() ?? null;
-        this.fullVertLimit = this.constants.getFullVertLimit() ?? null;
         this.compLat =
             this.ocean.getX() - this.sub.getX() + SUB_INITIAL_LAT_POS ?? null;
         this.compVert =
@@ -71,7 +57,6 @@ class Move {
         this.oceanLatLimit = this.constants.getOceanLatLimit();
         this.oceanVertLimit = this.constants.getOceanVertLimit();
         this.fullLatLimit = this.constants.getFullLatLimit();
-        this.fullVertLimit = this.constants.getFullVertLimit();
         this.depthObject = this.constants.getDepthObject(this.compLat);
         this.varDepth = this.constants.calcDepthLimit(this.compLat);
         this.OorS = this.constants.getOorS(this.compLat, this.compVert);
@@ -259,7 +244,6 @@ class Move {
         }
     };
 
-
     printCoordinates = (where: string) => {
         console.log(`=${where}==============`);
         console.log("OorS", this.OorS)
@@ -273,22 +257,6 @@ class Move {
         console.log("========================");
         console.log("                           ");
     };
-
-    // printMoveObjects = (moveObjects, where) => {
-    //     let { ocean, sub, lat, vert } = moveObjects;
-    //     let compLat = ocean.sx + sub.x - SUB_INITIAL_LAT_POS;
-    //     let compVert = ocean.sy + sub.y - INITIAL_Y_POSITION;
-    //     console.log(`=${where}===========`);
-    //     console.log("MO.ocean", ocean);
-    //     console.log("MO.sub", sub);
-    //     console.log("======================");
-    //     console.log("=======================");
-
-    //     console.log("MO.lat", lat);
-    //     console.log("MO.vert", vert);
-    //     console.log("_____________________");
-    //     console.log("                           ");
-    // };
 
     printStandard = (where: string) => {
         console.log(`${where}`);
