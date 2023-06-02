@@ -34,15 +34,15 @@ const musicNoteButton = document.getElementById("musicNoteButton") as HTMLElemen
 const bubblesContainer = document.querySelector(".bubblesContainer") as HTMLElement;
 const bubbles = bubblesContainer.getElementsByClassName("bubble")  as HTMLCollectionOf<Element>;
 const edMessage = document.getElementById("edMassage") as HTMLElement;
-const edTextContainer = document.getElementById("fadeInContainer") as HTMLElement;
+const edContainer = document.getElementById("edContainer") as HTMLElement;
 let messageInterval;
 
 export function showCanvas1() {
     //the ocean
     setCurrentCanvas(1);
     
-    if (edTextContainer) edTextContainer.classList.remove("hide");
-    stopMessageAnimation.messFlag = false;
+    if (edContainer) edContainer.classList.remove("hide");
+ 
     // messageInterval = setInterval(() => {
     //     getMessage();
     // }, 3000);
@@ -74,30 +74,13 @@ export function showCanvas1() {
     homeButton.classList.remove("can3home");
     edMessage ? edMessage.classList.remove("hideEdMessage") : null;
 
-    // fadeInText();
-    // document.addEventListener('keydown', function(event) {
-    //   if (event.key === 'Escape') {
-    //     event.preventDefault();
-
-    //     // Add your desired functionality or code here
-    //     console.log('Escape key was pressed');
-    //   }
-    // });
-    // document.addEventListener('keydown', function(event) {
-    //   if (event.key === 'Escape') {
-    //     event.preventDefault();
-
-    //     // Add your desired functionality or code here
-    //     console.log('Escape key was pressed');
-    //   }
-    // });
 }
 
 export function showCanvas2() {
     //opening page
     setCurrentCanvas(2);
-    edTextContainer.classList.add("hide");
-    stopMessageAnimation.messFlag = false;
+    edContainer.classList.add("hide");
+  
 
     canvas1.style.display = "none";
     canvas2.style.display = "block";
@@ -119,8 +102,7 @@ export function showCanvas3() {
     //cockpit
     globalCockpit.cockpit.draw()
     setCurrentCanvas(3);
-    edTextContainer.classList.add("hide");
-    stopMessageAnimation.messFlag = true;
+    edContainer.classList.add("hide");
     canvas1.style.display = "none";
     canvas2.style.display = "none";
     canvas3.style.display = "block";
@@ -134,8 +116,8 @@ export function showCanvas3() {
     homeButton.classList.remove("can2home");
     homeButton.classList.add("can3home");
     edMessage ? edMessage.classList.remove("hideEdMessage") : null;
-    edTextContainer.classList.forEach(className => {
-        edTextContainer.classList.remove(className);
+    edContainer.classList.forEach(className => {
+        edContainer.classList.remove(className);
       });
       
 }
