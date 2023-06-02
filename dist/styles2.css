@@ -1,7 +1,7 @@
 /*!**************************************************************************************************************************************************!*\
   !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[1].use[1]!./node_modules/sass-loader/dist/cjs.js!./src/styles/educational.scss ***!
   \**************************************************************************************************************************************************/
-#edContainer {
+.edContainer {
   position: relative;
   display: flex;
   flex-direction: column;
@@ -16,11 +16,11 @@
   box-shadow: 3px 3px 4px rgba(0, 0, 0, 0.5);
 }
 
-#edContainer.hide {
+.hide {
   display: none;
 }
 
-#edTitle {
+.edTitle {
   padding-top: 20px;
   color: var(--four);
   font-size: 1.5rem;
@@ -33,20 +33,20 @@
   color: var(--three);
 }
 
-#edContainer.upperStyle {
+.upperStyleEdContainer {
   background-color: var(--two);
   border: 3px solid var(--three);
 }
 
-#edTitle.upperStyle {
+.upperStyleEdTitle {
   color: var(--four);
 }
 
-#edText.upperStyle {
+.upperStyleEdText {
   color: var(--three);
 }
 
-.upperPelagicStyleContainer {
+.upperPelagicStyleEdContainer {
   background-color: var(--two);
   border: 3px solid var(--three);
   top: 720px;
@@ -59,36 +59,36 @@
   padding-bottom: 5px;
 }
 
-.upperPelagicStyleTitle {
+.upperPelagicStyleEdTitle {
   color: var(--four);
 }
 
-.upperPelagicStyleText {
+.upperPelagicStyleEdText {
   color: var(--three);
 }
 
-.middleStyleContainer {
+.middleStyleEdContainer {
   background-color: #0D376F;
   border: 3px solid lightgoldenrodyellow;
 }
 
-.middleStyleTitle {
+.middleStyleEdTitle {
   color: yellow;
 }
 
-.middleStyleText {
+.middleStyleEdText {
   color: lightgoldenrodyellow;
 }
 
-.lowerStyleContainer {
+.lowerStyleEdContainer {
   background-color: black;
   border: 3px solid lightgreen;
 }
 
-.lowerStyleTitle {
+.lowerStyleEdTitle {
   color: lightgreen;
 }
 
-.lowerStyleText {
+.lowerStyleEdText {
   color: lightsalmon;
 }
