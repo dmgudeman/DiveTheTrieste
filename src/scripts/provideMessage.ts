@@ -58,37 +58,21 @@ class ProvideMessage {
             if (this.flag === EUPHOTIC_PELAGIC) {
                 changeEducationalText(textObjects[0]);
                 addEdTextStyle("upperPelagic");
-
-                return;
             } else if (this.flag === EUPHOTIC_BENTHIC) {
                 changeEducationalText(textObjects[1]);
                 addEdTextStyle("upper");
-
-                return;
             } else if (this.flag === DYSPHOTIC_PELAGIC) {
-                // message = iteraterMessage(dpMessages);
-                // addAndStartMessAnimation(message);
                 changeEducationalText(textObjects[2]);
                 addEdTextStyle("middle");
-                return;
             } else if (this.flag === DYSPHOTIC_BENTHIC) {
-                // message = iteraterMessage(dbMessages);
-                // addAndStartMessAnimation(message);
                 changeEducationalText(textObjects[3]);
                 addEdTextStyle("middle");
-                return;
             } else if (this.flag === APHOTIC_PELAGIC) {
-                // message = iteraterMessage(apMessages);
-                // addAndStartMessAnimation(message);
                 changeEducationalText(textObjects[4]);
                 addEdTextStyle("lower");
-                return;
             } else if (this.flag === APHOTIC_BENTHIC) {
-                // message = iteraterMessage(abMessages);
-                // addAndStartMessAnimation(message);
                 changeEducationalText(textObjects[5]);
                 addEdTextStyle("lower");
-                return;
             }
         }
     }

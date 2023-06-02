@@ -16,7 +16,6 @@ interface CockpitOptions {
   underImageUrl?: string;
 }
 
-
 class Cockpit {
   private ctx: CanvasRenderingContext2D;
   private canvas: HTMLCanvasElement;
@@ -46,12 +45,7 @@ class Cockpit {
     this.underImageUrl = options.underImageUrl || "assets/life/ep/001_shark.jpg";
   }
 
-
-
-
-  
   draw() {
-
     // make first image
     let ui = new Image();
     let images = new Images({

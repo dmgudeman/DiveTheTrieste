@@ -2,7 +2,6 @@ export function fadeInText(Title:HTMLElement, Text:HTMLElement ) {
     const Container = document.getElementById("fadeInContainer");
     const hitBottom = document.getElementById("hitBottomContainer")
     Container.style.opacity = "1";
-
     Title.style.opacity = "0";
     Text.style.opacity = "0";
     
@@ -32,7 +31,6 @@ export function addEdTextStyle(flag) {
     const Text = document.getElementById("fadeInText");
     const Title = document.getElementById("fadeInTitle");
     const Container = document.getElementById("fadeInContainer");
-  
     const textEls = [Text, Title, Container];
     const textElStrings = ["Text", "Title", "Container"];
     Container.style.opacity = "1";
@@ -51,7 +49,6 @@ export function addEdTextStyle(flag) {
 }
 
 export function changeEducationalText(newText) {
-
     const title = document.getElementById("fadeInTitle");
     const text = document.getElementById("fadeInText");
 

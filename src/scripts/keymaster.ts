@@ -59,24 +59,6 @@ class Keymaster {
 
   newPos(dir: string) {
     this.move.getMove(dir);
-    
-    // if (dir === "down") {
-    //   console.log("DIRRRR", dir);
-    //   this.ocean.setY(this.ocean.getY() + this.ocean.getVelDown());
-    //   this.sub.setY(this.sub.getY() + this.sub.getVelDown());
-    // }
-    // if (dir === "up") {
-    //     this.ocean.setY(this.ocean.getY() - this.ocean.getVelDown());
-    //     this.sub.setY(this.sub.getY() - this.sub.getVelDown());
-    // }
-    // if (dir === "right") {
-    //     this.ocean.setX(this.ocean.getX() + this.ocean.getVelRight());
-    //     this.sub.setX(this.sub.getX() + this.sub.getVelRight());
-    // }
-    // if (dir === "left") {
-    //     this.ocean.setX(this.ocean.getX() - this.ocean.getVelLeft());
-    //     this.sub.setX(this.sub.getX() - this.sub.getVelLeft());
-    // }
   }
 
   closeModal = () => {

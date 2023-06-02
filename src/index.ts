@@ -6,7 +6,6 @@
 
 import { showCanvas1, showCanvas2, showCanvas3 } from "./scripts/util";
 import { showDepth, showMouseAsSub } from "./scripts/boundary";
-import { calcMovement } from "./scripts/provideMessage";
 import Sub from "./scripts/sub";
 import Ocean from "./scripts/ocean";
 import Cockpit from "./scripts/cockpit";

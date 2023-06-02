@@ -32,7 +32,6 @@ export interface DepthObject {
     y: number;
     yll: number;
     mvmtLat: string;
-    mvmtVert: string;
 }
 
 export interface ITextObject {
