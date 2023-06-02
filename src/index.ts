@@ -174,6 +174,7 @@ document.addEventListener("DOMContentLoaded", () => {
         showDepth();
         ocean.draw();
         sub.draw();
+        
         requestAnimationFrame(update);
     }
     // start the seperate animation loop in the sub

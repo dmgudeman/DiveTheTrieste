@@ -129,7 +129,9 @@ class Ocean {
         this.velDown = VERTICAL_VELOCITY;
     }
 
-    
+    public setVelDownReg(vel:number):void{
+        this.velDown = vel;
+    }
 
     public zeroVelRight(): void {
         this.velRight = 0;

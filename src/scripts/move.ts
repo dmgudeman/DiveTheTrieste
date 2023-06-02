@@ -35,6 +35,9 @@ class Move {
     private varDepth: number;
     private depthObject: DepthObject;
     private OorS: string[];
+    private increaseVelFlag: string;
+    private latVel: number;
+    private vertVel: number;
 
     constructor(ocean: Ocean, sub: Sub, dir?: string) {
         this.ocean = ocean;
@@ -52,6 +55,10 @@ class Move {
         this.depthObject = this.constants.getDepthObject(this.compLat) || null;
         this.varDepth = this.constants.calcDepthLimit(this.compLat) || null;
         this.OorS = this.constants.getOorS(this.compLat, this.compVert) || null;
+        this.increaseVelFlag = '';
+        this.latVel = LAT_VELOCITY;
+        this.vertVel = VERTICAL_VELOCITY;
+
     }
 
 
@@ -100,20 +107,23 @@ class Move {
 
         this.printCoordinates('getVerticalMove')
         console.log('this.Oors', this.OorS)
+        this.checkToIncreaseVel(this.dir);
+      
         if (this.OorS[1] == "O") {
             console.log('AAAAAAAAA')
+            this.sub.setY(80); // reset sub to assure accuracy at transition S to O on way up
             if (this.compVert > 0) {  // move down no matter what if above surface
                 console.log('BBBBBBBBB')
-                this.moveOceanDown();
+                this.moveOceanDown(this.vertVel);
             } else if (this.compVert > -VERTICAL_VELOCITY) { // stop one vertical vel upon rising
                 if (this.dir === "down") {
                     console.log('CCCCCCCCC')
-                    this.moveOceanDown();
+                    this.moveOceanDown(this.vertVel);
                 }
             } else if (this.compVert > this.varDepth ) { // normal
                 if (this.dir === "down") {
                     console.log('DDDDDDDD')
-                    this.moveOceanDown();
+                    this.moveOceanDown(this.vertVel);
                 } else if (this.dir === "up") { 
                 console.log('EEEEEEEEE')
                     this.moveOceanUp();
@@ -134,17 +144,23 @@ class Move {
                     this.moveSubDown();
                 }
 
-            } else if (this.compVert > this.varDepth) { // normal
+            // } else if (this.compVert >= this.varDepth - 2*VERTICAL_VELOCITY && this.compVert <= this.varDepth) { 
+            //     if (this.dir === "down") {
+            //         console.log('22222')
+            //         this.moveSubDown();
+            //     }
+                
+            } else if (this.compVert >= this.varDepth) { // normal
                 if (this.dir === "down") {
-                    console.log('22222')
+                    console.log('3333333')
                     this.moveSubDown();
                 } else if (this.dir === "up") { //
-                    console.log('333333')
+                    console.log('44444444')
                     this.moveSubUp();
                 }
             } else if (this.compVert < this.varDepth + VERTICAL_VELOCITY) { // stop one vel unit from lower limit
                 if (this.dir === "up") {
-                    console.log('444444444')
+                    console.log('5555555')
                     this.moveSubUp();
                 }             
             }
@@ -234,11 +250,11 @@ class Move {
         console.log("==============");
     };
 
-    moveOceanRight = () => {
-        this.ocean.setX(this.ocean.getX() - LAT_VELOCITY);
+    moveOceanRight = (vel:number) => {
+        this.ocean.setX(this.ocean.getX() - vel);
     };
-    moveOceanLeft = () => {
-        this.ocean.setX(this.ocean.getX() + LAT_VELOCITY);
+    moveOceanLeft = (vel:number) => {
+        this.ocean.setX(this.ocean.getX() + vel);
     };
     moveSubRight = () => {
         this.sub.setX(this.sub.getX() + LAT_VELOCITY);
@@ -246,12 +262,12 @@ class Move {
     moveSubLeft = () => {
         this.sub.setX(this.sub.getX() - LAT_VELOCITY);
     };
-    moveOceanUp = () => {
-        this.ocean.setY(this.ocean.getY() + VERTICAL_VELOCITY);
+    moveOceanUp = (vel:number) => {
+        this.ocean.setY(this.ocean.getY() + vel);
     };
 
-    moveOceanDown = () => {
-        this.ocean.setY(this.ocean.getY() - VERTICAL_VELOCITY);
+    moveOceanDown = (vel:number) => {
+        this.ocean.setY(this.ocean.getY() - vel);
     };
 
     moveSubUp = () => {
@@ -264,6 +280,20 @@ class Move {
 
     setDir(dir: string) {
         this.dir = dir;
+    }
+
+    checkToIncreaseVel(dir:string){
+        if (this.increaseVelFlag === dir) {
+            if(dir === 'right' || dir === 'left') {
+                this.latVel = 2 * LAT_VELOCITY;
+            }
+            if (dir === 'up' || dir === 'down') {
+                this.vertVel = 2 * VERTICAL_VELOCITY;
+            }
+        } else {
+            this.latVel = LAT_VELOCITY;
+            this.vertVel = VERTICAL_VELOCITY;
+        }
     }
 }
 
