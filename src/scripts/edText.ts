@@ -9,6 +9,7 @@ class EdText {
     private edTitle: HTMLElement;
     private edText: HTMLElement;
     private textEls: HTMLElement[];
+    private textElStrings: string[];
     private zoneFlag : string;
 
     constructor() {
@@ -16,8 +17,10 @@ class EdText {
         this.edTitle = document.getElementById("edTitle") || null;
         this.edText = document.getElementById("edText") || null;
         this.textEls = [this.edContainer, this.edTitle, this.edText]
-       
+        this.textElStrings = ["edContainer", "edTitle", "edText" ]
     }
+   
+  
 
     updateEdText(num:number) {
         if (num === 0) {
@@ -26,15 +29,16 @@ class EdText {
             let className = this.cssOne[num] ;
             //     // reset classList
         this.textEls.forEach((textEl, idx) => {
-            const className = "fadeIn" + textElStrings[idx];
+            const className =  this.textElStrings[idx];
+            console.log('CLASSNAME', className)
             textEl.classList.add(className);
         });
     
-        textEls.forEach((textEl, idx) => {
-            const className = flag + "Style" + textElStrings[idx];
+        this.textEls.forEach((textEl, idx) => {
+            const className = this.cssOne[num] + "Style" + this.textElStrings[idx];
             textEl.classList.add(className);
         });
-        fadeInText(Title, Text);
+    
     }
         }
 
