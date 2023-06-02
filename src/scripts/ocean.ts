@@ -41,6 +41,7 @@ class Ocean {
         this.velUp = velUp || 0;
         this.velDown = velDown || 0;
     }
+    
     public static getInstance(
         ctx?: CanvasRenderingContext2D,
         x?: number,

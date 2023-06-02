@@ -18,6 +18,7 @@ import Ocean from "./ocean";
 import Sub from "./sub";
 import { MoveObjects, LatMoveLimit, DepthObject } from "./types";
 import CalcConstant from "./calcConstant";
+import ProvideMessage from './provideMessage';
 // import MoveUtils from "./moveUtils";
 import { WIDTH } from "../index";
 
@@ -38,6 +39,7 @@ class Move {
     private increaseVelFlag: string;
     private latVel: number;
     private vertVel: number;
+    private provideMessage: ProvideMessage;
 
     constructor(ocean: Ocean, sub: Sub, dir?: string) {
         this.ocean = ocean;
@@ -58,6 +60,7 @@ class Move {
         this.increaseVelFlag = "";
         this.latVel = LAT_VELOCITY;
         this.vertVel = VERTICAL_VELOCITY;
+        this.provideMessage = new ProvideMessage(this.varDepth)
     }
 
     upDateCoordinates() {
@@ -89,6 +92,8 @@ class Move {
             this.getVerticalMove()
         // }    
         this.printCoordinates('IN GET MOVE')
+        // this.constants.printCalcConstant(this.compLat, this.compVert, "IN MOVE getMove")
+
     };
 
     getLatMove() {
@@ -252,6 +257,7 @@ class Move {
             }
         }
     };
+
 
     printCoordinates = (where: string) => {
         console.log(`=${where}==============`);

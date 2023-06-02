@@ -1,4 +1,5 @@
 import { WIDTH, HEIGHT } from "../index";
+import { EUPHOTIC_PELAGIC, EUPHOTIC_BENTHIC, DYSPHOTIC_PELAGIC, DYSPHOTIC_BENTHIC, APHOTIC_PELAGIC, APHOTIC_BENTHIC } from "./constants";
 import { LAT_LIMITS_EXT, FULL_LAT_LIMIT, VERTICAL_VELOCITY } from "./constants";
 import { LatMoveLimit, DepthObject } from "./types";
 
@@ -19,6 +20,36 @@ class CalcConstant {
     }
     getOceanVertLimit() {
         return this.roundDownToNearestVel(this.height * -0.55);
+    }
+    
+    getZone(vert: number, depth:number) {
+        if (vert < this.roundDownToNearestVel(this.height * -0.211)) {
+            if (vert - depth > 2 * VERTICAL_VELOCITY ) {
+                return EUPHOTIC_PELAGIC;
+            } else {
+                return EUPHOTIC_BENTHIC;
+            }
+        } else if (vert < this.roundDownToNearestVel(this.height * 0.6)) {
+            if (vert - depth > 2 * VERTICAL_VELOCITY ) {
+                return DYSPHOTIC_PELAGIC;
+            } else {
+                return DYSPHOTIC_BENTHIC;
+            }
+        } else {
+            if (vert - depth > 2 * VERTICAL_VELOCITY ) {
+                return APHOTIC_PELAGIC;
+            } else {
+                return APHOTIC_BENTHIC;
+            }
+        }
+    }
+
+    getBenthicOrPelagic(vert:number, depth:number) {
+        if (vert - depth > 2 * VERTICAL_VELOCITY ) {
+            return "PELAGIC"
+        } else {
+            return "BENTHIC"
+        }
     }
 
     getFullVertLimit() {
@@ -46,7 +77,6 @@ class CalcConstant {
             return ["O", "S"];
         if (lat < this.getOceanLatLimit() && vert < this.getOceanVertLimit())
             return ["S", "S"];
-            
     }
 
     calcDepthLimit(lat: number) {
@@ -66,12 +96,16 @@ class CalcConstant {
         const slope = (endY - startY) / (endX - startX);
         const yIntercept = startY - slope * startX;
         const y = slope * x + yIntercept;
-        let ans = Math.floor(y/VERTICAL_VELOCITY) * VERTICAL_VELOCITY; // round down to the nearest velocity
+        let ans = Math.floor(y / VERTICAL_VELOCITY) * VERTICAL_VELOCITY; // round down to the nearest velocity
         return ans;
     }
-    
-    roundDownToNearestVel(num:number) {
-        return Math.floor(num/VERTICAL_VELOCITY) * VERTICAL_VELOCITY;
+
+    roundDownToNearestVel(num: number) {
+        return Math.floor(num / VERTICAL_VELOCITY) * VERTICAL_VELOCITY;
+    }
+
+    calcZone() {
+        let fullDepth = this.getFullVertLimit;
     }
     // to calculate ratios lateer
     // calcX() {
@@ -79,6 +113,14 @@ class CalcConstant {
     //     let res = lats.map(el =>(el/ 3084).toFixed(3));
     //     console.log( res)
     // }
+
+    printCalcConstant = (lat: number, vert: number, where: string) => {
+        console.log(`=${where}==============`);
+        console.log("OorS", this.getOorS(lat, vert));
+        console.log("depthObjectName", this.getDepthObject(lat));
+        console.log("========================");
+        console.log("                           ");
+    };
 }
 
 export default CalcConstant;

@@ -34,3 +34,10 @@ export interface DepthObject {
     mvmtLat: string;
     mvmtVert: string;
 }
+
+export interface ITextObject {
+    id: string;
+    title: string;
+    text: string;
+}
+

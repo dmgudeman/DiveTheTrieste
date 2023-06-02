@@ -7,7 +7,6 @@ import Sub from './sub';
 
 class Keymaster {
 
-
   private ocean: Ocean;
   private sub: Sub;
   private dir: string;
