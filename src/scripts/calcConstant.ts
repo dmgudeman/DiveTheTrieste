@@ -38,8 +38,6 @@ class CalcConstant {
     }
 
     getOorS(lat: number, vert: number): string[] {
-        console.log('getOorS Lat', lat,)
-        console.log('getOorS Vert', vert)
         if (lat >= this.getOceanLatLimit() && vert >= this.getOceanVertLimit())
             return ["O", "O"];
         if (lat < this.getOceanLatLimit() && vert >= this.getOceanVertLimit())

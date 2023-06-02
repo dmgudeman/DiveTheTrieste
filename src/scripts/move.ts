@@ -139,7 +139,7 @@ class Move {
                     console.log('22222')
                     this.moveSubDown();
                 } else if (this.dir === "up") { //
-                    console.log('3333331')
+                    console.log('333333')
                     this.moveSubUp();
                 }
             } else if (this.compVert < this.varDepth + VERTICAL_VELOCITY) { // stop one vel unit from lower limit
@@ -148,31 +148,7 @@ class Move {
                     this.moveSubUp();
                 }             
             }
-
-         console.log('XXXXXXXXXXX')
         }
-        // } else if (vert > depth + VERTICAL_VELOCITY) {
-        //     moveUtils.hitBottomMoveVertical(dir);
-        //     console.log("SUBBBBBBBBB NORMAL"); // over ocean limit under depth limit
-        //     if (dir === "down") {
-        //         moveSubDown();
-        //     } else if (dir === "up") {
-        //         moveSubUp();
-        //     }
-        // }
-        // } else if (vert < depth + VERTICAL_VELOCITY) {
-        //     // over the limit
-        //     // console.log("XXXXXXXXXXXXBOTTOM");
-        //     if (vert >= oceanVertLimit) {
-        //         if (dir === "up") {
-        //             moveOceanUp();
-        //         }
-        //     } else if (vert < fullVertLimit + VERTICAL_VELOCITY) {
-        //         if (dir === "up") {
-        //             moveSubUp();
-        //         }
-        //     }
-        // }
     }
 
     // export const hitBottom = (dir) => {
