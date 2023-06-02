@@ -5,6 +5,7 @@ import {
     setCurrentCanvas,
 } from "./constants";
 import { globalCockpit } from "../index";
+import EdText from "./edText";
 
 export function clear(ctx:CanvasRenderingContext2D) {
     ctx.clearRect(0, 0, WIDTH, HEIGHT);
@@ -28,24 +29,16 @@ const musicNoteButton = document.getElementById("musicNoteButton") as HTMLElemen
 const bubblesContainer = document.querySelector(".bubblesContainer") as HTMLElement;
 const bubbles = bubblesContainer.getElementsByClassName("bubble")  as HTMLCollectionOf<Element>;
 const edContainer = document.getElementById("edContainer") as HTMLElement;
-
+const edText = new EdText();
 
 export function showCanvas1() {
     //the ocean
     setCurrentCanvas(1);
+    edText.initialEdSetup();
+    
     
     if (edContainer) edContainer.classList.remove("hide");
- 
-    // //  setInterval(ocean, sub);
-    // for (let i = 0; i < bubbles.length; i++) {
-    //     const bubble = bubbles[i] as HTMLElement;
-    //     // Stop the animation
-    //     bubble.style.animation = "none";
-    //     // Hide the div
-    //     bubble.style.display = "none";
-    // }
     bubblesContainer.classList.add("hide");
-
     if (!(localStorage.getItem("modalDisplayed") === "true")) {
         modal.style.display = "block";
     }
