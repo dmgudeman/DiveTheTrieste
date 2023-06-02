@@ -1,20 +1,14 @@
 // import Sub from "./sub";
 // import Ocean from "./ocean";
-// import { addAndStartMessAnimation, removeMessageElement, stopMessAnimation } from "./edMessage";
 import { WIDTH, HEIGHT } from "../index";
 import {
     setCurrentCanvas,
-    getCurrentCanvas,
-    stopMessageAnimation,
 } from "./constants";
-// import { getMessage } from "./provideMessage";
-import { fadeInText } from "./edText";
 import { globalCockpit } from "../index";
 
 export function clear(ctx:CanvasRenderingContext2D) {
     ctx.clearRect(0, 0, WIDTH, HEIGHT);
 }
-
 export function getCursorPosition(canvas:HTMLElement, event:MouseEvent):void {
     const rect = canvas.getBoundingClientRect();
     const x = event.clientX - rect.left;
@@ -33,9 +27,8 @@ const homeButton = document.getElementById("homeButton") as HTMLElement;
 const musicNoteButton = document.getElementById("musicNoteButton") as HTMLElement;
 const bubblesContainer = document.querySelector(".bubblesContainer") as HTMLElement;
 const bubbles = bubblesContainer.getElementsByClassName("bubble")  as HTMLCollectionOf<Element>;
-const edMessage = document.getElementById("edMassage") as HTMLElement;
 const edContainer = document.getElementById("edContainer") as HTMLElement;
-let messageInterval;
+
 
 export function showCanvas1() {
     //the ocean
@@ -43,18 +36,14 @@ export function showCanvas1() {
     
     if (edContainer) edContainer.classList.remove("hide");
  
-    // messageInterval = setInterval(() => {
-    //     getMessage();
-    // }, 3000);
-
-    //  setInterval(ocean, sub);
-    for (let i = 0; i < bubbles.length; i++) {
-        const bubble = bubbles[i] as HTMLElement;
-        // Stop the animation
-        bubble.style.animation = "none";
-        // Hide the div
-        bubble.style.display = "none";
-    }
+    // //  setInterval(ocean, sub);
+    // for (let i = 0; i < bubbles.length; i++) {
+    //     const bubble = bubbles[i] as HTMLElement;
+    //     // Stop the animation
+    //     bubble.style.animation = "none";
+    //     // Hide the div
+    //     bubble.style.display = "none";
+    // }
     bubblesContainer.classList.add("hide");
 
     if (!(localStorage.getItem("modalDisplayed") === "true")) {
@@ -72,8 +61,6 @@ export function showCanvas1() {
     homeButton.classList.add("can1home");
     homeButton.classList.remove("can2home");
     homeButton.classList.remove("can3home");
-    edMessage ? edMessage.classList.remove("hideEdMessage") : null;
-
 }
 
 export function showCanvas2() {
@@ -95,7 +82,6 @@ export function showCanvas2() {
     homeButton.classList.remove("can1home");
     homeButton.classList.add("can2home");
     homeButton.classList.remove("can3home");
-    edMessage ? edMessage.classList.remove("hideEdMessage") : null;
 }
 
 export function showCanvas3() {
@@ -115,7 +101,6 @@ export function showCanvas3() {
     homeButton.classList.remove("can1home");
     homeButton.classList.remove("can2home");
     homeButton.classList.add("can3home");
-    edMessage ? edMessage.classList.remove("hideEdMessage") : null;
     edContainer.classList.forEach(className => {
         edContainer.classList.remove(className);
       });
