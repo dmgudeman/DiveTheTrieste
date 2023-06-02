@@ -8,7 +8,7 @@ import {
     APHOTIC_PELAGIC,
     textObjects,
 } from "./constants";
-import { changeEducationalText, addEdTextStyle } from "./educational";
+import EdText from "./edText";
 import CalcConstant from "./calcConstant";
 
 class Zone {
@@ -17,6 +17,7 @@ class Zone {
     private calcConstants: CalcConstant;
     private flag: string;
     private oldFlag: string;
+    private edText: EdText
 
     constructor(vert: number, depth: number) {
         this.vert = vert;
@@ -24,6 +25,7 @@ class Zone {
         this.calcConstants = new CalcConstant();
         this.flag = this.calcConstants.getZone(this.vert, this.depth);
         this.oldFlag = "";
+        this.edText = new EdText();
     }
 
     upDateZoneFlag(vertical: number, varDepth: number) {
@@ -34,23 +36,17 @@ class Zone {
             this.oldFlag = this.flag;
 
             if (this.flag === EUPHOTIC_PELAGIC) {
-                changeEducationalText(textObjects[0]);
-                addEdTextStyle("upperPelagic");
+                this.updateEdText(0)
             } else if (this.flag === EUPHOTIC_BENTHIC) {
-                changeEducationalText(textObjects[1]);
-                addEdTextStyle("upper");
+                this.updateEdText(1)
             } else if (this.flag === DYSPHOTIC_PELAGIC) {
-                changeEducationalText(textObjects[2]);
-                addEdTextStyle("middle");
+                this.updateEdText(2)
             } else if (this.flag === DYSPHOTIC_BENTHIC) {
-                changeEducationalText(textObjects[3]);
-                addEdTextStyle("middle");
+                this.updateEdText(3)
             } else if (this.flag === APHOTIC_PELAGIC) {
-                changeEducationalText(textObjects[4]);
-                addEdTextStyle("lower");
+                this.updateEdText(4)
             } else if (this.flag === APHOTIC_BENTHIC) {
-                changeEducationalText(textObjects[5]);
-                addEdTextStyle("lower");
+                this.updateEdText(5)
             }
         }
     }

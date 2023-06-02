@@ -8,7 +8,7 @@ import {
     stopMessageAnimation,
 } from "./constants";
 // import { getMessage } from "./provideMessage";
-import { fadeInText } from "./educational";
+import { fadeInText } from "./edText";
 import { globalCockpit } from "../index";
 
 export function clear(ctx:CanvasRenderingContext2D) {

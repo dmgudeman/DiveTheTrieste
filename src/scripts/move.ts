@@ -8,7 +8,7 @@ import Ocean from "./ocean";
 import Sub from "./sub";
 import { DepthObject } from "./types";
 import CalcConstant from "./calcConstant";
-import ProvideMessage from './zone';
+import Zone from './zone';
 
 class Move {
     private ocean: Ocean;
@@ -26,7 +26,7 @@ class Move {
     private increaseVelFlag: string;
     private latVel: number;
     private vertVel: number;
-    private provideMessage: ProvideMessage;
+    private zone: Zone;
 
     constructor(ocean: Ocean, sub: Sub, dir?: string) {
         this.ocean = ocean;
@@ -46,7 +46,7 @@ class Move {
         this.increaseVelFlag = "";
         this.latVel = LAT_VELOCITY;
         this.vertVel = VERTICAL_VELOCITY;
-        this.provideMessage = new ProvideMessage(this.compLat, this.varDepth)
+        this.zone = new Zone(this.compLat, this.varDepth)
     }
 
     upDateCoordinates() {
@@ -77,7 +77,7 @@ class Move {
             this.getVerticalMove()
         // }    
         this.printCoordinates('IN GET MOVE')
-        this.provideMessage.upDateZoneFlag(this.compVert, this.varDepth);
+        this.zone.upDateZoneFlag(this.compVert, this.varDepth);
         // this.constants.printCalcConstant(this.compLat, this.compVert, "IN MOVE getMove")
 
     };
