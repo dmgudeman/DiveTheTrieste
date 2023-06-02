@@ -1,5 +1,5 @@
 import { WIDTH, HEIGHT } from "../index";
-import { LAT_LIMITS_EXT, FULL_LAT_LIMIT } from "./constants";
+import { LAT_LIMITS_EXT, FULL_LAT_LIMIT, VERTICAL_VELOCITY } from "./constants";
 import { LatMoveLimit, DepthObject } from "./types";
 
 class CalcConstant {
@@ -12,17 +12,17 @@ class CalcConstant {
     }
 
     getOceanLatLimit() {
-        return this.width * -0.45;
+        return this.roundDownToNearestVel(this.width * -0.45);
     }
     getFullLatLimit() {
-        return this.width * -0.7;
+        return this.roundDownToNearestVel(this.width * -0.7);
     }
     getOceanVertLimit() {
-        return this.height * -0.55;
+        return this.roundDownToNearestVel(this.height * -0.55);
     }
 
     getFullVertLimit() {
-        return this.height * -0.95;
+        return this.roundDownToNearestVel(this.height * -0.95);
     }
 
     getDepthObject(lat: number): DepthObject {
@@ -38,14 +38,17 @@ class CalcConstant {
     }
 
     getOorS(lat: number, vert: number): string[] {
-        if (lat > this.getOceanLatLimit() && vert > this.getOceanVertLimit())
+        console.log('getOorS Lat', lat,)
+        console.log('getOorS Vert', vert)
+        if (lat >= this.getOceanLatLimit() && vert >= this.getOceanVertLimit())
             return ["O", "O"];
-        if (lat < this.getOceanLatLimit() && vert > this.getOceanVertLimit())
+        if (lat < this.getOceanLatLimit() && vert >= this.getOceanVertLimit())
             return ["S", "O"];
-        if (lat > this.getOceanLatLimit() && vert < this.getOceanVertLimit())
+        if (lat >= this.getOceanLatLimit() && vert < this.getOceanVertLimit())
             return ["O", "S"];
         if (lat < this.getOceanLatLimit() && vert < this.getOceanVertLimit())
             return ["S", "S"];
+            
     }
 
     calcDepthLimit(lat: number) {
@@ -65,9 +68,13 @@ class CalcConstant {
         const slope = (endY - startY) / (endX - startX);
         const yIntercept = startY - slope * startX;
         const y = slope * x + yIntercept;
-        return y;
+        let ans = Math.floor(y/VERTICAL_VELOCITY) * VERTICAL_VELOCITY; // round down to the nearest velocity
+        return ans;
     }
-
+    
+    roundDownToNearestVel(num:number) {
+        return Math.floor(num/VERTICAL_VELOCITY) * VERTICAL_VELOCITY;
+    }
     // to calculate ratios lateer
     // calcX() {
     //     let lats  = [120,520,660,760,840,940,1040,1140,1240,1460,1620,2160,]

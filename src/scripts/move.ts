@@ -40,7 +40,7 @@ class Move {
         this.ocean = ocean;
         this.sub = sub;
         this.dir = dir || null;
-        this.constants = CalcConstant = new CalcConstant() || null;
+        this.constants = new CalcConstant() || null;
         this.oceanLatLimit = this.constants.getOceanLatLimit() ?? null;
         this.oceanVertLimit = this.constants.getOceanVertLimit() ?? null;
         this.fullLatLimit = this.constants.getFullLatLimit() ?? null;
@@ -77,7 +77,7 @@ class Move {
     getLatMove() {
         if (this.compLat > 0) {
             this.moveOceanRight();
-        } else if (this.compLat > this.oceanLatLimit) {
+        } else if (this.compLat >= this.oceanLatLimit) {
             if (this.dir === "right") {
                 this.moveOceanRight();
             } else if (this.dir === "left") {
@@ -97,31 +97,59 @@ class Move {
     }
 
     getVerticalMove() {
-        this.printStandard(86)
+
+        this.printCoordinates('getVerticalMove')
+        console.log('this.Oors', this.OorS)
         if (this.OorS[1] == "O") {
-            if (this.compVert > 0) {
+            console.log('AAAAAAAAA')
+            if (this.compVert > 0) {  // move down no matter what if above surface
+                console.log('BBBBBBBBB')
                 this.moveOceanDown();
-            } else if (this.compVert > -VERTICAL_VELOCITY) {
+            } else if (this.compVert > -VERTICAL_VELOCITY) { // stop one vertical vel upon rising
                 if (this.dir === "down") {
+                    console.log('CCCCCCCCC')
                     this.moveOceanDown();
                 }
-            } else if (this.compVert > this.varDepth) {
+            } else if (this.compVert > this.varDepth ) { // normal
                 if (this.dir === "down") {
-                    console.log("OCEAN5555555555NORMAL");
+                    console.log('DDDDDDDD')
                     this.moveOceanDown();
-                } else if (this.dir === "up") {
-                    console.log("OCEAN66666666666NORMAL");
+                } else if (this.dir === "up") { 
+                console.log('EEEEEEEEE')
                     this.moveOceanUp();
                 }
-            } else if (this.compVert < this.varDepth + VERTICAL_VELOCITY) {
+            } else if (this.compVert <= this.varDepth + VERTICAL_VELOCITY ) { // stop one vel unit from lower limit
+                console.log('FFFFFFFF')
                 if (this.dir === "up") {
                     this.moveOceanUp();
-                }
-            } else if (this.compVert < this.varDepth) {
-                // if (dir === "up") {
-                console.log("OCEAN7777777 OVER", this.compVert);
+                }             
             }
         } else if ((this.OorS[1] = "S")) {
+            console.log('000000000')
+            if (this.compVert > this.oceanVertLimit + VERTICAL_VELOCITY ) { 
+                console.log('1111111111')
+                console.log('this.varDepth + VERTICAL_VELOCITY ', this.varDepth + VERTICAL_VELOCITY )
+
+                if (this.dir === "down") {
+                    this.moveSubDown();
+                }
+
+            } else if (this.compVert > this.varDepth) { // normal
+                if (this.dir === "down") {
+                    console.log('22222')
+                    this.moveSubDown();
+                } else if (this.dir === "up") { //
+                    console.log('3333331')
+                    this.moveSubUp();
+                }
+            } else if (this.compVert < this.varDepth + VERTICAL_VELOCITY) { // stop one vel unit from lower limit
+                if (this.dir === "up") {
+                    console.log('444444444')
+                    this.moveSubUp();
+                }             
+            }
+
+         console.log('XXXXXXXXXXX')
         }
         // } else if (vert > depth + VERTICAL_VELOCITY) {
         //     moveUtils.hitBottomMoveVertical(dir);
@@ -193,9 +221,10 @@ class Move {
 
     printCoordinates = (where: string) => {
         console.log(`=${where}==============`);
-        console.log("COORDINATES", this.compLat, this.compVert);
-        console.log("OCEAN VAR LIMIT", this.oceanVertLimit);
-        console.log("VARIABLE DEPTH", this.varDepth);
+        console.log("COMP LAT VERT", this.compLat, this.compVert);
+        console.log("OCEAN VERT LIMIT", this.oceanVertLimit);
+        console.log("OCEAN LAT LIMIT", this.oceanLatLimit);
+        console.log("VARDEPTH", Math.floor(this.varDepth));
         console.log("OCEAN X, Y", this.ocean.getX(), this.ocean.getY());
         console.log("SUB X, Y", this.sub.getX(), this.sub.getY());
         console.log("========================");
