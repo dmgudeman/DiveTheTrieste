@@ -170,7 +170,6 @@ document.addEventListener("DOMContentLoaded", () => {
     // MAIN ANIMATION LOOP //////
     function update() {
         clear();
-        calcMovement(ocean, sub);
         showDepth();
         ocean.draw();
         sub.draw();

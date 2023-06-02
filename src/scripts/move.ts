@@ -60,7 +60,7 @@ class Move {
         this.increaseVelFlag = "";
         this.latVel = LAT_VELOCITY;
         this.vertVel = VERTICAL_VELOCITY;
-        this.provideMessage = new ProvideMessage(this.varDepth)
+        this.provideMessage = new ProvideMessage(this.compLat, this.varDepth)
     }
 
     upDateCoordinates() {
@@ -92,6 +92,7 @@ class Move {
             this.getVerticalMove()
         // }    
         this.printCoordinates('IN GET MOVE')
+        this.provideMessage.upDateZoneFlag(this.compVert, this.varDepth);
         // this.constants.printCalcConstant(this.compLat, this.compVert, "IN MOVE getMove")
 
     };

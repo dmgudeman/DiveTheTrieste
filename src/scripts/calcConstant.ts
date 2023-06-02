@@ -23,7 +23,7 @@ class CalcConstant {
     }
     
     getZone(vert: number, depth:number):string {
-        if (vert < this.roundDownToNearestVel(this.height * -0.211)) {
+        if (vert > this.roundDownToNearestVel(this.height * -0.211)) {
             if (vert - depth > 2 * VERTICAL_VELOCITY ) {
                 return EUPHOTIC_PELAGIC;
             } else {
