@@ -30,6 +30,9 @@ class Sub {
     private sprites: ISprite[];
     private currentFrame: number;
     private lastFrameTime: number;
+    private initialLatPos: number;
+    private initialVertPos: number;
+
     private constructor(
         ctx: CanvasRenderingContext2D,
         x?: number,
@@ -60,6 +63,8 @@ class Sub {
         this.sprites = sprites;
         this.currentFrame = currentFrame || 0;
         this.lastFrameTime = lastFrameTime || 0;
+        this.initialLatPos = SUB_INITIAL_LAT_POS;
+        this.initialVertPos = INITIAL_Y_POSITION;
         this.updateSprite = this.updateSprite.bind(this);
     }
 
@@ -75,7 +80,10 @@ class Sub {
         velDown: number = 0,
         currentFrame: number = 0,
         lastFrameTime: number = 0,
-        subImageSrc = "assets/sprite.png"
+        subImageSrc = "assets/sprite.png",
+        initialLatPos = SUB_INITIAL_LAT_POS,
+        initialVertPos = INITIAL_Y_POSITION
+
     ): Sub {
         if (!Sub.instance) {
             if (!ctx) {
@@ -96,7 +104,7 @@ class Sub {
                 subImageSrc,
                 sprites,
                 currentFrame,
-                lastFrameTime
+                lastFrameTime,
             );
         }
         return Sub.instance;
@@ -173,6 +181,13 @@ class Sub {
 
     public zeroVelDown(): void {
         this.velDown = 0;
+    }
+
+    public getInitialLatPos():number{
+        return this.initialLatPos
+    }
+    public getInitialVertPos():number{
+        return this.initialVertPos
     }
 
     clear() {
