@@ -1,7 +1,7 @@
 
 
 
-.fadeInContainer {
+#edContainer {
     position: relative;
     display: flex;
     flex-direction: column;
@@ -13,38 +13,34 @@
     width: 400px;
     padding-bottom: 20px;
     border-radius: 30px;
-    opacity: 0;
-    transition: opacity 1s ease-in;
     box-shadow: 3px 3px 4px rgba(0, 0, 0, 0.5);
 }
-.fadeInContainer.hide {
+
+#edContainer.hide {
     display: none;
 }
-.fadeInTitle { 
+
+#edTitle { 
     padding-top: 20px;
     color: var(--four);
     font-size: 1.5rem;
     font-weight: 700;
-    opacity: 0;
-    transition: opacity 1s ease-in;
 }
 
-.fadeInText {
+#edText {
     padding: 20px;
     padding-top: 10px;
     color: var(--three);
-    opacity: 0;
-    transition: opacity 1s ease-in;
 }
 
-.upperStyleContainer { 
+#edContainer.upperStyle { 
     background-color: var(--two);
     border: 3px solid var(--three);
 }
-.upperStyleTitle {
+#edTitle.upperStyle {
     color: var(--four);
 }
-.upperStyleText {
+#edText.upperStyle {
     color: var(--three);
 }
 

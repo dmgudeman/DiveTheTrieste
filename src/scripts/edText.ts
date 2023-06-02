@@ -8,20 +8,53 @@ class EdText {
     private edContainer: HTMLElement;
     private edTitle: HTMLElement;
     private edText: HTMLElement;
+    private textEls: HTMLElement[];
     private zoneFlag : string;
 
     constructor() {
-        this.edContainer = document.getElementById("fadeInContainer") || null;
-        this.edTitle = document.getElementById("fadeInTitle") || null;
-        this.edText = document.getElementById("fadeInText") || null;
+        this.edContainer = document.getElementById("edContainer") || null;
+        this.edTitle = document.getElementById("edTitle") || null;
+        this.edText = document.getElementById("edText") || null;
+        this.textEls = [this.edContainer, this.edTitle, this.edText]
        
     }
 
     updateEdText(num:number) {
-        if (num === 0)
+        if (num === 0) {
+            console.log('88888888888888', this.cssOne[num]);
+            console.log('77777777',this.textEls)
+            let className = this.cssOne[num] ;
+            this.textEls.forEach((textEl, idx) => {
+                  className = className ;
+               console.log('9999999999', className)
+            textEl.classList.add(className);
+        });
+        }
 
 
     }
+
+    // export function addEdTextStyle(flag) {
+    //     const Text = document.getElementById("fadeInText");
+    //     const Title = document.getElementById("fadeInTitle");
+    //     const Container = document.getElementById("fadeInContainer");
+      
+    //     const textEls = [Text, Title, Container];
+    //     const textElStrings = ["Text", "Title", "Container"];
+    //     Container.style.opacity = "1";
+    
+    //     // reset classList
+    //     textEls.forEach((textEl, idx) => {
+    //         const className = "fadeIn" + textElStrings[idx];
+    //         textEl.classList.add(className);
+    //     });
+    
+    //     textEls.forEach((textEl, idx) => {
+    //         const className = flag + "Style" + textElStrings[idx];
+    //         textEl.classList.add(className);
+    //     });
+    //     fadeInText(Title, Text);
+    // }
 
     // if (this.flag === EUPHOTIC_PELAGIC) {
     //     this.edText.changeEducationalText(textObjects[0]);

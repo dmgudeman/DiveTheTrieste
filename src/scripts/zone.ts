@@ -36,17 +36,17 @@ class Zone {
             this.oldFlag = this.flag;
 
             if (this.flag === EUPHOTIC_PELAGIC) {
-                this.updateEdText(0)
+                this.edText.updateEdText(0)
             } else if (this.flag === EUPHOTIC_BENTHIC) {
-                this.updateEdText(1)
+                this.edText.updateEdText(1)
             } else if (this.flag === DYSPHOTIC_PELAGIC) {
-                this.updateEdText(2)
+                this.edText.updateEdText(2)
             } else if (this.flag === DYSPHOTIC_BENTHIC) {
-                this.updateEdText(3)
+                this.edText.updateEdText(3)
             } else if (this.flag === APHOTIC_PELAGIC) {
-                this.updateEdText(4)
+                this.edText.updateEdText(4)
             } else if (this.flag === APHOTIC_BENTHIC) {
-                this.updateEdText(5)
+                this.edText.updateEdText(5)
             }
         }
     }

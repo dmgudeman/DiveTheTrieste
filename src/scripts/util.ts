@@ -40,7 +40,8 @@ let messageInterval;
 export function showCanvas1() {
     //the ocean
     setCurrentCanvas(1);
-    edTextContainer.classList.remove("hide");
+    
+    if (edTextContainer) edTextContainer.classList.remove("hide");
     stopMessageAnimation.messFlag = false;
     // messageInterval = setInterval(() => {
     //     getMessage();
