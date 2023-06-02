@@ -132,10 +132,11 @@ export const LAT_LIMITS_EXT: DepthObject[] = [  // the x, xll, y, yll are for sl
   {'id':6, 'name':'DBL_PEAK_1',       x: -980,  xll: -841,  y: -200,  yll: -461,  mvmtLat: 'left', mvmtVert: 'up'},
   {'id':7, 'name':'DBL_PEAK_2',       x: -1120, xll: -981,  y: -240,  yll: -199,  mvmtLat: 'both', mvmtVert: 'up'},
   {'id':8, 'name':'END_DBL',          x: -1180, xll: -1121, y: -450,  yll: -239,  mvmtLat: 'right', mvmtVert: 'up'},
-  {'id':9, 'name':'START_TRENCH',     x: -1320, xll: -1181, y: -500,  yll: -451,  mvmtLat: 'both', mvmtVert: 'up'},
-  {'id':10,'name':'TRENCH_BOTTOM',    x: -1600, xll: -1321, y: -1560, yll: -501,  mvmtLat: 'right', mvmtVert: 'up'},
-  {'id':11, 'name':'END_TRENCH',      x: -1740, xll: -1601, y: -480,  yll: -1561, mvmtLat: 'left', mvmtVert: 'up'},
-  {'id':12, 'name':'END_POSITION',    x: -2200, xll: -1741, y: -485,  yll: -481,  mvmtLat: 'left', mvmtVert: 'up'},
+  {'id':9, 'name':'START_TRENCH',     x: -1320, xll: -1181, y: -500,  yll: -451,  mvmtLat: 'right', mvmtVert: 'up'},
+  {'id':10,'name':'TRENCH_BOTTOM_L',  x: -1520, xll: -1321, y: -1560, yll: -501,  mvmtLat: 'right', mvmtVert: 'up'},
+  {'id':11,'name':'TRENCH_BOTTOM_R',  x: -1640, xll: -1521, y: -1560, yll: -501,  mvmtLat: 'both', mvmtVert: 'up'},
+  {'id':12, 'name':'END_TRENCH',      x: -1740, xll: -1641, y: -480,  yll: -1561, mvmtLat: 'left', mvmtVert: 'up'},
+  {'id':13, 'name':'END_POSITION',    x: -2200, xll: -1741, y: -485,  yll: -481,  mvmtLat: 'left', mvmtVert: 'up'},
 ]
 
 
