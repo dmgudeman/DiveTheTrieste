@@ -9,7 +9,7 @@ export const stopMessageAnimation = {
     messFlag: true
   };
   
-  let _CURRENT_CANVAS = 2;
+  export let _CURRENT_CANVAS = 2;
   export const getCurrentCanvas = () => _CURRENT_CANVAS; 
   export const setCurrentCanvas = (value) => {
     if (value === 1 || value === 2 || value === 3) {
