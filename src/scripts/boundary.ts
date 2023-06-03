@@ -1,7 +1,11 @@
-import { INITIAL_Y_POSITION, SEA_DEPTH, SUB_INITIAL_LAT_POS } from "./constants";
+import { INITIAL_Y_POSITION, SEA_DEPTH, SUB_INITIAL_LAT_POS, DIST_CA_TO_TRENCH } from "./constants";
 import { HEIGHT } from "../index";
 import Ocean from './ocean';
 import Sub from './sub';
+import CalcConstant from "./calcConstant";
+
+// const ocean = Ocean.getInstance();
+// const sub = Sub.getInstance();
 
 export  function showMouseAsSub(event) {
     var x = event.clientX - SUB_INITIAL_LAT_POS;
@@ -10,10 +14,10 @@ export  function showMouseAsSub(event) {
   }
 
 export function showDepth() {
-    let ocean = Ocean.getInstance();
-    let sub = Sub.getInstance();
-    let conversion = SEA_DEPTH / HEIGHT; // 19.64 feet per pixel
-    let conversionShallow = 2; // 2 feet per pixel
+    const ocean = Ocean.getInstance();
+    const sub = Sub.getInstance();
+    const conversion = SEA_DEPTH / HEIGHT; // 19.64 feet per pixel
+    const conversionShallow = 2; // 2 feet per pixel
     let composite = Math.abs(ocean.getY() - sub.getY() + INITIAL_Y_POSITION);
     let depth: number;
 
@@ -23,10 +27,31 @@ export function showDepth() {
         depth = Math.floor(conversion * composite);
     }
     if (depth < 0) depth = 0;
-    let d = document.getElementById("depth");
-    d.innerHTML = `Depth: ${depth} feet`;
+    const depthGauge = document.getElementById("depth");
+    const IPDepthGauge = document.getElementById("IPDepthGauge");
+    depthGauge.innerHTML = `Depth: ${depth} feet`;
+    IPDepthGauge.innerHTML = `Depth: ${depth} ft`;
 
     return depth;
+}
+
+
+export function showLat() : number {
+    let ocean = Ocean.getInstance();
+    let sub = Sub.getInstance();
+    const calcConstant = new CalcConstant();
+
+    const conversion = Math.ceil(Math.abs(DIST_CA_TO_TRENCH/calcConstant.getDistCAtoTrench())); 
+    let composite = Math.abs(ocean.getX() - sub.getX() + SUB_INITIAL_LAT_POS);
+
+    console.log('conversion', conversion);
+    console.log('composite', composite);
+    let lat: number;
+    lat = Math.floor(Math.abs(composite * conversion));
+    if (composite < 0) lat = 0;
+    const IPLatGauge = document.getElementById("IPLatGauge");
+    IPLatGauge.innerHTML = `Dist: ${lat} mi`;
+    return lat
 }
 
 export function pickImageArray(ocean, sub, ctx) {

@@ -23,6 +23,7 @@ const canvas1 = document.getElementById("canvas1") as HTMLCanvasElement;
 const canvas2 = document.getElementById("canvas2") as HTMLCanvasElement;
 const canvas3 = document.getElementById("canvas3") as HTMLCanvasElement;
 const gauge = document.querySelector(".gaugeContainer") as HTMLElement;
+const instPanel = document.getElementById("instPanelContainer") as HTMLElement;
 const trieste3Container = document.getElementById("trieste3Container") as HTMLElement;
 const homeButton = document.getElementById("homeButton") as HTMLElement;
 const musicNoteButton = document.getElementById("musicNoteButton") as HTMLElement;
@@ -54,6 +55,7 @@ export function showCanvas1() {
     homeButton.classList.add("can1home");
     homeButton.classList.remove("can2home");
     homeButton.classList.remove("can3home");
+    instPanel.classList.add("hide");
 }
 
 export function showCanvas2() {
@@ -75,6 +77,7 @@ export function showCanvas2() {
     homeButton.classList.remove("can1home");
     homeButton.classList.add("can2home");
     homeButton.classList.remove("can3home");
+    instPanel.classList.add("hide");
 }
 
 export function showCanvas3() {
@@ -96,6 +99,7 @@ export function showCanvas3() {
     homeButton.classList.add("can3home");
     edContainer.classList.forEach(className => {
         edContainer.classList.remove(className);
+        instPanel.classList.remove("hide");
       });
       
 }

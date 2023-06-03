@@ -5,7 +5,7 @@
 // canvas3 is the cockpit
 
 import { showCanvas1, showCanvas2, showCanvas3 } from "./scripts/util";
-import { showDepth, showMouseAsSub } from "./scripts/boundary";
+import { showDepth, showLat, showMouseAsSub } from "./scripts/boundary";
 import Sub from "./scripts/sub";
 import Ocean from "./scripts/ocean";
 import Cockpit from "./scripts/cockpit";
@@ -170,6 +170,7 @@ document.addEventListener("DOMContentLoaded", () => {
     function update() {
         clear();
         showDepth();
+        showLat();
         ocean.draw();
         sub.draw();
         

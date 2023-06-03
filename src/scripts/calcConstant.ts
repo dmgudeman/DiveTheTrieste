@@ -71,6 +71,9 @@ class CalcConstant {
             console.error("calcDepth did not work for lat = ", lat);
         }
     }
+    getDistCAtoTrench(){
+        return LAT_LIMITS_EXT[10].x
+    }
 
     getOorS(lat: number, vert: number): string[] {
         if (lat >= this.getOceanLatLimit() && vert >= this.getOceanVertLimit())

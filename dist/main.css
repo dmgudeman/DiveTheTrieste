@@ -571,6 +571,10 @@ input {
   border-radius: 50px 50px 0px 0px;
 }
 
+.instPanelContainer.hide {
+  display: none;
+}
+
 .IPLocationContainer {
   display: flex;
   align-items: center;
@@ -582,54 +586,48 @@ input {
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: var(--six);
-  color: var(--five);
-  font-size: 22;
-  font-weight: 550;
-  margin-top: 20px;
-  z-index: 21;
   width: 45%;
   height: 65px;
+  margin-top: 20px;
+  font-size: 1rem;
+  font-weight: 550;
+  text-align: center;
   border-radius: 40px 40px 16px 16px;
   border: 3px solid rgb(58, 19, 19);
-  text-align: center;
   background-color: yellowgreen;
+  z-index: 21;
 }
 
 .IPLatGauge {
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: var(--six);
-  color: var(--five);
-  font-size: 22;
-  font-weight: 550;
-  margin-top: 20px;
-  z-index: 21;
   width: 45%;
   height: 65px;
+  margin-top: 20px;
+  font-size: 1rem;
+  font-weight: 550;
+  text-align: center;
   border-radius: 40px 40px 16px 16px;
   border: 3px solid rgb(58, 19, 19);
-  text-align: center;
   background-color: yellowgreen;
+  z-index: 21;
 }
 
 .IPZoneGauge {
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: var(--six);
-  color: var(--five);
-  font-size: 22;
-  font-weight: 550;
-  margin: 20px;
-  z-index: 21;
   width: 87%;
   height: 65px;
+  margin: 20px;
+  font-size: 22;
+  font-weight: 550;
+  text-align: center;
   border-radius: 16px;
   border: 3px solid rgb(58, 19, 19);
-  text-align: center;
   background-color: yellowgreen;
+  z-index: 21;
 }
 
 :root {
