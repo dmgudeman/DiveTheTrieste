@@ -6,6 +6,8 @@ import {
 } from "./constants";
 import { globalCockpit } from "../index";
 import EdText from "./edText";
+import { showDepth, showLat, showZone, showMouseAsSub } from "./boundary";
+
 
 export function clear(ctx:CanvasRenderingContext2D) {
     ctx.clearRect(0, 0, WIDTH, HEIGHT);
@@ -22,6 +24,7 @@ export function getCursorPosition(canvas:HTMLElement, event:MouseEvent):void {
 const canvas1 = document.getElementById("canvas1") as HTMLCanvasElement;
 const canvas2 = document.getElementById("canvas2") as HTMLCanvasElement;
 const canvas3 = document.getElementById("canvas3") as HTMLCanvasElement;
+
 const gauge = document.querySelector(".gaugeContainer") as HTMLElement;
 const instPanel = document.getElementById("instPanelContainer") as HTMLElement;
 const trieste3Container = document.getElementById("trieste3Container") as HTMLElement;
@@ -36,6 +39,7 @@ export function showCanvas1() {
     //the ocean
     setCurrentCanvas(1);
     edText.initialEdSetup();
+    showDepth();
     
     
     edContainer.classList.remove("hideEd");
@@ -56,12 +60,13 @@ export function showCanvas1() {
     homeButton.classList.remove("can2home");
     homeButton.classList.remove("can3home");
     instPanel.classList.add("hide");
+    
 }
 
 export function showCanvas2() {
     //opening page
+
     setCurrentCanvas(2);
-    edContainer.classList.add("hide");
     canvas1.style.display = "none";
     canvas2.style.display = "block";
     canvas3.style.display = "none";
@@ -74,19 +79,21 @@ export function showCanvas2() {
     homeButton.classList.add("can2home");
     homeButton.classList.remove("can3home");
     instPanel.classList.add("hide");
-    removeEdContainer();
+   
+    edContainer.classList.add("hide");
 }
 
 export function showCanvas3() {
     //cockpit
     globalCockpit.cockpit.draw()
     setCurrentCanvas(3);
-    edContainer.classList.add("hide");
+    bubblesContainer.classList.add("hide");
     canvas1.style.display = "none";
     canvas2.style.display = "none";
     canvas3.style.display = "block";
     canvas3.style.cursor = "pointer";
     gauge.classList.add("hidegauge");
+   
     trieste3Container.classList.remove("hide");
     musicNoteButton.classList.remove("can1MN");
     musicNoteButton.classList.remove("can2MN");
@@ -98,6 +105,9 @@ export function showCanvas3() {
         edContainer.classList.remove(className);
         instPanel.classList.remove("hide");
       });
+    showDepth();
+    showLat();
+    showZone();
       
 }
 

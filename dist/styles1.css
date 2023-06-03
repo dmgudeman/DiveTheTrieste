@@ -132,32 +132,6 @@
   left: 25px;
 }
 
-#canvasContainer {
-  position: relative;
-}
-
-canvas {
-  position: absolute;
-  display: block;
-  background: brown;
-  left: 0;
-  right: 0;
-}
-
-#canvas1 {
-  display: none;
-  background-color: #E0AE7D;
-}
-
-#canvas2 {
-  background-color: green;
-}
-
-#canvas3 {
-  display: none;
-  background-color: purple;
-}
-
 body img {
   display: none;
 }
@@ -382,4 +356,39 @@ body img {
   transition: top 1s ease; /* Transition for the animation */
   font-size: 1rem;
   z-index: 999;
+}
+
+#canvasContainer {
+  position: relative;
+}
+
+canvas {
+  position: absolute;
+  background: brown;
+  left: 0;
+  right: 0;
+}
+
+#canvas3Container {
+  position: relative;
+  display: none;
+  width: 100%;
+  height: 100%;
+  background: brown;
+  left: 0;
+  right: 0;
+}
+
+#canvas1 {
+  display: none;
+  background-color: #E0AE7D;
+}
+
+#canvas2 {
+  background-color: green;
+}
+
+#canvas3 {
+  display: none;
+  background-color: purple;
 }

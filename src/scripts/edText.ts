@@ -40,13 +40,15 @@ class EdText {
     }
 
     setEdStyle(num: number) {
+     
         this.clearAllEdElementsClassList(); 
+        if (this.textEls.length < 1) return;
         this.textEls.forEach((textEl, idx) => { 
             let className = this.textElStrings[idx];
             let className2 =
                 this.cssOne[num] + "Style" + this.textElSuffixes[idx];
-            textEl.classList.add(className);
-            textEl.classList.add(className2);
+            if(textEl) textEl.classList.add(className);
+            if(textEl)textEl.classList.add(className2);
         });
     }
 
@@ -56,11 +58,12 @@ class EdText {
 
     setEdText(num: number) {
         let textObject = this.calcConstants.getTextObject(num);
-        this.edTitle.textContent = textObject.title;
-        this.edText.textContent = textObject.text;
+        if(this.edTitle)this.edTitle.textContent = textObject.title;
+        if(this.edText)this.edText.textContent = textObject.text;
     }
 
     clearOneEdElementClassList(element: HTMLElement) {
+        if (!element) return;
         while (element.classList.length > 0) {
             element.classList.remove(element.classList.item(0));
         }

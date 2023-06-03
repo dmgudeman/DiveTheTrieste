@@ -5,7 +5,7 @@
 // canvas3 is the cockpit
 
 import { showCanvas1, showCanvas2, showCanvas3 } from "./scripts/util";
-import { showDepth, showLat, showZone, showMouseAsSub } from "./scripts/boundary";
+
 import Sub from "./scripts/sub";
 import Ocean from "./scripts/ocean";
 import Cockpit from "./scripts/cockpit";
@@ -79,9 +79,8 @@ document.addEventListener("DOMContentLoaded", () => {
     let cockpit = new Cockpit({ ctx: ctx3, sub, ocean });
     globalCockpit.cockpit = cockpit;
     let key = new Keymaster();
-    showDepth();
-    showLat();
-    showZone();
+  
+   
 
 
     gitHubButton.addEventListener("click", () => {
