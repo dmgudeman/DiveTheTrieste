@@ -51,8 +51,11 @@ export function showLat() : number {
 }
 
 export function showZone():string {
-    
-
+    const zone = new Zone();
+    const title = zone.upDateZoneObject().title;
+    const IPZoneGauge = document.getElementById("IPZoneGauge");
+    IPZoneGauge.innerHTML = `${title}`;
+    return title;
 }
 
 export function pickImageArray(ocean, sub, ctx) {

@@ -10,26 +10,35 @@ import {
 } from "./constants";
 import EdText from "./edText";
 import CalcConstant from "./calcConstant";
+import Ocean from "./ocean";
+import Sub from "./sub";
 
 class Zone {
+    private ocean: Ocean;
+    private sub: Sub;
+    private lat: number;
     private vert: number;
-    private depth: number;
+    private varDepth: number;
     private calcConstants: CalcConstant;
     private flag: number;
     private oldFlag: number;
     private edText: EdText
 
-    constructor(vert: number, depth: number) {
-        this.vert = vert;
-        this.depth = depth;
+    constructor() {
+        this.ocean = Ocean.getInstance();
+        this.sub = Sub.getInstance();
         this.calcConstants = new CalcConstant();
-        this.flag = this.calcConstants.getZone(this.vert, this.depth);
+        this.lat = this.calcConstants._getCompLat(this.ocean, this.sub) || 0;
+        this.vert = this.calcConstants._getCompVert(this.ocean, this.sub) || 0;
+        this.varDepth = this.calcConstants._calcDepthLimit(this.lat) || null;
+        this.flag = this.calcConstants._getZone(this.lat, this.vert) || null;
         this.oldFlag = null;
         this.edText = new EdText();
     }
 
-    upDateZoneFlag(vertical: number, varDepth: number) {
-        this.flag = this.calcConstants.getZone(vertical, varDepth);
+    upDateZoneObject() { 
+        this.varDepth = this.calcConstants._calcDepthLimit(this.lat)
+        this.flag = this.calcConstants._getZone(this.vert, this.varDepth);
        
         if (this.oldFlag !== this.flag) {
             this.oldFlag = this.flag;

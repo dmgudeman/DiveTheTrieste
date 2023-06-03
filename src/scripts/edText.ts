@@ -45,7 +45,6 @@ class EdText {
             let className = this.textElStrings[idx];
             let className2 =
                 this.cssOne[num] + "Style" + this.textElSuffixes[idx];
-            console.log("CLASSNAME", className);
             textEl.classList.add(className);
             textEl.classList.add(className2);
         });

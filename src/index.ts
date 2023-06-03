@@ -5,7 +5,7 @@
 // canvas3 is the cockpit
 
 import { showCanvas1, showCanvas2, showCanvas3 } from "./scripts/util";
-import { showDepth, showLat, showMouseAsSub } from "./scripts/boundary";
+import { showDepth, showLat, showZone, showMouseAsSub } from "./scripts/boundary";
 import Sub from "./scripts/sub";
 import Ocean from "./scripts/ocean";
 import Cockpit from "./scripts/cockpit";
@@ -78,7 +78,11 @@ document.addEventListener("DOMContentLoaded", () => {
     let sub = Sub.getInstance(ctx1);
     let cockpit = new Cockpit({ ctx: ctx3, sub, ocean });
     globalCockpit.cockpit = cockpit;
-    let key = new Keymaster(ocean, sub);
+    let key = new Keymaster();
+    showDepth();
+    showLat();
+    showZone();
+
 
     gitHubButton.addEventListener("click", () => {
         window.location.href = "https://github.com/dmgudeman";
@@ -169,8 +173,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // MAIN ANIMATION LOOP //////
     function update() {
         clear();
-        showDepth();
-        showLat();
+        
         ocean.draw();
         sub.draw();
         
@@ -200,4 +203,5 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     document.addEventListener("keydown", keyDown);
+     
 });

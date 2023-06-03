@@ -92,12 +92,3 @@
 .lowerStyleEdText {
   color: lightsalmon;
 }
-
-.transition-fade {
-  transition: 0.3s ease-in-out;
-  opacity: 1;
-}
-
-.transition-fade.fade-out {
-  opacity: 0;
-}

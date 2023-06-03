@@ -38,7 +38,7 @@ export function showCanvas1() {
     edText.initialEdSetup();
     
     
-    if (edContainer) edContainer.classList.remove("hide");
+    edContainer.classList.remove("hideEd");
     bubblesContainer.classList.add("hide");
     if (!(localStorage.getItem("modalDisplayed") === "true")) {
         modal.style.display = "block";
@@ -74,6 +74,7 @@ export function showCanvas2() {
     homeButton.classList.add("can2home");
     homeButton.classList.remove("can3home");
     instPanel.classList.add("hide");
+    removeEdContainer();
 }
 
 export function showCanvas3() {
@@ -115,3 +116,13 @@ window.addEventListener("click", function (event) {
         localStorage.setItem("modalDisplayed", 'true');
     }
 });
+
+const removeEdContainer =() =>{
+    const edContainer = document.getElementById("edContainer") as HTMLElement;
+    edContainer.classList.forEach(className => {
+        edContainer.classList.remove(className);
+    })
+    edContainer.classList.add("edContainer");
+    edContainer.classList.add("hideEd");
+}
+     

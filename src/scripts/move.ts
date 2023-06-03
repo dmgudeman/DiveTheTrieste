@@ -41,12 +41,12 @@ class Move {
         this.compVert =
             this.ocean.getY() - this.sub.getY() + INITIAL_Y_POSITION ?? null;
         this.depthObject = this.constants.getDepthObject(this.compLat) || null;
-        this.varDepth = this.constants.calcDepthLimit(this.compLat) || null;
+        this.varDepth = this.constants._calcDepthLimit(this.compLat) || null;
         this.OorS = this.constants.getOorS(this.compLat, this.compVert) || null;
         this.increaseVelFlag = "";
         this.latVel = LAT_VELOCITY;
         this.vertVel = VERTICAL_VELOCITY;
-        this.zone = new Zone(this.compLat, this.varDepth)
+        this.zone = new Zone()
     }
 
     upDateCoordinates() {
@@ -58,7 +58,7 @@ class Move {
         this.oceanVertLimit = this.constants.getOceanVertLimit();
         this.fullLatLimit = this.constants.getFullLatLimit();
         this.depthObject = this.constants.getDepthObject(this.compLat);
-        this.varDepth = this.constants.calcDepthLimit(this.compLat);
+        this.varDepth = this.constants._calcDepthLimit(this.compLat);
         this.OorS = this.constants.getOorS(this.compLat, this.compVert);
     }
 
@@ -77,7 +77,7 @@ class Move {
             this.getVerticalMove()
         // }    
         // this.printCoordinates('IN GET MOVE')
-        this.zone.upDateZoneFlag(this.compVert, this.varDepth);
+        this.zone.upDateZoneObject();
         // this.constants.printCalcConstant(this.compLat, this.compVert, "IN MOVE getMove")
 
     };
