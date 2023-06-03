@@ -62,13 +62,9 @@ export function showCanvas2() {
     //opening page
     setCurrentCanvas(2);
     edContainer.classList.add("hide");
-  
-
     canvas1.style.display = "none";
     canvas2.style.display = "block";
     canvas3.style.display = "none";
-    gauge.classList.add("hidegauge");
-    gauge.classList.add("hidegauge");
     gauge.classList.add("hidegauge");
     trieste3Container.classList.remove("hide");
     musicNoteButton.classList.remove("can1MN");
@@ -89,7 +85,7 @@ export function showCanvas3() {
     canvas2.style.display = "none";
     canvas3.style.display = "block";
     canvas3.style.cursor = "pointer";
-    gauge.classList.remove("hidegauge");
+    gauge.classList.add("hidegauge");
     trieste3Container.classList.remove("hide");
     musicNoteButton.classList.remove("can1MN");
     musicNoteButton.classList.remove("can2MN");

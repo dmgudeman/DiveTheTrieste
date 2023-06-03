@@ -3,6 +3,7 @@ import { HEIGHT } from "../index";
 import Ocean from './ocean';
 import Sub from './sub';
 import CalcConstant from "./calcConstant";
+import Zone from "./zone";
 
 // const ocean = Ocean.getInstance();
 // const sub = Sub.getInstance();
@@ -31,27 +32,27 @@ export function showDepth() {
     const IPDepthGauge = document.getElementById("IPDepthGauge");
     depthGauge.innerHTML = `Depth: ${depth} feet`;
     IPDepthGauge.innerHTML = `Depth: ${depth} ft`;
-
     return depth;
 }
 
 
 export function showLat() : number {
-    let ocean = Ocean.getInstance();
-    let sub = Sub.getInstance();
+    const ocean = Ocean.getInstance();
+    const sub = Sub.getInstance();
     const calcConstant = new CalcConstant();
-
     const conversion = Math.ceil(Math.abs(DIST_CA_TO_TRENCH/calcConstant.getDistCAtoTrench())); 
     let composite = Math.abs(ocean.getX() - sub.getX() + SUB_INITIAL_LAT_POS);
-
-    console.log('conversion', conversion);
-    console.log('composite', composite);
     let lat: number;
     lat = Math.floor(Math.abs(composite * conversion));
     if (composite < 0) lat = 0;
     const IPLatGauge = document.getElementById("IPLatGauge");
     IPLatGauge.innerHTML = `Dist: ${lat} mi`;
     return lat
+}
+
+export function showZone():string {
+    
+
 }
 
 export function pickImageArray(ocean, sub, ctx) {
