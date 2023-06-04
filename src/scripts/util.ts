@@ -2,7 +2,8 @@
 // import Ocean from "./ocean";
 import { WIDTH, HEIGHT } from "../index";
 import {
-    setCurrentCanvas, _CURRENT_CANVAS
+    getCurrentCanvas,
+    setCurrentCanvas
 } from "./constants";
 import { globalCockpit } from "../index";
 import EdText from "./edText";
@@ -87,7 +88,7 @@ export function showCanvas3() {
     //cockpit
     globalCockpit.cockpit.draw()
     setCurrentCanvas(3);
-    console.log('_CURRENT_CANVAS', _CURRENT_CANVAS)
+    console.log('_CURRENT_CANVAS', getCurrentCanvas())
     bubblesContainer.classList.add("hide");
     canvas1.style.display = "none";
     canvas2.style.display = "none";

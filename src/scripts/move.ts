@@ -3,15 +3,15 @@ import {
     LAT_VELOCITY,
     VERTICAL_VELOCITY,
     SUB_INITIAL_LAT_POS,
-    _CURRENT_CANVAS,
+   
 } from "./constants";
 import Ocean from "./ocean";
 import Sub from "./sub";
 import { DepthObject } from "./types";
 import CalcConstant from "./calcConstant";
-import EdText from './edText';
-import Zone from './zone';
-import { getCurrentCanvas } from "./constants";
+import EdText from "./edText";
+import Zone from "./zone";
+import { getCurrentCanvas, setHitBottomFlag } from "./constants";
 
 class Move {
     private ocean: Ocean;
@@ -29,8 +29,8 @@ class Move {
     private increaseVelFlag: string;
     private latVel: number;
     private vertVel: number;
-  
-    private edText: EdText
+
+    private edText: EdText;
 
     constructor(ocean: Ocean, sub: Sub, dir?: string) {
         this.ocean = ocean;
@@ -50,8 +50,8 @@ class Move {
         this.increaseVelFlag = "";
         this.latVel = LAT_VELOCITY;
         this.vertVel = VERTICAL_VELOCITY;
-        
-        this.edText = new EdText()
+
+        this.edText = new EdText();
     }
 
     upDateCoordinates() {
@@ -67,38 +67,33 @@ class Move {
         this.OorS = this.constants.getOorS(this.compLat, this.compVert);
     }
 
-    getMove = (dir: string) => {
-        const zone = new Zone()
+    public getMove = (dir: string) => {
+        const zone = new Zone();
         this.setDir(dir);
         this.upDateCoordinates();
         this.checkToIncreaseVel(dir);
-        // if(dir === 'right' || dir === 'left') {
-            if (this.compVert <= this.varDepth){
-                this.configureMoveLateral(dir)
-            } else {
-                this.getLatMove();
-            }
-           
-        // } else if ( dir === 'up' || dir === 'down') {
-            this.getVerticalMove()
-        // }    
-        // this.printCoordinates('IN GET MOVE')
+        if (this.compVert <= this.varDepth) {
+            setHitBottomFlag(true);
+            this.configureHitBottomMove(dir);
+        } else {
+            this.getLatMove();
+        }
+
+        this.getVerticalMove();
+
         let zoneObject = zone.upDateZoneObject();
-      
+
         let zoneNum = zoneObject.id;
         let canvasNumber = getCurrentCanvas();
-        console.log('ZONENUM in getMOve', zoneNum);
-        console.log('_CURRENT_CANVAS', canvasNumber)
-        this.edText.updateEdText(zoneNum, canvasNumber)
-
+        this.edText.updateEdText(zoneNum, canvasNumber);
+        // this.printCoordinates('IN GET MOVE')
         // this.constants.printCalcConstant(this.compLat, this.compVert, "IN MOVE getMove")
-
     };
 
-    getLatMove() {
-        // console.log('xxxxxxxxxxxxxx')
+    private getLatMove() {
+        console.log("xxxxxxxxxxxxxx");
         if (this.OorS[0] == "O") {
-            this.sub.setX(this.sub.getInitialLatPos())
+            this.sub.setX(this.sub.getInitialLatPos());
             // console.log('LATERAL 0000000 LAT');
             if (this.compLat > 0) {
                 // console.log('LATERAL 1111111 LAT');
@@ -121,8 +116,8 @@ class Move {
             }
         } else if (this.OorS[0] == "S") {
             // console.log('yyyyyyyyyyyyy')
-           if (this.compLat > this.fullLatLimit) {
-            // console.log('LATERAL 5555555 LAT');
+            if (this.compLat > this.fullLatLimit) {
+                // console.log('LATERAL 5555555 LAT');
                 if (this.dir === "right") {
                     // console.log('LATERAL 66666666 LAT');
                     this.moveSubRight();
@@ -139,7 +134,7 @@ class Move {
         }
     }
 
-    getVerticalMove() {
+    private getVerticalMove() {
         if (this.OorS[1] == "O") {
             // console.log("AAAAAAAAA");
             this.sub.setY(this.sub.getInitialVertPos()); // reset sub to assure accuracy at transition S to O on way up
@@ -228,30 +223,30 @@ class Move {
         this.sub.zeroVelDown();
     };
 
-    configureMoveLateral = (dir:string) => {
-      console.log('In configure move lateral')
+    private configureHitBottomMove = (dir: string) => {
+        console.log("XXXXXXXXXXX)))))))))))))))))))))))");
         let mvmt = this.depthObject.mvmtLat;
         if (this.OorS[1] === "O") {
-            if (dir === 'right') {
-                if(mvmt === 'right' || mvmt === 'both') {
-                    this.moveOceanRight(this.latVel)
+            if (dir === "right") {
+                if (mvmt === "right" || mvmt === "both") {
+                    this.moveOceanRight(this.latVel);
                 }
-            } else if ( dir === 'left') {
-                if(mvmt === 'left' || mvmt === 'both') {
-                    this.moveOceanLeft(this.latVel)
+            } else if (dir === "left") {
+                if (mvmt === "left" || mvmt === "both") {
+                    this.moveOceanLeft(this.latVel);
                 }
             }
         } else if (this.OorS[1] === "S") {
-            console.log(' IN SUB SECTION')
-            if (dir === 'right') {
-                console.log('    IN MOVE RIGHT')
-                if(mvmt === 'right' || mvmt === 'both') {
-                    this.moveSubRight()
+            console.log(" IN SUB SECTION");
+            if (dir === "right") {
+                console.log("    IN MOVE RIGHT");
+                if (mvmt === "right" || mvmt === "both") {
+                    this.moveSubRight();
                 }
-            } else if ( dir === 'left') {
-                console.log('     IN MOVE LEFT')
-                if(mvmt === 'left' || mvmt === 'both') {
-                    this.moveSubLeft()
+            } else if (dir === "left") {
+                console.log("     IN MOVE LEFT");
+                if (mvmt === "left" || mvmt === "both") {
+                    this.moveSubLeft();
                 }
             }
         }
@@ -259,7 +254,7 @@ class Move {
 
     printCoordinates = (where: string) => {
         console.log(`=${where}==============`);
-        console.log("OorS", this.OorS)
+        console.log("OorS", this.OorS);
         console.log("COMP LAT VERT", this.compLat, this.compVert);
         console.log("OCEAN VERT LIMIT", this.oceanVertLimit);
         console.log("OCEAN LAT LIMIT", this.oceanLatLimit);

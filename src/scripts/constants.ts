@@ -9,15 +9,21 @@ export const stopMessageAnimation = {
     messFlag: true
   };
   
-  export let _CURRENT_CANVAS = 2;
+  let _CURRENT_CANVAS = 2;
   export const getCurrentCanvas = () => _CURRENT_CANVAS; 
-  export const setCurrentCanvas = (value) => {
+  export const setCurrentCanvas = (value:number) => {
     if (value === 1 || value === 2 || value === 3) {
       _CURRENT_CANVAS = value;
     } else {
       console.error('Invalid canvas value. Please provide a value of 1, 2, or 3.');
     }
   };
+
+  let _HIT_BOTTOM_FLAG:Boolean = false;
+  export const getHitBottomFlag = ():Boolean => _HIT_BOTTOM_FLAG;
+  export const setHitBottomFlag = (value:Boolean):void => {
+      _HIT_BOTTOM_FLAG = value;
+  }
 
 
 
@@ -41,9 +47,9 @@ export const SLOPE_DEPTH = 300;
 export const SHELF_DEPTH = DEPTH_CONT_SHELF;
 export const TRENCH_TOP = 500;
 export const TRENCH_DEPTH = OCEAN_BOTTOM;
-
 export const LEFT_EDGE_TRENCH = 1400;
 export const RIGHT_EDGE_TRENCH = 1800;
+
 //vertical for messages and images
 export const B_P_BARRIER = 200;
 export const CONT_SHELF_BENTHIC = DEPTH_CONT_SHELF - 150;
@@ -64,6 +70,7 @@ export const STOP_OCEAN_LAT = 'stop_ocean_lateral';
 export const STOP_SUB_LAT = 'stop_sub_lateral';
 export const STOP_OCEAN_VERTICAL = 'stop_ocean_vertical';
 export const STOP_SUB_VERTICAL = 'stop_sub_vertical';
+
 // for messaging and photos
 export const EUPHOTIC_PELAGIC: number = 0;
 export const EUPHOTIC_BENTHIC: number = 1;
@@ -104,23 +111,23 @@ export const LAT_LIMIT_08_1280_480= [1400, 440]; //same as LEFT_EDGE_TRENCH
 // ]
 
 
-export const LAT_LIMITS: LatMoveLimit[] = [
-  {'id':0, 'name':'OVER_LIMIT_R',     x: -0,    xll: -0,    y: -0,    yll: -0},
-  {'id':1, 'name':'INITIAL_POSITION', x: -0,    xll: -0,    y: -0,    yll: -0},
-  {'id':2, 'name':'SLOPE_LIMIT',      x: -140,  xll: -1,    y: -400,  yll: -1},
-  {'id':3, 'name':'START_BUMP',       x: -540,  xll: -141,  y: -450,  yll: -401},
-  {'id':4, 'name':'BUMP_PEAK',        x: -720,  xll: -541,  y: -300,  yll: -451},
-  {'id':5, 'name':'END_BUMP',         x: -800,  xll: -721,  y: -460,  yll: -301},
-  {'id':6, 'name':'START_DBL',        x: -840,  xll: -801,  y: -460,  yll: -461},
-  {'id':7, 'name':'DBL_PEAK_1',       x: -980,  xll: -841,  y: -200,  yll: -461},
-  {'id':8, 'name':'DBL_PEAK_2',       x: -1120, xll: -981,  y: -240,  yll: -199},
-  {'id':9, 'name':'END_DBL',          x: -1180, xll: -1121, y: -460,  yll: -239},
-  {'id':10, 'name':'START_TRENCH',    x: -1280, xll: -1181, y: -480,  yll: -461},
-  {'id':11,'name':'TRENCH_BOTTOM',    x: -1560, xll: -1281, y: -1800, yll: -479},
-  {'id':12, 'name':'END_TRENCH',      x: -1760, xll: -1561, y: -480,  yll: -1801},
-  {'id':13, 'name':'END_POSITION',    x: -2600, xll: -1761, y: -485,  yll: -481},
-  {'id':14, 'name':'OVER_LIMIT_L',    x: -2602, xll: -2601, y: -485,  yll: -481},
-]
+// export const LAT_LIMITS: LatMoveLimit[] = [
+//   {'id':0, 'name':'OVER_LIMIT_R',     x: -0,    xll: -0,    y: -0,    yll: -0},
+//   {'id':1, 'name':'INITIAL_POSITION', x: -0,    xll: -0,    y: -0,    yll: -0},
+//   {'id':2, 'name':'SLOPE_LIMIT',      x: -140,  xll: -1,    y: -400,  yll: -1},
+//   {'id':3, 'name':'START_BUMP',       x: -540,  xll: -141,  y: -450,  yll: -401},
+//   {'id':4, 'name':'BUMP_PEAK',        x: -720,  xll: -541,  y: -300,  yll: -451},
+//   {'id':5, 'name':'END_BUMP',         x: -800,  xll: -721,  y: -460,  yll: -301},
+//   {'id':6, 'name':'START_DBL',        x: -840,  xll: -801,  y: -460,  yll: -461},
+//   {'id':7, 'name':'DBL_PEAK_1',       x: -980,  xll: -841,  y: -200,  yll: -461},
+//   {'id':8, 'name':'DBL_PEAK_2',       x: -1120, xll: -981,  y: -240,  yll: -199},
+//   {'id':9, 'name':'END_DBL',          x: -1180, xll: -1121, y: -460,  yll: -239},
+//   {'id':10, 'name':'START_TRENCH',    x: -1280, xll: -1181, y: -480,  yll: -461},
+//   {'id':11,'name':'TRENCH_BOTTOM',    x: -1560, xll: -1281, y: -1800, yll: -479},
+//   {'id':12, 'name':'END_TRENCH',      x: -1760, xll: -1561, y: -480,  yll: -1801},
+//   {'id':13, 'name':'END_POSITION',    x: -2600, xll: -1761, y: -485,  yll: -481},
+//   {'id':14, 'name':'OVER_LIMIT_L',    x: -2602, xll: -2601, y: -485,  yll: -481},
+// ]
 
 
 export const LAT_LIMITS_EXT: DepthObject[] = [  // the x, xll, y, yll are for slope, the mvmt are to control movement when hit bottom
