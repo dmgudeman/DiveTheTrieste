@@ -6,21 +6,9 @@ import {
 } from "./constants";
 import { WIDTH, HEIGHT } from "../index";
 import { ISprite } from "./types";
+import {sprites, spritesL, crashSprites, crashSpritesL} from '../../assets/data/sprites'
 
-const sprites = [
-    { x: 0, y: 0, width: 125, height: 200 },
-    { x: 135, y: 0, width: 135, height: 200 },
-    { x: 280, y: 0, width: 125, height: 200 },
-    { x: 410, y: 0, width: 140, height: 200 },
-];
 
-const spritesL = [
-    { x: 30, y: 0, width: 125, height: 200 },
-    { x: 165, y: 0, width: 135, height: 200 },
-    { x: 310, y: 0, width: 125, height: 200 },
-    { x: 440, y: 0, width: 140, height: 200 },
-
-]
 
 class Sub {
     private static instance: Sub;
@@ -33,12 +21,12 @@ class Sub {
     private velLeft: number;
     private velUp: number;
     private velDown: number;
-    private subImageSrc: string; // this is the sprite sheet
+    private spritesImageSrc: string; // this is the sprite sheet
     private spriteSheet: HTMLImageElement;
-    private subImageSrcL: string; // this is the sprite sheet
-    private spriteSheetL: HTMLImageElement;
+    // private spritesImageSrcL: string; // this is the sprite sheet
+    // private spriteSheetL: HTMLImageElement;
     private sprites: ISprite[];
-    private spritesL: ISprite[];
+    // private spritesL: ISprite[];
     private currentFrame: number;
     private lastFrameTime: number;
     private initialLatPos: number;
@@ -55,10 +43,10 @@ class Sub {
         velLeft?: number,
         velUp?: number,
         velDown?: number,
-        subImageSrc?: string,
-        subImageSrcL?:string,
+        spritesImageSrc?: string,
+        // spritesImageSrcL?:string,
         sprites?: ISprite[],
-        spritesL?: ISprite[],
+        // spritesL?: ISprite[],
         currentFrame?: number,
         lastFrameTime?: number
     ) {
@@ -71,10 +59,10 @@ class Sub {
         this.velLeft = velLeft || 0;
         this.velUp = velUp || 0;
         this.velDown = velDown || 0;
-        this.subImageSrc = subImageSrc || "assets/sprite.png";
-        this.subImageSrcL = subImageSrcL || "assets/spriteL.png"; 
+        this.spritesImageSrc = spritesImageSrc || "assets/sprites/sprite.png";
+        // this.spritesImageSrcL = spritesImageSrcL || "assets/sprites/spriteL.png"; 
         this.sprites = sprites;
-        this.spritesL = spritesL;
+        // this.spritesL = spritesL;
         this.currentFrame = currentFrame || 0;
         this.lastFrameTime = lastFrameTime || 0;
         this.initialLatPos = SUB_INITIAL_LAT_POS;
@@ -82,9 +70,9 @@ class Sub {
         this.updateSprite = this.updateSprite.bind(this);
         this.lastLatDir = "right";
         this.spriteSheet = new Image();
-        this.spriteSheet.src = this.subImageSrc;
-        this.spriteSheetL = new Image();
-        this.spriteSheetL.src = this.subImageSrcL;
+        this.spriteSheet.src = this.spritesImageSrc;
+        // this.spriteSheetL = new Image();
+        // this.spriteSheetL.src = this.spritesImageSrcL;
     }
 
     public static getInstance(
@@ -97,8 +85,8 @@ class Sub {
         velLeft: number = 0,
         velUp: number = 0,
         velDown: number = 0,
-        subImageSrc = "assets/sprite.png",
-        subImageSrcL = "assets/spriteL.png",
+        spritesImageSrc = "assets/sprites/sprite.png",
+        // spritesImageSrcL = "assets/sprites/spriteL.png",
         currentFrame: number = 0,
         lastFrameTime: number = 0,
         lastLatDir: string = "right",
@@ -121,10 +109,10 @@ class Sub {
                 velLeft,
                 velUp,
                 velDown,
-                subImageSrc,
-                subImageSrcL,
+                spritesImageSrc,
+                // spritesImageSrcL,
                 sprites,
-                spritesL,
+                // spritesL,
                 currentFrame,
                 lastFrameTime
             );
@@ -217,12 +205,14 @@ class Sub {
         this.lastLatDir = dir;
     }
 
+
     clear() {
         this.ctx.clearRect(0, 0, WIDTH, HEIGHT);
     }
     draw() {
+        this.updateSpriteData()
        console.log('DRAW this.lastLatDir', this.lastLatDir)
-       if (this.lastLatDir === "right") {
+    //    if (this.lastLatDir === "right") {
         const sprite = this.sprites[this.currentFrame];
         this.ctx.drawImage(
             this.spriteSheet,
@@ -235,29 +225,30 @@ class Sub {
             this.getW(),
             this.getH()
         );
-        }else {
-            const sprite = this.spritesL[this.currentFrame];
-            this.ctx.drawImage(
-                this.spriteSheetL,
-                sprite.x,
-                sprite.y,
-                sprite.width,
-                sprite.height,
-                this.getX(),
-                this.getY(),
-                this.getW(),
-                this.getH()
-            );
+        // }else {
+        //     const sprite = this.spritesL[this.currentFrame];
+        //     this.ctx.drawImage(
+        //         this.spriteSheetL,
+        //         sprite.x,
+        //         sprite.y,
+        //         sprite.width,
+        //         sprite.height,
+        //         this.getX(),
+        //         this.getY(),
+        //         this.getW(),
+        //         this.getH()
+        //     );
 
-        }
+        // }
     }
 
     updateSprite() {
+        this.updateSpriteData()
         const currentTime = Date.now();
         const elapsedTime = currentTime - this.lastFrameTime;
 
         if (elapsedTime > 1000 / 10) {
-            if (this.lastLatDir === "right") {
+            // if (this.lastLatDir === "right") {
                 const sprite = this.sprites[this.currentFrame];
                 this.ctx.drawImage(
                     this.spriteSheet,
@@ -275,27 +266,23 @@ class Sub {
                     this.currentFrame = 0;
                 }
                 this.lastFrameTime = currentTime;
-            } else {
-                const sprite = this.spritesL[this.currentFrame];
-                this.ctx.drawImage(
-                    this.spriteSheetL,
-                    sprite.x,
-                    sprite.y,
-                    sprite.width,
-                    sprite.height,
-                    this.getX(),
-                    this.getY(),
-                    this.getW(),
-                    this.getH()
-                );
-                this.currentFrame++;
-                if (this.currentFrame >= this.sprites.length) {
-                    this.currentFrame = 0;
-                }
-                this.lastFrameTime = currentTime;
-            }
 
             requestAnimationFrame(this.updateSprite);
+        }
+    }
+
+    private updateSpriteData() {
+        if (this.lastLatDir === "right") {
+            this.sprites = sprites;
+            this.spritesImageSrc = "assets/sprites/sprite.png";
+            this.spriteSheet = new Image();
+            this.spriteSheet.src = this.spritesImageSrc;
+        } else if (this.lastLatDir === 'left') {
+            this.sprites = spritesL;
+            this.spritesImageSrc = "assets/sprites/spriteL.png";
+            this.spriteSheet = new Image();
+            this.spriteSheet.src = this.spritesImageSrc;
+
         }
     }
 }

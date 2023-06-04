@@ -2,40 +2,49 @@
 
 const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-
-interface WebpackConfig {
-  entry: {
-    main: any[];
-    styles1: any;
-    styles2: any;
-    styles3: any;
-    styles4: any;
-  };
-  output: {
-    path: any;
-    filename: string;
-  };
-  module: {
-    rules: ({
-      test: RegExp;
-      use: string[];
-      exclude: RegExp;
-    } | {
-      test: RegExp;
-      use: any[];
-      exclude?: undefined;
-    } | {
-      // ... other rule types
-    })[];
-  };
-  resolve: {
-    // ... resolve configuration
-  };
-  plugins: any[];
-  devtool?: string; // Add 'devtool' property to the type definition
+import { Configuration as WebpackDevServerConfiguration } from 'webpack-dev-server';
+import { Configuration as WebpackConfiguration } from 'webpack';
+interface Configuration extends WebpackConfiguration {
+  devServer?: WebpackDevServerConfiguration;
 }
 
-const config: WebpackConfig = {
+interface Configuration extends WebpackConfiguration {
+  devServer?: WebpackDevServerConfiguration;
+  devtool?: string;
+}
+// interface Configuration {
+//   entry: {
+//     main: any[];
+//     styles1: any;
+//     styles2: any;
+//     styles3: any;
+//     styles4: any;
+//   };
+//   output: {
+//     path: any;
+//     filename: string;
+//   };
+//   module: {
+//     rules: ({
+//       test: RegExp;
+//       use: string[];
+//       exclude: RegExp;
+//     } | {
+//       test: RegExp;
+//       use: any[];
+//       exclude?: undefined;
+//     } | {
+//       // ... other rule types
+//     })[];
+//   };
+//   resolve: {
+//     // ... resolve configuration
+//   };
+//   plugins: any[];
+//   devtool?: string; // Add 'devtool' property to the type definition
+// }
+
+const config: Configuration = {
   entry: {
     main: [
       path.resolve(__dirname, 'src', 'index.ts'),
@@ -51,6 +60,13 @@ const config: WebpackConfig = {
   output: {
     path: path.join(__dirname, 'dist'), // bundled file in dist/
     filename: '[name].js'
+  },
+  devServer: {
+    static: {
+      directory: path.join(__dirname, 'dist'),
+    },
+    compress: true,
+    port: 9000,
   },
   module: {
     rules: [

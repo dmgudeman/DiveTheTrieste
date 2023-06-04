@@ -4,48 +4,75 @@
 .instPanelContainer {
   position: fixed;
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   justify-content: center;
+  flex-direction: column;
   left: 48%;
   bottom: 0;
   transform: translateX(-50%);
-  width: 460px;
+  width: 25%;
   height: 190;
   z-index: 100;
-  background-color: black;
+  color: var(--cockpitBG);
+  background-color: var(--cockpitBG);
   border-radius: 50px 50px 0px 0px;
 }
 
-#depthIP {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: var(--six);
-  color: var(--five);
-  font-size: 22;
-  font-weight: 550;
-  margin-top: 20px;
-  z-index: 21;
-  width: 400px;
-  height: 65px;
-  border-radius: 40px 40px 16px 16px;
-  border: 3px solid rgb(58, 19, 19);
-  text-align: center;
+.instPanelContainer.hide {
+  display: none;
 }
 
-#zoneIP {
+.IPLocationContainer {
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: var(--six);
-  color: var(--five);
+  width: 100%;
+}
+
+.IPDepthGauge {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 45%;
+  height: 65px;
+  margin-top: 20px;
+  font-size: 1rem;
+  font-weight: 550;
+  text-align: center;
+  border-radius: 40px 40px 16px 16px;
+  border: 3px solid rgb(58, 19, 19);
+  background-color: var(--cockpitText);
+  z-index: 21;
+}
+
+.IPLatGauge {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 45%;
+  height: 65px;
+  margin-top: 20px;
+  font-size: 1rem;
+  font-weight: 550;
+  text-align: center;
+  border-radius: 40px 40px 16px 16px;
+  border: 3px solid rgb(58, 19, 19);
+  background-color: var(--cockpitText);
+  z-index: 21;
+}
+
+.IPZoneGauge {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 87%;
+  height: 65px;
+  margin: 20px;
   font-size: 22;
   font-weight: 550;
-  margin-top: 20px;
-  z-index: 21;
-  width: 400px;
-  height: 65px;
+  text-align: center;
   border-radius: 16px;
   border: 3px solid rgb(58, 19, 19);
-  text-align: center;
+  background-color: var(--cockpitText);
+  z-index: 21;
 }
