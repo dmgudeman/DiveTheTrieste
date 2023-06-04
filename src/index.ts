@@ -11,16 +11,33 @@ import Ocean from "./scripts/ocean";
 import Cockpit from "./scripts/cockpit";
 import { getCursorPosition } from "./scripts/util";
 import Keymaster from "./scripts/keymaster";
+import { showMouseAsSub } from "./scripts/boundary";
 
-export const WIDTH = window.innerWidth * 2; // width of canvases
-export const HEIGHT = window.innerHeight * 2.05; // height of canvases
+// export const WIDTH = window.innerWidth * 2; // width of canvases
+// export const HEIGHT = window.innerHeight * 2.05; // height of canvases
+export let WIDTH = visualViewport.width * 2; // width of canvases
+export let HEIGHT = visualViewport.height * 2.05; // height of canvases
 export const globalCockpit = { cockpit: null };
 
 let audioFlag = false; //change this to true for production
 
 document.addEventListener("DOMContentLoaded", () => {
-    console.log("WIDTH INDEX.TS", WIDTH);
-    console.log("HEIGHT INDEX.TS", HEIGHT);
+
+
+    window.addEventListener('resize', function() {
+     WIDTH = visualViewport.width * 2; // width of canvases
+     HEIGHT = visualViewport.height * 2.05; 
+        console.log('=======================')
+        console.log('WIDTH', WIDTH)
+        console.log('window width is ' + window.innerWidth);
+        console.log('viewport width is ' + window.visualViewport.width);
+        console.log('--------------------')
+        console.log('HEIGHT', HEIGHT)
+        console.log('window height is ' + window.innerHeight);
+        console.log('viewport height is ' + window.visualViewport.height);
+        console.log('=======================')
+      });
+
 
     // function toggleAudio(audio) {
     //     if (audioFlag) {
@@ -81,7 +98,9 @@ document.addEventListener("DOMContentLoaded", () => {
     let key = new Keymaster();
   
    
-
+    document.addEventListener("mousedown", (e)=> {
+      showMouseAsSub(e)
+    })
 
     gitHubButton.addEventListener("click", () => {
         window.location.href = "https://github.com/dmgudeman";
@@ -199,6 +218,7 @@ document.addEventListener("DOMContentLoaded", () => {
         } else if (e.key === "Escape") {
             key.navigate("Escape");
         }
+        
     }
 
     document.addEventListener("keydown", keyDown);

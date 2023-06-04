@@ -63,7 +63,7 @@ export let OCEAN_LAT_LIMIT: number  = null;
 export const FULL_LAT_LIMIT: number = -2200;
 export const FULL_VERTICAL_LIMIT: number = HEIGHT + 100;
 export const INITIAL_Y_POSITION: number = 80; // for both objects
-export const SUB_INITIAL_LAT_POS: number = 800;
+export const SUB_INITIAL_LAT_POS: number = 880;
 
 // flags
 export const STOP_OCEAN_LAT = 'stop_ocean_lateral';
@@ -128,8 +128,24 @@ export const LAT_LIMIT_08_1280_480= [1400, 440]; //same as LEFT_EDGE_TRENCH
 //   {'id':13, 'name':'END_POSITION',    x: -2600, xll: -1761, y: -485,  yll: -481},
 //   {'id':14, 'name':'OVER_LIMIT_L',    x: -2602, xll: -2601, y: -485,  yll: -481},
 // ]
+// const MP_0 :number[] = [ 0, 0 ];
+// const MP_1 :number[] = [ 0, 0];
+// const MP_2 :number[] = [ -180, -400 ];
+// const MP_3 :number[] = [ -630, -475 ];
+// const MP_4 :number[] = [ -720, -380 ];
+// const MP_5 :number[] = [ -800, -485 ];
+// const MP_6 :number[] = [ -840, -460 ];
+// const MP_7 :number[] = [ -980, -200 ];
+// const MP_8 :number[] = [ -1120, -240 ];
+// const MP_9 :number[] = [ -1180, -450 ];
+// const MP_10 :number[] = [ -1320, -500 ];
+// const MP_11 :number[] = [ -1520, -1560 ];
+// const MP_12 :number[] = [ -1640, -1560 ];
+// const MP_13 :number[] = [ -1740, -480 ];
+// const MP_14 :number[] = [ -2200, -485 ];
+// const MP_15 :number[] = [ -WIDTH, -485 ];
 const MP_0 :number[] = [ 0, 0 ];
-const MP_1 :number[] = [ 0, 0 ];
+const MP_1 :number[] = [ 0, 0];
 const MP_2 :number[] = [ -180, -400 ];
 const MP_3 :number[] = [ -630, -475 ];
 const MP_4 :number[] = [ -720, -380 ];
@@ -145,24 +161,48 @@ const MP_13 :number[] = [ -1740, -480 ];
 const MP_14 :number[] = [ -2200, -485 ];
 const MP_15 :number[] = [ -WIDTH, -485 ];
 
+export const MAP_POINTS: number[][] = [
+  MP_0, MP_1, MP_2, MP_3,
+  MP_4, MP_5, MP_6, MP_7,
+  MP_8, MP_9, MP_10, MP_11,
+  MP_12, MP_13, MP_14, MP_15,
+]
 
-export const MAP_POINTS: IMapPointObject[] = [  // the x, xll, y, yll are for slope, the mvmt are to control movement when hit bottom
-  {'id':0, 'name':'OOB_LEFT',         'point': MP_0, mvmtLat: 'right'},
-  {'id':1, 'name':'INITIAL_POSITION', 'point': MP_1,  mvmtLat: 'right'},
-  {'id':2, 'name':'SLOPE_LIMIT',      'point': MP_2,  mvmtLat: 'right'},
-  {'id':3, 'name':'START_BUMP',       'point': MP_3,  mvmtLat: 'left'}, 
-  {'id':4, 'name':'BUMP_PEAK',        'point': MP_4,  mvmtLat: 'both'},
-  {'id':5, 'name':'END_BUMP',         'point': MP_5,  mvmtLat: 'right'},
-  {'id':6, 'name':'START_DBL',        'point': MP_6,  mvmtLat: 'right'},
-  {'id':7, 'name':'DBL_PEAK_1',       'point': MP_7,  mvmtLat: 'left'},
-  {'id':8, 'name':'DBL_PEAK_2',       'point': MP_8,  mvmtLat: 'both'},
-  {'id':9, 'name':'END_DBL',          'point': MP_9,  mvmtLat: 'right'},
-  {'id':10, 'name':'START_TRENCH',    'point': MP_10,  mvmtLat: 'right'},
-  {'id':11,'name':'TRENCH_BOTTOM_L',  'point': MP_11,  mvmtLat: 'right'},
-  {'id':12,'name':'TRENCH_BOTTOM_R',  'point': MP_12,  mvmtLat: 'both'},
-  {'id':13, 'name':'END_TRENCH',      'point': MP_13,  mvmtLat: 'left'},
-  {'id':14, 'name':'END_POSITION',    'point': MP_14,  mvmtLat: 'left'},
-  {'id':15, 'name':'OOB_RIGHT',       'point': MP_15,  mvmtLat: 'left'}
+const MULT_MP_0 :number[] = [ 0, 0 ];
+const MULT_MP_1 :number[] = [ -0.041, -0.100];
+const MULT_MP_2 :number[] = [ -0.049, -0.213 ];
+const MULT_MP_3 :number[] = [ -0.191, -0.262 ];
+const MULT_MP_4 :number[] = [ -0.228, -0.201 ];
+const MULT_MP_5 :number[] = [ -0.259, -0.271 ];
+const MULT_MP_6 :number[] = [ -1, -1];
+const MULT_MP_7 :number[] = [ -1, -1];
+const MULT_MP_8 :number[] = [ -1, -1];
+const MULT_MP_9 :number[] = [ -1, -1];
+const MULT_MP_10 :number[] = [ -1, -1];
+const MULT_MP_11 :number[] = [ -1, -1];
+const MULT_MP_12 :number[] = [ -1, -1];
+const MULT_MP_13 :number[] = [ -1, - 1];
+const MULT_MP_14 :number[] = [ -1, -1];
+const MULT_MP_15 :number[] = [ WIDTH, -1];
+
+
+export const MAP_POINT_OBJECTS: IMapPointObject[] = [  // the x, xll, y, yll are for slope, the mvmt are to control movement when hit bottom
+  {'id':0, 'name':'OOB_LEFT',         'point': MP_0,   mvmtLat: 'right', 'coeff': MULT_MP_0 },
+  {'id':1, 'name':'INITIAL_POSITION', 'point': MP_1,   mvmtLat: 'right', 'coeff': MULT_MP_1 },
+  {'id':2, 'name':'SLOPE_LIMIT',      'point': MP_2,   mvmtLat: 'right', 'coeff': MULT_MP_2 },
+  {'id':3, 'name':'START_BUMP',       'point': MP_3,   mvmtLat: 'left',  'coeff': MULT_MP_3 }, 
+  {'id':4, 'name':'BUMP_PEAK',        'point': MP_4,   mvmtLat: 'both',  'coeff': MULT_MP_4 },
+  {'id':5, 'name':'END_BUMP',         'point': MP_5,   mvmtLat: 'right', 'coeff': MULT_MP_5 },
+  {'id':6, 'name':'START_DBL',        'point': MP_6,   mvmtLat: 'right', 'coeff': MULT_MP_6 },
+  {'id':7, 'name':'DBL_PEAK_1',       'point': MP_7,   mvmtLat: 'left',  'coeff': MULT_MP_7 },
+  {'id':8, 'name':'DBL_PEAK_2',       'point': MP_8,   mvmtLat: 'both',  'coeff': MULT_MP_8 },
+  {'id':9, 'name':'END_DBL',          'point': MP_9,   mvmtLat: 'right', 'coeff': MULT_MP_9 },
+  {'id':10, 'name':'START_TRENCH',    'point': MP_10,  mvmtLat: 'right', 'coeff': MULT_MP_10 },
+  {'id':11,'name':'TRENCH_BOTTOM_L',  'point': MP_11,  mvmtLat: 'right', 'coeff': MULT_MP_11 },
+  {'id':12,'name':'TRENCH_BOTTOM_R',  'point': MP_12,  mvmtLat: 'both',  'coeff': MULT_MP_12 },
+  {'id':13, 'name':'END_TRENCH',      'point': MP_13,  mvmtLat: 'left',  'coeff': MULT_MP_13 },
+  {'id':14, 'name':'END_POSITION',    'point': MP_14,  mvmtLat: 'left',  'coeff': MULT_MP_14 },
+  {'id':15, 'name':'OOB_RIGHT',       'point': MP_15,  mvmtLat: 'left',  'coeff': MULT_MP_15 },
 ]
 
 

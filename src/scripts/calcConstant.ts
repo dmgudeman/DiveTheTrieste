@@ -11,7 +11,7 @@ import {
 } from "./constants";
 import Ocean from './ocean';
 import Sub from './sub';
-import { LAT_LIMITS_EXT, FULL_LAT_LIMIT, VERTICAL_VELOCITY, textObjects, MAP_POINTS} from "./constants";
+import { LAT_LIMITS_EXT, FULL_LAT_LIMIT, VERTICAL_VELOCITY, textObjects, MAP_POINT_OBJECTS} from "./constants";
 import { LatMoveLimit, DepthObject, ITextObject, IMapPointObject } from "./types";
 
 
@@ -71,24 +71,24 @@ class CalcConstant {
         return this.roundDownToNearestVel(this.height * -0.95);
     }
 
-    getDepthObject(lat: number): DepthObject {
-        try {
-            const result: DepthObject[] = LAT_LIMITS_EXT.filter(
-                (obj: DepthObject) => obj.x <= lat && obj.xll >= lat
-            );
-            let depthObject: DepthObject = result[0];
-            return depthObject;
-        } catch (error) {
-            console.error("calcDepth did not work for lat = ", lat);
-        }
-    }
+    // getDepthObject(lat: number): DepthObject {
+    //     try {
+    //         const result: DepthObject[] = LAT_LIMITS_EXT.filter(
+    //             (obj: DepthObject) => obj.x <= lat && obj.xll >= lat
+    //         );
+    //         let depthObject: DepthObject = result[0];
+    //         return depthObject;
+    //     } catch (error) {
+    //         console.error("calcDepth did not work for lat = ", lat);
+    //     }
+    // }
 
     getMapPointObject(lat: number): IMapPointObject {
         let result:IMapPointObject;
         try {
-            for (let i = 0; i < MAP_POINTS.length - 1; i++) {
-                if (MAP_POINTS[i].point[0] >= lat && MAP_POINTS[i + 1].point[0] < lat) {
-                 result = MAP_POINTS[i];
+            for (let i = 1; i < MAP_POINT_OBJECTS.length - 1; i++) {
+                if (MAP_POINT_OBJECTS[i-1].point[0] >= lat && MAP_POINT_OBJECTS[i].point[0] < lat) {
+                 result = MAP_POINT_OBJECTS[i];
                 }
               }
             
@@ -114,39 +114,44 @@ class CalcConstant {
             return ["S", "S"];
     }
 
-    _calcDepthLimit(lat: number) {
-        const constants = new CalcConstant();
-        const depthObject: LatMoveLimit = constants.getDepthObject(lat);
-        if (!depthObject) return null;
-        let startX = depthObject.xll;
-        let endX = depthObject.x;
-        let startY = depthObject.yll;
-        let endY = depthObject.y;
-        let x = lat;
-        if (depthObject.id === 0) return 21;
-        if (startX === endX) {
-            // handles vertical line
-            endX = endX + 1;
-        }
-        const slope = (endY - startY) / (endX - startX);
-        const yIntercept = startY - slope * startX;
-        const y = slope * x + yIntercept;
-        let ans = Math.floor(y / VERTICAL_VELOCITY) * VERTICAL_VELOCITY; // round down to the nearest velocity
-        return ans;
-    }
+    // _calcDepthLimit(lat: number) {
+    //     const constants = new CalcConstant();
+    //     const depthObject: LatMoveLimit = constants.getDepthObject(lat);
+    //     if (!depthObject) return null;
+    //     let startX = depthObject.xll;
+    //     let endX = depthObject.x;
+    //     let startY = depthObject.yll;
+    //     let endY = depthObject.y;
+    //     let x = lat;
+    //     if (depthObject.id === 0) return 21;
+    //     if (startX === endX) {
+    //         // handles vertical line
+    //         endX = endX + 1;
+    //     }
+    //     const slope = (endY - startY) / (endX - startX);
+    //     const yIntercept = startY - slope * startX;
+    //     const y = slope * x + yIntercept;
+    //     let ans = Math.floor(y / VERTICAL_VELOCITY) * VERTICAL_VELOCITY; // round down to the nearest velocity
+    //     return ans;
+    // }
     _calcDepthLimit2(lat: number) {
         const constants = new CalcConstant();
         const index = constants.getMapPointObject(lat).id;
-        const mapPointObject: IMapPointObject = MAP_POINTS[index];
+        const mapPointObject: IMapPointObject = MAP_POINT_OBJECTS[index];
         if (!mapPointObject) return null;
-        const prevMapPointObject: IMapPointObject = MAP_POINTS[index -1]
-        console.log('MMMAAAAPPPPOINTOBJECT', mapPointObject)
-        console.log('PPPPPPP', prevMapPointObject)
+        const nextMapPointObject: IMapPointObject = MAP_POINT_OBJECTS[index - 1];
+      
+
      
-        let startX = prevMapPointObject.point[0];
-        let endX = mapPointObject.point[0];
-        let startY = prevMapPointObject.point[1];
-        let endY = mapPointObject.point[1];
+        let startX = nextMapPointObject.coeff[0] * WIDTH;
+        let endX = mapPointObject.coeff[0] * WIDTH;
+        console.log('END X', endX)
+        console.log('START X ', startX)
+        let startY = nextMapPointObject.coeff[1] * HEIGHT;
+       
+        let endY = mapPointObject.coeff[1] * HEIGHT;
+        console.log('END Y', endY)
+        console.log('START Y ', startY)
         let x = lat;
         // if (depthObject.id === 0) return 21;
         if (startX === endX) {
@@ -160,7 +165,7 @@ class CalcConstant {
         return ans;
     }
     getPreviousMapPointObject(num:number):IMapPointObject {
-        let result = MAP_POINTS.filter( mapPoint => mapPoint.id === num -1);
+        let result = MAP_POINT_OBJECTS.filter( mapPoint => mapPoint.id === num -1);
         return result[0];
      }
 
@@ -180,7 +185,7 @@ class CalcConstant {
     printCalcConstant = (lat: number, vert: number, where: string) => {
         console.log(`=${where}==============`);
         console.log("OorS", this.getOorS(lat, vert));
-        console.log("depthObjectName", this.getDepthObject(lat));
+      
         console.log("========================");
         console.log("                           ");
     };

@@ -4,10 +4,12 @@ import {
     VERTICAL_VELOCITY,
     SUB_INITIAL_LAT_POS,
    
+
 } from "./constants";
+import{WIDTH, HEIGHT} from '../index';
 import Ocean from "./ocean";
 import Sub from "./sub";
-import { DepthObject } from "./types";
+import { IMapPointObject } from "./types";
 import CalcConstant from "./calcConstant";
 import EdText from "./edText";
 import Zone from "./zone";
@@ -24,7 +26,7 @@ class Move {
     private compLat: number;
     private compVert: number;
     private varDepth: number;
-    private depthObject: DepthObject;
+    private mapPointObject: IMapPointObject;
     private OorS: string[];
     private increaseVelFlag: string;
     private latVel: number;
@@ -44,8 +46,8 @@ class Move {
             this.ocean.getX() - this.sub.getX() + SUB_INITIAL_LAT_POS ?? null;
         this.compVert =
             this.ocean.getY() - this.sub.getY() + INITIAL_Y_POSITION ?? null;
-        this.depthObject = this.constants.getDepthObject(this.compLat) || null;
-        this.varDepth = this.constants._calcDepthLimit(this.compLat) || null;
+        this.mapPointObject = this.constants.getMapPointObject(this.compLat) || null;
+        this.varDepth = this.constants._calcDepthLimit2(this.compLat) || null;
         this.OorS = this.constants.getOorS(this.compLat, this.compVert) || null;
         this.increaseVelFlag = "";
         this.latVel = LAT_VELOCITY;
@@ -61,7 +63,7 @@ class Move {
         this.oceanLatLimit = this.constants.getOceanLatLimit();
         this.oceanVertLimit = this.constants.getOceanVertLimit();
         this.fullLatLimit = this.constants.getFullLatLimit();
-        this.depthObject = this.constants.getDepthObject(this.compLat);
+        this.mapPointObject = this.constants.getMapPointObject(this.compLat);
         // this.varDepth = this.constants._calcDepthLimit(this.compLat);
         this.varDepth = this.constants._calcDepthLimit2(this.compLat);
         this.OorS = this.constants.getOorS(this.compLat, this.compVert);
@@ -72,7 +74,7 @@ class Move {
         this.setDir(dir);
         this.upDateCoordinates();
         this.checkToIncreaseVel(dir);
-        if (this.compVert <= this.varDepth) {
+        if (this.compVert <= this.varDepth -1) {
             setHitBottomFlag(true);
             this.configureHitBottomMove(dir);
         } else {
@@ -86,7 +88,7 @@ class Move {
         let zoneNum = zoneObject.id;
         let canvasNumber = getCurrentCanvas();
         this.edText.updateEdText(zoneNum, canvasNumber);
-        // this.printCoordinates('IN GET MOVE')
+        this.printCoordinates('IN GET MOVE')
         // this.constants.printCalcConstant(this.compLat, this.compVert, "IN MOVE getMove")
     };
 
@@ -224,8 +226,7 @@ class Move {
     };
 
     private configureHitBottomMove = (dir: string) => {
-        console.log("XXXXXXXXXXX)))))))))))))))))))))))");
-        let mvmt = this.depthObject.mvmtLat;
+        let mvmt = this.mapPointObject.mvmtLat;
         if (this.OorS[1] === "O") {
             if (dir === "right") {
                 if (mvmt === "right" || mvmt === "both") {
@@ -254,6 +255,9 @@ class Move {
 
     printCoordinates = (where: string) => {
         console.log(`=${where}==============`);
+        console.log('WIDTH', WIDTH);
+        console.log('HEiGHT', HEIGHT);
+        console.log('viewport.width', visualViewport.width);
         console.log("OorS", this.OorS);
         console.log("COMP LAT VERT", this.compLat, this.compVert);
         console.log("OCEAN VERT LIMIT", this.oceanVertLimit);
@@ -261,7 +265,7 @@ class Move {
         console.log("VARDEPTH", Math.floor(this.varDepth));
         console.log("OCEAN X, Y", this.ocean.getX(), this.ocean.getY());
         console.log("SUB X, Y", this.sub.getX(), this.sub.getY());
-        console.log("depthObjectName", this.depthObject.name);
+        console.log("mapPointObjectName", this.mapPointObject.name);
         console.log("========================");
         console.log("                           ");
     };
@@ -273,7 +277,7 @@ class Move {
         console.log("OCEAN Y", this.ocean.getY());
         console.log("SUB Y", this.sub.getY());
         console.log("VARIABLE DEPTH", this.varDepth);
-        console.log("depthObjectName", this.depthObject.name);
+        console.log("mapPointObjectName", this.mapPointObject.name);
         console.log("==============");
     };
 
