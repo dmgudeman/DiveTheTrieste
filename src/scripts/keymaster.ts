@@ -65,7 +65,10 @@ class Keymaster {
     showLat();
     showDepth();
     showZone();
+    this.zone.upDateZoneObject();
     this.move.getMove(dir);
+    if (dir === 'left' || dir === 'right')
+    this.sub.setLastLatDir(dir)
   }
 
   closeModal = () => {
@@ -85,6 +88,55 @@ class Keymaster {
       this.modal.style.display = "none";
     });
   }
+
+
+
+
+
+
+
+
+
+//   let keyRepeatTimeout;
+// let keyRepeatInterval;
+// let keyHeldDown = false;
+
+// document.addEventListener('keydown', function(event) {
+//   if (event.key === 'Enter') {
+//     if (!keyHeldDown) {
+//       keyHeldDown = true;
+//       console.log('Key is being held down');
+      
+//       // Perform initial action when the key is first pressed
+      
+//       // Start the timer for repeated actions
+//       keyRepeatTimeout = setTimeout(startKeyRepeat, 500);
+//     }
+//   }
+// });
+
+// document.addEventListener('keyup', function(event) {
+//   if (event.key === 'Enter') {
+//     keyHeldDown = false;
+//     console.log('Key is released');
+    
+//     // Stop the timer for repeated actions
+//     clearTimeout(keyRepeatTimeout);
+//     clearInterval(keyRepeatInterval);
+//   }
+// });
+
+// function startKeyRepeat() {
+//   // Perform repeated actions when the key is held down
+//   console.log('Key is repeatedly pressed');
+  
+//   // Set the interval for repeated actions
+//   keyRepeatInterval = setInterval(function() {
+//     // Perform repeated actions here
+//     console.log('Key is repeatedly pressed');
+//   }, 200);
+// }
+
 }
 
 

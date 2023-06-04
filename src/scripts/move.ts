@@ -3,12 +3,15 @@ import {
     LAT_VELOCITY,
     VERTICAL_VELOCITY,
     SUB_INITIAL_LAT_POS,
+    _CURRENT_CANVAS,
 } from "./constants";
 import Ocean from "./ocean";
 import Sub from "./sub";
 import { DepthObject } from "./types";
 import CalcConstant from "./calcConstant";
+import EdText from './edText';
 import Zone from './zone';
+import { getCurrentCanvas } from "./constants";
 
 class Move {
     private ocean: Ocean;
@@ -26,7 +29,8 @@ class Move {
     private increaseVelFlag: string;
     private latVel: number;
     private vertVel: number;
-    private zone: Zone;
+  
+    private edText: EdText
 
     constructor(ocean: Ocean, sub: Sub, dir?: string) {
         this.ocean = ocean;
@@ -46,7 +50,8 @@ class Move {
         this.increaseVelFlag = "";
         this.latVel = LAT_VELOCITY;
         this.vertVel = VERTICAL_VELOCITY;
-        this.zone = new Zone()
+        
+        this.edText = new EdText()
     }
 
     upDateCoordinates() {
@@ -63,6 +68,7 @@ class Move {
     }
 
     getMove = (dir: string) => {
+        const zone = new Zone()
         this.setDir(dir);
         this.upDateCoordinates();
         this.checkToIncreaseVel(dir);
@@ -77,7 +83,14 @@ class Move {
             this.getVerticalMove()
         // }    
         // this.printCoordinates('IN GET MOVE')
-        this.zone.upDateZoneObject();
+        let zoneObject = zone.upDateZoneObject();
+      
+        let zoneNum = zoneObject.id;
+        let canvasNumber = getCurrentCanvas();
+        console.log('ZONENUM in getMOve', zoneNum);
+        console.log('_CURRENT_CANVAS', canvasNumber)
+        this.edText.updateEdText(zoneNum, canvasNumber)
+
         // this.constants.printCalcConstant(this.compLat, this.compVert, "IN MOVE getMove")
 
     };

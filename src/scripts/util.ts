@@ -38,7 +38,7 @@ const edText = new EdText();
 export function showCanvas1() {
     //the ocean
     setCurrentCanvas(1);
-    edText.initialEdSetup();
+    // edText.initialEdSetup();
     showDepth();
     
     

@@ -34,32 +34,40 @@ class EdText {
         this.calcConstants = new CalcConstant();
     }
 
-    updateEdText(num: number) {
-        this.setEdStyle(num);
-        this.setEdText(num);
+    updateEdText(zoneNum: number, canvasNum: number) {
+        this.setEdStyle(zoneNum, canvasNum);
+        this.setEdText(zoneNum);
     }
 
-    setEdStyle(num: number) {
-     
-        this.clearAllEdElementsClassList(); 
+    setEdStyle(num: number, canvasNum: number) {
+        this.clearAllEdElementsClassList();
         if (this.textEls.length < 1) return;
-        this.textEls.forEach((textEl, idx) => { 
-            let className = this.textElStrings[idx];
-            let className2 =
-                this.cssOne[num] + "Style" + this.textElSuffixes[idx];
-            if(textEl) textEl.classList.add(className);
-            if(textEl)textEl.classList.add(className2);
-        });
+        if (canvasNum === 1) {
+            this.textEls.forEach((textEl, idx) => {
+                let className = this.textElStrings[idx];
+                let className2 =
+                    this.cssOne[num] + "Style" + this.textElSuffixes[idx];
+                if (textEl) textEl.classList.add(className);
+                if (textEl) textEl.classList.add(className2);
+            });
+        } else if (canvasNum === 3) {
+            // this.edContainer.classList.add("edContainer");
+            this.edContainer.classList.add("cockpitStyleEdContainer");
+            this.edTitle.classList.add("edTitle");
+            this.edTitle.classList.add("cockpitStyleEdTitle");
+            this.edText.classList.add("edText");
+            this.edText.classList.add("cockpitStyleEdText");
+        }
     }
 
-    initialEdSetup(){
-        this.updateEdText(1)
+    initialEdSetup() {
+        this.updateEdText(1, 1);
     }
 
     setEdText(num: number) {
         let textObject = this.calcConstants.getTextObject(num);
-        if(this.edTitle)this.edTitle.textContent = textObject.title;
-        if(this.edText)this.edText.textContent = textObject.text;
+        if (this.edTitle) this.edTitle.textContent = textObject.title;
+        if (this.edText) this.edText.textContent = textObject.text;
     }
 
     clearOneEdElementClassList(element: HTMLElement) {
@@ -69,9 +77,9 @@ class EdText {
         }
     }
 
-    clearAllEdElementsClassList(){
+    clearAllEdElementsClassList() {
         this.textEls.forEach((textEl) => {
-            this.clearOneEdElementClassList(textEl);  
+            this.clearOneEdElementClassList(textEl);
         });
     }
 }
