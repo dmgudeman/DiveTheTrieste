@@ -9,6 +9,7 @@ interface WebpackConfig {
     styles1: any;
     styles2: any;
     styles3: any;
+    styles4: any;
   };
   output: {
     path: any;
@@ -43,6 +44,8 @@ const config: WebpackConfig = {
     styles1: path.resolve(__dirname, 'src', 'styles/style.scss'),
     styles2: path.resolve(__dirname, 'src', 'styles/educational.scss'),
     styles3: path.resolve(__dirname, 'src', 'styles/hitBottom.scss'),
+    styles4: path.resolve(__dirname, 'src', 'styles/cockpit.scss')
+    
     // Add more entries for additional SCSS files
   },
   output: {
