@@ -83,12 +83,12 @@ class CalcConstant {
         }
     }
 
-    getMapPointObjectId(lat: number): number {
-        let result:number;
+    getMapPointObject(lat: number): IMapPointObject {
+        let result:IMapPointObject;
         try {
             for (let i = 0; i < MAP_POINTS.length - 1; i++) {
                 if (MAP_POINTS[i].point[0] >= lat && MAP_POINTS[i + 1].point[0] < lat) {
-                 result = i;
+                 result = MAP_POINTS[i];
                 }
               }
             
@@ -136,7 +136,7 @@ class CalcConstant {
     }
     _calcDepthLimit2(lat: number) {
         const constants = new CalcConstant();
-        const index = constants.getMapPointObjectId(lat);
+        const index = constants.getMapPointObject(lat).id;
         const mapPointObject: IMapPointObject = MAP_POINTS[index];
         if (!mapPointObject) return null;
         const prevMapPointObject: IMapPointObject = MAP_POINTS[index -1]
