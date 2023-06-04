@@ -169,9 +169,9 @@ export const MAP_POINTS: number[][] = [
 ]
 
 const MULT_MP_0 :number[] = [ 0, 0 ];
-const MULT_MP_1 :number[] = [ -0.041, -0.100];
-const MULT_MP_2 :number[] = [ -0.049, -0.213 ];
-const MULT_MP_3 :number[] = [ -0.191, -0.262 ];
+const MULT_MP_1 :number[] = [ 0, 0];
+const MULT_MP_2 :number[] = [ -0.049, -0.220 ];
+const MULT_MP_3 :number[] = [ -0.191, -0.240 ];
 const MULT_MP_4 :number[] = [ -0.228, -0.201 ];
 const MULT_MP_5 :number[] = [ -0.259, -0.271 ];
 const MULT_MP_6 :number[] = [ -1, -1];

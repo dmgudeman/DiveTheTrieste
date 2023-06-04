@@ -27,8 +27,8 @@ class Zone {
         this.ocean = Ocean.getInstance();
         this.sub = Sub.getInstance();
         this.calcConstants = new CalcConstant();
-        this.lat = this.calcConstants._getCompLat(this.ocean, this.sub) || 0;
-        this.vert = this.calcConstants._getCompVert(this.ocean, this.sub) || 0;
+        this.lat = this.calcConstants._getCompLat() || 0;
+        this.vert = this.calcConstants._getCompVert() || 0;
         this.varDepth = this.calcConstants._calcDepthLimit2(this.lat) || null;
         this.flag = null;
         this.oldFlag = null;
