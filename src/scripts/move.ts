@@ -50,7 +50,6 @@ class Move {
         this.increaseVelFlag = "";
         this.latVel = LAT_VELOCITY;
         this.vertVel = VERTICAL_VELOCITY;
-
         this.edText = new EdText();
     }
 
@@ -76,6 +75,7 @@ class Move {
             setHitBottomFlag(true);
             this.configureHitBottomMove(dir);
         } else {
+            setHitBottomFlag(false);
             this.getLatMove();
         }
 

@@ -3,14 +3,16 @@ import {
     SUB_INITIAL_LAT_POS,
     LAT_VELOCITY,
     VERTICAL_VELOCITY,
-    getHitBottomFlag
+    getHitBottomFlag,
 } from "./constants";
 import { WIDTH, HEIGHT } from "../index";
 import { ISprite } from "./types";
-import {sprites, spritesL, crashSprites, crashSpritesL} from '../../assets/data/sprites';
-
-
-
+import {
+    sprites,
+    spritesL,
+    crashSprites,
+    crashSpritesL,
+} from "../../assets/data/sprites";
 
 class Sub {
     private static instance: Sub;
@@ -199,8 +201,9 @@ class Sub {
     }
 
     draw() {
-        this.updateSpriteData()
+        this.updateSpriteData();
         const sprite = this.sprites[this.currentFrame];
+
         this.ctx.drawImage(
             this.spriteSheet,
             sprite.x,
@@ -215,64 +218,60 @@ class Sub {
     }
 
     updateSprite() {
-        this.updateSpriteData()
+        this.updateSpriteData();
         const currentTime = Date.now();
         const elapsedTime = currentTime - this.lastFrameTime;
 
         if (elapsedTime > 1000 / 10) {
             // if (this.lastLatDir === "right") {
-                const sprite = this.sprites[this.currentFrame];
-                this.ctx.drawImage(
-                    this.spriteSheet,
-                    sprite.x,
-                    sprite.y,
-                    sprite.width,
-                    sprite.height,
-                    this.getX(),
-                    this.getY(),
-                    this.getW(),
-                    this.getH()
-                );
-                this.currentFrame++;
-                if (this.currentFrame >= this.sprites.length) {
-                    this.currentFrame = 0;
-                }
-                this.lastFrameTime = currentTime;
+            const sprite = this.sprites[this.currentFrame];
+            this.ctx.drawImage(
+                this.spriteSheet,
+                sprite.x,
+                sprite.y,
+                sprite.width,
+                sprite.height,
+                this.getX(),
+                this.getY(),
+                this.getW(),
+                this.getH()
+            );
+            this.currentFrame++;
+            if (this.currentFrame >= this.sprites.length) {
+                this.currentFrame = 0;
+            }
+            this.lastFrameTime = currentTime;
 
             requestAnimationFrame(this.updateSprite);
         }
     }
 
     private updateSpriteData() {
-        
-        if(!getHitBottomFlag()) {
-        if (this.lastLatDir === "right") {
-            this.sprites = sprites;
-            this.spritesImageSrc = "assets/sprites/sprite.png";
-            this.spriteSheet = new Image();
-            this.spriteSheet.src = this.spritesImageSrc;
-        } else if (this.lastLatDir === 'left') {
-            this.sprites = spritesL;
-            this.spritesImageSrc = "assets/sprites/spriteL.png";
-            this.spriteSheet = new Image();
-            this.spriteSheet.src = this.spritesImageSrc;
-
+        if (!getHitBottomFlag()) {
+            if (this.lastLatDir === "right") {
+                this.sprites = sprites;
+                this.spritesImageSrc = "assets/sprites/sprite.png";
+                this.spriteSheet = new Image();
+                this.spriteSheet.src = this.spritesImageSrc;
+            } else if (this.lastLatDir === "left") {
+                this.sprites = spritesL;
+                this.spritesImageSrc = "assets/sprites/spriteL.png";
+                this.spriteSheet = new Image();
+                this.spriteSheet.src = this.spritesImageSrc;
+            }
+        } else {
+            if (this.lastLatDir === "right") {
+                this.sprites = crashSprites;
+                this.spritesImageSrc = "assets/sprites/crashSprite.png";
+                this.spriteSheet = new Image();
+                this.spriteSheet.src = this.spritesImageSrc;
+            } else if (this.lastLatDir === "left") {
+                this.sprites = crashSpritesL;
+                this.spritesImageSrc = "assets/sprites/crashSpriteL.png";
+                this.spriteSheet = new Image();
+                this.spriteSheet.src = this.spritesImageSrc;
+            }
         }
-    } else {
-        if (this.lastLatDir === "right") {
-            this.sprites = crashSprites;
-            this.spritesImageSrc = "assets/sprites/crashSprite.png";
-            this.spriteSheet = new Image();
-            this.spriteSheet.src = this.spritesImageSrc;
-        } else if (this.lastLatDir === 'left') {
-            this.sprites = crashSpritesL;
-            this.spritesImageSrc = "assets/sprites/crashSpriteL.png";
-            this.spriteSheet = new Image();
-            this.spriteSheet.src = this.spritesImageSrc;
-
-        }
-
-    }
     }
 }
 

@@ -30,23 +30,23 @@ class Zone {
         this.lat = this.calcConstants._getCompLat(this.ocean, this.sub) || 0;
         this.vert = this.calcConstants._getCompVert(this.ocean, this.sub) || 0;
         this.varDepth = this.calcConstants._calcDepthLimit(this.lat) || null;
-        this.flag = this.calcConstants._getZone(this.lat, this.vert) || null;
+        this.flag = null;
         this.oldFlag = null;
     }
 
     upDateZoneObject():ITextObject{ 
         this.varDepth = this.calcConstants._calcDepthLimit(this.lat)
         this.flag = this.calcConstants._getZone(this.vert, this.varDepth);
-        console.log('this.flag updateZoneObject', this.flag)
+      
        
         if (this.oldFlag !== this.flag) {
             this.oldFlag = this.flag;
-
+            console.log('this.flag updateZoneObject', this.flag)
             if (this.flag === EUPHOTIC_PELAGIC) {
                
                 return textObjects[0]
             } else if (this.flag === EUPHOTIC_BENTHIC) {
-               
+                 console.log("JJJJJJJ", textObjects[1])
                 return textObjects[1]
             } else if (this.flag === DYSPHOTIC_PELAGIC) {
                

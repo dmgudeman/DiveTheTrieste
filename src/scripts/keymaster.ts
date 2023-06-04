@@ -11,7 +11,6 @@ class Keymaster {
 
   private ocean: Ocean;
   private sub: Sub;
-  private zone: Zone;
   private dir: string;
   private modal: HTMLElement;
   private move: Move;
@@ -20,7 +19,6 @@ class Keymaster {
     this.dir = dir;
     this.ocean = Ocean.getInstance();
     this.sub = Sub.getInstance();
-    this.zone = new Zone();
     this.modal = document.getElementById("modal") as HTMLElement;
     this.move = new Move(this.ocean, this.sub);
   }
@@ -62,10 +60,11 @@ class Keymaster {
   }
 
   newPos(dir: string) {
+    const zone = new Zone();
     showLat();
     showDepth();
     showZone();
-    this.zone.upDateZoneObject();
+    zone.upDateZoneObject();
     this.move.getMove(dir);
     if (dir === 'left' || dir === 'right')
     this.sub.setLastLatDir(dir)
