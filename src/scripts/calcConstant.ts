@@ -26,14 +26,20 @@ class CalcConstant {
         this.textObjects = textObjects
     }
 
+    setInitialPoint() {
+        const result = [];
+        // result[0] = 
+
+    }
+
     getOceanLatLimit() {
-        return this.roundDownToNearestVel(this.width * -0.45);
+        return this.roundDownToNearestLatVel(this.width * -0.45);
     }
     getFullLatLimit() {
-        return this.roundDownToNearestVel(this.width * -0.7);
+        return this.roundDownToNearestLatVel(this.width * -0.7);
     }
     getOceanVertLimit() {
-        return this.roundDownToNearestVel(this.height * -0.55);
+        return this.roundDownToNearestVertVel(this.height * -0.55);
     }
 
     _getCompLat(ocean:Ocean, sub:Sub) {
@@ -46,13 +52,13 @@ class CalcConstant {
 
     _getZone(vert: number, depth: number): number {  // returns the photic zone based on depth
 
-        if (vert > this.roundDownToNearestVel(this.height * -0.211)) {
+        if (vert > this.roundDownToNearestVertVel(this.height * -0.211)) {
             if (vert - depth > 2 * VERTICAL_VELOCITY) {
                 return EUPHOTIC_PELAGIC;
             } else {
                 return EUPHOTIC_BENTHIC;
             }
-        } else if (vert > this.roundDownToNearestVel(this.height * -0.45)) {
+        } else if (vert > this.roundDownToNearestVertVel(this.height * -0.45)) {
             if (vert - depth > 2 * VERTICAL_VELOCITY) {
                 return DYSPHOTIC_PELAGIC;
             } else {
@@ -66,9 +72,9 @@ class CalcConstant {
             }
         }
     }
-
+     
     getFullVertLimit() {
-        return this.roundDownToNearestVel(this.height * -0.95);
+        return this.roundDownToNearestVertVel(this.height * -0.95);
     }
 
     // getDepthObject(lat: number): DepthObject {
@@ -168,8 +174,11 @@ class CalcConstant {
         let result = MAP_POINT_OBJECTS.filter( mapPoint => mapPoint.id === num -1);
         return result[0];
      }
+     roundDownToNearestLatVel(num: number) {
+        return Math.floor(num / VERTICAL_VELOCITY) * VERTICAL_VELOCITY;
+    }
 
-    roundDownToNearestVel(num: number) {
+    roundDownToNearestVertVel(num: number) {
         return Math.floor(num / VERTICAL_VELOCITY) * VERTICAL_VELOCITY;
     }
 
