@@ -131,6 +131,7 @@ export const LAT_LIMIT_08_1280_480= [1400, 440]; //same as LEFT_EDGE_TRENCH
 
 
 export const LAT_LIMITS_EXT: DepthObject[] = [  // the x, xll, y, yll are for slope, the mvmt are to control movement when hit bottom
+  {'id':0, 'name':'OOB_LEFT',         x: -0,    xll: -0,    y: -0,    yll: -0,    mvmtLat: 'right'},
   {'id':0, 'name':'INITIAL_POSITION', x: -0,    xll: -0,    y: -0,    yll: -0,    mvmtLat: 'right'},
   {'id':1, 'name':'SLOPE_LIMIT',      x: -180,  xll: -1,    y: -400,  yll: -1,    mvmtLat: 'right'},
   {'id':2, 'name':'START_BUMP',       x: -630,  xll: -181,  y: -475,  yll: -401,  mvmtLat: 'left'}, 
