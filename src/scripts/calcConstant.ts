@@ -11,8 +11,8 @@ import {
 } from "./constants";
 import Ocean from './ocean';
 import Sub from './sub';
-import { LAT_LIMITS_EXT, FULL_LAT_LIMIT, VERTICAL_VELOCITY, textObjects } from "./constants";
-import { LatMoveLimit, DepthObject, ITextObject } from "./types";
+import { LAT_LIMITS_EXT, FULL_LAT_LIMIT, VERTICAL_VELOCITY, textObjects, MAP_POINTS} from "./constants";
+import { LatMoveLimit, DepthObject, ITextObject, IMapPointObject } from "./types";
 
 
 class CalcConstant {
@@ -82,6 +82,23 @@ class CalcConstant {
             console.error("calcDepth did not work for lat = ", lat);
         }
     }
+
+    getMapPointObjectId(lat: number): number {
+        let result:number;
+        try {
+            for (let i = 0; i < MAP_POINTS.length - 1; i++) {
+                if (MAP_POINTS[i].point[0] >= lat && MAP_POINTS[i + 1].point[0] < lat) {
+                 result = i;
+                }
+              }
+            
+              return result;
+        } catch (error) {
+            console.error("calcDepth did not work for lat = ", lat);
+        }
+    }
+
+   
     getDistCAtoTrench(){
         return LAT_LIMITS_EXT[10].x
     }
@@ -117,6 +134,35 @@ class CalcConstant {
         let ans = Math.floor(y / VERTICAL_VELOCITY) * VERTICAL_VELOCITY; // round down to the nearest velocity
         return ans;
     }
+    _calcDepthLimit2(lat: number) {
+        const constants = new CalcConstant();
+        const index = constants.getMapPointObjectId(lat);
+        const mapPointObject: IMapPointObject = MAP_POINTS[index];
+        if (!mapPointObject) return null;
+        const prevMapPointObject: IMapPointObject = MAP_POINTS[index -1]
+        console.log('MMMAAAAPPPPOINTOBJECT', mapPointObject)
+        console.log('PPPPPPP', prevMapPointObject)
+     
+        let startX = prevMapPointObject.point[0];
+        let endX = mapPointObject.point[0];
+        let startY = prevMapPointObject.point[1];
+        let endY = mapPointObject.point[1];
+        let x = lat;
+        // if (depthObject.id === 0) return 21;
+        if (startX === endX) {
+            // handles vertical line
+            endX = endX + 1;
+        }
+        const slope = (endY - startY) / (endX - startX);
+        const yIntercept = startY - slope * startX;
+        const y = slope * x + yIntercept;
+        let ans = Math.floor(y / VERTICAL_VELOCITY) * VERTICAL_VELOCITY; // round down to the nearest velocity
+        return ans;
+    }
+    getPreviousMapPointObject(num:number):IMapPointObject {
+        let result = MAP_POINTS.filter( mapPoint => mapPoint.id === num -1);
+        return result[0];
+     }
 
     roundDownToNearestVel(num: number) {
         return Math.floor(num / VERTICAL_VELOCITY) * VERTICAL_VELOCITY;

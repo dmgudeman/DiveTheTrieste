@@ -62,7 +62,8 @@ class Move {
         this.oceanVertLimit = this.constants.getOceanVertLimit();
         this.fullLatLimit = this.constants.getFullLatLimit();
         this.depthObject = this.constants.getDepthObject(this.compLat);
-        this.varDepth = this.constants._calcDepthLimit(this.compLat);
+        // this.varDepth = this.constants._calcDepthLimit(this.compLat);
+        this.varDepth = this.constants._calcDepthLimit2(this.compLat);
         this.OorS = this.constants.getOorS(this.compLat, this.compVert);
     }
 

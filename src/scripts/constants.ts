@@ -3,7 +3,7 @@
 // canvas3 is the cockpit
 
 import {WIDTH, HEIGHT} from '../index';
-import { LatMoveLimit, DepthObject, ITextObject } from './types';
+import { LatMoveLimit, DepthObject, ITextObject, IMapPointObject } from './types';
 
 export const stopMessageAnimation = {
     messFlag: true
@@ -128,26 +128,67 @@ export const LAT_LIMIT_08_1280_480= [1400, 440]; //same as LEFT_EDGE_TRENCH
 //   {'id':13, 'name':'END_POSITION',    x: -2600, xll: -1761, y: -485,  yll: -481},
 //   {'id':14, 'name':'OVER_LIMIT_L',    x: -2602, xll: -2601, y: -485,  yll: -481},
 // ]
+const MP_0 :number[] = [ 0, 0 ];
+const MP_1 :number[] = [ 0, 0 ];
+const MP_2 :number[] = [ -180, -400 ];
+const MP_3 :number[] = [ -630, -475 ];
+const MP_4 :number[] = [ -720, -380 ];
+const MP_5 :number[] = [ -800, -485 ];
+const MP_6 :number[] = [ -840, -460 ];
+const MP_7 :number[] = [ -980, -200 ];
+const MP_8 :number[] = [ -1120, -240 ];
+const MP_9 :number[] = [ -1180, -450 ];
+const MP_10 :number[] = [ -1320, -500 ];
+const MP_11 :number[] = [ -1520, -1560 ];
+const MP_12 :number[] = [ -1640, -1560 ];
+const MP_13 :number[] = [ -1740, -480 ];
+const MP_14 :number[] = [ -2200, -485 ];
+const MP_15 :number[] = [ -WIDTH, -485 ];
+
+
+export const MAP_POINTS: IMapPointObject[] = [  // the x, xll, y, yll are for slope, the mvmt are to control movement when hit bottom
+  {'id':0, 'name':'OOB_LEFT',         'point': MP_0, mvmtLat: 'right'},
+  {'id':1, 'name':'INITIAL_POSITION', 'point': MP_1,  mvmtLat: 'right'},
+  {'id':2, 'name':'SLOPE_LIMIT',      'point': MP_2,  mvmtLat: 'right'},
+  {'id':3, 'name':'START_BUMP',       'point': MP_3,  mvmtLat: 'left'}, 
+  {'id':4, 'name':'BUMP_PEAK',        'point': MP_4,  mvmtLat: 'both'},
+  {'id':5, 'name':'END_BUMP',         'point': MP_5,  mvmtLat: 'right'},
+  {'id':6, 'name':'START_DBL',        'point': MP_6,  mvmtLat: 'right'},
+  {'id':7, 'name':'DBL_PEAK_1',       'point': MP_7,  mvmtLat: 'left'},
+  {'id':8, 'name':'DBL_PEAK_2',       'point': MP_8,  mvmtLat: 'both'},
+  {'id':9, 'name':'END_DBL',          'point': MP_9,  mvmtLat: 'right'},
+  {'id':10, 'name':'START_TRENCH',    'point': MP_10,  mvmtLat: 'right'},
+  {'id':11,'name':'TRENCH_BOTTOM_L',  'point': MP_11,  mvmtLat: 'right'},
+  {'id':12,'name':'TRENCH_BOTTOM_R',  'point': MP_12,  mvmtLat: 'both'},
+  {'id':13, 'name':'END_TRENCH',      'point': MP_13,  mvmtLat: 'left'},
+  {'id':14, 'name':'END_POSITION',    'point': MP_14,  mvmtLat: 'left'},
+  {'id':15, 'name':'OOB_RIGHT',       'point': MP_15,  mvmtLat: 'left'}
+]
 
 
 export const LAT_LIMITS_EXT: DepthObject[] = [  // the x, xll, y, yll are for slope, the mvmt are to control movement when hit bottom
   {'id':0, 'name':'OOB_LEFT',         x: -0,    xll: -0,    y: -0,    yll: -0,    mvmtLat: 'right'},
-  {'id':0, 'name':'INITIAL_POSITION', x: -0,    xll: -0,    y: -0,    yll: -0,    mvmtLat: 'right'},
-  {'id':1, 'name':'SLOPE_LIMIT',      x: -180,  xll: -1,    y: -400,  yll: -1,    mvmtLat: 'right'},
-  {'id':2, 'name':'START_BUMP',       x: -630,  xll: -181,  y: -475,  yll: -401,  mvmtLat: 'left'}, 
-  {'id':3, 'name':'BUMP_PEAK',        x: -720,  xll: -631,  y: -380,  yll: -476,  mvmtLat: 'both'},
-  {'id':4, 'name':'END_BUMP',         x: -800,  xll: -721,  y: -485,  yll: -381,  mvmtLat: 'right'},
-  {'id':5, 'name':'START_DBL',        x: -840,  xll: -801,  y: -460,  yll: -486,  mvmtLat: 'right'},
-  {'id':6, 'name':'DBL_PEAK_1',       x: -980,  xll: -841,  y: -200,  yll: -461,  mvmtLat: 'left'},
-  {'id':7, 'name':'DBL_PEAK_2',       x: -1120, xll: -981,  y: -240,  yll: -199,  mvmtLat: 'both'},
-  {'id':8, 'name':'END_DBL',          x: -1180, xll: -1121, y: -450,  yll: -239,  mvmtLat: 'right'},
-  {'id':9, 'name':'START_TRENCH',     x: -1320, xll: -1181, y: -500,  yll: -451,  mvmtLat: 'right'},
-  {'id':10,'name':'TRENCH_BOTTOM_L',  x: -1520, xll: -1321, y: -1560, yll: -501,  mvmtLat: 'right'},
-  {'id':11,'name':'TRENCH_BOTTOM_R',  x: -1640, xll: -1521, y: -1560, yll: -501,  mvmtLat: 'both'},
-  {'id':12, 'name':'END_TRENCH',      x: -1740, xll: -1641, y: -480,  yll: -1561, mvmtLat: 'left'},
-  {'id':13, 'name':'END_POSITION',    x: -2200, xll: -1741, y: -485,  yll: -481,  mvmtLat: 'left'},
-  {'id':14, 'name':'OOB_RIGHT',       x: -WIDTH, xll: -2201, y: -485, yll: -486,  mvmtLat: 'left'}
+  {'id':1, 'name':'INITIAL_POSITION', x: -0,    xll: -0,    y: -0,    yll: -0,    mvmtLat: 'right'},
+  {'id':2, 'name':'SLOPE_LIMIT',      x: -180,  xll: -1,    y: -400,  yll: -1,    mvmtLat: 'right'},
+  {'id':3, 'name':'START_BUMP',       x: -630,  xll: -181,  y: -475,  yll: -401,  mvmtLat: 'left'}, 
+  {'id':4, 'name':'BUMP_PEAK',        x: -720,  xll: -631,  y: -380,  yll: -476,  mvmtLat: 'both'},
+  {'id':5, 'name':'END_BUMP',         x: -800,  xll: -721,  y: -485,  yll: -381,  mvmtLat: 'right'},
+  {'id':6, 'name':'START_DBL',        x: -840,  xll: -801,  y: -460,  yll: -486,  mvmtLat: 'right'},
+  {'id':7, 'name':'DBL_PEAK_1',       x: -980,  xll: -841,  y: -200,  yll: -461,  mvmtLat: 'left'},
+  {'id':8, 'name':'DBL_PEAK_2',       x: -1120, xll: -981,  y: -240,  yll: -199,  mvmtLat: 'both'},
+  {'id':9, 'name':'END_DBL',          x: -1180, xll: -1121, y: -450,  yll: -239,  mvmtLat: 'right'},
+  {'id':10, 'name':'START_TRENCH',    x: -1320, xll: -1181, y: -500,  yll: -451,  mvmtLat: 'right'},
+  {'id':11,'name':'TRENCH_BOTTOM_L',  x: -1520, xll: -1321, y: -1560, yll: -501,  mvmtLat: 'right'},
+  {'id':12,'name':'TRENCH_BOTTOM_R',  x: -1640, xll: -1521, y: -1560, yll: -501,  mvmtLat: 'both'},
+  {'id':13, 'name':'END_TRENCH',      x: -1740, xll: -1641, y: -480,  yll: -1561, mvmtLat: 'left'},
+  {'id':14, 'name':'END_POSITION',    x: -2200, xll: -1741, y: -485,  yll: -481,  mvmtLat: 'left'},
+  {'id':15, 'name':'OOB_RIGHT',       x: -WIDTH, xll: -2201, y: -485, yll: -486,  mvmtLat: 'left'}
 ]
+
+
+
+
+
 
 
 export const textObjects: ITextObject[] = [

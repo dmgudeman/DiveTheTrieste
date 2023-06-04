@@ -40,3 +40,10 @@ export interface ITextObject {
     text: string;
 }
 
+export interface IMapPointObject {
+    id: number;
+    name: string;
+    point: number[];
+    mvmtLat: string;
+}
+
