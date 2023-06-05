@@ -1,5 +1,4 @@
-import { WIDTH, HEIGHT,   INITIAL_Y_POSITION,
-    SUB_INITIAL_LAT_POS, } from "../index";
+import { WIDTH, HEIGHT } from "../index";
 import {
     EUPHOTIC_PELAGIC,
     EUPHOTIC_BENTHIC,
@@ -22,14 +21,17 @@ import {
     ITextObject,
     IMapPointObject,
 } from "./types";
+import InitialValues from "./initialValues";
 
 
 class CalcConstant {
+    private initialValues: InitialValues;
     private width: number;
     private height: number;
     private textObjects: ITextObject[];
 
     constructor() {
+        this.initialValues = InitialValues.getInstance();
         this.width = WIDTH;
         this.height = HEIGHT;
         this.textObjects = textObjects;
@@ -39,25 +41,18 @@ class CalcConstant {
     getOceanLatLimit() {
         return this.roundDownToNearestLatVel(this.width * -0.45);
     }
-    getFullLatLimit() {
-        return this.roundDownToNearestLatVel(this.width * -0.7);
-    }
+   
     getOceanVertLimit() {
         return this.roundDownToNearestVertVel(this.height * -0.55);
     }
 
-    getInitial_X() {
-        return this.roundDownToNearestLatVel(this.width * 0.2604);
-    }
-    getInitial_Y() {
-        return this.roundDownToNearestVertVel(this.height * 0.0259);
-    }
+  
 
     _getCompLat(ocean: Ocean, sub: Sub) {
-        return ocean.getX() - sub.getX() + SUB_INITIAL_LAT_POS;
+        return ocean.getX() - sub.getX() + this.initialValues.getInitial_X();
     }
     _getCompVert(ocean: Ocean, sub: Sub) {
-        return ocean.getY() - sub.getY() + INITIAL_Y_POSITION;
+        return ocean.getY() - sub.getY() + this.initialValues.getInitial_Y();
     }
 
     _getZone(vert: number, depth: number): number {
@@ -84,9 +79,7 @@ class CalcConstant {
         }
     }
 
-    getFullVertLimit() {
-        return this.roundDownToNearestVertVel(this.height * -0.95);
-    }
+   
 
     // getDepthObject(lat: number): DepthObject {
     //     try {

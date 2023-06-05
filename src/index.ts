@@ -13,18 +13,17 @@ import { getCursorPosition } from "./scripts/util";
 import Keymaster from "./scripts/keymaster";
 import { showMouseAsSub } from "./scripts/boundary";
 import CalcConstant from "./scripts/calcConstant";
+import InitialValues from "./scripts/initialValues";
 
 const calcConstant = new CalcConstant();
+const initialValues = InitialValues.getInstance();
 
 // export const WIDTH = window.innerWidth * 2; // width of canvases
 // export const HEIGHT = window.innerHeight * 2.05; // height of canvases
 export let WIDTH = visualViewport.width * 2; // width of canvases
 export let HEIGHT = visualViewport.height * 2.05; // height of canvases
 export const globalCockpit = { cockpit: null };
-export let FULL_LAT_LIMIT: number = calcConstant.getFullLatLimit();
-export let FULL_VERTICAL_LIMIT: number = calcConstant.getFullVertLimit();
-export let  SUB_INITIAL_LAT_POS: number = calcConstant.getInitial_X()
-export let INITIAL_Y_POSITION: number = calcConstant.getInitial_Y();
+
 
 
 let audioFlag = false; //change this to true for production
@@ -48,10 +47,10 @@ document.addEventListener("DOMContentLoaded", () => {
         console.log('window height is ' + window.innerHeight);
         console.log('viewport height is ' + window.visualViewport.height);
         console.log('=======================')
-        console.log('FULL_LAT_LIMIT', FULL_LAT_LIMIT)
-        console.log('FULL_VERTICAL_LIMIT', FULL_VERTICAL_LIMIT)
-        console.log('SUB_INITAL_LAT_POS', SUB_INITIAL_LAT_POS)
-        console.log('INITIAL_Y_POSITION', INITIAL_Y_POSITION)
+        console.log('FULL_LAT_LIMIT', initialValues.getFullLatLimit())
+        console.log('FULL_VERTICAL_LIMIT', initialValues.getFullVertLimit())
+        console.log('SUB_INITAL_LAT_POS', initialValues.getInitial_X())
+        console.log('INITIAL_Y_POSITION', initialValues.getInitial_Y())
         console.log('--------------------')
         console.log('=======================')
       });

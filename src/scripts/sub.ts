@@ -1,11 +1,5 @@
-import {
-  
-   
-    LAT_VELOCITY,
-    VERTICAL_VELOCITY,
-    getHitBottomFlag,
-} from "./constants";
-import { WIDTH, HEIGHT,   INITIAL_Y_POSITION,  SUB_INITIAL_LAT_POS} from "../index";
+import { LAT_VELOCITY, VERTICAL_VELOCITY, getHitBottomFlag } from "./constants";
+
 import { ISprite } from "./types";
 import {
     sprites,
@@ -13,10 +7,12 @@ import {
     crashSprites,
     crashSpritesL,
 } from "../../assets/data/sprites";
+import InitialValues from "./initialValues";
 
 class Sub {
     private static instance: Sub;
     private ctx: CanvasRenderingContext2D;
+    private initialValues: InitialValues;
     private x: number;
     private y: number;
     private w: number;
@@ -36,6 +32,7 @@ class Sub {
 
     private constructor(
         ctx: CanvasRenderingContext2D,
+        initialValues: InitialValues,
         x?: number,
         y?: number,
         width?: number,
@@ -50,8 +47,9 @@ class Sub {
         lastFrameTime?: number
     ) {
         this.ctx = ctx;
-        this.x = x || SUB_INITIAL_LAT_POS;
-        this.y = y || INITIAL_Y_POSITION;
+        this.initialValues = InitialValues.getInstance();
+        this.x = x || this.initialValues.getInitial_X();
+        this.y = y || this.initialValues.getInitial_Y();
         this.w = width || 120; // size of the sub in px
         this.h = height || 120; // size of the sub in px
         this.velRight = velRight || 0;
@@ -62,31 +60,16 @@ class Sub {
         this.sprites = sprites;
         this.currentFrame = currentFrame || 0;
         this.lastFrameTime = lastFrameTime || 0;
-        this.initialLatPos = SUB_INITIAL_LAT_POS;
-        this.initialVertPos = INITIAL_Y_POSITION;
+        this.initialLatPos = this.initialValues.getInitial_X();
+        this.initialVertPos = this.initialValues.getInitial_Y();
         this.updateSprite = this.updateSprite.bind(this);
         this.lastLatDir = "right";
         this.spriteSheet = new Image();
         this.spriteSheet.src = this.spritesImageSrc;
     }
 
-    public static getInstance(
-        ctx?: CanvasRenderingContext2D,
-        x: number = SUB_INITIAL_LAT_POS,
-        y: number = 0,
-        width: number = 120,
-        height: number = 120,
-        velRight: number = 0,
-        velLeft: number = 0,
-        velUp: number = 0,
-        velDown: number = 0,
-        spritesImageSrc = "assets/sprites/sprite.png",
-        currentFrame: number = 0,
-        lastFrameTime: number = 0,
-        lastLatDir: string = "right",
-        initialLatPos = SUB_INITIAL_LAT_POS,
-        initialVertPos = INITIAL_Y_POSITION
-    ): Sub {
+    public static getInstance(ctx?: CanvasRenderingContext2D): Sub {
+        const initialValues = InitialValues.getInstance();
         if (!Sub.instance) {
             if (!ctx) {
                 throw new Error(
@@ -95,18 +78,19 @@ class Sub {
             }
             Sub.instance = new Sub(
                 ctx,
-                x,
-                y,
-                width,
-                height,
-                velRight,
-                velLeft,
-                velUp,
-                velDown,
-                spritesImageSrc,
+                initialValues,
+                initialValues.getInitial_X(),
+                initialValues.getInitial_Y(),
+                120,
+                120,
+                0,
+                0,
+                0,
+                0,
+                "assets/sprites/sprite.png",
                 sprites,
-                currentFrame,
-                lastFrameTime
+                0,
+                0
             );
         }
         return Sub.instance;
@@ -194,10 +178,6 @@ class Sub {
 
     public setLastLatDir(dir: string): void {
         this.lastLatDir = dir;
-    }
-
-    clear() {
-        this.ctx.clearRect(0, 0, WIDTH, HEIGHT);
     }
 
     draw() {

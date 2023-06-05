@@ -1,16 +1,18 @@
 import { SEA_DEPTH,  DIST_CA_TO_TRENCH } from "./constants";
-import { HEIGHT, SUB_INITIAL_LAT_POS, INITIAL_Y_POSITION,  } from "../index";
+import { HEIGHT } from "../index";
 import Ocean from './ocean';
 import Sub from './sub';
 import CalcConstant from "./calcConstant";
 import Zone from "./zone";
+import InitialValues from "./initialValues";
 
 // const ocean = Ocean.getInstance();
 // const sub = Sub.getInstance();
+const initialValues = InitialValues.getInstance();
 
 export  function showMouseAsSub(event) {
-    var x = event.clientX - SUB_INITIAL_LAT_POS;
-    var y = event.clientY - INITIAL_Y_POSITION;
+    var x = event.clientX - initialValues.getInitial_X();
+    var y = event.clientY - initialValues.getInitial_Y();
     console.log("X: " + x + ", Y: " + y);
   }
 
@@ -19,7 +21,7 @@ export function showDepth() {
     const sub = Sub.getInstance();
     const conversion = SEA_DEPTH / HEIGHT; // 19.64 feet per pixel
     const conversionShallow = 2; // 2 feet per pixel
-    let composite = Math.abs(ocean.getY() - sub.getY() + INITIAL_Y_POSITION);
+    let composite = Math.abs(ocean.getY() - sub.getY() + initialValues.getInitial_Y());
     let depth: number;
 
     if (composite < 500) {
@@ -41,7 +43,7 @@ export function showLat() : number {
     const sub = Sub.getInstance();
     const calcConstant = new CalcConstant();
     const conversion = Math.ceil(Math.abs(DIST_CA_TO_TRENCH/calcConstant.getDistCAtoTrench())); 
-    let composite = Math.abs(ocean.getX() - sub.getX() + SUB_INITIAL_LAT_POS);
+    let composite = Math.abs(ocean.getX() - sub.getX() + initialValues.getInitial_X());
     let lat: number;
     lat = Math.floor(Math.abs(composite * conversion));
     if (composite < 0) lat = 0;

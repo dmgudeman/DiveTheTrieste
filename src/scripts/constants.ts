@@ -2,10 +2,11 @@
 // canvas2 is the opening page
 // canvas3 is the cockpit
 
-import {WIDTH, HEIGHT, SUB_INITIAL_LAT_POS, INITIAL_Y_POSITION, FULL_LAT_LIMIT, FULL_VERTICAL_LIMIT } from '../index';
+
 import { LatMoveLimit, DepthObject, ITextObject, IMapPointObject} from './types';
 import CalcConstant from './calcConstant';
 import { callbackify } from 'util';
+import InitialValues from './initialValues';
 
 export const stopMessageAnimation = {
     messFlag: true
@@ -28,6 +29,7 @@ export const stopMessageAnimation = {
   }
 
 const calcConstant = new CalcConstant();
+const initialValues = InitialValues.getInstance();
 
 // values
 export const SURFACE = 100;
@@ -143,7 +145,7 @@ export const LAT_LIMIT_08_1280_480= [1400, 440]; //same as LEFT_EDGE_TRENCH
 // const MP_13 :number[] = [ -1740, -480 ];
 // const MP_14 :number[] = [ -2200, -485 ];
 // const MP_15 :number[] = [ -WIDTH, -485 ];
-const MP_0 :number[] = [ SUB_INITIAL_LAT_POS, INITIAL_Y_POSITION ];
+const MP_0 :number[] = [ initialValues.getInitial_X(),  initialValues.getInitial_Y() ];
 const MP_1 :number[] = [ 0, 0];
 const MP_2 :number[] = [ -180, -400 ];
 const MP_3 :number[] = [ -460, -475 ];
@@ -157,9 +159,9 @@ const MP_10 :number[] = [ -1580, -500 ];
 const MP_11 :number[] = [ -1720, -1560 ];
 const MP_12 :number[] = [ -1840, -1560 ];
 const MP_13 :number[] = [ -2040, -480 ];
-const MP_14 :number[] = [ FULL_LAT_LIMIT, FULL_VERTICAL_LIMIT ];
-const MP_15 :number[] = [ -WIDTH, -HEIGHT ];
-const MP_16 :number[] = [ -WIDTH, -HEIGHT ];
+const MP_14 :number[] = [ -initialValues.getFullLatLimit(), -initialValues.getFullVertLimit()];
+const MP_15 :number[] = [ -initialValues.getWidth(), -initialValues.getHeight()];
+const MP_16 :number[]  = [ -initialValues.getWidth(), -initialValues.getHeight()];
 
 export const MAP_POINTS: number[][] = [
   MP_0, MP_1, MP_2, MP_3,

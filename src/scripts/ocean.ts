@@ -43,18 +43,7 @@ class Ocean {
         this.velDown = velDown || 0;
     }
     
-    public static getInstance(
-        ctx?: CanvasRenderingContext2D,
-        x?: number,
-        y?: number,
-        width?: number,
-        height?: number,
-        oceanImage?: HTMLImageElement | null,
-        velRight?: number,
-        velLeft?: number,
-        velUp?: number,
-        velDown?: number
-    ): Ocean {
+    public static getInstance( ctx?: CanvasRenderingContext2D ): Ocean {
         if (!Ocean.instance) {
             if (!ctx) {
                 throw new Error(
@@ -63,15 +52,17 @@ class Ocean {
             }
             Ocean.instance = new Ocean(
                 ctx,
-                x,
-                y,
-                width,
-                height,
-                oceanImage,
-                velRight,
-                velLeft,
-                velUp,
-                velDown
+                0,
+                0,
+                WIDTH,
+                HEIGHT,
+                document.getElementById(
+                    "crossSection"
+                ) as HTMLImageElement,
+                0,
+                0,
+                0,
+                0
             );
         }
         return Ocean.instance;

@@ -2,8 +2,6 @@ import { LAT_VELOCITY, VERTICAL_VELOCITY } from "./constants";
 import {
     WIDTH,
     HEIGHT,
-    INITIAL_Y_POSITION,
-    SUB_INITIAL_LAT_POS,
 } from "../index";
 import Ocean from "./ocean";
 import Sub from "./sub";
@@ -14,6 +12,7 @@ import Zone from "./zone";
 import { getCurrentCanvas, setHitBottomFlag } from "./constants";
 import { eventBus } from "./eventBus";
 import CalcPosition from "./calcPosition";
+import InitialValues from "./initialValues";
 
 class Move {
     private ocean: Ocean;
@@ -21,6 +20,7 @@ class Move {
     private dir: string;
     private constants: CalcConstant;
     private calcPosition: CalcPosition;
+    private initialValues: InitialValues;
     private oceanLatLimit: number;
     private oceanVertLimit: number;
     private fullLatLimit: number;
@@ -41,13 +41,14 @@ class Move {
         this.dir = dir || null;
         this.constants = new CalcConstant() || null;
         this.calcPosition = new CalcPosition();
+        this.initialValues = InitialValues.getInstance();
         this.oceanLatLimit = this.constants.getOceanLatLimit() ?? null;
         this.oceanVertLimit = this.constants.getOceanVertLimit() ?? null;
-        this.fullLatLimit = this.constants.getFullLatLimit() ?? null;
+        this.fullLatLimit = this.initialValues.getFullLatLimit() ?? null;
         this.compLat =
-            this.ocean.getX() - this.sub.getX() + SUB_INITIAL_LAT_POS ?? null;
+            this.ocean.getX() - this.sub.getX() + this.initialValues.getInitial_X() ?? null;
         this.compVert =
-            this.ocean.getY() - this.sub.getY() + INITIAL_Y_POSITION ?? null;
+            this.ocean.getY() - this.sub.getY() + this.initialValues.getInitial_Y() ?? null;
         this.mapPointObject =
             this.constants.getMapPointObject(this.compLat) || null;
         this.varDepth = this.constants._calcDepthLimit2(this.compLat) || null;
@@ -60,12 +61,12 @@ class Move {
 
     upDateCoordinates() {
         this.compLat =
-            this.ocean.getX() - this.sub.getX() + SUB_INITIAL_LAT_POS;
+            this.ocean.getX() - this.sub.getX() + this.initialValues.getInitial_X();
         this.compVert =
-            this.ocean.getY() - this.sub.getY() + INITIAL_Y_POSITION;
+            this.ocean.getY() - this.sub.getY() + this.initialValues.getInitial_Y();
         this.oceanLatLimit = this.constants.getOceanLatLimit();
         this.oceanVertLimit = this.constants.getOceanVertLimit();
-        this.fullLatLimit = this.constants.getFullLatLimit();
+        this.fullLatLimit = this.initialValues.getFullLatLimit();
         this.mapPointObject = this.constants.getMapPointObject(this.compLat);
         // this.varDepth = this.constants._calcDepthLimit(this.compLat);
         this.varDepth = this.constants._calcDepthLimit2(this.compLat);
