@@ -41,12 +41,12 @@ class Zone {
        
         if (this.oldFlag !== this.flag) {
             this.oldFlag = this.flag;
-            console.log('this.flag updateZoneObject', this.flag)
+            // console.log('this.flag updateZoneObject', this.flag)
             if (this.flag === EUPHOTIC_PELAGIC) {
                
                 return textObjects[0]
             } else if (this.flag === EUPHOTIC_BENTHIC) {
-                 console.log("JJJJJJJ", textObjects[1])
+                //  console.log("JJJJJJJ", textObjects[1])
                 return textObjects[1]
             } else if (this.flag === DYSPHOTIC_PELAGIC) {
                

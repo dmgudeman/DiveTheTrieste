@@ -13,6 +13,7 @@ import {
     crashSprites,
     crashSpritesL,
 } from "../../assets/data/sprites";
+import { eventBus } from "./eventBus";
 
 class Sub {
     private static instance: Sub;
@@ -122,6 +123,7 @@ class Sub {
 
     public setX(x: number): void {
         this.x = x;
+        this.updateCoordinates(this.x, this.y);
     }
 
     public getY(): number {
@@ -130,6 +132,7 @@ class Sub {
 
     public setY(y: number): void {
         this.y = y;
+        this.updateCoordinates(this.x, this.y);
     }
 
     public getW(): number {
@@ -272,6 +275,13 @@ class Sub {
                 this.spriteSheet.src = this.spritesImageSrc;
             }
         }
+    }
+
+    private updateCoordinates(x: number, y: number) {
+        this.x = x;
+        this.y = y;
+
+        eventBus.emit("submarineCoordinatesChanged", { x: this.x, y: this.y });
     }
 }
 

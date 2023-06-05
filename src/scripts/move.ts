@@ -12,6 +12,7 @@ import CalcConstant from "./calcConstant";
 import EdText from "./edText";
 import Zone from "./zone";
 import { getCurrentCanvas, setHitBottomFlag } from "./constants";
+import { eventBus } from "./eventBus";
 
 class Move {
     private ocean: Ocean;
@@ -51,6 +52,14 @@ class Move {
         this.latVel = LAT_VELOCITY;
         this.vertVel = VERTICAL_VELOCITY;
         this.edText = new EdText();
+
+        eventBus.on('oceanCoordinatesChanged', (coordinates) => {
+            console.log('Ocean coordinates:', coordinates);
+          });
+          
+          eventBus.on('submarineCoordinatesChanged', (coordinates) => {
+            console.log('Submarine coordinates:', coordinates);
+          });
     }
 
     upDateCoordinates() {
@@ -91,7 +100,7 @@ class Move {
     };
 
     private getLatMove() {
-        console.log("xxxxxxxxxxxxxx");
+        // console.log("xxxxxxxxxxxxxx");
         if (this.OorS[0] == "O") {
             this.sub.setX(this.sub.getInitialLatPos());
             // console.log('LATERAL 0000000 LAT');
@@ -278,10 +287,14 @@ class Move {
     };
 
     moveOceanRight = (vel: number) => {
+        console.log('this fired')
         this.ocean.setX(this.ocean.getX() - vel);
+    
     };
     moveOceanLeft = (vel: number) => {
         this.ocean.setX(this.ocean.getX() + vel);
+
+       
     };
     moveSubRight = () => {
         this.sub.setX(this.sub.getX() + LAT_VELOCITY);
