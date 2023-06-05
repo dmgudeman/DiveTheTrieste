@@ -11,6 +11,7 @@ import CalcConstant from "./calcConstant";
 import Ocean from "./ocean";
 import Sub from "./sub";
 import {ITextObject} from './types';
+import { eventBus } from "./eventBus";
 
 class Zone {
     private ocean: Ocean;
@@ -32,6 +33,7 @@ class Zone {
         this.varDepth = this.calcConstants._calcDepthLimit2(this.lat) || null;
         this.flag = null;
         this.oldFlag = null;
+        eventBus.on('oceanXChanged', this.handleOceanXChange);
     }
 
     upDateZoneObject():ITextObject{ 
