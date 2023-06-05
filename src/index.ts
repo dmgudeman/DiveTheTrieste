@@ -11,14 +11,18 @@ import Ocean from "./scripts/ocean";
 import Cockpit from "./scripts/cockpit";
 import { getCursorPosition } from "./scripts/util";
 import Keymaster from "./scripts/keymaster";
+import { eventBus } from "./scripts/eventBus";
+import CalcConstant from "./scripts/calcConstant";
 
 export const WIDTH = window.innerWidth * 2; // width of canvases
 export const HEIGHT = window.innerHeight * 2.05; // height of canvases
 export const globalCockpit = { cockpit: null };
 
+
 let audioFlag = false; //change this to true for production
 
 document.addEventListener("DOMContentLoaded", () => {
+
     console.log("WIDTH INDEX.TS", WIDTH);
     console.log("HEIGHT INDEX.TS", HEIGHT);
 
@@ -74,11 +78,12 @@ document.addEventListener("DOMContentLoaded", () => {
     canvas3.width = WIDTH;
     canvas3.height = HEIGHT;
 
-    let ocean = Ocean.getInstance(ctx1);
-    let sub = Sub.getInstance(ctx1);
-    let cockpit = new Cockpit({ ctx: ctx3, sub, ocean });
+    const ocean = Ocean.getInstance(ctx1);
+    const sub = Sub.getInstance(ctx1);
+    const cockpit = new Cockpit({ ctx: ctx3, sub, ocean });
     globalCockpit.cockpit = cockpit;
-    let key = new Keymaster();
+    const key = new Keymaster();
+    const calcConstant = new CalcConstant();
   
    
 
@@ -142,13 +147,18 @@ document.addEventListener("DOMContentLoaded", () => {
     };
 
     //use update to make sure the canvas is rendered
-    function handler1(e) {
-        getCursorPosition(canvas1, e);
-        cockpit.draw();
-        showCanvas3();
-        update();
-    }
-    ctx1.canvas.addEventListener("mousedown", handler1);
+    // function handler1(e) {
+    //     getCursorPosition(canvas1, e);
+    //     cockpit.draw();
+    //     showCanvas3();
+      
+    //     update();
+    // }
+    // ctx1.canvas.addEventListener("mousedown", handler1);
+    // ctx2.canvas.addEventListener("mousedown", handler1);
+    // ctx1.canvas.addEventListener("keydown", handler1);
+    // ctx2.canvas.addEventListener("keydown", handler1);
+  
 
     // adding click function to the cockpit
     const rect = canvas3.getBoundingClientRect();
@@ -175,6 +185,7 @@ document.addEventListener("DOMContentLoaded", () => {
         
         ocean.draw();
         sub.draw();
+       
         
         requestAnimationFrame(update);
     }

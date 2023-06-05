@@ -46,20 +46,12 @@ class Move {
         this.compVert =
             this.ocean.getY() - this.sub.getY() + INITIAL_Y_POSITION ?? null;
         this.depthObject = this.constants.getDepthObject(this.compLat) || null;
-        this.varDepth = this.constants._calcDepthLimit(this.compLat) || null;
+        this.varDepth = this.constants.calcDepthLimit(this.compLat) || null;
         this.OorS = this.constants.getOorS(this.compLat, this.compVert) || null;
         this.increaseVelFlag = "";
         this.latVel = LAT_VELOCITY;
         this.vertVel = VERTICAL_VELOCITY;
         this.edText = new EdText();
-
-        eventBus.on('oceanCoordinatesChanged', (coordinates) => {
-            console.log('Ocean coordinates:', coordinates);
-          });
-          
-          eventBus.on('submarineCoordinatesChanged', (coordinates) => {
-            console.log('Submarine coordinates:', coordinates);
-          });
     }
 
     upDateCoordinates() {
@@ -71,7 +63,7 @@ class Move {
         this.oceanVertLimit = this.constants.getOceanVertLimit();
         this.fullLatLimit = this.constants.getFullLatLimit();
         this.depthObject = this.constants.getDepthObject(this.compLat);
-        this.varDepth = this.constants._calcDepthLimit(this.compLat);
+        this.varDepth = this.constants.calcDepthLimit(this.compLat);
         this.OorS = this.constants.getOorS(this.compLat, this.compVert);
     }
 

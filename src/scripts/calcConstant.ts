@@ -36,15 +36,15 @@ class CalcConstant {
         return this.roundDownToNearestVel(this.height * -0.55);
     }
 
-    _getCompLat(ocean:Ocean, sub:Sub) {
+    getCompLat(ocean:Ocean, sub:Sub) {
         return ocean.getX() - sub.getX() + SUB_INITIAL_LAT_POS
 
     }
-    _getCompVert(ocean:Ocean, sub:Sub) {
+    getCompVert(ocean:Ocean, sub:Sub) {
          return ocean.getY() - sub.getY() + INITIAL_Y_POSITION 
     }
 
-    _getZone(vert: number, depth: number): number {  // returns the photic zone based on depth
+    getZone(vert: number, depth: number): number {  // returns the photic zone based on depth
 
         if (vert > this.roundDownToNearestVel(this.height * -0.211)) {
             if (vert - depth > 2 * VERTICAL_VELOCITY) {
@@ -97,7 +97,7 @@ class CalcConstant {
             return ["S", "S"];
     }
 
-    _calcDepthLimit(lat: number) {
+    calcDepthLimit(lat: number) {
         const constants = new CalcConstant();
         const depthObject: LatMoveLimit = constants.getDepthObject(lat);
         if (!depthObject) return null;

@@ -27,16 +27,16 @@ class Zone {
         this.ocean = Ocean.getInstance();
         this.sub = Sub.getInstance();
         this.calcConstants = new CalcConstant();
-        this.lat = this.calcConstants._getCompLat(this.ocean, this.sub) || 0;
-        this.vert = this.calcConstants._getCompVert(this.ocean, this.sub) || 0;
-        this.varDepth = this.calcConstants._calcDepthLimit(this.lat) || null;
+        this.lat = this.calcConstants.getCompLat(this.ocean, this.sub) || 0;
+        this.vert = this.calcConstants.getCompVert(this.ocean, this.sub) || 0;
+        this.varDepth = this.calcConstants.calcDepthLimit(this.lat) || null;
         this.flag = null;
         this.oldFlag = null;
     }
 
     upDateZoneObject():ITextObject{ 
-        this.varDepth = this.calcConstants._calcDepthLimit(this.lat)
-        this.flag = this.calcConstants._getZone(this.vert, this.varDepth);
+        this.varDepth = this.calcConstants.calcDepthLimit(this.lat)
+        this.flag = this.calcConstants.getZone(this.vert, this.varDepth);
       
        
         if (this.oldFlag !== this.flag) {

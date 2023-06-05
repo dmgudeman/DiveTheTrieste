@@ -92,7 +92,12 @@ class Ocean {
 
     public setX(x: number): void {
         this.x = x;
-        this.updateCoordinates(this.x, this.y)
+        try {
+            this.updateCoordinates(this.x, this.y)
+        } catch (error) {
+             console.log(error);
+        }
+      
     }
     public getY(): number {
         return this.y;
