@@ -43,16 +43,12 @@ export const DIST_CA_TO_TRENCH = 6000; //miles
 export const LAT_VELOCITY = 20;
 export const VERTICAL_VELOCITY = 20;
 
-
 //vertical for messages and images
 export const B_P_BARRIER = 200;
 export const CONT_SHELF_BENTHIC = DEPTH_CONT_SHELF - 150;
 export const E_D_BARRIER = SURFACE + 200;
 export const D_A_BARRIER = SURFACE + 500;   // dysphotic_aphotic_barrier
 export const APHOTIC_BENTHIC_BARRIER = OCEAN_BOTTOM - 400;
-
-
-
 
 // flags
 export const STOP_OCEAN_LAT = 'stop_ocean_lateral';
@@ -69,70 +65,6 @@ export const APHOTIC_PELAGIC: number = 4;
 export const APHOTIC_BENTHIC: number = 5;
 
 
-export const LAT_LIMIT_00_0_0= [0,0];
-export const LAT_LIMIT_01_220_420= [220, 380];
-export const LAT_LIMIT_02_620_480 = [620, 420];
-export const LAT_LIMIT_03_720_380 = [720, 260];
-export const LAT_LIMIT_04_860_500 = [860, 460];
-export const LAT_LIMIT_05_1000_200 = [1000, 160];
-export const LAT_LIMIT_06_1100_200 = [1100, 160];
-export const LAT_LIMIT_07_1200_460 = [1200, 420];
-export const LAT_LIMIT_08_1280_480= [1400, 440]; //same as LEFT_EDGE_TRENCH
-
-
-// export const LAT_LIMITS: LatMoveLimit[] = [
-//   {'id':0, 'name':'OVER_LIMIT_R',     x: 0   ,    xll: -0,    y: -0,    yll: -0},
-//   {'id':1, 'name':'INITIAL_POSITION', x: 0,    xll: -0,    y: -0,    yll: -0},
-//   {'id':2, 'name':'SLOPE_LIMIT',      x: 0.039,    xll: -0,    y: -0,    yll: -0},
-//   {'id':3, 'name':'START_BUMP',      x: 0.169,  xll: 1,    y: 400,  yll: 1},
-//   {'id':4, 'name':'START_BUMP',       x: 0.214,  xll: 141,  y: 450,  yll: 401},
-//   {'id':5, 'name':'BUMP_PEAK',        x: 0.233,  xll: 541,  y: 300,  yll: 451},
-//   {'id':6, 'name':'END_BUMP',         x: 0.259,  xll: 721,  y: 460,  yll: 301},
-//   {'id':7, 'name':'START_DBL',        x: 0.272,  xll: 801,  y: 460,  yll: 461},
-//   {'id':8, 'name':'DBL_PEAK_1',       x: 0.318,  xll: 841,  y: 200,  yll: 461},
-//   {'id':9, 'name':'DBL_PEAK_2',       x: 0.363, xll: 981,  y: 240,  yll: 199},
-//   {'id':10, 'name':'END_DBL',          x: 0.423, xll: 1121, y: 420,  yll: 239},
-//   {'id':11, 'name':'START_TRENCH',    x: 0.506, xll: 1181, y: 480,  yll: 419},
-//   {'id':12,'name':'TRENCH_BOTTOM',    x: 0.525, xll: 1321, y: 1560, yll: 479},
-//   {'id':13, 'name':'END_TRENCH',      x: 0.700, xll: 1601, y: 480,  yll: 1561},
-//   {'id':14, 'name':'END_POSITION',    x: 0.713, xll: 1761, y: 485,  yll: 481},
-//   {'id':15, 'name':'OVER_LIMIT_L',    x: 0.713, xll: 1761, y: 485,  yll: 481},
-// ]
-
-
-// export const LAT_LIMITS: LatMoveLimit[] = [
-//   {'id':0, 'name':'OVER_LIMIT_R',     x: -0,    xll: -0,    y: -0,    yll: -0},
-//   {'id':1, 'name':'INITIAL_POSITION', x: -0,    xll: -0,    y: -0,    yll: -0},
-//   {'id':2, 'name':'SLOPE_LIMIT',      x: -140,  xll: -1,    y: -400,  yll: -1},
-//   {'id':3, 'name':'START_BUMP',       x: -540,  xll: -141,  y: -450,  yll: -401},
-//   {'id':4, 'name':'BUMP_PEAK',        x: -720,  xll: -541,  y: -300,  yll: -451},
-//   {'id':5, 'name':'END_BUMP',         x: -800,  xll: -721,  y: -460,  yll: -301},
-//   {'id':6, 'name':'START_DBL',        x: -840,  xll: -801,  y: -460,  yll: -461},
-//   {'id':7, 'name':'DBL_PEAK_1',       x: -980,  xll: -841,  y: -200,  yll: -461},
-//   {'id':8, 'name':'DBL_PEAK_2',       x: -1120, xll: -981,  y: -240,  yll: -199},
-//   {'id':9, 'name':'END_DBL',          x: -1180, xll: -1121, y: -460,  yll: -239},
-//   {'id':10, 'name':'START_TRENCH',    x: -1280, xll: -1181, y: -480,  yll: -461},
-//   {'id':11,'name':'TRENCH_BOTTOM',    x: -1560, xll: -1281, y: -1800, yll: -479},
-//   {'id':12, 'name':'END_TRENCH',      x: -1760, xll: -1561, y: -480,  yll: -1801},
-//   {'id':13, 'name':'END_POSITION',    x: -2600, xll: -1761, y: -485,  yll: -481},
-//   {'id':14, 'name':'OVER_LIMIT_L',    x: -2602, xll: -2601, y: -485,  yll: -481},
-// ]
-// const MP_0 :number[] = [ 0, 0 ];
-// const MP_1 :number[] = [ 0, 0];
-// const MP_2 :number[] = [ -180, -400 ];
-// const MP_3 :number[] = [ -630, -475 ];
-// const MP_4 :number[] = [ -720, -380 ];
-// const MP_5 :number[] = [ -800, -485 ];
-// const MP_6 :number[] = [ -840, -460 ];
-// const MP_7 :number[] = [ -980, -200 ];
-// const MP_8 :number[] = [ -1120, -240 ];
-// const MP_9 :number[] = [ -1180, -450 ];
-// const MP_10 :number[] = [ -1320, -500 ];
-// const MP_11 :number[] = [ -1520, -1560 ];
-// const MP_12 :number[] = [ -1640, -1560 ];
-// const MP_13 :number[] = [ -1740, -480 ];
-// const MP_14 :number[] = [ -2200, -485 ];
-// const MP_15 :number[] = [ -WIDTH, -485 ];
 const MP_0 :number[] = [ initialValues.getInitial_X(),  initialValues.getInitial_Y() ];
 const MP_1 :number[] = [ 0, 0];
 const MP_2 :number[] = [ -180, -400 ];
@@ -191,12 +123,12 @@ export const MAP_POINT_OBJECTS: IMapPointObject[] = [  // the x, xll, y, yll are
   {'id':8, 'name':'DBL_PEAK_2',       'point': MP_8,   mvmtLat: 'both',  'coeff': MULT_MP_8 },
   {'id':9, 'name':'END_DBL',          'point': MP_9,   mvmtLat: 'right', 'coeff': MULT_MP_9 },
   {'id':10, 'name':'START_TRENCH',    'point': MP_10,  mvmtLat: 'right', 'coeff': MULT_MP_10 },
-  {'id':11,'name':'TRENCH_BOTTOM_L',  'point': MP_11,  mvmtLat: 'right', 'coeff': MULT_MP_11 },
-  {'id':12,'name':'TRENCH_BOTTOM_R',  'point': MP_12,  mvmtLat: 'both',  'coeff': MULT_MP_12 },
+  {'id':11, 'name':'TRENCH_BOTTOM_L', 'point': MP_11,  mvmtLat: 'right', 'coeff': MULT_MP_11 },
+  {'id':12, 'name':'TRENCH_BOTTOM_R', 'point': MP_12,  mvmtLat: 'both',  'coeff': MULT_MP_12 },
   {'id':13, 'name':'END_TRENCH',      'point': MP_13,  mvmtLat: 'left',  'coeff': MULT_MP_13 },
   {'id':14, 'name':'END_POSITION',    'point': MP_14,  mvmtLat: 'left',  'coeff': MULT_MP_14 },
   {'id':15, 'name':'OOB_RIGHT',       'point': MP_15,  mvmtLat: 'left',  'coeff': MULT_MP_15 },
-  {'id':16, 'name':'OOB_RIGHT_2',       'point': MP_16,  mvmtLat: 'left',  'coeff': MULT_MP_16 },
+  {'id':16, 'name':'OOB_RIGHT_2',     'point': MP_16,  mvmtLat: 'left',  'coeff': MULT_MP_16 },
 ]
 
 

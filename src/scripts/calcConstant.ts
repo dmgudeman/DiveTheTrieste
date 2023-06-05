@@ -6,26 +6,17 @@ import {
     DYSPHOTIC_BENTHIC,
     APHOTIC_PELAGIC,
     APHOTIC_BENTHIC,
-  
 } from "./constants";
 import Ocean from "./ocean";
 import Sub from "./sub";
-import {
-    VERTICAL_VELOCITY,
-    textObjects,
-    MAP_POINT_OBJECTS,
-} from "./constants";
-import {
-    ITextObject,
-    IMapPointObject,
-} from "./types";
+import { VERTICAL_VELOCITY, textObjects, MAP_POINT_OBJECTS } from "./constants";
+import { ITextObject, IMapPointObject } from "./types";
 import InitialValues from "./initialValues";
 import CalcPosition from "./calcPosition";
 
-
 class CalcConstant {
     private initialValues: InitialValues;
-    private calcPosition: CalcPosition
+    private calcPosition: CalcPosition;
     private width: number;
     private height: number;
     private textObjects: ITextObject[];
@@ -36,12 +27,7 @@ class CalcConstant {
         this.width = WIDTH;
         this.height = HEIGHT;
         this.textObjects = textObjects;
-        
     }
-
-
-
-  
 
     _getCompLat(ocean: Ocean, sub: Sub) {
         return ocean.getX() - sub.getX() + this.initialValues.getInitial_X();
@@ -74,8 +60,6 @@ class CalcConstant {
         }
     }
 
-   
-
     // getDepthObject(lat: number): DepthObject {
     //     try {
     //         const result: DepthObject[] = LAT_LIMITS_EXT.filter(
@@ -106,14 +90,11 @@ class CalcConstant {
 
                 if (nextMapPoints[0] < lat && mapPoints[0] >= lat) {
                     result = MAP_POINT_OBJECTS[i + 1];
-                  
-               
                 }
-               
             }
-            console.log('====RESULT======')
-            console.log(result)
-            console.log('====++++======')
+            console.log("====RESULT======");
+            console.log(result);
+            console.log("====++++======");
             return result;
         } catch (error) {
             console.error("getMapPointObject did not work for lat = ", lat);
@@ -132,18 +113,30 @@ class CalcConstant {
     }
 
     getOorS(lat: number, vert: number): string[] {
-        if (lat >= this.initialValues.getOceanLatLimit() && vert >= this.initialValues.getOceanVertLimit())
+        if (
+            lat >= this.initialValues.getOceanLatLimit() &&
+            vert >= this.initialValues.getOceanVertLimit()
+        )
             return ["O", "O"];
-        if (lat < this.initialValues.getOceanLatLimit() && vert >= this.initialValues.getOceanVertLimit())
+        if (
+            lat < this.initialValues.getOceanLatLimit() &&
+            vert >= this.initialValues.getOceanVertLimit()
+        )
             return ["S", "O"];
-        if (lat >= this.initialValues.getOceanLatLimit() && vert < this.initialValues.getOceanVertLimit())
+        if (
+            lat >= this.initialValues.getOceanLatLimit() &&
+            vert < this.initialValues.getOceanVertLimit()
+        )
             return ["O", "S"];
-        if (lat < this.initialValues.getOceanLatLimit() && vert < this.initialValues.getOceanVertLimit())
+        if (
+            lat < this.initialValues.getOceanLatLimit() &&
+            vert < this.initialValues.getOceanVertLimit()
+        )
             return ["S", "S"];
     }
 
     _calcDepthLimit2() {
-        let lat =  this.calcPosition.getCompLat();
+        let lat = this.calcPosition.getCompLat();
         const index = this.getMapPointObject(lat).id;
         const mapPointObject: IMapPointObject = MAP_POINT_OBJECTS[index];
         if (!mapPointObject) return null;
@@ -187,6 +180,10 @@ class CalcConstant {
 
     getTextObject(num: number) {
         return textObjects[num];
+    }
+    
+    setCoeffOnMapPoinObjects() {
+        
     }
 }
 
