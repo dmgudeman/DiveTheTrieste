@@ -14,6 +14,7 @@ import CalcConstant from "./calcConstant";
 import EdText from "./edText";
 import Zone from "./zone";
 import { getCurrentCanvas, setHitBottomFlag } from "./constants";
+import { eventBus } from "./eventBus";
 
 class Move {
     private ocean: Ocean;
@@ -291,16 +292,21 @@ class Move {
     }
 
     moveOceanRight = (vel: number) => {
+        console.log("this fired");
         this.ocean.setX(this.ocean.getX() - vel);
+        eventBus.emit("oceanXChanged", this.ocean.getX());
     };
     moveOceanLeft = (vel: number) => {
         this.ocean.setX(this.ocean.getX() + vel);
+        eventBus.emit("oceanXChanged", this.ocean.getX());
     };
     moveSubRight = () => {
         this.sub.setX(this.sub.getX() + LAT_VELOCITY);
+        eventBus.emit("subXChanged", this.sub.getX());
     };
     moveSubLeft = () => {
         this.sub.setX(this.sub.getX() - LAT_VELOCITY);
+        eventBus.emit("subXChanged", this.sub.getX());
     };
     moveOceanUp = (vel: number) => {
         this.ocean.setY(this.ocean.getY() + vel);
