@@ -61,9 +61,9 @@ export const APHOTIC_BENTHIC_BARRIER = OCEAN_BOTTOM - 400;
 export const OCEAN_DEPTH_LIMIT: number = 820;
 export let OCEAN_LAT_LIMIT: number  = null;
 export const FULL_LAT_LIMIT: number = -2200;
-export const FULL_VERTICAL_LIMIT: number = HEIGHT + 100;
+export const FULL_VERTICAL_LIMIT: number = -(HEIGHT + 100); // need to fix this
 export const INITIAL_Y_POSITION: number = 80; // for both objects
-export const SUB_INITIAL_LAT_POS: number = 1000;
+export const SUB_INITIAL_LAT_POS: number = 899 // should be 0.2604 * width
 
 // flags
 export const STOP_OCEAN_LAT = 'stop_ocean_lateral';
@@ -148,18 +148,19 @@ const MP_0 :number[] = [ SUB_INITIAL_LAT_POS, INITIAL_Y_POSITION ];
 const MP_1 :number[] = [ 0, 0];
 const MP_2 :number[] = [ -180, -400 ];
 const MP_3 :number[] = [ -460, -475 ];
-const MP_4 :number[] = [ -840, -380 ];
-const MP_5 :number[] = [ -800, -485 ];
-const MP_6 :number[] = [ -840, -460 ];
-const MP_7 :number[] = [ -980, -200 ];
+const MP_4 :number[] = [ -860, -380 ];
+const MP_5 :number[] = [ -980, -485 ];
+const MP_6 :number[] = [ -1060, -460 ];
+const MP_7 :number[] = [ -1180, -200 ];
 const MP_8 :number[] = [ -1320, -240 ];
 const MP_9 :number[] = [ -1400, -450 ];
-const MP_10 :number[] = [ -1320, -500 ];
-const MP_11 :number[] = [ -1520, -1560 ];
-const MP_12 :number[] = [ -1640, -1560 ];
-const MP_13 :number[] = [ -2060, -480 ];
-const MP_14 :number[] = [ -2560, -485 ];
-const MP_15 :number[] = [ -WIDTH, -485 ];
+const MP_10 :number[] = [ -1580, -500 ];
+const MP_11 :number[] = [ -1720, -1560 ];
+const MP_12 :number[] = [ -1840, -1560 ];
+const MP_13 :number[] = [ -2040, -480 ];
+const MP_14 :number[] = [ FULL_LAT_LIMIT, FULL_VERTICAL_LIMIT ];
+const MP_15 :number[] = [ -WIDTH, -HEIGHT ];
+const MP_16 :number[] = [ -WIDTH, -HEIGHT ];
 
 export const MAP_POINTS: number[][] = [
   MP_0, MP_1, MP_2, MP_3,
@@ -172,19 +173,21 @@ const MULT_MP_0 :number[] = [ 0, 0 ];
 const MULT_MP_1 :number[] = [ 0, 0 ];
 const MULT_MP_2 :number[] = [ -0.0468, -1 ];
 const MULT_MP_3 :number[] = [ -0.1823, -1 ];
-const MULT_MP_4 :number[] = [ -0.2188, -1 ];
+const MULT_MP_4 :number[] = [ -0.2239, -1 ];
 const MULT_MP_5 :number[] = [ -0.2552, -1 ];
 const MULT_MP_6 :number[] = [ -0.2781, -1 ];
 const MULT_MP_7 :number[] = [ -0.3021, -1];
 const MULT_MP_8 :number[] = [ -0.34375, -1];
 const MULT_MP_9 :number[] = [ -0.3646, -1];
-const MULT_MP_10 :number[] = [ -0.3698, -1];
-const MULT_MP_11 :number[] = [ -0.4167, -1];
-const MULT_MP_12 :number[] = [ -0.4427, -1];
-const MULT_MP_13 :number[] = [ -0.4948, -1];
-const MULT_MP_14 :number[] = [ -0.5364, - 1];
-const MULT_MP_15 :number[] = [ -0.6666, -1];
-const MULT_MP_16 :number[] = [ WIDTH, -1];
+const MULT_MP_10 :number[] = [ -0.4115, -1];
+const MULT_MP_11 :number[] = [ -0.4479, -1];
+const MULT_MP_12 :number[] = [ -0.4791, -1];
+const MULT_MP_13 :number[] = [ -0.5312, -1];
+
+const MULT_MP_14 :number[] = [ -0.5729, - 1];
+const MULT_MP_15 :number[] = [ -1, -1];
+const MULT_MP_16 :number[] = [ -1, -1];
+
 
 
 export const MAP_POINT_OBJECTS: IMapPointObject[] = [  // the x, xll, y, yll are for slope, the mvmt are to control movement when hit bottom
@@ -204,6 +207,7 @@ export const MAP_POINT_OBJECTS: IMapPointObject[] = [  // the x, xll, y, yll are
   {'id':13, 'name':'END_TRENCH',      'point': MP_13,  mvmtLat: 'left',  'coeff': MULT_MP_13 },
   {'id':14, 'name':'END_POSITION',    'point': MP_14,  mvmtLat: 'left',  'coeff': MULT_MP_14 },
   {'id':15, 'name':'OOB_RIGHT',       'point': MP_15,  mvmtLat: 'left',  'coeff': MULT_MP_15 },
+  {'id':16, 'name':'OOB_RIGHT_2',       'point': MP_16,  mvmtLat: 'left',  'coeff': MULT_MP_16 },
 ]
 
 

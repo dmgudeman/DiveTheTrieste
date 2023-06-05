@@ -93,6 +93,7 @@ class Move {
         let canvasNumber = getCurrentCanvas();
         this.edText.updateEdText(zoneNum, canvasNumber);
         this.printLateral('IN GET MOVE')
+        console.log('Complat from calcPostion in MOVE)', this.calcPosition.getCompLat());
         // this.constants.printCalcConstant(this.compLat, this.compVert, "IN MOVE getMove")
     };
 

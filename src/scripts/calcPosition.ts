@@ -24,6 +24,10 @@ class CalcPosition {
         this.compLat += newX;
         console.log('this.compLat sub', this.compLat)
     };
+
+    getCompLat(){
+        return this.compLat;
+    }
 }
 
 export default CalcPosition;
