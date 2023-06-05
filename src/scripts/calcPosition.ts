@@ -14,14 +14,12 @@ class CalcPosition {
     }
 
     handleOceanXChange = (newX: number) => {
-        // Do something in response to the change in the Sub's x coordinate
         console.log("this is in Zone", newX);
         this.compLat = newX ;
         console.log('this.compLat Ocean', this.compLat)
     };
 
     handleSubXChange = (newX: number) => {
-        // Do something in response to the change in the Sub's x coordinate
         console.log("this is in Zone", newX);
         this.compLat += newX;
         console.log('this.compLat sub', this.compLat)
