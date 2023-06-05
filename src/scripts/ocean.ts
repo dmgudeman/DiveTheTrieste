@@ -92,7 +92,6 @@ class Ocean {
 
     public setX(x: number): void {
         this.x = x;
-        this.updateX
     }
     public getY(): number {
         return this.y;
@@ -151,10 +150,7 @@ class Ocean {
     public zeroVelDown(): void {
         this.velDown = 0;
     }
-    private updateX() {
-        eventBus.emit('oceanX CHANGED', { x: this.x});
-      }
-    
+
 
 }
 export default Ocean;
