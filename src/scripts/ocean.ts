@@ -92,11 +92,7 @@ class Ocean {
 
     public setX(x: number): void {
         this.x = x;
-        try {
-            this.updateCoordinates(this.x, this.y)
-        } catch (error) {
-             console.log(error);
-        }
+      
       
     }
     public getY(): number {
@@ -105,7 +101,6 @@ class Ocean {
 
     public setY(y: number): void {
         this.y = y;
-        this.updateCoordinates(this.x, this.y)
     }
 
     public getVelRight(): number {
@@ -157,13 +152,7 @@ class Ocean {
     public zeroVelDown(): void {
         this.velDown = 0;
     }
-    private updateCoordinates(x: number, y: number) {
-        this.x = x;
-        this.y = y;
-    
-        eventBus.emit('oceanCoordinatesChanged', { x: this.x, y: this.y });
-      }
-    
+   
 
 }
 export default Ocean;

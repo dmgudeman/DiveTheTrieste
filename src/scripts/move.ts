@@ -3,7 +3,6 @@ import {
     LAT_VELOCITY,
     VERTICAL_VELOCITY,
     SUB_INITIAL_LAT_POS,
-   
 } from "./constants";
 import Ocean from "./ocean";
 import Sub from "./sub";
@@ -52,6 +51,7 @@ class Move {
         this.latVel = LAT_VELOCITY;
         this.vertVel = VERTICAL_VELOCITY;
         this.edText = new EdText();
+        eventBus.on("subXChanged", this.handleSubXChange);
     }
 
     upDateCoordinates() {
@@ -66,6 +66,11 @@ class Move {
         this.varDepth = this.constants.calcDepthLimit(this.compLat);
         this.OorS = this.constants.getOorS(this.compLat, this.compVert);
     }
+
+    handleSubXChange = (newX: number) => {
+        // Do something in response to the change in the Sub's x coordinate
+        console.log(newX);
+    };
 
     public getMove = (dir: string) => {
         const zone = new Zone();
@@ -279,20 +284,21 @@ class Move {
     };
 
     moveOceanRight = (vel: number) => {
-        console.log('this fired')
+        console.log("this fired");
         this.ocean.setX(this.ocean.getX() - vel);
-    
+        eventBus.emit("oceanXChanged", this.ocean.getX());
     };
     moveOceanLeft = (vel: number) => {
         this.ocean.setX(this.ocean.getX() + vel);
-
-       
+        eventBus.emit("oceanXChanged", this.ocean.getX());
     };
     moveSubRight = () => {
         this.sub.setX(this.sub.getX() + LAT_VELOCITY);
+        eventBus.emit("subXChanged", this.sub.getX());
     };
     moveSubLeft = () => {
         this.sub.setX(this.sub.getX() - LAT_VELOCITY);
+        eventBus.emit("subXChanged", this.sub.getX());
     };
     moveOceanUp = (vel: number) => {
         this.ocean.setY(this.ocean.getY() + vel);

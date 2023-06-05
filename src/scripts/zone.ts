@@ -11,6 +11,7 @@ import CalcConstant from "./calcConstant";
 import Ocean from "./ocean";
 import Sub from "./sub";
 import {ITextObject} from './types';
+import {eventBus} from './eventBus';
 
 class Zone {
     private ocean: Ocean;
@@ -32,8 +33,14 @@ class Zone {
         this.varDepth = this.calcConstants.calcDepthLimit(this.lat) || null;
         this.flag = null;
         this.oldFlag = null;
+        eventBus.on('oceanXChanged', this.handleOceanXChange);
     }
 
+
+    handleOceanXChange = (newX: number) => {
+        // Do something in response to the change in the Sub's x coordinate
+        console.log('this is in Zone', newX);
+      }
     upDateZoneObject():ITextObject{ 
         this.varDepth = this.calcConstants.calcDepthLimit(this.lat)
         this.flag = this.calcConstants.getZone(this.vert, this.varDepth);

@@ -182,10 +182,10 @@ document.addEventListener("DOMContentLoaded", () => {
     // MAIN ANIMATION LOOP //////
     function update() {
         clear();
-        
+           
         ocean.draw();
         sub.draw();
-       
+    
         
         requestAnimationFrame(update);
     }
