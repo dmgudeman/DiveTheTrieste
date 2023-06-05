@@ -7,13 +7,22 @@ import {
     APHOTIC_PELAGIC,
     APHOTIC_BENTHIC,
     INITIAL_Y_POSITION,
-    SUB_INITIAL_LAT_POS
+    SUB_INITIAL_LAT_POS,
 } from "./constants";
-import Ocean from './ocean';
-import Sub from './sub';
-import { LAT_LIMITS_EXT, FULL_LAT_LIMIT, VERTICAL_VELOCITY, textObjects, MAP_POINT_OBJECTS} from "./constants";
-import { LatMoveLimit, DepthObject, ITextObject, IMapPointObject } from "./types";
-
+import Ocean from "./ocean";
+import Sub from "./sub";
+import {
+    FULL_LAT_LIMIT,
+    VERTICAL_VELOCITY,
+    textObjects,
+    MAP_POINT_OBJECTS,
+} from "./constants";
+import {
+    LatMoveLimit,
+    DepthObject,
+    ITextObject,
+    IMapPointObject,
+} from "./types";
 
 class CalcConstant {
     private width: number;
@@ -23,13 +32,12 @@ class CalcConstant {
     constructor() {
         this.width = WIDTH;
         this.height = HEIGHT;
-        this.textObjects = textObjects
+        this.textObjects = textObjects;
     }
 
     setInitialPoint() {
         const result = [];
-        // result[0] = 
-
+        // result[0] =
     }
 
     getOceanLatLimit() {
@@ -42,15 +50,15 @@ class CalcConstant {
         return this.roundDownToNearestVertVel(this.height * -0.55);
     }
 
-    _getCompLat(ocean:Ocean, sub:Sub) {
-        return ocean.getX() - sub.getX() + SUB_INITIAL_LAT_POS
-
+    _getCompLat(ocean: Ocean, sub: Sub) {
+        return ocean.getX() - sub.getX() + SUB_INITIAL_LAT_POS;
     }
-    _getCompVert(ocean:Ocean, sub:Sub) {
-         return ocean.getY() - sub.getY() + INITIAL_Y_POSITION 
+    _getCompVert(ocean: Ocean, sub: Sub) {
+        return ocean.getY() - sub.getY() + INITIAL_Y_POSITION;
     }
 
-    _getZone(vert: number, depth: number): number {  // returns the photic zone based on depth
+    _getZone(vert: number, depth: number): number {
+        // returns the photic zone based on depth
 
         if (vert > this.roundDownToNearestVertVel(this.height * -0.211)) {
             if (vert - depth > 2 * VERTICAL_VELOCITY) {
@@ -72,7 +80,7 @@ class CalcConstant {
             }
         }
     }
-     
+
     getFullVertLimit() {
         return this.roundDownToNearestVertVel(this.height * -0.95);
     }
@@ -90,23 +98,46 @@ class CalcConstant {
     // }
 
     getMapPointObject(lat: number): IMapPointObject {
-        let result:IMapPointObject;
+        let result: IMapPointObject;
+
         try {
-            for (let i = 1; i < MAP_POINT_OBJECTS.length - 1; i++) {
-                if (MAP_POINT_OBJECTS[i-1].point[0] >= lat && MAP_POINT_OBJECTS[i].point[0] < lat) {
-                 result = MAP_POINT_OBJECTS[i];
+            for (let i = 0; i < MAP_POINT_OBJECTS.length - 1; i++) {
+                let mapPoints: number[] = this.calcPoint(
+                    MAP_POINT_OBJECTS[i].coeff
+                );
+                let nextMapPoints: number[] = this.calcPoint(
+                    MAP_POINT_OBJECTS[i + 1].coeff
+                );
+                // console.log('mapPoints[0]', mapPoints[0], 'nextMapPoints[0]', nextMapPoints[0])
+                // console.log('nextMapPoints[0] < lat', nextMapPoints[0] < lat)
+                // console.log('mapPoints[0] => lat', mapPoints[0] >= lat)
+                // console.log('LLLAAATTT', lat, 'iiiiiiii', i)
+
+                if (nextMapPoints[0] < lat && mapPoints[0] >= lat) {
+                    result = MAP_POINT_OBJECTS[i + 1];
+                  
+               
                 }
-              }
-            
-              return result;
+               
+            }
+            console.log('====RESULT======')
+            console.log(result)
+            console.log('====++++======')
+            return result;
         } catch (error) {
-            console.error("calcDepth did not work for lat = ", lat);
+            console.error("getMapPointObject did not work for lat = ", lat);
         }
     }
 
-   
-    getDistCAtoTrench(){
-        return LAT_LIMITS_EXT[10].x
+    calcPoint(coeff: number[]) {
+        let result = [];
+        result[0] = Math.floor(coeff[0] * this.width);
+        result[1] = Math.floor(coeff[1] * this.height);
+        return result;
+    }
+
+    getDistCAtoTrench() {
+        return MAP_POINT_OBJECTS[10].point[0];
     }
 
     getOorS(lat: number, vert: number): string[] {
@@ -145,19 +176,18 @@ class CalcConstant {
         const index = constants.getMapPointObject(lat).id;
         const mapPointObject: IMapPointObject = MAP_POINT_OBJECTS[index];
         if (!mapPointObject) return null;
-        const nextMapPointObject: IMapPointObject = MAP_POINT_OBJECTS[index - 1];
-      
+        const nextMapPointObject: IMapPointObject =
+            MAP_POINT_OBJECTS[index + 1];
 
-     
         let startX = nextMapPointObject.coeff[0] * WIDTH;
         let endX = mapPointObject.coeff[0] * WIDTH;
-        console.log('END X', endX)
-        console.log('START X ', startX)
+        // console.log('END X', endX)
+        // console.log('START X ', startX)
         let startY = nextMapPointObject.coeff[1] * HEIGHT;
-       
+
         let endY = mapPointObject.coeff[1] * HEIGHT;
-        console.log('END Y', endY)
-        console.log('START Y ', startY)
+        // console.log('END Y', endY)
+        // console.log('START Y ', startY)
         let x = lat;
         // if (depthObject.id === 0) return 21;
         if (startX === endX) {
@@ -170,11 +200,13 @@ class CalcConstant {
         let ans = Math.floor(y / VERTICAL_VELOCITY) * VERTICAL_VELOCITY; // round down to the nearest velocity
         return ans;
     }
-    getPreviousMapPointObject(num:number):IMapPointObject {
-        let result = MAP_POINT_OBJECTS.filter( mapPoint => mapPoint.id === num -1);
+    getPreviousMapPointObject(num: number): IMapPointObject {
+        let result = MAP_POINT_OBJECTS.filter(
+            (mapPoint) => mapPoint.id === num - 1
+        );
         return result[0];
-     }
-     roundDownToNearestLatVel(num: number) {
+    }
+    roundDownToNearestLatVel(num: number) {
         return Math.floor(num / VERTICAL_VELOCITY) * VERTICAL_VELOCITY;
     }
 
@@ -189,12 +221,12 @@ class CalcConstant {
     //     console.log( res)
     // }
     getTextObject(num: number) {
-        return  textObjects[num]
+        return textObjects[num];
     }
     printCalcConstant = (lat: number, vert: number, where: string) => {
         console.log(`=${where}==============`);
         console.log("OorS", this.getOorS(lat, vert));
-      
+
         console.log("========================");
         console.log("                           ");
     };

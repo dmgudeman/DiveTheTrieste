@@ -88,7 +88,7 @@ class Move {
         let zoneNum = zoneObject.id;
         let canvasNumber = getCurrentCanvas();
         this.edText.updateEdText(zoneNum, canvasNumber);
-        this.printCoordinates('IN GET MOVE')
+        this.printLateral('IN GET MOVE')
         // this.constants.printCalcConstant(this.compLat, this.compVert, "IN MOVE getMove")
     };
 
@@ -280,6 +280,15 @@ class Move {
         console.log("mapPointObjectName", this.mapPointObject.name);
         console.log("==============");
     };
+
+    printLateral = (where: string) => {
+        console.log(`${where}`);
+        console.log("COMPLAT", this.compLat);
+        console.log('WIDTH', WIDTH);
+        console.log("mapPointObjectName", this.mapPointObject.name);
+        console.log("==============");
+
+    }
 
     moveOceanRight = (vel: number) => {
         this.ocean.setX(this.ocean.getX() - vel);

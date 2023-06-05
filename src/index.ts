@@ -27,15 +27,15 @@ document.addEventListener("DOMContentLoaded", () => {
     window.addEventListener('resize', function() {
      WIDTH = visualViewport.width * 2; // width of canvases
      HEIGHT = visualViewport.height * 2.05; 
-        console.log('=======================')
-        console.log('WIDTH', WIDTH)
-        console.log('window width is ' + window.innerWidth);
-        console.log('viewport width is ' + window.visualViewport.width);
-        console.log('--------------------')
-        console.log('HEIGHT', HEIGHT)
-        console.log('window height is ' + window.innerHeight);
-        console.log('viewport height is ' + window.visualViewport.height);
-        console.log('=======================')
+        // console.log('=======================')
+        // console.log('WIDTH', WIDTH)
+        // console.log('window width is ' + window.innerWidth);
+        // console.log('viewport width is ' + window.visualViewport.width);
+        // console.log('--------------------')
+        // console.log('HEIGHT', HEIGHT)
+        // console.log('window height is ' + window.innerHeight);
+        // console.log('viewport height is ' + window.visualViewport.height);
+        // console.log('=======================')
       });
 
 
