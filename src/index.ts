@@ -116,9 +116,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
   
    
-    document.addEventListener("mousedown", (e)=> {
-      showMouseAsSub(e)
-    })
+    // document.addEventListener("mousedown", (e)=> {
+    //   showMouseAsSub(e)
+    // })
 
     gitHubButton.addEventListener("click", () => {
         window.location.href = "https://github.com/dmgudeman";

@@ -43,16 +43,6 @@ export const DIST_CA_TO_TRENCH = 6000; //miles
 export const LAT_VELOCITY = 20;
 export const VERTICAL_VELOCITY = 20;
 
-//lateral for setting depths for movement
-export const INITIAL_LAT = 80;
-export const INITIAL_DEPTH = 25;
-export const SLOPE_LAT = 190;
-export const SLOPE_DEPTH = 300;
-export const SHELF_DEPTH = DEPTH_CONT_SHELF;
-export const TRENCH_TOP = 500;
-export const TRENCH_DEPTH = OCEAN_BOTTOM;
-export const LEFT_EDGE_TRENCH = 1400;
-export const RIGHT_EDGE_TRENCH = 1800;
 
 //vertical for messages and images
 export const B_P_BARRIER = 200;
@@ -61,9 +51,7 @@ export const E_D_BARRIER = SURFACE + 200;
 export const D_A_BARRIER = SURFACE + 500;   // dysphotic_aphotic_barrier
 export const APHOTIC_BENTHIC_BARRIER = OCEAN_BOTTOM - 400;
 
-// OBJECT option values
-export const OCEAN_DEPTH_LIMIT: number = 820;
-export let OCEAN_LAT_LIMIT: number  = null;
+
 
 
 // flags

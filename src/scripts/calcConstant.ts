@@ -16,35 +16,30 @@ import {
     MAP_POINT_OBJECTS,
 } from "./constants";
 import {
-    LatMoveLimit,
-    DepthObject,
     ITextObject,
     IMapPointObject,
 } from "./types";
 import InitialValues from "./initialValues";
+import CalcPosition from "./calcPosition";
 
 
 class CalcConstant {
     private initialValues: InitialValues;
+    private calcPosition: CalcPosition
     private width: number;
     private height: number;
     private textObjects: ITextObject[];
 
     constructor() {
         this.initialValues = InitialValues.getInstance();
+        this.calcPosition = new CalcPosition();
         this.width = WIDTH;
         this.height = HEIGHT;
         this.textObjects = textObjects;
         
     }
 
-    getOceanLatLimit() {
-        return this.roundDownToNearestLatVel(this.width * -0.45);
-    }
-   
-    getOceanVertLimit() {
-        return this.roundDownToNearestVertVel(this.height * -0.55);
-    }
+
 
   
 
@@ -137,41 +132,19 @@ class CalcConstant {
     }
 
     getOorS(lat: number, vert: number): string[] {
-        if (lat >= this.getOceanLatLimit() && vert >= this.getOceanVertLimit())
+        if (lat >= this.initialValues.getOceanLatLimit() && vert >= this.initialValues.getOceanVertLimit())
             return ["O", "O"];
-        if (lat < this.getOceanLatLimit() && vert >= this.getOceanVertLimit())
+        if (lat < this.initialValues.getOceanLatLimit() && vert >= this.initialValues.getOceanVertLimit())
             return ["S", "O"];
-        if (lat >= this.getOceanLatLimit() && vert < this.getOceanVertLimit())
+        if (lat >= this.initialValues.getOceanLatLimit() && vert < this.initialValues.getOceanVertLimit())
             return ["O", "S"];
-        if (lat < this.getOceanLatLimit() && vert < this.getOceanVertLimit())
+        if (lat < this.initialValues.getOceanLatLimit() && vert < this.initialValues.getOceanVertLimit())
             return ["S", "S"];
     }
 
-    // _calcDepthLimit(lat: number) {
-    //     const constants = new CalcConstant();
-    //     const depthObject: LatMoveLimit = constants.getDepthObject(lat);
-    //     if (!depthObject) return null;
-    //     let startX = depthObject.xll;
-    //     let endX = depthObject.x;
-    //     let startY = depthObject.yll;
-    //     let endY = depthObject.y;
-    //     let x = lat;
-    //     if (depthObject.id === 0) return 21;
-    //     if (startX === endX) {
-    //         // handles vertical line
-    //         endX = endX + 1;
-    //     }
-    //     const slope = (endY - startY) / (endX - startX);
-    //     const yIntercept = startY - slope * startX;
-    //     const y = slope * x + yIntercept;
-    //     let ans = Math.floor(y / VERTICAL_VELOCITY) * VERTICAL_VELOCITY; // round down to the nearest velocity
-    //     return ans;
-    // }
-    _calcDepthLimit2(lat: number) {
-        const constants = new CalcConstant();
-
-        console.log('LATTTTTTT', lat)
-        const index = constants.getMapPointObject(lat).id;
+    _calcDepthLimit2() {
+        let lat =  this.calcPosition.getCompLat();
+        const index = this.getMapPointObject(lat).id;
         const mapPointObject: IMapPointObject = MAP_POINT_OBJECTS[index];
         if (!mapPointObject) return null;
         const nextMapPointObject: IMapPointObject =
@@ -212,22 +185,9 @@ class CalcConstant {
         return Math.floor(num / VERTICAL_VELOCITY) * VERTICAL_VELOCITY;
     }
 
-    // to calculate ratios lateer
-    // calcX() {
-    //     let lats  = [120,520,660,760,840,940,1040,1140,1240,1460,1620,2160,]
-    //     let res = lats.map(el =>(el/ 3084).toFixed(3));
-    //     console.log( res)
-    // }
     getTextObject(num: number) {
         return textObjects[num];
     }
-    printCalcConstant = (lat: number, vert: number, where: string) => {
-        console.log(`=${where}==============`);
-        console.log("OorS", this.getOorS(lat, vert));
-
-        console.log("========================");
-        console.log("                           ");
-    };
 }
 
 export default CalcConstant;
