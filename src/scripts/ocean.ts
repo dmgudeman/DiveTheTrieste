@@ -1,5 +1,6 @@
 import { WIDTH, HEIGHT } from "../index";
 import { LAT_VELOCITY, VERTICAL_VELOCITY } from "./constants";
+import {eventBus} from './eventBus';
 
 class Ocean {
     private static instance: Ocean;
@@ -91,6 +92,7 @@ class Ocean {
 
     public setX(x: number): void {
         this.x = x;
+        this.updateX
     }
     public getY(): number {
         return this.y;
@@ -149,6 +151,10 @@ class Ocean {
     public zeroVelDown(): void {
         this.velDown = 0;
     }
+    private updateX() {
+        eventBus.emit('oceanX CHANGED', { x: this.x});
+      }
+    
 
 }
 export default Ocean;
