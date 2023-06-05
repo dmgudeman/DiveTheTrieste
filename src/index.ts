@@ -96,6 +96,7 @@ document.addEventListener("DOMContentLoaded", () => {
     let cockpit = new Cockpit({ ctx: ctx3, sub, ocean });
     globalCockpit.cockpit = cockpit;
     let key = new Keymaster();
+
   
    
     document.addEventListener("mousedown", (e)=> {

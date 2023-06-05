@@ -35,7 +35,10 @@ class Zone {
         this.oldFlag = null;
         eventBus.on('oceanXChanged', this.handleOceanXChange);
     }
-
+    handleOceanXChange = (newX: number) => {
+        // Do something in response to the change in the Sub's x coordinate
+        console.log('this is in Zone', newX);
+      }
     upDateZoneObject():ITextObject{ 
         this.varDepth = this.calcConstants._calcDepthLimit2(this.lat)
         this.flag = this.calcConstants._getZone(this.vert, this.varDepth);

@@ -24,6 +24,7 @@ import {
     IMapPointObject,
 } from "./types";
 
+
 class CalcConstant {
     private width: number;
     private height: number;
@@ -33,6 +34,7 @@ class CalcConstant {
         this.width = WIDTH;
         this.height = HEIGHT;
         this.textObjects = textObjects;
+        
     }
 
     setInitialPoint() {

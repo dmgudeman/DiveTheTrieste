@@ -15,12 +15,14 @@ import EdText from "./edText";
 import Zone from "./zone";
 import { getCurrentCanvas, setHitBottomFlag } from "./constants";
 import { eventBus } from "./eventBus";
+import CalcPosition from "./calcPosition";
 
 class Move {
     private ocean: Ocean;
     private sub: Sub;
     private dir: string;
     private constants: CalcConstant;
+    private calcPosition: CalcPosition
     private oceanLatLimit: number;
     private oceanVertLimit: number;
     private fullLatLimit: number;
@@ -40,6 +42,7 @@ class Move {
         this.sub = sub;
         this.dir = dir || null;
         this.constants = new CalcConstant() || null;
+        this.calcPosition = new CalcPosition()
         this.oceanLatLimit = this.constants.getOceanLatLimit() ?? null;
         this.oceanVertLimit = this.constants.getOceanVertLimit() ?? null;
         this.fullLatLimit = this.constants.getFullLatLimit() ?? null;
