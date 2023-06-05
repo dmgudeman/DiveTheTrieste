@@ -1,4 +1,5 @@
-import { WIDTH, HEIGHT } from "../index";
+import { WIDTH, HEIGHT,   INITIAL_Y_POSITION,
+    SUB_INITIAL_LAT_POS, } from "../index";
 import {
     EUPHOTIC_PELAGIC,
     EUPHOTIC_BENTHIC,
@@ -6,13 +7,11 @@ import {
     DYSPHOTIC_BENTHIC,
     APHOTIC_PELAGIC,
     APHOTIC_BENTHIC,
-    INITIAL_Y_POSITION,
-    SUB_INITIAL_LAT_POS,
+  
 } from "./constants";
 import Ocean from "./ocean";
 import Sub from "./sub";
 import {
-    FULL_LAT_LIMIT,
     VERTICAL_VELOCITY,
     textObjects,
     MAP_POINT_OBJECTS,
@@ -37,11 +36,6 @@ class CalcConstant {
         
     }
 
-    setInitialPoint() {
-        const result = [];
-        // result[0] =
-    }
-
     getOceanLatLimit() {
         return this.roundDownToNearestLatVel(this.width * -0.45);
     }
@@ -50,6 +44,13 @@ class CalcConstant {
     }
     getOceanVertLimit() {
         return this.roundDownToNearestVertVel(this.height * -0.55);
+    }
+
+    getInitial_X() {
+        return this.roundDownToNearestLatVel(this.width * 0.2604);
+    }
+    getInitial_Y() {
+        return this.roundDownToNearestVertVel(this.height * 0.0259);
     }
 
     _getCompLat(ocean: Ocean, sub: Sub) {
@@ -175,6 +176,8 @@ class CalcConstant {
     // }
     _calcDepthLimit2(lat: number) {
         const constants = new CalcConstant();
+
+        console.log('LATTTTTTT', lat)
         const index = constants.getMapPointObject(lat).id;
         const mapPointObject: IMapPointObject = MAP_POINT_OBJECTS[index];
         if (!mapPointObject) return null;

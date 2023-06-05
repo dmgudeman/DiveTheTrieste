@@ -2,8 +2,10 @@
 // canvas2 is the opening page
 // canvas3 is the cockpit
 
-import {WIDTH, HEIGHT} from '../index';
-import { LatMoveLimit, DepthObject, ITextObject, IMapPointObject } from './types';
+import {WIDTH, HEIGHT, SUB_INITIAL_LAT_POS, INITIAL_Y_POSITION, FULL_LAT_LIMIT, FULL_VERTICAL_LIMIT } from '../index';
+import { LatMoveLimit, DepthObject, ITextObject, IMapPointObject} from './types';
+import CalcConstant from './calcConstant';
+import { callbackify } from 'util';
 
 export const stopMessageAnimation = {
     messFlag: true
@@ -25,7 +27,7 @@ export const stopMessageAnimation = {
       _HIT_BOTTOM_FLAG = value;
   }
 
-
+const calcConstant = new CalcConstant();
 
 // values
 export const SURFACE = 100;
@@ -60,10 +62,7 @@ export const APHOTIC_BENTHIC_BARRIER = OCEAN_BOTTOM - 400;
 // OBJECT option values
 export const OCEAN_DEPTH_LIMIT: number = 820;
 export let OCEAN_LAT_LIMIT: number  = null;
-export const FULL_LAT_LIMIT: number = -2200;
-export const FULL_VERTICAL_LIMIT: number = -(HEIGHT + 100); // need to fix this
-export const INITIAL_Y_POSITION: number = 80; // for both objects
-export const SUB_INITIAL_LAT_POS: number = 899 // should be 0.2604 * width
+
 
 // flags
 export const STOP_OCEAN_LAT = 'stop_ocean_lateral';

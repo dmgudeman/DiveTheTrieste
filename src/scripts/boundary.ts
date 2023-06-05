@@ -1,5 +1,5 @@
-import { INITIAL_Y_POSITION, SEA_DEPTH, SUB_INITIAL_LAT_POS, DIST_CA_TO_TRENCH } from "./constants";
-import { HEIGHT } from "../index";
+import { SEA_DEPTH,  DIST_CA_TO_TRENCH } from "./constants";
+import { HEIGHT, SUB_INITIAL_LAT_POS, INITIAL_Y_POSITION,  } from "../index";
 import Ocean from './ocean';
 import Sub from './sub';
 import CalcConstant from "./calcConstant";

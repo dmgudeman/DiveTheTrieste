@@ -1,12 +1,10 @@
+import { LAT_VELOCITY, VERTICAL_VELOCITY } from "./constants";
 import {
+    WIDTH,
+    HEIGHT,
     INITIAL_Y_POSITION,
-    LAT_VELOCITY,
-    VERTICAL_VELOCITY,
     SUB_INITIAL_LAT_POS,
-   
-
-} from "./constants";
-import{WIDTH, HEIGHT} from '../index';
+} from "../index";
 import Ocean from "./ocean";
 import Sub from "./sub";
 import { IMapPointObject } from "./types";
@@ -22,7 +20,7 @@ class Move {
     private sub: Sub;
     private dir: string;
     private constants: CalcConstant;
-    private calcPosition: CalcPosition
+    private calcPosition: CalcPosition;
     private oceanLatLimit: number;
     private oceanVertLimit: number;
     private fullLatLimit: number;
@@ -42,7 +40,7 @@ class Move {
         this.sub = sub;
         this.dir = dir || null;
         this.constants = new CalcConstant() || null;
-        this.calcPosition = new CalcPosition()
+        this.calcPosition = new CalcPosition();
         this.oceanLatLimit = this.constants.getOceanLatLimit() ?? null;
         this.oceanVertLimit = this.constants.getOceanVertLimit() ?? null;
         this.fullLatLimit = this.constants.getFullLatLimit() ?? null;
@@ -50,7 +48,8 @@ class Move {
             this.ocean.getX() - this.sub.getX() + SUB_INITIAL_LAT_POS ?? null;
         this.compVert =
             this.ocean.getY() - this.sub.getY() + INITIAL_Y_POSITION ?? null;
-        this.mapPointObject = this.constants.getMapPointObject(this.compLat) || null;
+        this.mapPointObject =
+            this.constants.getMapPointObject(this.compLat) || null;
         this.varDepth = this.constants._calcDepthLimit2(this.compLat) || null;
         this.OorS = this.constants.getOorS(this.compLat, this.compVert) || null;
         this.increaseVelFlag = "";
@@ -78,7 +77,7 @@ class Move {
         this.setDir(dir);
         this.upDateCoordinates();
         this.checkToIncreaseVel(dir);
-        if (this.compVert <= this.varDepth -1) {
+        if (this.compVert <= this.varDepth - 1) {
             setHitBottomFlag(true);
             this.configureHitBottomMove(dir);
         } else {
@@ -92,8 +91,11 @@ class Move {
         let zoneNum = zoneObject.id;
         let canvasNumber = getCurrentCanvas();
         this.edText.updateEdText(zoneNum, canvasNumber);
-        this.printLateral('IN GET MOVE')
-        console.log('Complat from calcPostion in MOVE)', this.calcPosition.getCompLat());
+        this.printLateral("IN GET MOVE");
+        console.log(
+            "Complat from calcPostion in MOVE)",
+            this.calcPosition.getCompLat()
+        );
         // this.constants.printCalcConstant(this.compLat, this.compVert, "IN MOVE getMove")
     };
 
@@ -260,9 +262,9 @@ class Move {
 
     printCoordinates = (where: string) => {
         console.log(`=${where}==============`);
-        console.log('WIDTH', WIDTH);
-        console.log('HEiGHT', HEIGHT);
-        console.log('viewport.width', visualViewport.width);
+        console.log("WIDTH", WIDTH);
+        console.log("HEiGHT", HEIGHT);
+        console.log("viewport.width", visualViewport.width);
         console.log("OorS", this.OorS);
         console.log("COMP LAT VERT", this.compLat, this.compVert);
         console.log("OCEAN VERT LIMIT", this.oceanVertLimit);
@@ -289,11 +291,10 @@ class Move {
     printLateral = (where: string) => {
         console.log(`${where}`);
         console.log("COMPLAT", this.compLat);
-        console.log('WIDTH', WIDTH);
+        console.log("WIDTH", WIDTH);
         console.log("mapPointObjectName", this.mapPointObject.name);
         console.log("==============");
-
-    }
+    };
 
     moveOceanRight = (vel: number) => {
         console.log("this fired");

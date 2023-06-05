@@ -1,11 +1,11 @@
 import {
-    INITIAL_Y_POSITION,
-    SUB_INITIAL_LAT_POS,
+  
+   
     LAT_VELOCITY,
     VERTICAL_VELOCITY,
     getHitBottomFlag,
 } from "./constants";
-import { WIDTH, HEIGHT } from "../index";
+import { WIDTH, HEIGHT,   INITIAL_Y_POSITION,  SUB_INITIAL_LAT_POS} from "../index";
 import { ISprite } from "./types";
 import {
     sprites,
