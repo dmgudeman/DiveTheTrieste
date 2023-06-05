@@ -54,7 +54,7 @@ export function showLat() : number {
 
 export function showZone():string {
     const zone = new Zone();
-    console.log('zoneObject.id in BOUNDARY', zone.upDateZoneObject().id)
+    // console.log('zoneObject.id in BOUNDARY', zone.upDateZoneObject().id)
     const title = zone.upDateZoneObject().title;
     const IPZoneGauge = document.getElementById("IPZoneGauge");
     IPZoneGauge.innerHTML = `${title}`;

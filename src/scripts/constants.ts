@@ -81,13 +81,13 @@ const MP_12 :number[] = [ -1840, -1560 ];
 const MP_13 :number[] = [ -2040, -480 ];
 const MP_14 :number[] = [ -initialValues.getFullLatLimit(), -initialValues.getFullVertLimit()];
 const MP_15 :number[] = [ -initialValues.getWidth(), -initialValues.getHeight()];
-const MP_16 :number[]  = [ -initialValues.getWidth(), -initialValues.getHeight()];
+const MP_16 :number[] = [ -initialValues.getWidth(), -initialValues.getHeight()];
 
 export const MAP_POINTS: number[][] = [
   MP_0, MP_1, MP_2, MP_3,
   MP_4, MP_5, MP_6, MP_7,
   MP_8, MP_9, MP_10, MP_11,
-  MP_12, MP_13, MP_14, MP_15,
+  MP_12, MP_13, MP_14, MP_15, MP_16
 ]
 
 const MULT_MP_0 :number[] = [ 0, 0 ];
@@ -109,7 +109,12 @@ const MULT_MP_14 :number[] = [ -0.5729, - 1];
 const MULT_MP_15 :number[] = [ -1, -1];
 const MULT_MP_16 :number[] = [ -1, -1];
 
-
+export const MAP_POINT_COEFFS: number[][] =[
+  MULT_MP_0, MULT_MP_1, MULT_MP_2, MULT_MP_3,
+  MULT_MP_4, MULT_MP_5, MULT_MP_6, MULT_MP_7,
+  MULT_MP_8, MULT_MP_9, MULT_MP_10, MULT_MP_11,
+  MULT_MP_12, MULT_MP_13, MULT_MP_14, MULT_MP_15, MULT_MP_16
+]
 
 export const MAP_POINT_OBJECTS: IMapPointObject[] = [  // the x, xll, y, yll are for slope, the mvmt are to control movement when hit bottom
   {'id':0, 'name':'OOB_LEFT',         'point': MP_0,   mvmtLat: 'right', 'coeff': MULT_MP_0 },
@@ -130,31 +135,6 @@ export const MAP_POINT_OBJECTS: IMapPointObject[] = [  // the x, xll, y, yll are
   {'id':15, 'name':'OOB_RIGHT',       'point': MP_15,  mvmtLat: 'left',  'coeff': MULT_MP_15 },
   {'id':16, 'name':'OOB_RIGHT_2',     'point': MP_16,  mvmtLat: 'left',  'coeff': MULT_MP_16 },
 ]
-
-
-// export const LAT_LIMITS_EXT: DepthObject[] = [  // the x, xll, y, yll are for slope, the mvmt are to control movement when hit bottom
-//   {'id':0, 'name':'OOB_LEFT',         x: -0,    xll: -0,    y: -0,    yll: -0,    mvmtLat: 'right'},
-//   {'id':1, 'name':'INITIAL_POSITION', x: -0,    xll: -0,    y: -0,    yll: -0,    mvmtLat: 'right'},
-//   {'id':2, 'name':'SLOPE_LIMIT',      x: -180,  xll: -1,    y: -400,  yll: -1,    mvmtLat: 'right'},
-//   {'id':3, 'name':'START_BUMP',       x: -630,  xll: -181,  y: -475,  yll: -401,  mvmtLat: 'left'}, 
-//   {'id':4, 'name':'BUMP_PEAK',        x: -720,  xll: -631,  y: -380,  yll: -476,  mvmtLat: 'both'},
-//   {'id':5, 'name':'END_BUMP',         x: -800,  xll: -721,  y: -485,  yll: -381,  mvmtLat: 'right'},
-//   {'id':6, 'name':'START_DBL',        x: -840,  xll: -801,  y: -460,  yll: -486,  mvmtLat: 'right'},
-//   {'id':7, 'name':'DBL_PEAK_1',       x: -980,  xll: -841,  y: -200,  yll: -461,  mvmtLat: 'left'},
-//   {'id':8, 'name':'DBL_PEAK_2',       x: -1120, xll: -981,  y: -240,  yll: -199,  mvmtLat: 'both'},
-//   {'id':9, 'name':'END_DBL',          x: -1180, xll: -1121, y: -450,  yll: -239,  mvmtLat: 'right'},
-//   {'id':10, 'name':'START_TRENCH',    x: -1320, xll: -1181, y: -500,  yll: -451,  mvmtLat: 'right'},
-//   {'id':11,'name':'TRENCH_BOTTOM_L',  x: -1520, xll: -1321, y: -1560, yll: -501,  mvmtLat: 'right'},
-//   {'id':12,'name':'TRENCH_BOTTOM_R',  x: -1640, xll: -1521, y: -1560, yll: -501,  mvmtLat: 'both'},
-//   {'id':13, 'name':'END_TRENCH',      x: -1740, xll: -1641, y: -480,  yll: -1561, mvmtLat: 'left'},
-//   {'id':14, 'name':'END_POSITION',    x: -2200, xll: -1741, y: -485,  yll: -481,  mvmtLat: 'left'},
-//   {'id':15, 'name':'OOB_RIGHT',       x: -WIDTH, xll: -2201, y: -485, yll: -486,  mvmtLat: 'left'}
-// ]
-
-
-
-
-
 
 
 export const textObjects: ITextObject[] = [

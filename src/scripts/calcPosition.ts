@@ -27,26 +27,26 @@ class CalcPosition {
     }
 
     handleOceanXChange = (newX: number) => {
-        console.log("this is in CALC POS newX", newX);
+        // console.log("this is in CALC POS newX", newX);
         this.oceanLat = newX ;
         this.compLat = this.oceanLat - this.subLat + this.initialValues.getInitial_X()
         console.log('this.compLat Ocean CALCPOS', this.compLat);
     };
 
     handleSubXChange = (newX: number) => {
-        console.log("this is in Zone", newX);
+        // console.log("this is in Zone", newX);
         this.compLat += newX;
         console.log('this.compLat sub CALCPOS', this.compLat)
     };
     handleOceanYChange = (newY: number) => {
-        console.log("this is in Zone", newY);
+        console.log("this is in CALCPOS", newY);
         this.oceanVert = newY ;
         this.compVert = this.oceanVert - this.subVert + this.initialValues.getInitial_Y()
         console.log('this.compVert Ocean CALCPOS', this.compVert);
     };
 
     handleSubYChange = (newY: number) => {
-        console.log("this is in Zone", newY);
+        console.log("this is in CALCPOS", newY);
         this.compVert += newY;
         console.log('this.compVert sub CALCPOS', this.compVert)
     };

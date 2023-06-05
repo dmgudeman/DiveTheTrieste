@@ -52,7 +52,7 @@ class InitialValues {
         return this.roundDownToNearestLatVel(this.width * 0.2604);
     }
     getInitial_Y() {
-        return this.roundDownToNearestVertVel(this.height * 0.0259);
+        return this.roundDownToNearestVertVel(this.height * 0.04028);
     }
 
     getOceanLatLimit() {

@@ -93,7 +93,13 @@ class CalcConstant {
                 }
             }
             console.log("====RESULT======");
-            console.log(result);
+            console.log('INITIAL X', this.initialValues.getInitial_X())
+            console.log('INITAIL Y',  this.initialValues.getInitial_Y())
+            console.log('LATTTT', this.calcPosition.getCompLat())
+            console.log('VVVVVERT', this.calcPosition.getCompVert())
+            console.log(result.name);
+            console.log('point[1]', result.point[1], 'coeff[1]', result.coeff[1])
+            console.log('point[0]', result.point[0], 'coeff[0]', result.coeff[0])
             console.log("====++++======");
             return result;
         } catch (error) {
@@ -183,7 +189,7 @@ class CalcConstant {
     }
     
     setCoeffOnMapPoinObjects() {
-        
+
     }
 }
 
