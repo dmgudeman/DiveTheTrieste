@@ -116,25 +116,30 @@ class Move {
     }
 
     private getVerticalMove() {
-        // console.log("AAAAAAAAA");
+        console.log('VERT', this.calcPosition.getCompVert())
+        console.log('OCEAN LIMIT', this.initialValues.getOceanVertLimit())
+        console.log('VARDEPTH' , this.calcConstant._calcDepthLimit2())
+        console.log("AAAAAAAAA");
+        console.log('AAAAAAAAA', this.calcConstant.getOorS())
+      
         let oorS = this.calcConstant.getOorS();
         if (oorS[1] == "O") {
             
             this.sub.setY(this.sub.getInitialVertPos()); // reset sub to assure accuracy at transition S to O on way up
             if (this.calcPosition.getCompVert() > 0) {
                 // move down no matter what if above surface
-                // console.log("BBBBBBBBB");
+                console.log("BBBBBBBBB");
                 this.moveOceanDown(this.vertVel);
             } else if (this.calcPosition.getCompVert() > -VERTICAL_VELOCITY) {
                 // stop one vertical vel upon rising
                 if (this.dir === "down") {
-                    // console.log("CCCCCCCCC");
+                    console.log("CCCCCCCCC");
                     this.moveOceanDown(this.vertVel);
                 }
             } else if (this.calcPosition.getCompVert() > this.varDepth) {
                 // normal
                 if (this.dir === "down") {
-                    // console.log("DDDDDDDD");
+                    console.log("DDDDDDDD");
                     this.moveOceanDown(this.vertVel);
                 } else if (this.dir === "up") {
                     // console.log("EEEEEEEEE");

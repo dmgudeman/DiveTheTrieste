@@ -8,7 +8,7 @@ import InitialValues from "./initialValues";
 import { eventBus } from "./eventBus";
 import CalcPosition from "./calcPosition";
 
-const calcPosition = new CalcPosition()
+const calcPosition = CalcPosition.getInstance();
 // const ocean = Ocean.getInstance();
 // const sub = Sub.getInstance();
 const initialValues = InitialValues.getInstance();
@@ -40,11 +40,11 @@ export function showDepth() {
     }
     if (depth < 0) depth = 0;
     let tempDepth = calcPosition.getCompVert()
-    console.log('BOUNDARY 88888');
-    console.log('height initialValues', initialValues.getHeight())
-    console.log('LOCAL VERT', composite);
-    console.log('CALC POS VERT', calcPosition.getCompVert())
-    console.log('88888888888')
+    // console.log('BOUNDARY 88888');
+    // console.log('height initialValues', initialValues.getHeight())
+    // console.log('LOCAL VERT', composite);
+    // console.log('CALC POS VERT', calcPosition.getCompVert())
+    // console.log('88888888888')
     const depthGauge = document.getElementById("depth");
     const IPDepthGauge = document.getElementById("IPDepthGauge");
     depthGauge.innerHTML = `Depth: ${Math.floor(tempDepth)} feet`;

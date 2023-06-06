@@ -115,7 +115,7 @@ document.addEventListener("DOMContentLoaded", () => {
     globalCockpit.cockpit = cockpit;
     let key = new Keymaster();
 
-    new CalcPosition();
+    CalcPosition.getInstance();
   
    
     // document.addEventListener("mousedown", (e)=> {
