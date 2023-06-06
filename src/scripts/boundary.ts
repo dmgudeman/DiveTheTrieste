@@ -5,7 +5,10 @@ import Sub from './sub';
 import CalcConstant from "./calcConstant";
 import Zone from "./zone";
 import InitialValues from "./initialValues";
+import { eventBus } from "./eventBus";
+import CalcPosition from "./calcPosition";
 
+const calcPosition = new CalcPosition()
 // const ocean = Ocean.getInstance();
 // const sub = Sub.getInstance();
 const initialValues = InitialValues.getInstance();
@@ -17,11 +20,17 @@ export  function showMouseAsSub(event) {
   }
 
 export function showDepth() {
+    // eventBus.on("oceanXChanged", this.handleOceanXChange);
+    // eventBus.on("subXChanged", this.handleSubXChange);
+    // eventBus.on("oceanYChanged", this.handleOceanYChange);
+    // eventBus.on("subYChanged", this.handleSubYChange);
+
     const ocean = Ocean.getInstance();
     const sub = Sub.getInstance();
     const conversion = SEA_DEPTH / HEIGHT; // 19.64 feet per pixel
     const conversionShallow = 2; // 2 feet per pixel
     let composite = Math.abs(ocean.getY() - sub.getY() + initialValues.getInitial_Y());
+  
     let depth: number;
 
     if (composite < 500) {
@@ -30,9 +39,15 @@ export function showDepth() {
         depth = Math.floor(conversion * composite);
     }
     if (depth < 0) depth = 0;
+    let tempDepth = calcPosition.getCompVert()
+    console.log('BOUNDARY 88888');
+    console.log('height initialValues', initialValues.getHeight())
+    console.log('LOCAL VERT', composite);
+    console.log('CALC POS VERT', calcPosition.getCompVert())
+    console.log('88888888888')
     const depthGauge = document.getElementById("depth");
     const IPDepthGauge = document.getElementById("IPDepthGauge");
-    depthGauge.innerHTML = `Depth: ${depth} feet`;
+    depthGauge.innerHTML = `Depth: ${Math.floor(tempDepth)} feet`;
     IPDepthGauge.innerHTML = `Depth: ${depth} ft`;
     return depth;
 }

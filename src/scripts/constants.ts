@@ -3,7 +3,7 @@
 // canvas3 is the cockpit
 
 
-import { LatMoveLimit, DepthObject, ITextObject, IMapPointObject} from './types';
+import { LatMoveLimit, DepthObject, ITextObject, IMapPointObject, IMP} from './types';
 import CalcConstant from './calcConstant';
 import { callbackify } from 'util';
 import InitialValues from './initialValues';
@@ -64,49 +64,71 @@ export const DYSPHOTIC_BENTHIC: number = 3;
 export const APHOTIC_PELAGIC: number = 4;
 export const APHOTIC_BENTHIC: number = 5;
 
+const OOB_LEFT = 'OOB_LEFT';
+const INITIAL_POSITION = 'INITIAL_POSITION';
+const SLOPE_LIMIT = 'SLOPE_LIMIT';
+const START_BUMP = 'START_BUMP';
+const BUMP_PEAK = 'BUMP_PEAK';
+const END_BUMP = 'END_BUMP';
+const START_DBL = 'START_DBL';
+const DBL_PEAK_1 = 'DBL_PEAK_1';
+const DBL_PEAK_2 = 'DBL_PEAK_2';
+const END_DBL = 'END_DBL';
+const START_TRENCH = 'START_TRENCH';
+const TRENCH_BOTTOM_L = 'TRENCH_BOTTOM_L';
+const TRENCH_BOTTOM_R = 'TRENCH_BOTTOM_R';
+const END_TRENCH = 'END_TRENCH'
+const END_POSITION = 'END_POSITION';
+const OOB_RIGHT = 'OOB_RIGHT';
+const OOB_RIGHT_2 = 'OOB_RIGHT_2';
 
-const MP_0 :number[] = [ initialValues.getInitial_X(),  initialValues.getInitial_Y() ];
-const MP_1 :number[] = [ 0, 0];
-const MP_2 :number[] = [ -180, -460 ];
-const MP_3 :number[] = [ -460, -540 ];
-const MP_4 :number[] = [ -860, -380 ];
-const MP_5 :number[] = [ -980, -485 ];
-const MP_6 :number[] = [ -1060, -460 ];
-const MP_7 :number[] = [ -1180, -200 ];
-const MP_8 :number[] = [ -1320, -240 ];
-const MP_9 :number[] = [ -1400, -450 ];
-const MP_10 :number[] = [ -1580, -500 ];
-const MP_11 :number[] = [ -1720, -1560 ];
-const MP_12 :number[] = [ -1840, -1560 ];
-const MP_13 :number[] = [ -2040, -480 ];
-const MP_14 :number[] = [ -initialValues.getFullLatLimit(), -initialValues.getFullVertLimit()];
-const MP_15 :number[] = [ -initialValues.getWidth(), -initialValues.getHeight()];
-const MP_16 :number[] = [ -initialValues.getWidth(), -initialValues.getHeight()];
 
-export const MAP_POINTS: number[][] = [
+// these update the constants in calConstant
+const MP_0 :IMP = [0,  0, OOB_LEFT ];
+const MP_1 :IMP = [ 0, 0, INITIAL_POSITION];      // lateral based on width 3840    
+const MP_2 :IMP = [ -180, -461, SLOPE_LIMIT ];    // vertical based on height of 1986
+const MP_3 :IMP = [ -460, -520, START_BUMP ];    
+const MP_4 :IMP = [ -860, -420, BUMP_PEAK ];    
+const MP_5 :IMP = [ -980, -520, END_BUMP ];    
+const MP_6 :IMP = [ -1060, -520, START_DBL ];  
+const MP_7 :IMP = [ -1180, -220, DBL_PEAK_1 ];
+const MP_8 :IMP = [ -1320, -240, DBL_PEAK_2 ];
+const MP_9 :IMP = [ -1400, -481, END_DBL ];
+const MP_10 :IMP = [ -1580, -520, START_TRENCH ];
+const MP_11 :IMP = [ -1720, -1760, TRENCH_BOTTOM_L ];
+const MP_12 :IMP = [ -1840, -1760, TRENCH_BOTTOM_R];
+const MP_13 :IMP = [ -2040, -520, END_TRENCH];
+const MP_14 :IMP = [ -2488, -520, END_POSITION];
+const MP_15 :IMP = [ -3840, -520, OOB_RIGHT];
+const MP_16 :IMP = [ -3840, -520, OOB_RIGHT_2];
+
+export const MAP_POINTS: IMP[] = [
   MP_0, MP_1, MP_2, MP_3,
   MP_4, MP_5, MP_6, MP_7,
   MP_8, MP_9, MP_10, MP_11,
   MP_12, MP_13, MP_14, MP_15, MP_16
 ]
 
+// lateral based on width 3840    
+// vertical based on height of 1986
+// these get updated in calcConstants  so no longer used
 const MULT_MP_0 :number[] = [ 0, 0 ];
 const MULT_MP_1 :number[] = [ 0, 0 ];
-const MULT_MP_2 :number[] = [ -0.0468, -0.2164 ];
-const MULT_MP_3 :number[] = [ -0.1823, -1 ];
-const MULT_MP_4 :number[] = [ -0.2239, -1 ];
-const MULT_MP_5 :number[] = [ -0.2552, -1 ];
-const MULT_MP_6 :number[] = [ -0.2781, -1 ];
-const MULT_MP_7 :number[] = [ -0.3021, -1];
-const MULT_MP_8 :number[] = [ -0.34375, -1];
-const MULT_MP_9 :number[] = [ -0.3646, -1];
-const MULT_MP_10 :number[] = [ -0.4115, -1];
-const MULT_MP_11 :number[] = [ -0.4479, -1];
-const MULT_MP_12 :number[] = [ -0.4791, -1];
-const MULT_MP_13 :number[] = [ -0.5312, -1];
-const MULT_MP_14 :number[] = [ -0.5729, - 1];
-const MULT_MP_15 :number[] = [ -1, -1];
-const MULT_MP_16 :number[] = [ -1, -1];
+const MULT_MP_2 :number[] = [ -0.0468, -0.2164 ];// lateral based on width 3840    
+const MULT_MP_3 :number[] = [ -0.1823, -0.2618 ];// vertical based on height of 1986
+const MULT_MP_4 :number[] = [ -0.2239, -0.2115 ];
+const MULT_MP_5 :number[] = [ -0.2552, -0.2618 ];
+const MULT_MP_6 :number[] = [ -0.2781, -0.2618 ];
+const MULT_MP_7 :number[] = [ -0.3021, -0.1108 ];
+const MULT_MP_8 :number[] = [ -0.3437, -0.1208 ];
+const MULT_MP_9 :number[] = [ -0.3646, -0.2422 ];
+const MULT_MP_10 :number[] = [ -0.4115, -0.2618 ];
+const MULT_MP_11 :number[] = [ -0.4479, -0.8862 ];
+const MULT_MP_12 :number[] = [ -0.4791, -0.8862 ];
+const MULT_MP_13 :number[] = [ -0.5312, -0.2618 ];
+const MULT_MP_14 :number[] = [ -0.5729, -0.2618 ];
+const MULT_MP_15 :number[] = [ -1, -0.2618 ];
+const MULT_MP_16 :number[] = [ -1, -0.2618 ];
 
 export const MAP_POINT_COEFFS: number[][] =[
   MULT_MP_0, MULT_MP_1, MULT_MP_2, MULT_MP_3,
@@ -116,25 +138,26 @@ export const MAP_POINT_COEFFS: number[][] =[
 ]
 
 export const MAP_POINT_OBJECTS: IMapPointObject[] = [  // the x, xll, y, yll are for slope, the mvmt are to control movement when hit bottom
-  {'id':0, 'name':'OOB_LEFT',         'point': MP_0,   mvmtLat: 'right', 'coeff': MULT_MP_0 },
-  {'id':1, 'name':'INITIAL_POSITION', 'point': MP_1,   mvmtLat: 'right', 'coeff': MULT_MP_1 },
-  {'id':2, 'name':'SLOPE_LIMIT',      'point': MP_2,   mvmtLat: 'right', 'coeff': MULT_MP_2 },
-  {'id':3, 'name':'START_BUMP',       'point': MP_3,   mvmtLat: 'left',  'coeff': MULT_MP_3 }, 
-  {'id':4, 'name':'BUMP_PEAK',        'point': MP_4,   mvmtLat: 'both',  'coeff': MULT_MP_4 },
-  {'id':5, 'name':'END_BUMP',         'point': MP_5,   mvmtLat: 'right', 'coeff': MULT_MP_5 },
-  {'id':6, 'name':'START_DBL',        'point': MP_6,   mvmtLat: 'right', 'coeff': MULT_MP_6 },
-  {'id':7, 'name':'DBL_PEAK_1',       'point': MP_7,   mvmtLat: 'left',  'coeff': MULT_MP_7 },
-  {'id':8, 'name':'DBL_PEAK_2',       'point': MP_8,   mvmtLat: 'both',  'coeff': MULT_MP_8 },
-  {'id':9, 'name':'END_DBL',          'point': MP_9,   mvmtLat: 'right', 'coeff': MULT_MP_9 },
-  {'id':10, 'name':'START_TRENCH',    'point': MP_10,  mvmtLat: 'right', 'coeff': MULT_MP_10 },
-  {'id':11, 'name':'TRENCH_BOTTOM_L', 'point': MP_11,  mvmtLat: 'right', 'coeff': MULT_MP_11 },
-  {'id':12, 'name':'TRENCH_BOTTOM_R', 'point': MP_12,  mvmtLat: 'both',  'coeff': MULT_MP_12 },
-  {'id':13, 'name':'END_TRENCH',      'point': MP_13,  mvmtLat: 'left',  'coeff': MULT_MP_13 },
-  {'id':14, 'name':'END_POSITION',    'point': MP_14,  mvmtLat: 'left',  'coeff': MULT_MP_14 },
-  {'id':15, 'name':'OOB_RIGHT',       'point': MP_15,  mvmtLat: 'left',  'coeff': MULT_MP_15 },
-  {'id':16, 'name':'OOB_RIGHT_2',     'point': MP_16,  mvmtLat: 'left',  'coeff': MULT_MP_16 },
+  {'id':0, 'name':'OOB_LEFT',         'point': MP_0,   mvmtLat: 'right', 'coeff':[ 0, 0 ] },
+  {'id':1, 'name':'INITIAL_POSITION', 'point': MP_1,   mvmtLat: 'right', 'coeff': [ 0, 0 ] },
+  {'id':2, 'name':'SLOPE_LIMIT',      'point': MP_2,   mvmtLat: 'right', 'coeff': [ -0.0468, -0.2164 ] },
+  {'id':3, 'name':'START_BUMP',       'point': MP_3,   mvmtLat: 'left',  'coeff': [ -0.1823, -0.2618 ] }, 
+  {'id':4, 'name':'BUMP_PEAK',        'point': MP_4,   mvmtLat: 'both',  'coeff': [ -0.2239, -0.2115 ] },
+  {'id':5, 'name':'END_BUMP',         'point': MP_5,   mvmtLat: 'right', 'coeff': [ -0.2552, -0.2618 ] },
+  {'id':6, 'name':'START_DBL',        'point': MP_6,   mvmtLat: 'right', 'coeff': [ -0.2781, -0.2618 ] },
+  {'id':7, 'name':'DBL_PEAK_1',       'point': MP_7,   mvmtLat: 'left',  'coeff': [ -0.3021, -0.1108 ] },
+  {'id':8, 'name':'DBL_PEAK_2',       'point': MP_8,   mvmtLat: 'both',  'coeff': [ -0.3437, -0.1208 ] },
+  {'id':9, 'name':'END_DBL',          'point': MP_9,   mvmtLat: 'right', 'coeff': [ -0.3646, -0.2422 ] },
+  {'id':10, 'name':'START_TRENCH',    'point': MP_10,  mvmtLat: 'right', 'coeff': [ -0.4115, -0.2618 ] },
+  {'id':11, 'name':'TRENCH_BOTTOM_L', 'point': MP_11,  mvmtLat: 'right', 'coeff': [ -0.4479, -0.8862 ] },
+  {'id':12, 'name':'TRENCH_BOTTOM_R', 'point': MP_12,  mvmtLat: 'both',  'coeff': [ -0.4791, -0.8862 ] },
+  {'id':13, 'name':'END_TRENCH',      'point': MP_13,  mvmtLat: 'left',  'coeff': [ -0.5312, -0.2618 ] },
+  {'id':14, 'name':'END_POSITION',    'point': MP_14,  mvmtLat: 'left',  'coeff': [ -0.5729, -0.2618 ] },
+  {'id':15, 'name':'OOB_RIGHT',       'point': MP_15,  mvmtLat: 'left',  'coeff': [ -1, -0.2618 ] },
+  {'id':16, 'name':'OOB_RIGHT_2',     'point': MP_16,  mvmtLat: 'left',  'coeff': [ -1, -0.2618 ] },
 ]
 
+  
 
 export const textObjects: ITextObject[] = [
 {id: EUPHOTIC_PELAGIC, title: "EUPHOTIC PELAGIC", text: "The uppermost layer of the open ocean sunlight can penetrate allowing photosynthesis to occur. Flora consists of phytoplankton, microscopic plant-like organisms that harness sunlight. These microscopic plants serve as the foundation of the marine food web, providing nourishment for a wide range of organisms. They contribute significantly to global oxygen production and carbon dioxide absorption, playing a vital role in regulating the Earth's climate. Fauna includes zooplankton, small fish, squid, and jellyfish. Many species undertake vertical migrations, moving closer to the surface during the night to feed on phytoplankton and descending to deeper depths during the day to avoid predators. Larger marine animals, such as whales and dolphins, often rely on the abundant food resources found in the euphotic pelagic zone.Commercial fisheries, providing a substantial portion of the world's seafood supply. It claims a major role in carbon sequestration balancing global ecosystem. "}

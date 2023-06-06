@@ -116,9 +116,10 @@ class Move {
     }
 
     private getVerticalMove() {
+        // console.log("AAAAAAAAA");
         let oorS = this.calcConstant.getOorS();
         if (oorS[1] == "O") {
-            // console.log("AAAAAAAAA");
+            
             this.sub.setY(this.sub.getInitialVertPos()); // reset sub to assure accuracy at transition S to O on way up
             if (this.calcPosition.getCompVert() > 0) {
                 // move down no matter what if above surface
@@ -150,10 +151,7 @@ class Move {
             console.log("000000000");
             if (this.calcPosition.getCompVert() > this.initialValues.getOceanVertLimit() + VERTICAL_VELOCITY) {
                 // console.log("1111111111");
-                console.log(
-                    "this.varDepth + VERTICAL_VELOCITY ",
-                    this.varDepth + VERTICAL_VELOCITY
-                );
+        
 
                 if (this.dir === "down") {
                     this.moveSubDown();
@@ -270,7 +268,6 @@ class Move {
     };
 
     moveOceanRight = (vel: number) => {
-        console.log("this fired");
         this.ocean.setX(this.ocean.getX() - vel);
         eventBus.emit("oceanXChanged", this.ocean.getX());
     };

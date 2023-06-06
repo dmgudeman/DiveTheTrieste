@@ -43,8 +43,15 @@ export interface ITextObject {
 export interface IMapPointObject {
     id: number;
     name: string;
-    point: number[];
+    point: IMP;
     mvmtLat: string;
     coeff: number[];
 }
+
+export type IMP = [
+        number,
+        number,
+        string
+    ]
+
 
