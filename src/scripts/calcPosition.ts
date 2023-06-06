@@ -2,6 +2,7 @@ import { eventBus } from "./eventBus";
 import InitialValues from "./initialValues";
 
 class CalcPosition {
+    private static instance: CalcPosition;
     private initialValues: InitialValues;
     private compLat: number;
     private compVert: number;
@@ -12,7 +13,7 @@ class CalcPosition {
     private subLat: number;
     private subVert: number;
 
-    constructor(oceanLat?:number, oceanVert?:number, subLat?:number, subVert?:number) {
+    private constructor(oceanLat?:number, oceanVert?:number, subLat?:number, subVert?:number) {
         this.initialValues = InitialValues.getInstance();
         this.compLat =  0;
         this.compVert = 0;
@@ -28,6 +29,13 @@ class CalcPosition {
         eventBus.on("subXChanged", this.handleSubXChange);
         eventBus.on("oceanYChanged", this.handleOceanYChange);
         eventBus.on("subYChanged", this.handleSubYChange);
+    }
+
+    public static getInstance(oceanLat?:number, oceanVert?:number, subLat?:number, subVert?:number): CalcPosition {
+        if (!CalcPosition.instance) {
+            CalcPosition.instance = new CalcPosition(oceanLat, oceanVert, subLat, subVert);
+        }
+        return CalcPosition.instance;
     }
 
     handleOceanXChange = (newX: number) => {
@@ -80,7 +88,7 @@ class CalcPosition {
     }
 
     getCompVert(){
-        return this.oceanVert - this.subVert + this.initialValues.getInitial_Y()
+        return this.compVert;
     }
 }
 

@@ -35,7 +35,7 @@ class Move {
         this.sub = sub;
         this.dir = dir || null;
         this.constants = new CalcConstant() || null;
-        this.calcPosition = new CalcPosition();
+        this.calcPosition = CalcPosition.getInstance();
         this.calcConstant = new CalcConstant();
         this.initialValues = InitialValues.getInstance();
         this.mapPointObject =

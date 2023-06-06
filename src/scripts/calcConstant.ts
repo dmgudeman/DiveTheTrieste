@@ -26,7 +26,7 @@ class CalcConstant {
 
     constructor() {
         this.initialValues = InitialValues.getInstance();
-        this.calcPosition = new CalcPosition();
+        this.calcPosition = CalcPosition.getInstance();
         this.textObjects = textObjects;
     }
 
@@ -93,7 +93,6 @@ class CalcConstant {
         let lastObject: IMapPointObject
         let currentObject: IMapPointObject;
         let lat = this.calcPosition.getCompLat();
-
         try {
             for (let i = 1; i < MAP_POINT_OBJECTS.length - 1; i++) {
                 let lastMapPoints: number[] = this.calcPoint(

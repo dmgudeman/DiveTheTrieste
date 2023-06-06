@@ -13,6 +13,7 @@ import { getCursorPosition } from "./scripts/util";
 import Keymaster from "./scripts/keymaster";
 import { showMouseAsSub } from "./scripts/boundary";
 import CalcConstant from "./scripts/calcConstant";
+import CalcPosition from "./scripts/calcPosition"
 import InitialValues from "./scripts/initialValues";
 
 const calcConstant = new CalcConstant();
@@ -114,6 +115,7 @@ document.addEventListener("DOMContentLoaded", () => {
     globalCockpit.cockpit = cockpit;
     let key = new Keymaster();
 
+    new CalcPosition();
   
    
     // document.addEventListener("mousedown", (e)=> {
