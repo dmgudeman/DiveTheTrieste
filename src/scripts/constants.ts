@@ -67,8 +67,8 @@ export const APHOTIC_BENTHIC: number = 5;
 
 const MP_0 :number[] = [ initialValues.getInitial_X(),  initialValues.getInitial_Y() ];
 const MP_1 :number[] = [ 0, 0];
-const MP_2 :number[] = [ -180, -400 ];
-const MP_3 :number[] = [ -460, -475 ];
+const MP_2 :number[] = [ -180, -460 ];
+const MP_3 :number[] = [ -460, -540 ];
 const MP_4 :number[] = [ -860, -380 ];
 const MP_5 :number[] = [ -980, -485 ];
 const MP_6 :number[] = [ -1060, -460 ];
@@ -92,7 +92,7 @@ export const MAP_POINTS: number[][] = [
 
 const MULT_MP_0 :number[] = [ 0, 0 ];
 const MULT_MP_1 :number[] = [ 0, 0 ];
-const MULT_MP_2 :number[] = [ -0.0468, -1 ];
+const MULT_MP_2 :number[] = [ -0.0468, -0.2164 ];
 const MULT_MP_3 :number[] = [ -0.1823, -1 ];
 const MULT_MP_4 :number[] = [ -0.2239, -1 ];
 const MULT_MP_5 :number[] = [ -0.2552, -1 ];
@@ -104,7 +104,6 @@ const MULT_MP_10 :number[] = [ -0.4115, -1];
 const MULT_MP_11 :number[] = [ -0.4479, -1];
 const MULT_MP_12 :number[] = [ -0.4791, -1];
 const MULT_MP_13 :number[] = [ -0.5312, -1];
-
 const MULT_MP_14 :number[] = [ -0.5729, - 1];
 const MULT_MP_15 :number[] = [ -1, -1];
 const MULT_MP_16 :number[] = [ -1, -1];

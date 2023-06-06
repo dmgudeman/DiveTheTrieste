@@ -1,4 +1,3 @@
-import { WIDTH, HEIGHT } from "../index";
 import {
     EUPHOTIC_PELAGIC,
     EUPHOTIC_BENTHIC,
@@ -24,8 +23,6 @@ class CalcConstant {
     constructor() {
         this.initialValues = InitialValues.getInstance();
         this.calcPosition = new CalcPosition();
-        this.width = WIDTH;
-        this.height = HEIGHT;
         this.textObjects = textObjects;
     }
 
@@ -39,13 +36,13 @@ class CalcConstant {
     _getZone(vert: number, depth: number): number {
         // returns the photic zone based on depth
 
-        if (vert > this.roundDownToNearestVertVel(this.height * -0.211)) {
+        if (vert > this.height * -0.211) {
             if (vert - depth > 2 * VERTICAL_VELOCITY) {
                 return EUPHOTIC_PELAGIC;
             } else {
                 return EUPHOTIC_BENTHIC;
             }
-        } else if (vert > this.roundDownToNearestVertVel(this.height * -0.45)) {
+        } else if (vert > this.height * -0.45) {
             if (vert - depth > 2 * VERTICAL_VELOCITY) {
                 return DYSPHOTIC_PELAGIC;
             } else {
@@ -72,36 +69,42 @@ class CalcConstant {
     //     }
     // }
 
-    getMapPointObject(lat: number): IMapPointObject {
-        let result: IMapPointObject;
+    getMapPointObject(): IMapPointObject {
+        let endPoint: IMapPointObject;
+        let lat = this.calcPosition.getCompLat();
+        console.log("LATTTT", this.calcPosition.getCompLat());
 
         try {
-            for (let i = 0; i < MAP_POINT_OBJECTS.length - 1; i++) {
-                let mapPoints: number[] = this.calcPoint(
+            for (let i = 1; i < MAP_POINT_OBJECTS.length - 1; i++) {
+                let startMapPoints: number[] = this.calcPoint(
+                    MAP_POINT_OBJECTS[i - 1].coeff
+                );
+                let endMapPoints: number[] = this.calcPoint(
                     MAP_POINT_OBJECTS[i].coeff
                 );
-                let nextMapPoints: number[] = this.calcPoint(
-                    MAP_POINT_OBJECTS[i + 1].coeff
-                );
-                // console.log('mapPoints[0]', mapPoints[0], 'nextMapPoints[0]', nextMapPoints[0])
-                // console.log('nextMapPoints[0] < lat', nextMapPoints[0] < lat)
-                // console.log('mapPoints[0] => lat', mapPoints[0] >= lat)
+
+                // console.log('startMapPoints[0]', startMapPoints[0])
+                // console.log('nextMapPointsX < lat', nextMapPoints[0] < lat)
+                // console.log('mapPointX => lat', mapPoints[0] >= lat)
                 // console.log('LLLAAATTT', lat, 'iiiiiiii', i)
 
-                if (nextMapPoints[0] < lat && mapPoints[0] >= lat) {
-                    result = MAP_POINT_OBJECTS[i + 1];
+                if (startMapPoints[0] >= lat && endMapPoints[0] < lat) {
+                    endPoint = MAP_POINT_OBJECTS[i];
+                    // console.log('ENDPOINT', endPoint)
                 }
             }
-            console.log("====RESULT======");
-            console.log('INITIAL X', this.initialValues.getInitial_X())
-            console.log('INITAIL Y',  this.initialValues.getInitial_Y())
-            console.log('LATTTT', this.calcPosition.getCompLat())
-            console.log('VVVVVERT', this.calcPosition.getCompVert())
-            console.log(result.name);
-            console.log('point[1]', result.point[1], 'coeff[1]', result.coeff[1])
-            console.log('point[0]', result.point[0], 'coeff[0]', result.coeff[0])
-            console.log("====++++======");
-            return result;
+            // console.log("====RESULT======");
+            // console.log('INITIAL X', this.initialValues.getInitial_X())
+            // console.log('INITAIL Y',  this.initialValues.getInitial_Y())
+
+            // console.log('VVVVVERT', this.calcPosition.getCompVert());
+            // // console.log('varDepth', this._calcDepthLimit2())
+            // console.log('ratio', (this.calcPosition.getCompVert()/this.initialValues.height))
+            // console.log("CHOSEN IN GET MAPPOINT OBJECT", endPoint.name);
+            // console.log('point[1]', result.point[1], 'coeff[1]', result.coeff[1])
+            // console.log('point[0]', result.point[0], 'coeff[0]', result.coeff[0])
+            // console.log("====++++======");
+            return endPoint;
         } catch (error) {
             console.error("getMapPointObject did not work for lat = ", lat);
         }
@@ -109,8 +112,8 @@ class CalcConstant {
 
     calcPoint(coeff: number[]) {
         let result = [];
-        result[0] = Math.floor(coeff[0] * this.width);
-        result[1] = Math.floor(coeff[1] * this.height);
+        result[0] = Math.floor(coeff[0] * this.initialValues.getWidth());
+        result[1] = Math.floor(coeff[1] * this.initialValues.getHeight());
         return result;
     }
 
@@ -118,57 +121,79 @@ class CalcConstant {
         return MAP_POINT_OBJECTS[10].point[0];
     }
 
-    getOorS(lat: number, vert: number): string[] {
+    getOorS(): string[] {
+        let lat = this.calcPosition.getCompLat();
+        let vert = this.calcPosition.getCompVert();
+        console.log("OOOOOOOOOOOOOOOOOOOOOOOOrs lat ", lat);
+        console.log(
+            " lat >= this.initialValues.getOceanLatLimit()",
+            lat >= this.initialValues.getOceanLatLimit()
+        );
+
         if (
             lat >= this.initialValues.getOceanLatLimit() &&
             vert >= this.initialValues.getOceanVertLimit()
-        )
+        ) {
             return ["O", "O"];
+        }
         if (
             lat < this.initialValues.getOceanLatLimit() &&
             vert >= this.initialValues.getOceanVertLimit()
-        )
+        ) {
+            console.log("SSSSSSSSSSSSSSSSSSSS oors lat ", lat);
             return ["S", "O"];
+        }
         if (
             lat >= this.initialValues.getOceanLatLimit() &&
             vert < this.initialValues.getOceanVertLimit()
-        )
+        ){
+
             return ["O", "S"];
+        }
         if (
             lat < this.initialValues.getOceanLatLimit() &&
             vert < this.initialValues.getOceanVertLimit()
-        )
+        ){
+
             return ["S", "S"];
+        }
     }
 
     _calcDepthLimit2() {
-        let lat = this.calcPosition.getCompLat();
-        const index = this.getMapPointObject(lat).id;
+        console.log("====RESULT======");
+        console.log("", this.getMapPointObject().name);
+
+        console.log("====++++======");
+
+        const index = this.getMapPointObject().id;
         const mapPointObject: IMapPointObject = MAP_POINT_OBJECTS[index];
         if (!mapPointObject) return null;
         const nextMapPointObject: IMapPointObject =
             MAP_POINT_OBJECTS[index + 1];
 
-        let startX = nextMapPointObject.coeff[0] * WIDTH;
-        let endX = mapPointObject.coeff[0] * WIDTH;
-        // console.log('END X', endX)
-        // console.log('START X ', startX)
-        let startY = nextMapPointObject.coeff[1] * HEIGHT;
+        let startX = mapPointObject.coeff[0] * this.initialValues.getWidth();
+        let endX = nextMapPointObject.coeff[0] * this.initialValues.getWidth();
+        // console.log("getIitial_x", this.initialValues.getInitial_X());
+        // console.log("COMPLAT", this.calcPosition.getCompLat());
+        // console.log("nextMapPointObject.coeff[0]", nextMapPointObject.coeff[0]);
+        // console.log("START X ", startX);
+        // console.log("END X", endX);
+        // let startY = nextMapPointObject.coeff[1] * this.initialValues.getHeight();
 
-        let endY = mapPointObject.coeff[1] * HEIGHT;
+        // let endY = mapPointObject.coeff[1] * this.initialValues.getHeight();
         // console.log('END Y', endY)
         // console.log('START Y ', startY)
-        let x = lat;
-        // if (depthObject.id === 0) return 21;
-        if (startX === endX) {
-            // handles vertical line
-            endX = endX + 1;
-        }
-        const slope = (endY - startY) / (endX - startX);
-        const yIntercept = startY - slope * startX;
-        const y = slope * x + yIntercept;
-        let ans = Math.floor(y / VERTICAL_VELOCITY) * VERTICAL_VELOCITY; // round down to the nearest velocity
-        return ans;
+        // let x = lat;
+
+        // if (startX === endX) {
+        //     // handles vertical line
+        //     endX = endX + 1;
+        // }
+        // const slope = (endY - startY) / (endX - startX);
+        // const yIntercept = startY - slope * startX;
+        // const y = slope * x + yIntercept;
+        // let ans = Math.floor(y / VERTICAL_VELOCITY) * VERTICAL_VELOCITY; // round down to the nearest velocity
+        // return ans;
     }
     getPreviousMapPointObject(num: number): IMapPointObject {
         let result = MAP_POINT_OBJECTS.filter(
@@ -187,10 +212,8 @@ class CalcConstant {
     getTextObject(num: number) {
         return textObjects[num];
     }
-    
-    setCoeffOnMapPoinObjects() {
 
-    }
+    setCoeffOnMapPoinObjects() {}
 }
 
 export default CalcConstant;

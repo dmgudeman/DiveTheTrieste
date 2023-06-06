@@ -41,26 +41,28 @@ class InitialValues {
         return this.height;
     }
 
-    getFullLatLimit() {
-        return this.roundDownToNearestVertVel(this.height * -0.7);
-    }
-    getFullVertLimit() {
-        return this.roundDownToNearestVertVel(this.height * -0.95);
-    }
-
     getInitial_X() {
-        return this.roundDownToNearestLatVel(this.width * 0.2604);
+        return this.width * 0.2604;
     }
     getInitial_Y() {
-        return this.roundDownToNearestVertVel(this.height * 0.04028);
+        return this.height * 0.04028;
     }
 
+    getFullLatLimit() {
+        return this.width * -0.6375;
+    }
+    getFullVertLimit() {
+        return this.height * -0.95;
+    }
+
+    
+
     getOceanLatLimit() {
-        return this.roundDownToNearestLatVel(this.width * -0.45);
+        return this.width * -0.45;
     }
    
     getOceanVertLimit() {
-        return this.roundDownToNearestVertVel(this.height * -0.55);
+        return this.height * -0.55;
     }
 
     roundDownToNearestLatVel(num: number) {

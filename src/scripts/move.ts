@@ -20,6 +20,7 @@ class Move {
     private dir: string;
     private constants: CalcConstant;
     private calcPosition: CalcPosition;
+    private calcConstant: CalcConstant;
     private initialValues: InitialValues;
     private varDepth: number;
     private mapPointObject: IMapPointObject;
@@ -35,11 +36,12 @@ class Move {
         this.dir = dir || null;
         this.constants = new CalcConstant() || null;
         this.calcPosition = new CalcPosition();
+        this.calcConstant = new CalcConstant();
         this.initialValues = InitialValues.getInstance();
         this.mapPointObject =
-            this.constants.getMapPointObject(this.calcPosition.getCompLat()) || null;
+            this.constants.getMapPointObject() || null;
         this.varDepth = this.constants._calcDepthLimit2() || null;
-        this.OorS = this.constants.getOorS(this.calcPosition.getCompLat(), this.calcPosition.getCompVert()) || null;
+        this.OorS = this.constants.getOorS() || null;
         this.increaseVelFlag = "";
         this.latVel = LAT_VELOCITY;
         this.vertVel = VERTICAL_VELOCITY;
@@ -64,13 +66,14 @@ class Move {
         let zoneNum = zoneObject.id;
         let canvasNumber = getCurrentCanvas();
         this.edText.updateEdText(zoneNum, canvasNumber);
-        this.printLateral("IN GET MOVE");
+        // this.printCoordinates("IN GET MOVE");
 
     };
 
     private getLatMove() {
         console.log("xxxxxxxxxxxxxx");
-        if (this.OorS[0] == "O") {
+        let oors = this.calcConstant.getOorS();
+        if (oors[0] == "O") {
             this.sub.setX(this.sub.getInitialLatPos());
             // console.log('LATERAL 0000000 LAT');
             if (this.calcPosition.getCompLat() > 0) {
@@ -92,8 +95,8 @@ class Move {
                     this.moveOceanLeft(this.latVel);
                 }
             }
-        } else if (this.OorS[0] == "S") {
-            // console.log('yyyyyyyyyyyyy')
+        } else if (oors[0] === "S") {
+            console.log('yyyyyyyyyyyyy')
             if (this.calcPosition.getCompLat() > this.initialValues.getFullLatLimit()) {
                 // console.log('LATERAL 5555555 LAT');
                 if (this.dir === "right") {
@@ -113,7 +116,8 @@ class Move {
     }
 
     private getVerticalMove() {
-        if (this.OorS[1] == "O") {
+        let oorS = this.calcConstant.getOorS();
+        if (oorS[1] == "O") {
             // console.log("AAAAAAAAA");
             this.sub.setY(this.sub.getInitialVertPos()); // reset sub to assure accuracy at transition S to O on way up
             if (this.calcPosition.getCompVert() > 0) {
@@ -142,7 +146,7 @@ class Move {
                     this.moveOceanUp(this.vertVel);
                 }
             }
-        } else if ((this.OorS[1] = "S")) {
+        } else if ((oorS[1] = "S")) {
             console.log("000000000");
             if (this.calcPosition.getCompVert() > this.initialValues.getOceanVertLimit() + VERTICAL_VELOCITY) {
                 // console.log("1111111111");
@@ -214,7 +218,7 @@ class Move {
                 }
             }
         } else if (this.OorS[1] === "S") {
-            console.log(" IN SUB SECTION");
+        
             if (dir === "right") {
                 console.log("    IN MOVE RIGHT");
                 if (mvmt === "right" || mvmt === "both") {
