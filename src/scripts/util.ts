@@ -7,6 +7,7 @@ import {
 } from "./constants";
 import { globalCockpit } from "../index";
 import EdText from "./edText";
+import Modal from './modal';
 import { showDepth, showLat, showZone, showMouseAsSub, showGeoDisplay } from "./boundary";
 
 
@@ -35,6 +36,7 @@ const bubblesContainer = document.querySelector(".bubblesContainer") as HTMLElem
 const bubbles = bubblesContainer.getElementsByClassName("bubble")  as HTMLCollectionOf<Element>;
 const edContainer = document.getElementById("edContainer") as HTMLElement;
 const edText = new EdText();
+const modal = new Modal();
 
 export function showCanvas1() {
     //the ocean
@@ -42,9 +44,10 @@ export function showCanvas1() {
     showDepth();
     edText.updateEdText(1);
     bubblesContainer.classList.add("hide");
-    if (!(localStorage.getItem("modalDisplayed") === "true")) {
-        modal.style.display = "block";
-    }
+    // if (!(localStorage.getItem("modalDisplayed") === "true")) {
+    //     modal.style.display = "block";
+    // }
+    modal.displayModalInitially();
     canvas1.style.display = "block";
     canvas2.style.display = "none";
     canvas3.style.display = "none";
@@ -102,19 +105,19 @@ export function showCanvas3() {
 }
 
 // modal code
-const modal = document.getElementById("modal");
-const closeButton = document.getElementsByClassName("close")[0];
+// const modal = document.getElementById("modal");
+// const closeButton = document.getElementsByClassName("close")[0];
 
-closeButton.addEventListener("click", function () {
-    modal.style.display = "none";
-    localStorage.setItem("modalDisplayed", 'true');
-});
+// closeButton.addEventListener("click", function () {
+//     modal.style.display = "none";
+//     localStorage.setItem("modalDisplayed", 'true');
+// });
 
-window.addEventListener("click", function (event) {
-    if (event.target === modal) {
-        modal.style.display = "none";
-        localStorage.setItem("modalDisplayed", 'true');
-    }
-});
+// window.addEventListener("click", function (event) {
+//     if (event.target === modal) {
+//         modal.style.display = "none";
+//         localStorage.setItem("modalDisplayed", 'true');
+//     }
+// });
 
      
