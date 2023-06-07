@@ -11,27 +11,24 @@ import { showZone, showDepth, showLat } from "./boundary";
 class Keymaster {
     private ocean: Ocean;
     private sub: Sub;
-    private images: Images;
-    private cockpit: Cockpit
-    private dir: string;
+    // private images: Images;
+    // private cockpit: Cockpit
+    // private dir: string;
     private modal: HTMLElement;
     private move: Move;
-    private currentCanvas: number;
 
-    constructor(dir?: string) {
-        this.dir = dir;
+    constructor() {
+        // this.dir = dir;
         this.ocean = Ocean.getInstance();
         this.sub = Sub.getInstance();
-        this.images = new Images();
+        // this.images = new Images();
         this.modal = document.getElementById("modal") as HTMLElement;
         this.move = new Move(this.ocean, this.sub);
-        this.currentCanvas = getCurrentCanvas() || 2;
+        // this.currentCanvas = getCurrentCanvas() || 2;
     }
-
-    keyDown(e: KeyboardEvent, ctx1, ctx2, ctx3) {
+    // set key funciton depending on which canvas is showing
+    keyDown(e: KeyboardEvent, ctx1:CanvasRenderingContext2D, ctx2:CanvasRenderingContext2D, ctx3:CanvasRenderingContext2D) {
      let currentCanvas:number = getCurrentCanvas()
-      console.log(e.key, 'in keymaster');
-      console.log(currentCanvas)
         if (currentCanvas === 1) {
             if (e.key === "ArrowDown" || e.key === "Down") {
                 this.newPos("down");
@@ -68,7 +65,7 @@ class Keymaster {
         }
     }
 
-    navigate(navigate: string) {
+    navigate(navigate: string):void {
         let currentCanvas = getCurrentCanvas();
         if (localStorage.modalDisplayed === "false") {
             this.addModalEventListener(navigate);
@@ -85,7 +82,7 @@ class Keymaster {
                     showCanvas1();
                     break;
                 default:
-                    return;
+                    break;
             }
         } else if (navigate === "Escape") {
             switch (currentCanvas) {
@@ -99,12 +96,12 @@ class Keymaster {
                     showCanvas2();
                     break;
                 default:
-                    return;
+                    break;
             }
         }
     }
 
-    newPos(dir: string) {
+    newPos(dir: string):void {
         const zone = new Zone();
         showLat();
         showDepth();
@@ -114,7 +111,7 @@ class Keymaster {
         if (dir === "left" || dir === "right") this.sub.setLastLatDir(dir);
     }
 
-    closeModal = () => {
+    closeModal = ():void => {
         window.addEventListener("click", (event) => {
             if (event.target === this.modal) {
                 this.modal.style.display = "none";
@@ -123,7 +120,7 @@ class Keymaster {
         });
     };
 
-    addModalEventListener(navigate: string) {
+    addModalEventListener(navigate: string):void {
         this.modal.style.display = "block";
         localStorage.setItem("modalDisplayed", "true");
         this.modal.addEventListener("click", () => {

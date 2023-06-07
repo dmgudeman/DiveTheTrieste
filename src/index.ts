@@ -41,19 +41,9 @@ document.addEventListener("DOMContentLoaded", () => {
       });
 
 
-    // function toggleAudio(audio) {
-    //     if (audioFlag) {
-    //         audio.play();
-    //         musicNoteButton.classList.add("redNote");
-    //     } else {
-    //         audio.pause();
-    //         musicNoteButton.classList.remove("redNote");
-    //     }
-    //     audioFlag = !audioFlag;
-    // }
+   
 
-    // let audio = document.getElementById("music");
-    // toggleAudio(audio);
+  
     localStorage.setItem("modalDisplayed", false.toString());
 
     const canvas1: HTMLCanvasElement = document.getElementById(
@@ -116,6 +106,18 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     const modal = document.getElementById("modal");
+    let audio = document.getElementById("music");
+    function toggleAudio(audio) {
+        if (audioFlag) {
+            audio.play();
+            musicNoteButton.classList.add("redNote");
+        } else {
+            audio.pause();
+            musicNoteButton.classList.remove("redNote");
+        }
+        audioFlag = !audioFlag;
+    }
+    toggleAudio(audio);
 
     // Close the modal when the user clicks outside
     window.addEventListener("click", function (event) {
@@ -125,7 +127,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     musicNoteButton.addEventListener("click", (e) => {
-        //     toggleAudio(audio);
+            toggleAudio(audio);
     });
 
     // make the instruction page canvas
