@@ -5,18 +5,17 @@ import {
     DYSPHOTIC_PELAGIC,
     APHOTIC_BENTHIC,
     APHOTIC_PELAGIC,
+    VERTICAL_VELOCITY,
     textObjects,
 } from "./constants";
 import CalcConstant from "./calcConstant";
-import Ocean from "./ocean";
-import Sub from "./sub";
 import {ITextObject} from './types';
-import { eventBus } from "./eventBus";
+import InitialValues from "./initialValues";
+import CalcPosition from "./calcPosition";
 
 class Zone {
-
-    private vert: number;
-    private varDepth: number;
+    private initialValues: InitialValues;
+    private calcPosition: CalcPosition;
     private calcConstants: CalcConstant;
     private flag: number;
     private oldFlag: number;
@@ -24,13 +23,13 @@ class Zone {
 
     constructor() {
         this.calcConstants = new CalcConstant();
-        this.varDepth = this.calcConstants._calcDepthLimit2() || null;
+        this.initialValues = InitialValues.getInstance();
+        this.calcPosition = CalcPosition.getInstance();
         this.flag = null;
         this.oldFlag = null;
     }
     upDateZoneObject():ITextObject{ 
-        this.varDepth = this.calcConstants._calcDepthLimit2()
-        this.flag = this.calcConstants._getZone(this.vert, this.varDepth);
+        this._getZone();
       
         if (this.oldFlag !== this.flag) {
             this.oldFlag = this.flag;
@@ -51,6 +50,31 @@ class Zone {
             }
         } 
         return textObjects[this.flag]
+    }
+
+    _getZone(): void {
+        let vert = this.calcPosition.getCompVert();
+        let depth = this.calcConstants._calcDepthLimit2();
+      
+        if (vert > this.initialValues.getHeight() * -0.211) {
+            if (vert - depth > 4 * VERTICAL_VELOCITY) {
+                this.flag =  EUPHOTIC_PELAGIC;
+            } else {
+                this.flag = EUPHOTIC_BENTHIC;
+            }
+        } else if (vert > this.initialValues.getHeight() * -0.45) {
+            if (vert - depth > 4 * VERTICAL_VELOCITY) {
+                this.flag = DYSPHOTIC_PELAGIC;
+            } else {
+                this.flag = DYSPHOTIC_BENTHIC;
+            }
+        } else {
+            if (vert - depth > 1 * VERTICAL_VELOCITY) {
+                this.flag = APHOTIC_PELAGIC;
+            } else {
+                this.flag = APHOTIC_BENTHIC;
+            }
+        }
     }
 }
 export default Zone;

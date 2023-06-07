@@ -67,7 +67,7 @@ class Move {
         let zoneNum = zoneObject.id;
         let canvasNumber = getCurrentCanvas();
         this.edText.updateEdText(zoneNum, canvasNumber);
-        // this.printCoordinates("IN GET MOVE");
+    
 
     };
 
@@ -76,7 +76,7 @@ class Move {
         let oors = this.calcConstant.getOorS();
         if (oors[0] == "O") {
             this.sub.setX(this.sub.getInitialLatPos());
-            this.sub.setY(this.sub.getInitialVertPos()); 
+          
             // console.log('LATERAL 0000000 LAT');
             if (this.calcPosition.getCompLat() > 0) {
                 // console.log('LATERAL 1111111 LAT');
@@ -99,6 +99,7 @@ class Move {
             }
         } else if (oors[0] === "S") {
             console.log('yyyyyyyyyyyyy')
+          
             if (this.calcPosition.getCompLat() > this.initialValues.getFullLatLimit()) {
                 // console.log('LATERAL 5555555 LAT');
                 if (this.dir === "right") {
@@ -131,7 +132,8 @@ class Move {
         let oorS = this.calcConstant.getOorS();
         if (oorS[1] == "O") {
             
-            this.sub.setY(this.sub.getInitialVertPos()); // reset sub to assure accuracy at transition S to O on way up
+           
+            this.sub.setY(this.sub.getInitialVertPos());  // reset sub to assure accuracy at transition S to O on way up
             if (this.calcPosition.getCompVert() > 0) {
                 // move down no matter what if above surface
                 console.log("BBBBBBBBB");
@@ -160,7 +162,9 @@ class Move {
                 }
             }
         } else if ((oorS[1] = "S")) {
-            console.log("000000000");
+           
+          
+            
             if (this.calcPosition.getCompVert() > this.initialValues.getOceanVertLimit() + 1) {
                 // console.log("1111111111");
         
