@@ -23,8 +23,6 @@ class CalcPosition {
         this.oceanVertLimit = this.initialValues.getOceanVertLimit();
         this.subLat = subLat || this.initialValues.getInitial_X();
         this.subVert = subVert || this.initialValues.getInitial_Y();
-
-
         eventBus.on("oceanXChanged", this.handleOceanXChange);
         eventBus.on("subXChanged", this.handleSubXChange);
         eventBus.on("oceanYChanged", this.handleOceanYChange);
@@ -39,7 +37,6 @@ class CalcPosition {
     }
 
     handleOceanXChange = (newX: number) => {
-      
         this.oceanLat = newX ;
         this.compLat = this.oceanLat - this.subLat + this.initialValues.getInitial_X();
         console.log('=======CALC POSITION===============')

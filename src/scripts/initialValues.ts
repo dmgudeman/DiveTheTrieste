@@ -55,8 +55,6 @@ class InitialValues {
         return this.height * -0.95;
     }
 
-    
-
     getOceanLatLimit() {
         return this.width * -0.45;
     }

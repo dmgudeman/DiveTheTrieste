@@ -10,14 +10,14 @@ import EdText from "./edText";
 import { showDepth, showLat, showZone, showMouseAsSub } from "./boundary";
 
 
-export function clear(ctx:CanvasRenderingContext2D) {
-    ctx.clearRect(0, 0, WIDTH, HEIGHT);
-}
-export function getCursorPosition(canvas:HTMLElement, event:MouseEvent):void {
-    const rect = canvas.getBoundingClientRect();
-    const x = event.clientX - rect.left;
-    const y = event.clientY - rect.top;
-}
+// export function clear(ctx:CanvasRenderingContext2D) {
+//     ctx.clearRect(0, 0, WIDTH, HEIGHT);
+// }
+// export function getCursorPosition(canvas:HTMLElement, event:MouseEvent):void {
+//     const rect = canvas.getBoundingClientRect();
+//     const x = event.clientX - rect.left;
+//     const y = event.clientY - rect.top;
+// }
 
 // canvas1 is the ocean
 // canvas2 is the opening page
@@ -39,16 +39,12 @@ const edText = new EdText();
 export function showCanvas1() {
     //the ocean
     setCurrentCanvas(1);
-    // edText.initialEdSetup();
     showDepth();
-    
-    
-    edContainer.classList.remove("hideEd");
+    edText.updateEdText(1);
     bubblesContainer.classList.add("hide");
     if (!(localStorage.getItem("modalDisplayed") === "true")) {
         modal.style.display = "block";
     }
-
     canvas1.style.display = "block";
     canvas2.style.display = "none";
     canvas3.style.display = "none";
@@ -59,15 +55,13 @@ export function showCanvas1() {
     musicNoteButton.classList.remove("can3MN");
     homeButton.classList.add("can1home");
     homeButton.classList.remove("can2home");
-    homeButton.classList.remove("can3home");
-    instPanel.classList.add("hide");
-    
+    homeButton.classList.remove("can3home");   
 }
 
 export function showCanvas2() {
     //opening page
-
     setCurrentCanvas(2);
+    edText.updateEdText(2);
     canvas1.style.display = "none";
     canvas2.style.display = "block";
     canvas3.style.display = "none";
@@ -78,10 +72,7 @@ export function showCanvas2() {
     musicNoteButton.classList.remove("can3MN");
     homeButton.classList.remove("can1home");
     homeButton.classList.add("can2home");
-    homeButton.classList.remove("can3home");
-    instPanel.classList.add("hide");
-   
-    edContainer.classList.add("hide");
+    homeButton.classList.remove("can3home");    
 }
 
 export function showCanvas3() {
@@ -94,8 +85,7 @@ export function showCanvas3() {
     canvas2.style.display = "none";
     canvas3.style.display = "block";
     canvas3.style.cursor = "pointer";
-    gauge.classList.add("hidegauge");
-   
+    gauge.classList.add("hidegauge"); 
     trieste3Container.classList.remove("hide");
     musicNoteButton.classList.remove("can1MN");
     musicNoteButton.classList.remove("can2MN");
@@ -103,10 +93,8 @@ export function showCanvas3() {
     homeButton.classList.remove("can1home");
     homeButton.classList.remove("can2home");
     homeButton.classList.add("can3home");
-    edContainer.classList.forEach(className => {
-        edContainer.classList.remove(className);
-        instPanel.classList.remove("hide");
-      });
+  
+    edText.updateEdText(3)
     showDepth();
     showLat();
     showZone();
@@ -129,12 +117,4 @@ window.addEventListener("click", function (event) {
     }
 });
 
-const removeEdContainer =() =>{
-    const edContainer = document.getElementById("edContainer") as HTMLElement;
-    edContainer.classList.forEach(className => {
-        edContainer.classList.remove(className);
-    })
-    edContainer.classList.add("edContainer");
-    edContainer.classList.add("hideEd");
-}
      

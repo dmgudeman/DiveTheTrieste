@@ -141,7 +141,5 @@ class Ocean {
     public zeroVelDown(): void {
         this.velDown = 0;
     }
-
-
 }
 export default Ocean;
