@@ -5,7 +5,8 @@ import Ocean from "./ocean";
 import Sub from "./sub";
 import Zone from "./zone";
 import Images from "./images";
-import Cockpit from './cockpit';
+import Cockpit from "./cockpit";
+import Modal from "./modal";
 import { showZone, showDepth, showLat, showGeoDisplay } from "./boundary";
 
 class Keymaster {
@@ -14,7 +15,7 @@ class Keymaster {
     // private images: Images;
     // private cockpit: Cockpit
     // private dir: string;
-    private modal: HTMLElement;
+    private modal: Modal;
     private move: Move;
 
     constructor() {
@@ -22,13 +23,19 @@ class Keymaster {
         this.ocean = Ocean.getInstance();
         this.sub = Sub.getInstance();
         // this.images = new Images();
-        this.modal = document.getElementById("modal") as HTMLElement;
+        this.modal = new Modal();
         this.move = new Move(this.ocean, this.sub);
         // this.currentCanvas = getCurrentCanvas() || 2;
     }
     // set key funciton depending on which canvas is showing
-    keyDown(e: KeyboardEvent, ctx1:CanvasRenderingContext2D, ctx2:CanvasRenderingContext2D, ctx3:CanvasRenderingContext2D) {
-     let currentCanvas:number = getCurrentCanvas()
+    keyDown(
+        e: KeyboardEvent,
+        ctx1: CanvasRenderingContext2D,
+        ctx2: CanvasRenderingContext2D,
+        ctx3: CanvasRenderingContext2D
+    ) {
+        let currentCanvas: number = getCurrentCanvas();
+        console.log("JJJJJJJJJ", currentCanvas);
         if (currentCanvas === 1) {
             if (e.key === "ArrowDown" || e.key === "Down") {
                 this.newPos("down");
@@ -42,6 +49,10 @@ class Keymaster {
                 this.navigate("Enter");
             } else if (e.key === "Escape") {
                 this.navigate("Escape");
+            }
+        } else if (currentCanvas === 2) {
+            if (e.key === "Enter") {
+                showCanvas1();
             }
         } else if (currentCanvas === 3) {
             let cockpit = new Cockpit(ctx3);
@@ -65,12 +76,17 @@ class Keymaster {
         }
     }
 
-    navigate(navigate: string):void {
+    navigate(navigate: string): void {
         let currentCanvas = getCurrentCanvas();
-        if (localStorage.modalDisplayed === "false") {
-            this.addModalEventListener(navigate);
-        }
+        console.log("CURRENT CANVAS", currentCanvas);
+
         if (navigate === "Enter") {
+            if (
+                localStorage.modalDisplayed === "false" &&
+                currentCanvas === 1
+            ) {
+                this.modal.hideModal();
+            } else {
             switch (currentCanvas) {
                 case 1:
                     showCanvas3();
@@ -83,6 +99,7 @@ class Keymaster {
                     break;
                 default:
                     break;
+            }
             }
         } else if (navigate === "Escape") {
             switch (currentCanvas) {
@@ -101,7 +118,7 @@ class Keymaster {
         }
     }
 
-    newPos(dir: string):void {
+    newPos(dir: string): void {
         const zone = new Zone();
         showLat();
         showDepth();
@@ -111,23 +128,23 @@ class Keymaster {
         if (dir === "left" || dir === "right") this.sub.setLastLatDir(dir);
     }
 
-    closeModal = ():void => {
-        window.addEventListener("click", (event) => {
-            if (event.target === this.modal) {
-                this.modal.style.display = "none";
-                localStorage.setItem("modalDisplayed", "true");
-            }
-        });
-    };
+    // closeModal = ():void => {
+    //     window.addEventListener("click", (event) => {
+    //         if (event.target === this.modal) {
+    //             this.modal.style.display = "none";
+    //             localStorage.setItem("modalDisplayed", "true");
+    //         }
+    //     });
+    // };
 
-    addModalEventListener(navigate: string):void {
-        this.modal.style.display = "block";
-        localStorage.setItem("modalDisplayed", "true");
-        this.modal.addEventListener("click", () => {
-            this.navigate(navigate);
-            this.modal.style.display = "none";
-        });
-    }
+    // addModalEventListener(navigate: string):void {
+    //     this.modal.style.display = "block";
+    //     localStorage.setItem("modalDisplayed", "true");
+    //     this.modal.addEventListener("click", () => {
+    //         this.navigate(navigate);
+    //         this.modal.style.display = "none";
+    //     });
+    // }
 
     //   let keyRepeatTimeout;
     // let keyRepeatInterval;
