@@ -1,5 +1,4 @@
 import { LAT_VELOCITY, VERTICAL_VELOCITY, getHitBottomFlag } from "./constants";
-
 import { ISprite } from "./types";
 import {
     sprites,
@@ -95,10 +94,6 @@ class Sub {
         }
         return Sub.instance;
     }
-
-    // draw() {
-    //   this.ctx.drawImage(this.subImage, this.x, this.y, this.w, this.h);
-    // }
 
     public getX(): number {
         return this.x;
@@ -203,7 +198,6 @@ class Sub {
         const elapsedTime = currentTime - this.lastFrameTime;
 
         if (elapsedTime > 1000 / 10) {
-            // if (this.lastLatDir === "right") {
             const sprite = this.sprites[this.currentFrame];
             this.ctx.drawImage(
                 this.spriteSheet,

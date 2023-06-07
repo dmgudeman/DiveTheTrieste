@@ -1,14 +1,9 @@
-// import { pickImageArray } from "./boundary";
-import Ocean from "./ocean";
-import Sub from "./sub";
 import Zone from "./zone";
-// import {ITextObject} from './types';
+
 class Images {
-   
     private images: string[][];
 
     constructor() {
-    
         // Assign a number to the arrays
         this.images = [this.ep, this.eb, this.dp, this.db, this.ap, this.ab];
     }

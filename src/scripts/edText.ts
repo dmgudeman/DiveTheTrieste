@@ -56,6 +56,7 @@ class EdText {
                 if (textEl) textEl.classList.add(className);
                 if (textEl) textEl.classList.add(className2);
             });
+            this.instPanel.classList.add("hide");
         } else if (canvasNum === 2) {
             this.instPanel.classList.add("hide");
             this.edContainer.classList.add("hide");
