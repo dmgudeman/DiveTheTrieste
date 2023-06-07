@@ -157,10 +157,6 @@ class CalcConstant {
         const slope = (endY - startY) / (endX - startX);
         const yIntercept = startY - slope * startX;
         const y = slope * x + yIntercept;
-
-        // console.log("SLOPE", slope);
-        // console.log("yIntercept", yIntercept);
-        // console.log("yyyyyyyy", y)
         let ans = Math.floor(y / VERTICAL_VELOCITY) * VERTICAL_VELOCITY; // round down to the nearest velocity
         return ans;
     }

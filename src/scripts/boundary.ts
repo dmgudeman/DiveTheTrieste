@@ -1,20 +1,11 @@
 import { SEA_DEPTH, DIST_CA_TO_TRENCH } from "./constants";
-import Ocean from "./ocean";
-import Sub from "./sub";
 import CalcConstant from "./calcConstant";
 import Zone from "./zone";
 import InitialValues from "./initialValues";
-import { eventBus } from "./eventBus";
 import CalcPosition from "./calcPosition";
 
 const calcPosition = CalcPosition.getInstance();
 const initialValues = InitialValues.getInstance();
-
-export function showMouseAsSub(e:MouseEvent) {
-    var x = e.clientX - initialValues.getInitial_X();
-    var y = e.clientY - initialValues.getInitial_Y();
-    console.log("X: " + x + ", Y: " + y);
-}
 
 export function showDepth() {
     const conversion: number = SEA_DEPTH / initialValues.getHeight(); // 19.64 feet per pixel
@@ -27,11 +18,11 @@ export function showDepth() {
     if (composite > -500) {
         depth = Math.floor(conversionShallow * -composite);
         depthGauge.innerHTML = `Depth: ${Math.floor(depth)} feet`;
-        IPDepthGauge.innerHTML = `Depth: ${depth} ft`;
+        IPDepthGauge.innerHTML = `Depth: ${Math.floor(depth)} ft`;
     } else if (composite > -1000) {
         depth = composite * -conversion;
         depthGauge.innerHTML = `Depth: ${Math.floor(depth)} feet`;
-        IPDepthGauge.innerHTML = `Depth: ${depth} ft`;
+        IPDepthGauge.innerHTML = `Depth: ${Math.floor(depth)} ft`;
     } else {
         let miles = (conversion * -composite) / 5280;
         depth = parseFloat(miles.toFixed(1));
@@ -44,15 +35,11 @@ export function showDepth() {
 }
 
 export function showLat(): number {
-    const ocean = Ocean.getInstance();
-    const sub = Sub.getInstance();
     const calcConstant = new CalcConstant();
     const conversion = Math.ceil(
         Math.abs(DIST_CA_TO_TRENCH / calcConstant.getDistCAtoTrench())
     );
-    let composite = Math.abs(
-        ocean.getX() - sub.getX() + initialValues.getInitial_X()
-    );
+    let composite: number = Math.abs(calcPosition.getCompLat());
     let lat: number;
     lat = Math.floor(Math.abs(composite * conversion));
     if (composite < 0) lat = 0;
@@ -67,5 +54,11 @@ export function showZone(): string {
     const IPZoneGauge = document.getElementById("IPZoneGauge");
     IPZoneGauge.innerHTML = `${title}`;
     return title;
+}
+
+export function showMouseAsSub(e:MouseEvent) {
+    var x = e.clientX - initialValues.getInitial_X();
+    var y = e.clientY - initialValues.getInitial_Y();
+    console.log("X: " + x + ", Y: " + y);
 }
 
