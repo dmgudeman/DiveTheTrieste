@@ -13,7 +13,7 @@ class Images {
         this.images = [this.ep, this.eb, this.dp, this.db, this.ap, this.ab];
     }
 
-    public pickRandomImage(): string {
+    public getImage(): string {
         const zone: Zone = new Zone();
         const arrNum: number = zone.upDateZoneObject().id;
 

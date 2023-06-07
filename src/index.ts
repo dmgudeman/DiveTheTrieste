@@ -93,7 +93,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     let ocean = Ocean.getInstance(ctx1);
     let sub = Sub.getInstance(ctx1);
-    let cockpit = new Cockpit({ ctx: ctx3, sub, ocean });
+    let cockpit = new Cockpit(ctx3);
     globalCockpit.cockpit = cockpit;
     let key = new Keymaster();
 
@@ -200,21 +200,23 @@ document.addEventListener("DOMContentLoaded", () => {
         requestAnimationFrame(animateSprite);
     }
     animateSprite();
-
-    function keyDown(e) {
-        if (e.key === "ArrowDown" || e.key === "Down") {
-            key.newPos("down");
-        } else if (e.key === "ArrowLeft" || e.key === "Left") {
-            key.newPos("left");
-        } else if (e.key === "ArrowRight" || e.key === "Right") {
-            key.newPos("right");
-        } else if (e.key === "ArrowUp" || e.key === "Up") {
-            key.newPos("up");
-        } else if (e.key === "Enter") {
-            key.navigate("Enter");
-        } else if (e.key === "Escape") {
-            key.navigate("Escape");
-        }
+    
+    function keyDown(e:KeyboardEvent) {
+        console.log('e.key', e.key)
+        key.keyDown(e, ctx1, ctx2, ctx3)
+    //     if (e.key === "ArrowDown" || e.key === "Down") {
+    //         key.newPos("down");
+    //     } else if (e.key === "ArrowLeft" || e.key === "Left") {
+    //         key.newPos("left");
+    //     } else if (e.key === "ArrowRight" || e.key === "Right") {
+    //         key.newPos("right");
+    //     } else if (e.key === "ArrowUp" || e.key === "Up") {
+    //         key.newPos("up");
+    //     } else if (e.key === "Enter") {
+    //         key.navigate("Enter");
+    //     } else if (e.key === "Escape") {
+    //         key.navigate("Escape");
+    //     }
         
     }
 

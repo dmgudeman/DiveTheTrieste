@@ -4,13 +4,15 @@ import { showCanvas1, showCanvas2, showCanvas3 } from "./util";
 import Ocean from "./ocean";
 import Sub from "./sub";
 import Zone from "./zone";
-import Images from './images';
+import Images from "./images";
+import Cockpit from './cockpit';
 import { showZone, showDepth, showLat } from "./boundary";
 
 class Keymaster {
     private ocean: Ocean;
     private sub: Sub;
     private images: Images;
+    private cockpit: Cockpit
     private dir: string;
     private modal: HTMLElement;
     private move: Move;
@@ -26,8 +28,11 @@ class Keymaster {
         this.currentCanvas = getCurrentCanvas() || 2;
     }
 
-    keyDown(e: KeyboardEvent) {
-        if (this.currentCanvas === 1) {
+    keyDown(e: KeyboardEvent, ctx1, ctx2, ctx3) {
+     let currentCanvas:number = getCurrentCanvas()
+      console.log(e.key, 'in keymaster');
+      console.log(currentCanvas)
+        if (currentCanvas === 1) {
             if (e.key === "ArrowDown" || e.key === "Down") {
                 this.newPos("down");
             } else if (e.key === "ArrowLeft" || e.key === "Left") {
@@ -41,21 +46,25 @@ class Keymaster {
             } else if (e.key === "Escape") {
                 this.navigate("Escape");
             }
-        } else if (this.currentCanvas === 3) {
-          if (e.key === "ArrowDown" || e.key === "Down") {
-            this.newPos("down");
-        } else if (e.key === "ArrowLeft" || e.key === "Left") {
-            this.newPos("left");
-        } else if (e.key === "ArrowRight" || e.key === "Right") {
-            this.newPos("right");
-        } else if (e.key === "ArrowUp" || e.key === "Up") {
-            this.newPos("up");
-        } else if (e.key === "Enter") {
-            this.navigate("Enter");
-        } else if (e.key === "Escape") {
-            this.navigate("Escape");
-        }
-
+        } else if (currentCanvas === 3) {
+            let cockpit = new Cockpit(ctx3);
+            if (e.key === "ArrowDown" || e.key === "Down") {
+                cockpit.draw();
+                this.newPos("down");
+            } else if (e.key === "ArrowLeft" || e.key === "Left") {
+                cockpit.draw();
+                this.newPos("left");
+            } else if (e.key === "ArrowRight" || e.key === "Right") {
+                cockpit.draw();
+                this.newPos("right");
+            } else if (e.key === "ArrowUp" || e.key === "Up") {
+                cockpit.draw();
+                this.newPos("up");
+            } else if (e.key === "Enter") {
+                this.navigate("Enter");
+            } else if (e.key === "Escape") {
+                this.navigate("Escape");
+            }
         }
     }
 
