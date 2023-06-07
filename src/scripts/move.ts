@@ -126,7 +126,7 @@ class Move {
         console.log('this.varDepth', this.varDepth)
         console.log('VERT>=DEPTH',(this.calcPosition.getCompVert() <= this.varDepth));
         console.log('this.dir', this.dir)
-        console.log(' FFF conditional', (this.calcPosition.getCompVert() <= this.varDepth + VERTICAL_VELOCITY))
+        console.log('LAT', this.calcPosition.getCompLat())
       
         let oorS = this.calcConstant.getOorS();
         if (oorS[1] == "O") {
@@ -137,7 +137,7 @@ class Move {
                 console.log("BBBBBBBBB");
                 this.moveOceanDown(this.vertVel);
                 
-            } else if (this.calcPosition.getCompVert() > -VERTICAL_VELOCITY) {
+            } else if (this.calcPosition.getCompVert() > -1) {
                 // stop one vertical vel upon rising
                 if (this.dir === "down") {
                     console.log("CCCCCCCCC");
@@ -152,7 +152,7 @@ class Move {
                     // console.log("EEEEEEEEE");
                     this.moveOceanUp(this.vertVel);
                 }
-            } else if (this.calcPosition.getCompVert() <= this.varDepth + VERTICAL_VELOCITY) {
+            } else if (this.calcPosition.getCompVert() <= this.varDepth + 1) {
                 // stop one vel unit from lower limit
                 console.log("FFFFFFFF");
                 if (this.dir === "up") {
@@ -161,7 +161,7 @@ class Move {
             }
         } else if ((oorS[1] = "S")) {
             console.log("000000000");
-            if (this.calcPosition.getCompVert() > this.initialValues.getOceanVertLimit() + VERTICAL_VELOCITY) {
+            if (this.calcPosition.getCompVert() > this.initialValues.getOceanVertLimit() + 1) {
                 // console.log("1111111111");
         
 
@@ -184,7 +184,7 @@ class Move {
                     console.log("44444444");
                     this.moveSubUp();
                 }
-            } else if (this.calcPosition.getCompVert() < this.varDepth + VERTICAL_VELOCITY) {
+            } else if (this.calcPosition.getCompVert() < this.varDepth + 1) {
                 // stop one vel unit from lower limit
                 if (this.dir === "up") {
                     console.log("5555555");
