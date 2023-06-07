@@ -8,7 +8,8 @@ import {
     MAP_POINTS,
     MAP_POINT_OBJECTS,
     VERTICAL_VELOCITY,
-    textObjects
+    textObjects,
+    LAT_VELOCITY
     
 } from "./constants";
 import Ocean from "./ocean";
@@ -47,7 +48,7 @@ class CalcConstant {
                 if (lastMapPoints[0] >= lat && currentPoints[0] < lat) {
                     currentObject = MAP_POINT_OBJECTS[i];
                     // console.log('$$$$$$$$$$$$$')console.log('lastObject.', currentPoints)
-                    console.log('currentObject.name', currentObject.name)
+                    // console.log('currentObject.name', currentObject.name)
                     
                    
                     // console.log('currentPoints[0]', currentPoints[0])
@@ -95,27 +96,27 @@ class CalcConstant {
         // console.log('VERT LIM',this.initialValues.getOceanVertLimit())
 
         if (
-            lat >= this.initialValues.getOceanLatLimit() &&
-            vert > this.initialValues.getOceanVertLimit()
+            lat >= this.initialValues.getOceanLatLimit()  &&
+            vert > this.initialValues.getOceanVertLimit() + VERTICAL_VELOCITY
         ) {
             return ["O", "O"];
         }
         if (
-            lat < this.initialValues.getOceanLatLimit() &&
-            vert > this.initialValues.getOceanVertLimit()
+            lat < this.initialValues.getOceanLatLimit() + LAT_VELOCITY&&
+            vert > this.initialValues.getOceanVertLimit() + VERTICAL_VELOCITY
         ) {
             return ["S", "O"];
         }
         if (
             lat >= this.initialValues.getOceanLatLimit() &&
-            vert <= this.initialValues.getOceanVertLimit()
+            vert <= this.initialValues.getOceanVertLimit() 
         ){
 
             return ["O", "S"];
         }
         if (
-            lat < this.initialValues.getOceanLatLimit() &&
-            vert <= this.initialValues.getOceanVertLimit()
+            lat < this.initialValues.getOceanLatLimit() + LAT_VELOCITY &&
+            vert <= this.initialValues.getOceanVertLimit() 
         ){
 
             return ["S", "S"];

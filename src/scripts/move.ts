@@ -71,7 +71,7 @@ class Move {
     };
 
     private getLatMove() {
-        console.log("xxxxxxxxxxxxxx");
+        // console.log("xxxxxxxxxxxxxx");
         let oors = this.calcConstant.getOorS();
         if (oors[0] == "O") {
             this.sub.setX(this.sub.getInitialLatPos());
@@ -97,7 +97,7 @@ class Move {
                 }
             }
         } else if (oors[0] === "S") {
-            console.log('yyyyyyyyyyyyy')
+            // console.log('yyyyyyyyyyyyy')
           
             if (this.calcPosition.getCompLat() > this.initialValues.getFullLatLimit()) {
                 // console.log('LATERAL 5555555 LAT');
@@ -119,13 +119,13 @@ class Move {
 
     private getVerticalMove() {
         this.varDepth = this.calcConstant._calcDepthLimit2();
-        console.log('=====VERT MOVE=======')
+        console.log('==VERT MOVE===')
         console.log('OOORS', this.calcConstant.getOorS());
         console.log('VERT', this.calcPosition.getCompVert())
-        console.log('VARDEPTH' , this.calcConstant._calcDepthLimit2())
-        console.log('this.varDepth', this.varDepth);
-        console.log('Ocean Limit', this.initialValues.getOceanVertLimit())
-        console.log('=====================')
+        console.log('VARDEPTH', this.varDepth);
+        console.log('Vert Limit', this.initialValues.getOceanVertLimit())
+        console.log('Lat Limit', this.initialValues.getOceanLatLimit())
+        console.log('==============')
        
        
        
@@ -224,8 +224,8 @@ class Move {
     private configureHitBottomMove = (dir: string) => {
         let mvmt = this.calcConstant.getMapPointObject().mvmtLat
 
-        console.log('ConfigureHitBottommmmmmmmmmmmm mvmt', mvmt);
-        console.log('ConfigureHitBottommmmmmmmmmmmm dir', dir);
+        // console.log('ConfigureHitBottommmmmmmmmmmmm mvmt', mvmt);
+        // console.log('ConfigureHitBottommmmmmmmmmmmm dir', dir);
         if (this.OorS[1] === "O") {
             if (dir === "right") {
                 if (mvmt === "right" || mvmt === "both") {
