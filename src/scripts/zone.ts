@@ -76,5 +76,8 @@ class Zone {
             }
         }
     }
+    getZoneObjectNumber():number {
+       return  this.upDateZoneObject().id
+    }
 }
 export default Zone;

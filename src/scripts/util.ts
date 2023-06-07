@@ -10,14 +10,14 @@ import EdText from "./edText";
 import { showDepth, showLat, showZone, showMouseAsSub } from "./boundary";
 
 
-export function clear(ctx:CanvasRenderingContext2D) {
-    ctx.clearRect(0, 0, WIDTH, HEIGHT);
-}
-export function getCursorPosition(canvas:HTMLElement, event:MouseEvent):void {
-    const rect = canvas.getBoundingClientRect();
-    const x = event.clientX - rect.left;
-    const y = event.clientY - rect.top;
-}
+// export function clear(ctx:CanvasRenderingContext2D) {
+//     ctx.clearRect(0, 0, WIDTH, HEIGHT);
+// }
+// export function getCursorPosition(canvas:HTMLElement, event:MouseEvent):void {
+//     const rect = canvas.getBoundingClientRect();
+//     const x = event.clientX - rect.left;
+//     const y = event.clientY - rect.top;
+// }
 
 // canvas1 is the ocean
 // canvas2 is the opening page
@@ -41,9 +41,9 @@ export function showCanvas1() {
     setCurrentCanvas(1);
     // edText.initialEdSetup();
     showDepth();
+     edText.updateEdText(1);
     
-    
-    edContainer.classList.remove("hideEd");
+    // edContainer.classList.remove("hideEd");
     bubblesContainer.classList.add("hide");
     if (!(localStorage.getItem("modalDisplayed") === "true")) {
         modal.style.display = "block";
@@ -60,7 +60,7 @@ export function showCanvas1() {
     homeButton.classList.add("can1home");
     homeButton.classList.remove("can2home");
     homeButton.classList.remove("can3home");
-    instPanel.classList.add("hide");
+    // instPanel.classList.add("hide");
     
 }
 
@@ -68,6 +68,7 @@ export function showCanvas2() {
     //opening page
 
     setCurrentCanvas(2);
+    edText.updateEdText(2);
     canvas1.style.display = "none";
     canvas2.style.display = "block";
     canvas3.style.display = "none";
@@ -79,9 +80,7 @@ export function showCanvas2() {
     homeButton.classList.remove("can1home");
     homeButton.classList.add("can2home");
     homeButton.classList.remove("can3home");
-    instPanel.classList.add("hide");
-   
-    edContainer.classList.add("hide");
+    
 }
 
 export function showCanvas3() {
@@ -103,10 +102,8 @@ export function showCanvas3() {
     homeButton.classList.remove("can1home");
     homeButton.classList.remove("can2home");
     homeButton.classList.add("can3home");
-    edContainer.classList.forEach(className => {
-        edContainer.classList.remove(className);
-        instPanel.classList.remove("hide");
-      });
+  
+    edText.updateEdText(3)
     showDepth();
     showLat();
     showZone();

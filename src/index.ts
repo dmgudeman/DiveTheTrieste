@@ -9,7 +9,7 @@ import { showCanvas1, showCanvas2, showCanvas3 } from "./scripts/util";
 import Sub from "./scripts/sub";
 import Ocean from "./scripts/ocean";
 import Cockpit from "./scripts/cockpit";
-import { getCursorPosition } from "./scripts/util";
+// import { getCursorPosition } from "./scripts/util";
 import Keymaster from "./scripts/keymaster";
 import { showMouseAsSub } from "./scripts/boundary";
 import CalcConstant from "./scripts/calcConstant";
@@ -24,8 +24,6 @@ const initialValues = InitialValues.getInstance();
 export let WIDTH = visualViewport.width * 2; // width of canvases
 export let HEIGHT = visualViewport.height * 2.05; // height of canvases
 export const globalCockpit = { cockpit: null };
-
-
 
 let audioFlag = false; //change this to true for production
 
@@ -182,7 +180,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     //use update to make sure the canvas is rendered
     function handler1(e) {
-        getCursorPosition(canvas1, e);
+        // getCursorPosition(canvas1, e);
         cockpit.draw();
         showCanvas3();
         update();

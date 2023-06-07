@@ -66,7 +66,7 @@ class Move {
         let zoneObject = zone.upDateZoneObject();
         let zoneNum = zoneObject.id;
         let canvasNumber = getCurrentCanvas();
-        this.edText.updateEdText(zoneNum, canvasNumber);
+        this.edText.updateEdText(canvasNumber);
     
 
     };

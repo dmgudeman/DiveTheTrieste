@@ -1,8 +1,8 @@
-import { pickImageArray } from "./boundary";
+// import { pickImageArray } from "./boundary";
 import Ocean from "./ocean";
 import Sub from "./sub";
 import Zone from "./zone";
-import {ITextObject} from './types';
+// import {ITextObject} from './types';
 class Images {
     private ctx: CanvasRenderingContext2D;
     private ocean: Ocean;

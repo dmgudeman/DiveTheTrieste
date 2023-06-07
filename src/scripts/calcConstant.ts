@@ -20,8 +20,6 @@ import CalcPosition from "./calcPosition";
 class CalcConstant {
     private initialValues: InitialValues;
     private calcPosition: CalcPosition;
-  
-   
     private textObjects: ITextObject[];
 
     constructor() {
@@ -29,65 +27,6 @@ class CalcConstant {
         this.calcPosition = CalcPosition.getInstance();
         this.textObjects = textObjects;
     }
-
-    // _getCompLat(ocean: Ocean, sub: Sub) {
-    //     return ocean.getX() - sub.getX() + this.initialValues.getInitial_X();
-    // }
-    // _getCompVert(ocean: Ocean, sub: Sub) {
-    //     return ocean.getY() - sub.getY() + this.initialValues.getInitial_Y();
-    // }
-
-    _getZone(vert: number, depth: number): number {
-        // returns the photic zone based on depth
-
-        if (vert > this.initialValues.getHeight() * -0.211) {
-            if (vert - depth > 2 * VERTICAL_VELOCITY) {
-                return EUPHOTIC_PELAGIC;
-            } else {
-                return EUPHOTIC_BENTHIC;
-            }
-        } else if (vert > this.initialValues.getHeight() * -0.45) {
-            if (vert - depth > 2 * VERTICAL_VELOCITY) {
-                return DYSPHOTIC_PELAGIC;
-            } else {
-                return DYSPHOTIC_BENTHIC;
-            }
-        } else {
-            if (vert - depth > 1 * VERTICAL_VELOCITY) {
-                return APHOTIC_PELAGIC;
-            } else {
-                return APHOTIC_BENTHIC;
-            }
-        }
-    }
-
-    // setMapPointCoeffs () {
-    //     let width = this.initialValues.getWidth();
-    //     let height = this.initialValues.getHeight();
-
-    //     for(let i = 0; i < MAP_POINTS.length; i++) {
-
-    //         MAP_POINT_OBJECTS[i].coeff[0] = MAP_POINTS[i][0] / width;
-    //         MAP_POINT_OBJECTS[i].coeff[1] = MAP_POINTS[i][1] / height;
-    //         // console.log(i, 'lat coeff', MAP_POINT_COEFFS[i][0]);
-    //         // console.log(i, 'lat obj', MAP_POINT_OBJECTS[i].coeff[0])
-    //         // // console.log(i, 'vert coeff', MAP_POINT_COEFFS[i][1]);
-    //         // console.log(i, 'vert obj', MAP_POINT_OBJECTS[i].coeff[1])
-
-    //     }
-    // }
-
-    // getDepthObject(lat: number): DepthObject {
-    //     try {
-    //         const result: DepthObject[] = LAT_LIMITS_EXT.filter(
-    //             (obj: DepthObject) => obj.x <= lat && obj.xll >= lat
-    //         );
-    //         let depthObject: DepthObject = result[0];
-    //         return depthObject;
-    //     } catch (error) {
-    //         console.error("calcDepth did not work for lat = ", lat);
-    //     }
-    // }
 
     getMapPointObject(): IMapPointObject {
         let lastObject: IMapPointObject
@@ -239,11 +178,7 @@ class CalcConstant {
         return Math.floor(num / VERTICAL_VELOCITY) * VERTICAL_VELOCITY;
     }
 
-    getTextObject(num: number) {
-        return textObjects[num];
-    }
-
-    setCoeffOnMapPoinObjects() {}
+  
 }
 
 export default CalcConstant;
