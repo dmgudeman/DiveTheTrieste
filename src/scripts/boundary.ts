@@ -1,5 +1,4 @@
 import { SEA_DEPTH,  DIST_CA_TO_TRENCH } from "./constants";
-import { HEIGHT } from "../index";
 import Ocean from './ocean';
 import Sub from './sub';
 import CalcConstant from "./calcConstant";
@@ -9,8 +8,6 @@ import { eventBus } from "./eventBus";
 import CalcPosition from "./calcPosition";
 
 const calcPosition = CalcPosition.getInstance();
-// const ocean = Ocean.getInstance();
-// const sub = Sub.getInstance();
 const initialValues = InitialValues.getInstance();
 
 export  function showMouseAsSub(event) {
@@ -20,23 +17,38 @@ export  function showMouseAsSub(event) {
   }
 
 export function showDepth() {
-    // eventBus.on("oceanXChanged", this.handleOceanXChange);
-    // eventBus.on("subXChanged", this.handleSubXChange);
-    // eventBus.on("oceanYChanged", this.handleOceanYChange);
-    // eventBus.on("subYChanged", this.handleSubYChange);
-
     const ocean = Ocean.getInstance();
     const sub = Sub.getInstance();
-    const conversion = SEA_DEPTH / HEIGHT; // 19.64 feet per pixel
-    const conversionShallow = 2; // 2 feet per pixel
-    let composite = Math.abs(ocean.getY() - sub.getY() + initialValues.getInitial_Y());
-  
+    const conversion:number = SEA_DEPTH / initialValues.getHeight(); // 19.64 feet per pixel
+    const conversionShallow:number = 2; // 2 feet per pixel
+    let composite:number = calcPosition.getCompVert();
+    const depthGauge = document.getElementById("depth");
+    const IPDepthGauge = document.getElementById("IPDepthGauge");
     let depth: number;
-
-    if (composite < 500) {
-        depth = Math.floor(conversionShallow * composite);
+    console.log('COMPOSITE', composite)
+    console.log('COMPOSITE500', composite > -500)
+    console.log('COMPOSITE500', composite > -500)
+    console.log('COMPOSITE7000', composite > -700)
+    console.log('COMPOSITE700', composite > -700)
+   
+  
+   
+    if (composite > -500) {
+        console.log('COMPOSITE111111111', composite )
+        depth = Math.floor(conversionShallow * -composite);
+        depthGauge.innerHTML = `Depth: ${Math.floor(depth)} feet`;
+        IPDepthGauge.innerHTML = `Depth: ${depth} ft`;
+    } else if (composite > -1000) {
+        console.log('COMPOSITE33333333', composite ) 
+        depth = composite * -conversion
+        depthGauge.innerHTML = `Depth: ${Math.floor(depth)} feet`;
+        IPDepthGauge.innerHTML = `Depth: ${depth} ft`;
     } else {
-        depth = Math.floor(conversion * composite);
+        console.log('COMPOSITE2222222222', composite)
+        let miles = (conversion * -composite)/ 5280;
+        depth = parseFloat(miles.toFixed(1));
+        depthGauge.innerHTML = `Depth: ${depth} mile`;
+        IPDepthGauge.innerHTML = `Depth: ${depth} mi`;
     }
     if (depth < 0) depth = 0;
     let tempDepth = calcPosition.getCompVert()
@@ -45,10 +57,8 @@ export function showDepth() {
     // console.log('LOCAL VERT', composite);
     // console.log('CALC POS VERT', calcPosition.getCompVert())
     // console.log('88888888888')
-    const depthGauge = document.getElementById("depth");
-    const IPDepthGauge = document.getElementById("IPDepthGauge");
-    depthGauge.innerHTML = `Depth: ${Math.floor(tempDepth)} feet`;
-    IPDepthGauge.innerHTML = `Depth: ${depth} ft`;
+  
+   
     return depth;
 }
 

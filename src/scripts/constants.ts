@@ -3,9 +3,8 @@
 // canvas3 is the cockpit
 
 
-import { LatMoveLimit, DepthObject, ITextObject, IMapPointObject, IMP} from './types';
+import { ITextObject, IMapPointObject, IMP} from './types';
 import CalcConstant from './calcConstant';
-import { callbackify } from 'util';
 import InitialValues from './initialValues';
 
 export const stopMessageAnimation = {
@@ -28,8 +27,6 @@ export const stopMessageAnimation = {
       _HIT_BOTTOM_FLAG = value;
   }
 
-const calcConstant = new CalcConstant();
-const initialValues = InitialValues.getInstance();
 
 // values
 export const SURFACE = 100;
@@ -84,7 +81,7 @@ const OOB_RIGHT_2 = 'OOB_RIGHT_2';
 
 
 // these update the constants in calConstant
-const MP_0 :IMP = [0,  0, OOB_LEFT ];
+const MP_0 :IMP = [ 0, 0, OOB_LEFT ];
 const MP_1 :IMP = [ 0, 0, INITIAL_POSITION];      // lateral based on width 3840    
 const MP_2 :IMP = [ -180, -461, SLOPE_LIMIT ];    // vertical based on height of 1986
 const MP_3 :IMP = [ -460, -520, START_BUMP ];    
@@ -111,7 +108,7 @@ export const MAP_POINTS: IMP[] = [
 
 // lateral based on width 3840    
 // vertical based on height of 1986
-// these get updated in calcConstants  so no longer used
+// this array not being used
 const MULT_MP_0 :number[] = [ 0, 0 ];
 const MULT_MP_1 :number[] = [ 0, 0 ];
 const MULT_MP_2 :number[] = [ -0.0468, -0.2164 ];// lateral based on width 3840    
@@ -138,8 +135,11 @@ export const MAP_POINT_COEFFS: number[][] =[
 ]
 // the above data structures are currently not used. There is the possibility of implementing
 // them in the future to make the app able to resize dynamically
+// the mvmt are to control movement when hit bottom
+// the coeff are taken from MP_ constants. These are possibly to be used to dyamically
+// make the coeffs in the future. For now these are manually calculated
 
-export const MAP_POINT_OBJECTS: IMapPointObject[] = [  //the mvmt are to control movement when hit bottom
+export const MAP_POINT_OBJECTS: IMapPointObject[] = [  
   {'id':0,  'name':'OOB_LEFT',         'point': MP_0,   mvmtLat: 'right', 'coeff': [ 1, 1 ] },
   {'id':1,  'name':'INITIAL_POSITION', 'point': MP_1,   mvmtLat: 'right', 'coeff': [ 0, 0 ] },
   {'id':2,  'name':'SLOPE_LIMIT',      'point': MP_2,   mvmtLat: 'right', 'coeff': [ -0.0468, -0.2164 ] },

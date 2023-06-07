@@ -76,6 +76,7 @@ class Move {
         let oors = this.calcConstant.getOorS();
         if (oors[0] == "O") {
             this.sub.setX(this.sub.getInitialLatPos());
+            this.sub.setY(this.sub.getInitialVertPos()); 
             // console.log('LATERAL 0000000 LAT');
             if (this.calcPosition.getCompLat() > 0) {
                 // console.log('LATERAL 1111111 LAT');
@@ -136,12 +137,12 @@ class Move {
                 console.log("BBBBBBBBB");
                 this.moveOceanDown(this.vertVel);
                 
-            // } else if (this.calcPosition.getCompVert() >= -VERTICAL_VELOCITY) {
-            //     // stop one vertical vel upon rising
-            //     if (this.dir === "down") {
-            //         console.log("CCCCCCCCC");
-            //         this.moveOceanDown(this.vertVel);
-            //     }
+            } else if (this.calcPosition.getCompVert() > -VERTICAL_VELOCITY) {
+                // stop one vertical vel upon rising
+                if (this.dir === "down") {
+                    console.log("CCCCCCCCC");
+                    this.moveOceanDown(this.vertVel);
+                }
             } else if (this.calcPosition.getCompVert() >= this.varDepth) {
                 // normal
                 if (this.dir === "down") {
