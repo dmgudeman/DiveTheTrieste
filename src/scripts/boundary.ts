@@ -3,9 +3,11 @@ import CalcConstant from "./calcConstant";
 import Zone from "./zone";
 import InitialValues from "./initialValues";
 import CalcPosition from "./calcPosition";
+import { IMapPointObject } from "./types";
 
 const calcPosition = CalcPosition.getInstance();
 const initialValues = InitialValues.getInstance();
+const calcConstant = new CalcConstant();
 
 export function showDepth() {
     const conversion: number = SEA_DEPTH / initialValues.getHeight(); // 19.64 feet per pixel
@@ -14,7 +16,7 @@ export function showDepth() {
     const depthGauge = document.getElementById("depth");
     const IPDepthGauge = document.getElementById("IPDepthGauge");
     let depth: number;
-  
+
     if (composite > -500) {
         depth = Math.floor(conversionShallow * -composite);
         depthGauge.innerHTML = `Depth: ${Math.floor(depth)} feet`;
@@ -30,16 +32,24 @@ export function showDepth() {
         IPDepthGauge.innerHTML = `Depth: ${depth} mi`;
     }
     if (depth < 0) depth = 0;
-   
+
     return depth;
 }
 
-export function showGeoGraphic() {
+export function showGeoDisplay(): void {
+    const IPZoneGauge = document.getElementById("IPZoneGauge");
+    let mapPointObject: IMapPointObject = calcConstant.getMapPointObject();
+    let display = mapPointObject.display;
+    if (calcPosition.getCompLat() === 0) display = 'Home';
+    IPZoneGauge.classList.remove('IPTrench');
+    if (display === 'Marina Trench') {
+        IPZoneGauge.classList.add('IPTrench');
+    }
     
+    IPZoneGauge.innerHTML = `${display}`;
 }
 
 export function showLat(): number {
-    const calcConstant = new CalcConstant();
     const conversion = Math.ceil(
         Math.abs(DIST_CA_TO_TRENCH / calcConstant.getDistCAtoTrench())
     );
@@ -60,9 +70,8 @@ export function showZone(): string {
     return title;
 }
 
-export function showMouseAsSub(e:MouseEvent) {
+export function showMouseAsSub(e: MouseEvent) {
     var x = e.clientX - initialValues.getInitial_X();
     var y = e.clientY - initialValues.getInitial_Y();
     console.log("X: " + x + ", Y: " + y);
 }
-

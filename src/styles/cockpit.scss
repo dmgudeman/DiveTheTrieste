@@ -59,6 +59,9 @@
     z-index: 21; 
 }
 
+
+
+
 .IPZoneGauge {
     display: flex;
     align-items: center;
@@ -74,3 +77,7 @@
     background-color: var(--cockpitText);
     z-index: 21;    
 }
+
+.IPZoneGauge.IPTrench {
+    background-color: var(--trenchBG); 
+ }

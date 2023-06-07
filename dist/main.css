@@ -656,6 +656,10 @@ input {
   z-index: 21;
 }
 
+.IPZoneGauge.IPTrench {
+  background-color: var(--trenchBG);
+}
+
 :root {
   --one: #E0AE7D;
   --two: wheat;
@@ -665,6 +669,7 @@ input {
   --dysphoticLightYellow: #fafa2d;
   --cockpitText: #C5DEE8;
   --cockpitBG: #111224;
+  --trenchBG: #df7128;
 }
 
 body {

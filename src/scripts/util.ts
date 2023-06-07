@@ -7,7 +7,7 @@ import {
 } from "./constants";
 import { globalCockpit } from "../index";
 import EdText from "./edText";
-import { showDepth, showLat, showZone, showMouseAsSub } from "./boundary";
+import { showDepth, showLat, showZone, showMouseAsSub, showGeoDisplay } from "./boundary";
 
 
 // export function clear(ctx:CanvasRenderingContext2D) {
@@ -97,7 +97,7 @@ export function showCanvas3() {
     edText.updateEdText(3)
     showDepth();
     showLat();
-    showZone();
+    showGeoDisplay();
       
 }
 

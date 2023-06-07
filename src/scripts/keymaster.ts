@@ -6,7 +6,7 @@ import Sub from "./sub";
 import Zone from "./zone";
 import Images from "./images";
 import Cockpit from './cockpit';
-import { showZone, showDepth, showLat } from "./boundary";
+import { showZone, showDepth, showLat, showGeoDisplay } from "./boundary";
 
 class Keymaster {
     private ocean: Ocean;
@@ -105,7 +105,7 @@ class Keymaster {
         const zone = new Zone();
         showLat();
         showDepth();
-        showZone();
+        showGeoDisplay();
         zone.upDateZoneObject();
         this.move.getMove(dir);
         if (dir === "left" || dir === "right") this.sub.setLastLatDir(dir);

@@ -76,3 +76,7 @@
   background-color: var(--cockpitText);
   z-index: 21;
 }
+
+.IPZoneGauge.IPTrench {
+  background-color: var(--trenchBG);
+}
