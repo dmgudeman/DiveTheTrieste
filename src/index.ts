@@ -13,14 +13,12 @@ import Cockpit from "./scripts/cockpit";
 import Keymaster from "./scripts/keymaster";
 import { showMouseAsSub } from "./scripts/boundary";
 import CalcConstant from "./scripts/calcConstant";
-import CalcPosition from "./scripts/calcPosition"
+import CalcPosition from "./scripts/calcPosition";
 import InitialValues from "./scripts/initialValues";
 
 const calcConstant = new CalcConstant();
 const initialValues = InitialValues.getInstance();
 
-// export const WIDTH = window.innerWidth * 2; // width of canvases
-// export const HEIGHT = window.innerHeight * 2.05; // height of canvases
 export let WIDTH = visualViewport.width * 2; // width of canvases
 export let HEIGHT = visualViewport.height * 2.05; // height of canvases
 export const globalCockpit = { cockpit: null };
@@ -28,22 +26,11 @@ export const globalCockpit = { cockpit: null };
 let audioFlag = false; //change this to true for production
 
 document.addEventListener("DOMContentLoaded", () => {
-// FULL_LAT_LIMIT: number = calcConstant.getFullLatLimit();
-// const FULL_VERTICAL_LIMIT: number = calcConstant.getFullVertLimit();
-// const SUB_INITIAL_LAT_POS: number = calcConstant.getInitial_X()
-// const INITIAL_Y_POSITION: number = calcConstant.getInitial_Y();
+    window.addEventListener("resize", function () {
+        WIDTH = visualViewport.width * 2; // width of canvases
+        HEIGHT = visualViewport.height * 2.05;
+    });
 
-
-    window.addEventListener('resize', function() {
-     WIDTH = visualViewport.width * 2; // width of canvases
-     HEIGHT = visualViewport.height * 2.05; 
-       
-      });
-
-
-   
-
-  
     localStorage.setItem("modalDisplayed", false.toString());
 
     const canvas1: HTMLCanvasElement = document.getElementById(
@@ -88,7 +75,7 @@ document.addEventListener("DOMContentLoaded", () => {
     let key = new Keymaster();
 
     CalcPosition.getInstance();
-  
+
     gitHubButton.addEventListener("click", () => {
         window.location.href = "https://github.com/dmgudeman";
     });
@@ -127,10 +114,11 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     musicNoteButton.addEventListener("click", (e) => {
-            toggleAudio(audio);
+        toggleAudio(audio);
     });
 
     // make the instruction page canvas
+    let isInstructions1Visible = true;
     const backgroundImage = new Image();
     backgroundImage.src = "assets/openOcean.png"; // background for opening page
 
@@ -138,30 +126,41 @@ document.addEventListener("DOMContentLoaded", () => {
         ctx2.drawImage(backgroundImage, 0, 0, canvas2.width, canvas2.height);
         backgroundImage.style.zIndex = "100";
 
-        const instructions = new Image();
-        instructions.src = "assets/dtt6.png";
+        const instructions1 = new Image();
+        instructions1.src = "assets/dtt8.png";
+        const instructions2 = new Image();
+        instructions2.src = "assets/dtt9.png";
 
-        instructions.onload = () => {
-            ctx2.drawImage(instructions, 450, 250, 600, 600);
+        instructions1.onload = () => {
+            ctx2.drawImage(instructions1, 450, 200, 600, 600);
         };
 
-        let banner = { x: 450, y: 100, width: 600, height: 150 };
+        let banner = { x: 450, y: 100, width: 600, height: 100 };
         ctx2.fillStyle = "#fff";
         ctx2.fillRect(banner.x, banner.y, banner.width, banner.height);
         ctx2.fillStyle = "#4CAF50";
         ctx2.font = "bold 50px Arial";
         ctx2.fillText("DIVE THE TRIESTE!", 520, 175);
-    };
-    const instructions = new Image();
-    instructions.src = "assets/instructions.png";
-    instructions.onload = () => {
-        ctx2.drawImage(instructions, 450, 250, 600, 600);
-        update();
+
+        canvas2.onclick = function (e) {
+            let rect = canvas2.getBoundingClientRect();
+            let x = e.clientX - rect.left;
+            let y = e.clientY - rect.top;
+
+            if (x > 450 && x < 450 + 600 && y > 200 && y < 200 + 600) {
+                ctx2.clearRect(450, 200, 600, 600);
+                if (isInstructions1Visible) {
+                    ctx2.drawImage(instructions2, 450, 200, 600, 600);
+                } else {
+                    ctx2.drawImage(instructions1, 450, 200, 600, 600);
+                }
+                isInstructions1Visible = !isInstructions1Visible; // toggle the flag
+            }
+        };
     };
 
     //use update to make sure the canvas is rendered
-    function handler1(e) {
-        // getCursorPosition(canvas1, e);
+    function handler1() {
         cockpit.draw();
         showCanvas3();
         update();
@@ -190,10 +189,10 @@ document.addEventListener("DOMContentLoaded", () => {
     // MAIN ANIMATION LOOP //////
     function update() {
         clear();
-        
+
         ocean.draw();
         sub.draw();
-        
+
         requestAnimationFrame(update);
     }
     // start the seperate animation loop in the sub
@@ -202,44 +201,28 @@ document.addEventListener("DOMContentLoaded", () => {
         requestAnimationFrame(animateSprite);
     }
     animateSprite();
-    
-    function keyDown(e:KeyboardEvent) {
-        console.log('e.key', e.key)
-        key.keyDown(e, ctx1, ctx2, ctx3)
-    //     if (e.key === "ArrowDown" || e.key === "Down") {
-    //         key.newPos("down");
-    //     } else if (e.key === "ArrowLeft" || e.key === "Left") {
-    //         key.newPos("left");
-    //     } else if (e.key === "ArrowRight" || e.key === "Right") {
-    //         key.newPos("right");
-    //     } else if (e.key === "ArrowUp" || e.key === "Up") {
-    //         key.newPos("up");
-    //     } else if (e.key === "Enter") {
-    //         key.navigate("Enter");
-    //     } else if (e.key === "Escape") {
-    //         key.navigate("Escape");
-    //     }
-        
+
+    function keyDown(e: KeyboardEvent) {
+        key.keyDown(e, ctx1, ctx2, ctx3);
     }
 
     document.addEventListener("keydown", keyDown);
-     
 });
 
 const printInitialViewPortStats = () => {
-    console.log('=======================')
-    console.log('WIDTH', WIDTH)
-    console.log('window width is ' + window.innerWidth);
-    console.log('viewport width is ' + window.visualViewport.width);
-    console.log('--------------------')
-    console.log('HEIGHT', HEIGHT)
-    console.log('window height is ' + window.innerHeight);
-    console.log('viewport height is ' + window.visualViewport.height);
-    console.log('=======================')
-    console.log('FULL_LAT_LIMIT', initialValues.getFullLatLimit())
-    console.log('FULL_VERTICAL_LIMIT', initialValues.getFullVertLimit())
-    console.log('SUB_INITAL_LAT_POS', initialValues.getInitial_X())
-    console.log('INITIAL_Y_POSITION', initialValues.getInitial_Y())
-    console.log('--------------------')
-    console.log('=======================')
-}
+    console.log("=======================");
+    console.log("WIDTH", WIDTH);
+    console.log("window width is " + window.innerWidth);
+    console.log("viewport width is " + window.visualViewport.width);
+    console.log("--------------------");
+    console.log("HEIGHT", HEIGHT);
+    console.log("window height is " + window.innerHeight);
+    console.log("viewport height is " + window.visualViewport.height);
+    console.log("=======================");
+    console.log("FULL_LAT_LIMIT", initialValues.getFullLatLimit());
+    console.log("FULL_VERTICAL_LIMIT", initialValues.getFullVertLimit());
+    console.log("SUB_INITAL_LAT_POS", initialValues.getInitial_X());
+    console.log("INITIAL_Y_POSITION", initialValues.getInitial_Y());
+    console.log("--------------------");
+    console.log("=======================");
+};
