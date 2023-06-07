@@ -83,6 +83,7 @@ class Ocean {
 
     public setX(x: number): void {
         this.x = x;
+        
     }
     public getY(): number {
         return this.y;
@@ -90,6 +91,7 @@ class Ocean {
 
     public setY(y: number): void {
         this.y = y;
+        console.log('OCEAN SETY', this.y)
     }
 
     public getVelRight(): number {

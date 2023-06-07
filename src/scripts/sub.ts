@@ -109,6 +109,7 @@ class Sub {
 
     public setY(y: number): void {
         this.y = y;
+        console.log('SUB SETY', this.y)
     }
 
     public getW(): number {

@@ -39,31 +39,31 @@ class CalcPosition {
     handleOceanXChange = (newX: number) => {
         this.oceanLat = newX ;
         this.compLat = this.oceanLat - this.subLat + this.initialValues.getInitial_X();
-        console.log('=======CALC POSITION===============')
-        console.log("ZZ newX", newX);
-        console.log("ZZ this.coeanLat", this.oceanLat)
+        // console.log('=======CALC POSITION===============')
+        // console.log("ZZ newX", newX);
+        // console.log("ZZ this.coeanLat", this.oceanLat)
         // console.log('ZZ OCEAN_LAT_LIMIT', this.initialValues.getOceanLatLimit())
         // console.log('ZZ this.subLat', this.subLat)
         // console.log('ZZ Initial_X()', this.initialValues.getInitial_X())
         // console.log('ZZ .getWidth', this.initialValues.getWidth())
-        console.log('ZZ this.compLat', this.compLat)
+        // console.log('ZZ this.compLat', this.compLat)
         // console.log('ZZ FullLatLimit', this.initialValues.getFullLatLimit())
-        console.log('======================')
+        // console.log('======================')
     };
 
     handleSubXChange = (newX: number) => {
-        console.log('+++++++++++++++++++++++++')
-        console.log("WWWWWWWWW newX", newX);
+        // console.log('+++++++++++++++++++++++++')
+        // console.log("WWWWWWWWW newX", newX);
         this.subLat = newX;
         this.compLat = this.oceanLatLimit - this.subLat + this.initialValues.getInitial_X();
-        console.log('WWWWWWWWW this.oceanLat', this.oceanLat)
-        console.log('WWWWWWWWW this.subLat', this.subLat)
-        console.log('WWWWWWWWW this.initialValues.getInitial_X()', this.initialValues.getInitial_X())
-        console.log('WWWWWWWWW this.initialValues.getWidth', this.initialValues.getWidth())
-        console.log('WWWWWWWWW this.compLat', this.compLat)
-        console.log('WWWWWWWWW this.intialValues.getFullLatLimit', this.initialValues.getFullLatLimit())
+        // console.log('WWWWWWWWW this.oceanLat', this.oceanLat)
+        // console.log('WWWWWWWWW this.subLat', this.subLat)
+        // console.log('WWWWWWWWW this.initialValues.getInitial_X()', this.initialValues.getInitial_X())
+        // console.log('WWWWWWWWW this.initialValues.getWidth', this.initialValues.getWidth())
+        // console.log('WWWWWWWWW this.compLat', this.compLat)
+        // console.log('WWWWWWWWW this.intialValues.getFullLatLimit', this.initialValues.getFullLatLimit())
 
-        console.log('+++++++++++++++++++++++++')
+        // console.log('+++++++++++++++++++++++++')
     };
     handleOceanYChange = (newY: number) => {
         

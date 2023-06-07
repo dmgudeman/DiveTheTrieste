@@ -19,8 +19,6 @@ import InitialValues from "./scripts/initialValues";
 const calcConstant = new CalcConstant();
 const initialValues = InitialValues.getInstance();
 
-// export const WIDTH = window.innerWidth * 2; // width of canvases
-// export const HEIGHT = window.innerHeight * 2.05; // height of canvases
 export let WIDTH = visualViewport.width * 2; // width of canvases
 export let HEIGHT = visualViewport.height * 2.05; // height of canvases
 export const globalCockpit = { cockpit: null };
@@ -28,22 +26,12 @@ export const globalCockpit = { cockpit: null };
 let audioFlag = false; //change this to true for production
 
 document.addEventListener("DOMContentLoaded", () => {
-// FULL_LAT_LIMIT: number = calcConstant.getFullLatLimit();
-// const FULL_VERTICAL_LIMIT: number = calcConstant.getFullVertLimit();
-// const SUB_INITIAL_LAT_POS: number = calcConstant.getInitial_X()
-// const INITIAL_Y_POSITION: number = calcConstant.getInitial_Y();
-
 
     window.addEventListener('resize', function() {
      WIDTH = visualViewport.width * 2; // width of canvases
-     HEIGHT = visualViewport.height * 2.05; 
-       
+     HEIGHT = visualViewport.height * 2.05;     
       });
 
-
-   
-
-  
     localStorage.setItem("modalDisplayed", false.toString());
 
     const canvas1: HTMLCanvasElement = document.getElementById(
@@ -204,22 +192,7 @@ document.addEventListener("DOMContentLoaded", () => {
     animateSprite();
     
     function keyDown(e:KeyboardEvent) {
-        console.log('e.key', e.key)
-        key.keyDown(e, ctx1, ctx2, ctx3)
-    //     if (e.key === "ArrowDown" || e.key === "Down") {
-    //         key.newPos("down");
-    //     } else if (e.key === "ArrowLeft" || e.key === "Left") {
-    //         key.newPos("left");
-    //     } else if (e.key === "ArrowRight" || e.key === "Right") {
-    //         key.newPos("right");
-    //     } else if (e.key === "ArrowUp" || e.key === "Up") {
-    //         key.newPos("up");
-    //     } else if (e.key === "Enter") {
-    //         key.navigate("Enter");
-    //     } else if (e.key === "Escape") {
-    //         key.navigate("Escape");
-    //     }
-        
+        key.keyDown(e, ctx1, ctx2, ctx3);   
     }
 
     document.addEventListener("keydown", keyDown);

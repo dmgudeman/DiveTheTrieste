@@ -29,11 +29,11 @@ export const stopMessageAnimation = {
 
 
 // values
-export const SURFACE = 100;
-export const DEPTH_CONT_SHELF = 450;
+// export const SURFACE = 100;
+// export const DEPTH_CONT_SHELF = 450;
 export const SEA_DEPTH = 36161; // feet
-export const OCEAN_BOTTOM = 1560;
-export const OCEAN_FLOOR = 1560;
+// export const OCEAN_BOTTOM = 1560;
+// export const OCEAN_FLOOR = 1560;
 export const DIST_CA_TO_TRENCH = 6000; //miles
 
 // velocities
@@ -41,17 +41,17 @@ export const LAT_VELOCITY = 20;
 export const VERTICAL_VELOCITY = 20;
 
 //vertical for messages and images
-export const B_P_BARRIER = 200;
-export const CONT_SHELF_BENTHIC = DEPTH_CONT_SHELF - 150;
-export const E_D_BARRIER = SURFACE + 200;
-export const D_A_BARRIER = SURFACE + 500;   // dysphotic_aphotic_barrier
-export const APHOTIC_BENTHIC_BARRIER = OCEAN_BOTTOM - 400;
+// export const B_P_BARRIER = 200;
+// export const CONT_SHELF_BENTHIC = DEPTH_CONT_SHELF - 150;
+// export const E_D_BARRIER = SURFACE + 200;
+// export const D_A_BARRIER = SURFACE + 500;   // dysphotic_aphotic_barrier
+// export const APHOTIC_BENTHIC_BARRIER = OCEAN_BOTTOM - 400;
 
 // flags
-export const STOP_OCEAN_LAT = 'stop_ocean_lateral';
-export const STOP_SUB_LAT = 'stop_sub_lateral';
-export const STOP_OCEAN_VERTICAL = 'stop_ocean_vertical';
-export const STOP_SUB_VERTICAL = 'stop_sub_vertical';
+// export const STOP_OCEAN_LAT = 'stop_ocean_lateral';
+// export const STOP_SUB_LAT = 'stop_sub_lateral';
+// export const STOP_OCEAN_VERTICAL = 'stop_ocean_vertical';
+// export const STOP_SUB_VERTICAL = 'stop_sub_vertical';
 
 // for messaging and photos
 export const EUPHOTIC_PELAGIC: number = 0;
