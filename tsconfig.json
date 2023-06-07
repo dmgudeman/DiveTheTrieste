@@ -108,6 +108,7 @@
   },
   "include": [
     "src/**/*",
+    "globals.d.ts",
     // "src/index.js" 
    ]
 }

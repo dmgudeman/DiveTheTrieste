@@ -12,37 +12,7 @@ interface Configuration extends WebpackConfiguration {
   devServer?: WebpackDevServerConfiguration;
   devtool?: string;
 }
-// interface Configuration {
-//   entry: {
-//     main: any[];
-//     styles1: any;
-//     styles2: any;
-//     styles3: any;
-//     styles4: any;
-//   };
-//   output: {
-//     path: any;
-//     filename: string;
-//   };
-//   module: {
-//     rules: ({
-//       test: RegExp;
-//       use: string[];
-//       exclude: RegExp;
-//     } | {
-//       test: RegExp;
-//       use: any[];
-//       exclude?: undefined;
-//     } | {
-//       // ... other rule types
-//     })[];
-//   };
-//   resolve: {
-//     // ... resolve configuration
-//   };
-//   plugins: any[];
-//   devtool?: string; // Add 'devtool' property to the type definition
-// }
+
 
 const config: Configuration = {
   entry: {
@@ -90,6 +60,17 @@ const config: Configuration = {
         test: /\.ts$/,
         use: 'ts-loader',
         exclude: /node_modules/
+      },
+      {
+        test: /\.(png|svg|jpg|jpeg|webp)$/,
+        use: [
+          {
+            loader: 'file-loader',
+            options: {
+              name: '[path][name].[ext]',
+            },
+          },
+        ],
       }
     ]
   },
@@ -112,3 +93,35 @@ module.exports = (env, argv) => {
 
   return config;
 }
+
+// interface Configuration {
+//   entry: {
+//     main: any[];
+//     styles1: any;
+//     styles2: any;
+//     styles3: any;
+//     styles4: any;
+//   };
+//   output: {
+//     path: any;
+//     filename: string;
+//   };
+//   module: {
+//     rules: ({
+//       test: RegExp;
+//       use: string[];
+//       exclude: RegExp;
+//     } | {
+//       test: RegExp;
+//       use: any[];
+//       exclude?: undefined;
+//     } | {
+//       // ... other rule types
+//     })[];
+//   };
+//   resolve: {
+//     // ... resolve configuration
+//   };
+//   plugins: any[];
+//   devtool?: string; // Add 'devtool' property to the type definition
+// }

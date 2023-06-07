@@ -15,6 +15,7 @@ import { showMouseAsSub } from "./scripts/boundary";
 import CalcConstant from "./scripts/calcConstant";
 import CalcPosition from "./scripts/calcPosition";
 import InitialValues from "./scripts/initialValues";
+import Modal from './scripts/modal';
 
 const calcConstant = new CalcConstant();
 const initialValues = InitialValues.getInstance();
@@ -31,7 +32,7 @@ document.addEventListener("DOMContentLoaded", () => {
         HEIGHT = visualViewport.height * 2.05;
     });
 
-    localStorage.setItem("modalDisplayed", false.toString());
+    // localStorage.setItem("modalDisplayed", false.toString());
 
     const canvas1: HTMLCanvasElement = document.getElementById(
         "canvas1"
@@ -73,6 +74,7 @@ document.addEventListener("DOMContentLoaded", () => {
     let cockpit = new Cockpit(ctx3);
     globalCockpit.cockpit = cockpit;
     let key = new Keymaster();
+    // const oceanModal = new Modal("modal", "close")
 
     CalcPosition.getInstance();
 
@@ -92,7 +94,7 @@ document.addEventListener("DOMContentLoaded", () => {
         showCanvas2();
     });
 
-    const modal = document.getElementById("modal");
+    // const modal = document.getElementById("modal");
     let audio = document.getElementById("music");
     function toggleAudio(audio) {
         if (audioFlag) {
@@ -105,13 +107,14 @@ document.addEventListener("DOMContentLoaded", () => {
         audioFlag = !audioFlag;
     }
     toggleAudio(audio);
-
+    // localStorage.setItem("modalDisplayed", false.toString());
+ 
     // Close the modal when the user clicks outside
-    window.addEventListener("click", function (event) {
-        if (event.target === modal) {
-            modal.style.display = "none";
-        }
-    });
+    // window.addEventListener("click", function (event) {
+    //     if (event.target === oceanModal.getModalElement()) {
+    //         oceanModal.hideModal();
+    //     }
+    // });
 
     musicNoteButton.addEventListener("click", (e) => {
         toggleAudio(audio);

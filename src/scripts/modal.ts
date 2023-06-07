@@ -2,10 +2,10 @@ class Modal {
     private modal: HTMLElement | null;
     private closeButton: HTMLSpanElement | null;
 
-    constructor() {
-        this.modal = document.getElementById("modal");
+    constructor(modalId: string, closeButtonClass: string) {
+        this.modal = document.getElementById(modalId);
         this.closeButton = document.getElementsByClassName(
-            "close"
+            closeButtonClass
         )[0] as HTMLSpanElement | null;
 
         if (this.closeButton) {
@@ -24,7 +24,7 @@ class Modal {
     }
 
     displayModalInitially() {
-        if (!(localStorage.getItem("modalDisplayed") === "true")) {
+        if (!(localStorage.getItem(this.modal?.id) === "true")) {
             this.showModal();
         }
     }
@@ -39,7 +39,10 @@ class Modal {
         if(this.modal) {
             this.modal.style.display = "none";
         }
-        localStorage.setItem("modalDisplayed", 'true');
+        localStorage.setItem(this.modal?.id || "modalDisplayed", 'true');
+    }
+    public getModalElement(): HTMLElement | null {
+        return this.modal;
     }
 }
 

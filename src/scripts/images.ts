@@ -1,5 +1,6 @@
 import Zone from "./zone";
 
+
 class Images {
     private images: string[][];
 
@@ -16,6 +17,8 @@ class Images {
         const x = Math.floor(Math.random() * arr.length);
         return arr[x];
     }
+
+
 
     private ep: string[] = [
         "./assets/life/ep/001.jpg",
@@ -36,19 +39,22 @@ class Images {
 
     private eb: string[] = [
         "./assets/life/eb/001.jpeg",
-        "./assets/life/eb/002.jpeg",
+        "./assets/life/eb/002.webp",
         "./assets/life/eb/003.jpeg",
-        "./assets/life/eb/004.jpeg",
+        "./assets/life/eb/004.jpg",
         "./assets/life/eb/005.jpeg",
         "./assets/life/eb/006.jpeg",
-        "./assets/life/eb/007.jpeg",
+        "./assets/life/eb/007.jpg",
         "./assets/life/eb/008.jpeg",
         "./assets/life/eb/009.jpeg",
         "./assets/life/eb/010.jpeg",
         "./assets/life/eb/011.jpeg",
-        "./assets/life/eb/012.jpeg",
+        "./assets/life/eb/012.jpg",
         "./assets/life/eb/013.webp",
-        "./assets/life/eb/014.jpeg",
+        "./assets/life/eb/014.jpg",
+        "./assets/life/eb/015.jpg",
+        "./assets/life/eb/016.jpg",
+        "./assets/life/eb/017.jpg",
     ];
 
     private dp: string[] = [

@@ -23,7 +23,7 @@ class Keymaster {
         this.ocean = Ocean.getInstance();
         this.sub = Sub.getInstance();
         // this.images = new Images();
-        this.modal = new Modal();
+        this.modal = new Modal("modal", "close");
         this.move = new Move(this.ocean, this.sub);
         // this.currentCanvas = getCurrentCanvas() || 2;
     }
