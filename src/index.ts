@@ -37,21 +37,7 @@ document.addEventListener("DOMContentLoaded", () => {
     window.addEventListener('resize', function() {
      WIDTH = visualViewport.width * 2; // width of canvases
      HEIGHT = visualViewport.height * 2.05; 
-        console.log('=======================')
-        console.log('WIDTH', WIDTH)
-        console.log('window width is ' + window.innerWidth);
-        console.log('viewport width is ' + window.visualViewport.width);
-        console.log('--------------------')
-        console.log('HEIGHT', HEIGHT)
-        console.log('window height is ' + window.innerHeight);
-        console.log('viewport height is ' + window.visualViewport.height);
-        console.log('=======================')
-        console.log('FULL_LAT_LIMIT', initialValues.getFullLatLimit())
-        console.log('FULL_VERTICAL_LIMIT', initialValues.getFullVertLimit())
-        console.log('SUB_INITAL_LAT_POS', initialValues.getInitial_X())
-        console.log('INITIAL_Y_POSITION', initialValues.getInitial_Y())
-        console.log('--------------------')
-        console.log('=======================')
+       
       });
 
 
@@ -70,8 +56,6 @@ document.addEventListener("DOMContentLoaded", () => {
     // toggleAudio(audio);
     localStorage.setItem("modalDisplayed", false.toString());
 
-    console.log("HEIGHT", HEIGHT);
-    console.log("WIDTH", WIDTH);
     const canvas1: HTMLCanvasElement = document.getElementById(
         "canvas1"
     ) as HTMLCanvasElement;
@@ -115,11 +99,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     CalcPosition.getInstance();
   
-   
-    // document.addEventListener("mousedown", (e)=> {
-    //   showMouseAsSub(e)
-    // })
-
     gitHubButton.addEventListener("click", () => {
         window.location.href = "https://github.com/dmgudeman";
     });
@@ -151,7 +130,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // make the instruction page canvas
     const backgroundImage = new Image();
-    backgroundImage.src = "assets/openOcean.png";
+    backgroundImage.src = "assets/openOcean.png"; // background for opening page
 
     backgroundImage.onload = function () {
         ctx2.drawImage(backgroundImage, 0, 0, canvas2.width, canvas2.height);
@@ -242,3 +221,21 @@ document.addEventListener("DOMContentLoaded", () => {
     document.addEventListener("keydown", keyDown);
      
 });
+
+const printInitialViewPortStats = () => {
+    console.log('=======================')
+    console.log('WIDTH', WIDTH)
+    console.log('window width is ' + window.innerWidth);
+    console.log('viewport width is ' + window.visualViewport.width);
+    console.log('--------------------')
+    console.log('HEIGHT', HEIGHT)
+    console.log('window height is ' + window.innerHeight);
+    console.log('viewport height is ' + window.visualViewport.height);
+    console.log('=======================')
+    console.log('FULL_LAT_LIMIT', initialValues.getFullLatLimit())
+    console.log('FULL_VERTICAL_LIMIT', initialValues.getFullVertLimit())
+    console.log('SUB_INITAL_LAT_POS', initialValues.getInitial_X())
+    console.log('INITIAL_Y_POSITION', initialValues.getInitial_Y())
+    console.log('--------------------')
+    console.log('=======================')
+}

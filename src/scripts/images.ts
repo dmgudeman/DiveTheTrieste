@@ -4,20 +4,11 @@ import Sub from "./sub";
 import Zone from "./zone";
 // import {ITextObject} from './types';
 class Images {
-    private ctx: CanvasRenderingContext2D;
-    private ocean: Ocean;
-    private sub: Sub;
+   
     private images: string[][];
 
-    constructor(options: {
-        ctx: CanvasRenderingContext2D;
-        ocean: Ocean;
-        sub: Sub;
-    }) {
-        this.ctx = options.ctx;
-        this.ocean = options.ocean;
-        this.sub = options.sub;
-
+    constructor() {
+    
         // Assign a number to the arrays
         this.images = [this.ep, this.eb, this.dp, this.db, this.ap, this.ab];
     }
