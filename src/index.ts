@@ -158,6 +158,12 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         };
     };
+    const instructions = new Image();
+    instructions.src = "assets/instructions.png";
+    instructions.onload = () => {
+        ctx2.drawImage(instructions, 450, 250, 600, 600);
+        update();
+    };
 
     //use update to make sure the canvas is rendered
     function handler1() {
