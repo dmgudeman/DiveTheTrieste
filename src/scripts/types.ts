@@ -46,6 +46,7 @@ export interface IMapPointObject {
     point: IMP;
     mvmtLat: string;
     coeff: number[];
+    display: string;
 }
 
 export type IMP = [

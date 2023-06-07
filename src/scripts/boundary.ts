@@ -34,6 +34,10 @@ export function showDepth() {
     return depth;
 }
 
+export function showGeoGraphic() {
+    
+}
+
 export function showLat(): number {
     const calcConstant = new CalcConstant();
     const conversion = Math.ceil(
