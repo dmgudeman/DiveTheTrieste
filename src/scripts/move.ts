@@ -60,6 +60,7 @@ class Move {
             setHitBottomFlag(false);
             this.getLatMove();
         }
+        // this.getLatMove();
         this.getVerticalMove();
 
         let zoneObject = zone.upDateZoneObject();
@@ -116,11 +117,15 @@ class Move {
     }
 
     private getVerticalMove() {
+        this.varDepth = this.calcConstant._calcDepthLimit2();
         console.log('VERT', this.calcPosition.getCompVert())
-        console.log('OCEAN LIMIT', this.initialValues.getOceanVertLimit())
         console.log('VARDEPTH' , this.calcConstant._calcDepthLimit2())
         console.log("AAAAAAAAA");
         console.log('AAAAAAAAA', this.calcConstant.getOorS())
+        console.log('this.varDepth', this.varDepth)
+        console.log('VERT>=DEPTH',(this.calcPosition.getCompVert() <= this.varDepth));
+        console.log('this.dir', this.dir)
+        console.log(' FFF conditional', (this.calcPosition.getCompVert() <= this.varDepth + VERTICAL_VELOCITY))
       
         let oorS = this.calcConstant.getOorS();
         if (oorS[1] == "O") {
@@ -130,13 +135,14 @@ class Move {
                 // move down no matter what if above surface
                 console.log("BBBBBBBBB");
                 this.moveOceanDown(this.vertVel);
-            } else if (this.calcPosition.getCompVert() > -VERTICAL_VELOCITY) {
-                // stop one vertical vel upon rising
-                if (this.dir === "down") {
-                    console.log("CCCCCCCCC");
-                    this.moveOceanDown(this.vertVel);
-                }
-            } else if (this.calcPosition.getCompVert() > this.varDepth) {
+                
+            // } else if (this.calcPosition.getCompVert() >= -VERTICAL_VELOCITY) {
+            //     // stop one vertical vel upon rising
+            //     if (this.dir === "down") {
+            //         console.log("CCCCCCCCC");
+            //         this.moveOceanDown(this.vertVel);
+            //     }
+            } else if (this.calcPosition.getCompVert() >= this.varDepth) {
                 // normal
                 if (this.dir === "down") {
                     console.log("DDDDDDDD");
@@ -147,7 +153,7 @@ class Move {
                 }
             } else if (this.calcPosition.getCompVert() <= this.varDepth + VERTICAL_VELOCITY) {
                 // stop one vel unit from lower limit
-                // console.log("FFFFFFFF");
+                console.log("FFFFFFFF");
                 if (this.dir === "up") {
                     this.moveOceanUp(this.vertVel);
                 }
@@ -209,7 +215,10 @@ class Move {
     };
 
     private configureHitBottomMove = (dir: string) => {
-        let mvmt = this.mapPointObject.mvmtLat;
+        let mvmt = this.calcConstant.getMapPointObject().mvmtLat
+
+        console.log('ConfigureHitBottommmmmmmmmmmmm mvmt', mvmt);
+        console.log('ConfigureHitBottommmmmmmmmmmmm dir', dir);
         if (this.OorS[1] === "O") {
             if (dir === "right") {
                 if (mvmt === "right" || mvmt === "both") {

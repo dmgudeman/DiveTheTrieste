@@ -95,20 +95,22 @@ class CalcConstant {
         let lat = this.calcPosition.getCompLat();
         try {
             for (let i = 1; i < MAP_POINT_OBJECTS.length - 1; i++) {
+                lastObject = MAP_POINT_OBJECTS[i-1]
                 let lastMapPoints: number[] = this.calcPoint(
                     MAP_POINT_OBJECTS[i - 1].coeff
                 );
                 let currentPoints: number[] = this.calcPoint(
                     MAP_POINT_OBJECTS[i].coeff
                 );
-              
+            
                
 
                 if (lastMapPoints[0] >= lat && currentPoints[0] < lat) {
                     currentObject = MAP_POINT_OBJECTS[i];
-                    // console.log('$$$$$$$$$$$$$')
-                    // console.log('CURRENTPOINTS', currentPoints)
-                    // console.log('lastMapPoints[0]', lastMapPoints[0])
+                    // console.log('$$$$$$$$$$$$$')console.log('lastObject.', currentPoints)
+                    console.log('currentObject.name', currentObject.name)
+                    
+                   
                     // console.log('currentPoints[0]', currentPoints[0])
                     // console.log('nextMapPointsX < lat', currentPoints[0] < lat)
                     // // console.log('mapPointX => lat', mapPoints[0] >= lat)
@@ -148,10 +150,10 @@ class CalcConstant {
     getOorS(): string[] {
         let lat = this.calcPosition.getCompLat();
         let vert = this.calcPosition.getCompVert();
-        console.log('LAT', this.calcPosition.getCompLat())
-        console.log('VERT', this.calcPosition.getCompVert())
-        console.log('L LIM',this.initialValues.getOceanLatLimit())
-        console.log('VERT LIM',this.initialValues.getOceanVertLimit())
+        // console.log('LAT', this.calcPosition.getCompLat())
+        // console.log('VERT', this.calcPosition.getCompVert())
+        // console.log('L LIM',this.initialValues.getOceanLatLimit())
+        // console.log('VERT LIM',this.initialValues.getOceanVertLimit())
 
         if (
             lat >= this.initialValues.getOceanLatLimit() &&
@@ -189,26 +191,25 @@ class CalcConstant {
         // console.log("====++++======");
 
         const index = this.getMapPointObject().id;
-        const mapPointObject: IMapPointObject = MAP_POINT_OBJECTS[index];
-        if (!mapPointObject) return null;
+        const lastMapPointObject: IMapPointObject = MAP_POINT_OBJECTS[index-1];
         const nextMapPointObject: IMapPointObject =
-            MAP_POINT_OBJECTS[index + 1];
+            MAP_POINT_OBJECTS[index];
 
-        let startX = mapPointObject.coeff[0] * this.initialValues.getWidth();
+        let startX = lastMapPointObject.coeff[0] * this.initialValues.getWidth();
         let endX = nextMapPointObject.coeff[0] * this.initialValues.getWidth();
-        console.log("getIitial_x", this.initialValues.getInitial_X());
-        console.log("COMPLAT", this.calcPosition.getCompLat());
-        console.log("nextMapPointObject.coeff[0]", nextMapPointObject.coeff[0]);
-        console.log("nextMapPointObject.coeff[1]", nextMapPointObject.coeff[1]);
-        console.log("START X ", startX);
-        console.log("END X", endX);
-        let startY = nextMapPointObject.coeff[1] * this.initialValues.getHeight();
+        // console.log("getIitial_x", this.initialValues.getInitial_X());
+        // console.log("COMPLAT", this.calcPosition.getCompLat());
+        // console.log("nextMapPointObject.coeff[0]", nextMapPointObject.coeff[0]);
+        // console.log("nextMapPointObject.coeff[1]", nextMapPointObject.coeff[1]);
+        // console.log("START X ", startX);
+        // console.log("END X", endX);
+        let startY = lastMapPointObject.coeff[1] * this.initialValues.getHeight();
+        let endY = nextMapPointObject.coeff[1] * this.initialValues.getHeight();
 
-        let endY = mapPointObject.coeff[1] * this.initialValues.getHeight();
         // console.log('END Y', endY)
         // console.log('START Y ', startY)
         let x =  this.calcPosition.getCompLat();
-        console.log('LATTTT IN CALCDEPTH ', x)
+        // console.log('LATTTT IN CALCDEPTH ', x)
 
         if (startX === endX) {
             // handles vertical line
@@ -218,9 +219,9 @@ class CalcConstant {
         const yIntercept = startY - slope * startX;
         const y = slope * x + yIntercept;
 
-        console.log("SLOPE", slope);
-        console.log("yIntercept", yIntercept);
-        console.log("yyyyyyyy", y)
+        // console.log("SLOPE", slope);
+        // console.log("yIntercept", yIntercept);
+        // console.log("yyyyyyyy", y)
         let ans = Math.floor(y / VERTICAL_VELOCITY) * VERTICAL_VELOCITY; // round down to the nearest velocity
         return ans;
     }

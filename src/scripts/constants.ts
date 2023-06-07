@@ -95,7 +95,7 @@ const MP_7 :IMP = [ -1180, -220, DBL_PEAK_1 ];
 const MP_8 :IMP = [ -1320, -240, DBL_PEAK_2 ];
 const MP_9 :IMP = [ -1400, -481, END_DBL ];
 const MP_10 :IMP = [ -1580, -520, START_TRENCH ];
-const MP_11 :IMP = [ -1720, -1760, TRENCH_BOTTOM_L ];
+const MP_11 :IMP = [ -1780, -1760, TRENCH_BOTTOM_L ];
 const MP_12 :IMP = [ -1840, -1760, TRENCH_BOTTOM_R];
 const MP_13 :IMP = [ -2040, -520, END_TRENCH];
 const MP_14 :IMP = [ -2488, -520, END_POSITION];
@@ -136,25 +136,27 @@ export const MAP_POINT_COEFFS: number[][] =[
   MULT_MP_8, MULT_MP_9, MULT_MP_10, MULT_MP_11,
   MULT_MP_12, MULT_MP_13, MULT_MP_14, MULT_MP_15, MULT_MP_16
 ]
+// the above data structures are currently not used. There is the possibility of implementing
+// them in the future to make the app able to resize dynamically
 
-export const MAP_POINT_OBJECTS: IMapPointObject[] = [  // the x, xll, y, yll are for slope, the mvmt are to control movement when hit bottom
-  {'id':0, 'name':'OOB_LEFT',         'point': MP_0,   mvmtLat: 'right', 'coeff':[ 0, 0 ] },
-  {'id':1, 'name':'INITIAL_POSITION', 'point': MP_1,   mvmtLat: 'right', 'coeff': [ 0, 0 ] },
-  {'id':2, 'name':'SLOPE_LIMIT',      'point': MP_2,   mvmtLat: 'right', 'coeff': [ -0.0468, -0.2164 ] },
-  {'id':3, 'name':'START_BUMP',       'point': MP_3,   mvmtLat: 'left',  'coeff': [ -0.1823, -0.2618 ] }, 
-  {'id':4, 'name':'BUMP_PEAK',        'point': MP_4,   mvmtLat: 'both',  'coeff': [ -0.2239, -0.2115 ] },
-  {'id':5, 'name':'END_BUMP',         'point': MP_5,   mvmtLat: 'right', 'coeff': [ -0.2552, -0.2618 ] },
-  {'id':6, 'name':'START_DBL',        'point': MP_6,   mvmtLat: 'right', 'coeff': [ -0.2781, -0.2618 ] },
-  {'id':7, 'name':'DBL_PEAK_1',       'point': MP_7,   mvmtLat: 'left',  'coeff': [ -0.3021, -0.1108 ] },
-  {'id':8, 'name':'DBL_PEAK_2',       'point': MP_8,   mvmtLat: 'both',  'coeff': [ -0.3437, -0.1208 ] },
-  {'id':9, 'name':'END_DBL',          'point': MP_9,   mvmtLat: 'right', 'coeff': [ -0.3646, -0.2422 ] },
-  {'id':10, 'name':'START_TRENCH',    'point': MP_10,  mvmtLat: 'right', 'coeff': [ -0.4115, -0.2618 ] },
-  {'id':11, 'name':'TRENCH_BOTTOM_L', 'point': MP_11,  mvmtLat: 'right', 'coeff': [ -0.4479, -0.8862 ] },
-  {'id':12, 'name':'TRENCH_BOTTOM_R', 'point': MP_12,  mvmtLat: 'both',  'coeff': [ -0.4791, -0.8862 ] },
-  {'id':13, 'name':'END_TRENCH',      'point': MP_13,  mvmtLat: 'left',  'coeff': [ -0.5312, -0.2618 ] },
-  {'id':14, 'name':'END_POSITION',    'point': MP_14,  mvmtLat: 'left',  'coeff': [ -0.5729, -0.2618 ] },
-  {'id':15, 'name':'OOB_RIGHT',       'point': MP_15,  mvmtLat: 'left',  'coeff': [ -1, -0.2618 ] },
-  {'id':16, 'name':'OOB_RIGHT_2',     'point': MP_16,  mvmtLat: 'left',  'coeff': [ -1, -0.2618 ] },
+export const MAP_POINT_OBJECTS: IMapPointObject[] = [  //the mvmt are to control movement when hit bottom
+  {'id':0,  'name':'OOB_LEFT',         'point': MP_0,   mvmtLat: 'right', 'coeff': [ 1, 1 ] },
+  {'id':1,  'name':'INITIAL_POSITION', 'point': MP_1,   mvmtLat: 'right', 'coeff': [ 0, 0 ] },
+  {'id':2,  'name':'SLOPE_LIMIT',      'point': MP_2,   mvmtLat: 'right', 'coeff': [ -0.0468, -0.2164 ] },
+  {'id':3,  'name':'START_BUMP',       'point': MP_3,   mvmtLat: 'left',  'coeff': [ -0.1823, -0.2618 ] }, 
+  {'id':4,  'name':'BUMP_PEAK',        'point': MP_4,   mvmtLat: 'left',  'coeff': [ -0.2239, -0.2115 ] },
+  {'id':5,  'name':'END_BUMP',         'point': MP_5,   mvmtLat: 'right', 'coeff': [ -0.2552, -0.2618 ] },
+  {'id':6,  'name':'START_DBL',        'point': MP_6,   mvmtLat: 'left',  'coeff': [ -0.2781, -0.2618 ] },
+  {'id':7,  'name':'DBL_PEAK_1',       'point': MP_7,   mvmtLat: 'left',  'coeff': [ -0.3021, -0.1108 ] },
+  {'id':8,  'name':'DBL_PEAK_2',       'point': MP_8,   mvmtLat: 'both',  'coeff': [ -0.3437, -0.1208 ] },
+  {'id':9,  'name':'END_DBL',          'point': MP_9,   mvmtLat: 'right', 'coeff': [ -0.3646, -0.2422 ] },
+  {'id':10, 'name':'START_TRENCH',     'point': MP_10,  mvmtLat: 'both',  'coeff': [ -0.4115, -0.2618 ] },
+  {'id':11, 'name':'TRENCH_BOTTOM_L',  'point': MP_11,  mvmtLat: 'right', 'coeff': [ -0.4635, -0.8862 ] },
+  {'id':12, 'name':'TRENCH_BOTTOM_R',  'point': MP_12,  mvmtLat: 'both',  'coeff': [ -0.4791, -0.8862 ] },
+  {'id':13, 'name':'END_TRENCH',       'point': MP_13,  mvmtLat: 'left',  'coeff': [ -0.5312, -0.2618 ] },
+  {'id':14, 'name':'END_POSITION',     'point': MP_14,  mvmtLat: 'both',  'coeff': [ -0.5729, -0.2618 ] },
+  {'id':15, 'name':'OOB_RIGHT',        'point': MP_15,  mvmtLat: 'left',  'coeff': [ -1, -0.2618 ] },
+  {'id':16, 'name':'OOB_RIGHT_2',      'point': MP_16,  mvmtLat: 'left',  'coeff': [ -1, -0.2618 ] },
 ]
 
   
