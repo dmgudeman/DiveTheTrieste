@@ -4,22 +4,10 @@ class InitialValues {
     private static instance: InitialValues;
     public width: number;// OBJECT option values
     public height: number;
-    // private FULL_LAT_LIMIT: number;
-    // private FULL_VERTICAL_LIMIT: number;
-    // private OCEAN_LAT_LIMIT: number;
-    // private OCEAN_VERTICAL_LIMIT: number;
-    // private SUB_INITIAL_LAT_POS: number;
-    // private INITIAL_Y_POSITION: number;
 
     private constructor() {
         this.width = window.innerWidth * 2;
         this.height = window.innerHeight * 2.05;
-        // this.FULL_LAT_LIMIT = this.getFullLatLimit();
-        // this.FULL_VERTICAL_LIMIT = this.getFullVertLimit();
-        // this.OCEAN_LAT_LIMIT = this.getOceanLatLimit();
-        // this.OCEAN_VERTICAL_LIMIT = this.getOceanVertLimit();
-        // this.INITIAL_Y_POSITION = this.getInitial_Y();
-
         window.addEventListener("resize", this.updateWindowSize.bind(this));
     }
 

@@ -163,14 +163,6 @@ class CalcPosition {
 
                 if (lastMapPoints[0] >= lat && currentPoints[0] < lat) {
                     currentObject = MAP_POINT_OBJECTS[i];
-                    // console.log('$$$$$$$$$$$$$')console.log('lastObject.', currentPoints)
-                    // console.log('currentObject.name', currentObject.name)
-
-                    // console.log('currentPoints[0]', currentPoints[0])
-                    // console.log('nextMapPointsX < lat', currentPoints[0] < lat)
-                    // // console.log('mapPointX => lat', mapPoints[0] >= lat)
-                    // console.log('LLLAAATTT', lat, 'iiiiiiii', i)
-                    // console.log('$$$$$$$$$$$$$')
                 }
             }
             return currentObject;
@@ -179,34 +171,17 @@ class CalcPosition {
         }
     }
     _calcDepthLimit2() {
-        // console.log("====RESULT======");
-        // console.log("compVeert", this.calcPosition.getCompVert())
-        // console.log("NAAAAMMMMMMEEEEE", this.getMapPointObject().name);
-        // console.log("====++++======");
-
         const index = this.getMapPointObject().id;
         const lastMapPointObject: IMapPointObject =
             MAP_POINT_OBJECTS[index - 1];
         const nextMapPointObject: IMapPointObject = MAP_POINT_OBJECTS[index];
-
         let startX =
             lastMapPointObject.coeff[0] * this.initialValues.getWidth();
         let endX = nextMapPointObject.coeff[0] * this.initialValues.getWidth();
-        // console.log("getIitial_x", this.initialValues.getInitial_X());
-        // console.log("COMPLAT", this.calcPosition.getCompLat());
-        // console.log("nextMapPointObject.coeff[0]", nextMapPointObject.coeff[0]);
-        // console.log("nextMapPointObject.coeff[1]", nextMapPointObject.coeff[1]);
-        // console.log("START X ", startX);
-        // console.log("END X", endX);
         let startY =
             lastMapPointObject.coeff[1] * this.initialValues.getHeight();
         let endY = nextMapPointObject.coeff[1] * this.initialValues.getHeight();
-
-        // console.log('END Y', endY)
-        // console.log('START Y ', startY)
         let x = this.getCompLat();
-        // console.log('LATTTT IN CALCDEPTH ', x)
-
         if (startX === endX) {
             // handles vertical line
             endX = endX + 1;

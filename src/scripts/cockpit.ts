@@ -49,6 +49,7 @@ class Cockpit {
     };
   }
 
+  // future implementation
   debounceDraw(delay:number) {
     let debounceTimer;
     return () => {
