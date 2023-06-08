@@ -48,6 +48,15 @@ class Cockpit {
       };
     };
   }
+
+  debounceDraw(delay:number) {
+    let debounceTimer;
+    return () => {
+      clearTimeout(debounceTimer);
+      debounceTimer = setTimeout(() => this.draw(), delay);
+    };
+  }
+
 }
 
 export default Cockpit;
