@@ -89,7 +89,13 @@ class Move {
         }
 
         if (dir === "up" || dir === "down") {
-            this.getVerticalMove(dir);
+            if (this.calcPosition.getCompVert() <= this.depthLim) {
+                setHitBottomFlag(true);
+                this.configureHitBottomMove(dir);
+            } else {
+                setHitBottomFlag(false);
+                this.getVerticalMove(dir);
+            }
         }
 
         // let zoneObject = zone.upDateZoneObject();
@@ -257,16 +263,8 @@ class Move {
         hitBottom.classList.add("hide");
     };
 
-   
-
-    
-
     private configureHitBottomMove = (dir: string) => {
-        console.log("99999999999999999999999");
-        console.log("99999999", dir);
-
         let mvmt = this.calcPosition.getMapPointObject().mvmtLat;
-        console.log("99999999 MVMT", mvmt);
         if (this.OorS[1] === "O") {
             if (dir === "right") {
                 if (mvmt === "right" || mvmt === "both") {
@@ -274,11 +272,13 @@ class Move {
                 }
             } else if (dir === "left") {
                 if (mvmt === "left" || mvmt === "both") {
-                    // this.modal.showModal();
                     this.moveOceanLeft();
                 }
+            } else if ( dir == 'up') {
+                this.moveOceanUp();
             }
-            console.log("9b9b9b9b9b9b9b9b9b9");
+            
+            
         } else if (this.OorS[1] === "S") {
             if (dir === "right") {
                 console.log("    IN MOVE RIGHT");
@@ -290,71 +290,20 @@ class Move {
                 if (mvmt === "left" || mvmt === "both") {
                     this.moveSubLeft();
                 }
+            } else if ( dir == 'up') {
+                this.moveSubUp();
             }
         }
-        console.log("HIT BOTTOM 9999999");
-        console.log(localStorage.getItem("cockpitModal"));
-        console.log("current Canavs ", getCurrentCanvas());
+
         if (getCurrentCanvas() === 3) {
             this.modal.showModal();
 
-            // Hide the modal after 1 second (1000 ms)
+            // Hide the cockpit modal after 1 second (1000 ms)
             setTimeout(() => {
                 this.modal.hideModal();
             }, 1000);
         }
-
-        console.log("9c9c9c9c9c9c9c9c9c9c9");
     };
-
-    printCoordinates = (where: string) => {
-        console.log(`=${where}==============`);
-
-        console.log("viewport.width", visualViewport.width);
-        console.log("OorS", this.OorS);
-        console.log(
-            "COMP LAT VERT",
-            this.calcPosition.getCompLat(),
-            this.calcPosition.getCompVert()
-        );
-        console.log("OCEAN VERT LIMIT", this.initialValues.getOceanVertLimit());
-        console.log("OCEAN LAT LIMIT", this.initialValues.getOceanLatLimit());
-        console.log("OCEAN X, Y", this.ocean.getX(), this.ocean.getY());
-        console.log("SUB X, Y", this.sub.getX(), this.sub.getY());
-        console.log("mapPointObjectName", this.mapPointObject.name);
-        console.log("========================");
-        console.log("                           ");
-    };
-
-    printStandard = (where: string) => {
-        console.log(`${where}`);
-        console.log("COMPLAT", this.calcPosition.getCompLat());
-        console.log("COMPVERT", this.calcPosition.getCompVert());
-        console.log("OCEAN Y", this.ocean.getY());
-        console.log("SUB Y", this.sub.getY());
-        console.log("mapPointObjectName", this.mapPointObject.name);
-        console.log("==============");
-    };
-
-    printLateral = (where: string) => {
-        console.log(`${where}`);
-        console.log("COMPLAT", this.calcPosition.getCompLat());
-
-        console.log("mapPointObjectName", this.mapPointObject.name);
-        console.log("==============");
-    };
-
-    printMove = (location: string) => {
-        console.log(`==${location}====`);
-        console.log("lat", this.lat);
-        console.log("vert", this.vert);
-        console.log("lOceanLim", this.lOceanLim);
-        console.log("vOceanLim", this.vOceanLim);
-        console.log("lFullLim", this.lFullLim);
-        console.log("vFullLim", this.vFullLim);
-        console.log("OorS", this.OorS);
-        console.log("===================");
-    }
 
     moveOceanRight = () => {
         this.ocean.setX(this.ocean.getX() - LAT_VELOCITY);
