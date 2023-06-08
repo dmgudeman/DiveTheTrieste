@@ -80,7 +80,7 @@ elements and conditionally showing them.
 
 ### Technologies, Libararies, APIS
 Canvas API to render the diagram
-Webpack and Babel to bundle and transpile the Javascript code
+Webpack and Babel to bundle and transpile the Typescript code
 npm to manage dependencies
 font-awesome for the github and linkedIn icons
 
