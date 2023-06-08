@@ -122,8 +122,8 @@ export const MAP_POINT_COEFFS: number[][] =[
 // make the coeffs in the future. For now these are manually calculated
 
 export const MAP_POINT_OBJECTS: IMapPointObject[] = [  
-  {'id':0,  'name':'OOB_LEFT',         'point': MP_0,   mvmtLat: 'right', 'coeff': [ 1, 1 ],             "display": "Starting" },
-  {'id':1,  'name':'INITIAL_POSITION', 'point': MP_1,   mvmtLat: 'right', 'coeff': [ 0, 0 ],             "display": "Starting" },
+  {'id':0,  'name':'OOB_LEFT',         'point': MP_0,   mvmtLat: 'right', 'coeff': [ 1, -0.0101 ],       "display": "Starting" },
+  {'id':1,  'name':'INITIAL_POSITION', 'point': MP_1,   mvmtLat: 'right', 'coeff': [ 0, -0.0101 ],       "display": "Starting" },
   {'id':2,  'name':'SLOPE_LIMIT',      'point': MP_2,   mvmtLat: 'right', 'coeff': [ -0.0468, -0.2164 ], "display": "Continental Slope" },
   {'id':3,  'name':'START_BUMP',       'point': MP_3,   mvmtLat: 'left',  'coeff': [ -0.1823, -0.2618 ], "display": "Abyssal Plain" }, 
   {'id':4,  'name':'BUMP_PEAK',        'point': MP_4,   mvmtLat: 'left',  'coeff': [ -0.2239, -0.2115 ], "display": "Abyssal Hill" },

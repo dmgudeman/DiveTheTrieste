@@ -24,6 +24,7 @@ class Move {
     private OorS: string[];
     private lat: number;
     private vert: number;
+    private oldVert:number;
     private lOceanLim: number;
     private vOceanLim: number;
     private lFullLim: number;
@@ -34,6 +35,7 @@ class Move {
     private vertVel: number;
     private edText: EdText;
     private modal: Modal;
+    private surfaceModal: Modal;
 
     constructor(ocean: Ocean, sub: Sub, dir?: string) {
         this.ocean = ocean;
@@ -45,6 +47,7 @@ class Move {
         this.OorS = this.calcPosition.getOorS("right") || null;
         this.lat = this.calcPosition.getCompLat();
         this.vert = this.calcPosition.getCompVert();
+        this.oldVert = this.vert;
         this.lOceanLim = this.initialValues.getOceanLatLimit();
         this.vOceanLim = this.initialValues.getOceanVertLimit();
         this.lFullLim = this.initialValues.getFullLatLimit();
@@ -55,6 +58,7 @@ class Move {
         this.vertVel = VERTICAL_VELOCITY;
         this.edText = new EdText();
         this.modal = new Modal("cockpitModal", "closeCockpitModal");
+        this.surfaceModal = new Modal('surfaceModal', 'closeSurfaceModal');
     }
 
     public getMove = (dir: string) => {
@@ -62,6 +66,13 @@ class Move {
         this.depthLim = this.calcPosition.calcDepthLimit();
         this.lat = this.calcPosition.getCompLat();
         this.vert = this.calcPosition.getCompVert();
+        if (this.vert === 0 && this.oldVert < 0 ) {
+            this.showSurfaceModal();
+        }
+
+        console.log('THIS OLD VERT', this.oldVert);
+        console.log('THIS VERT', this.vert)
+        this.oldVert = this.vert;
         this.lOceanLim = this.initialValues.getOceanLatLimit();
         this.vOceanLim = this.initialValues.getOceanVertLimit();
         this.lFullLim = this.initialValues.getFullLatLimit();
@@ -72,7 +83,7 @@ class Move {
 
         if (dir === "left" || dir === "right") {
             if (this.vert <= this.depthLim) {
-                if (this.lat <= -40) setHitBottomFlag(true);
+                setHitBottomFlag(true);
                 this.configureHitBottomMove(dir);
             } else {
                 setHitBottomFlag(false);
@@ -82,7 +93,8 @@ class Move {
 
         if (dir === "up" || dir === "down") {
             if (this.vert <= this.depthLim) {
-                if (this.lat <= -40) setHitBottomFlag(true);
+                // if (this.lat <= -40) setHitBottomFlag(true);
+             setHitBottomFlag(true);
                 this.configureHitBottomMove(dir);
             } else {
                 setHitBottomFlag(false);
@@ -128,9 +140,6 @@ class Move {
         let vertLim: number;
 
         if (this.OorS[1] === "O") {
-            console.log('this.depthLim', this.depthLim)
-            console.log('this.vOceanLim', this.vOceanLim)
-            console.log( 'this.vert', this.vert)
             if (this.depthLim > this.vOceanLim) {
                 vertLim = this.depthLim;
             } else {
@@ -257,6 +266,17 @@ class Move {
             this.sub.setY(this.initialValues.getInitial_Y());
 
         }
+    }
+
+    showSurfaceModal() {
+        if (getCurrentCanvas() === 3 && this.vert === 0 ) {
+            this.surfaceModal.showModal();
+            // Hide the cockpit modal after 1 second (1000 ms)
+            setTimeout(() => {
+                this.surfaceModal.hideModal();
+            }, 1000);
+        }
+
     }
 
     checkToIncreaseVel(dir: string) {
