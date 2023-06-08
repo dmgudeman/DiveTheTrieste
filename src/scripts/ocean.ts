@@ -1,6 +1,6 @@
 import { WIDTH, HEIGHT } from "../index";
 import { LAT_VELOCITY, VERTICAL_VELOCITY } from "./constants";
-import {eventBus} from './eventBus';
+import { eventBus } from "./eventBus";
 
 class Ocean {
     private static instance: Ocean;
@@ -42,8 +42,8 @@ class Ocean {
         this.velUp = velUp || 0;
         this.velDown = velDown || 0;
     }
-    
-    public static getInstance( ctx?: CanvasRenderingContext2D ): Ocean {
+
+    public static getInstance(ctx?: CanvasRenderingContext2D): Ocean {
         if (!Ocean.instance) {
             if (!ctx) {
                 throw new Error(
@@ -56,9 +56,7 @@ class Ocean {
                 0,
                 WIDTH,
                 HEIGHT,
-                document.getElementById(
-                    "crossSection"
-                ) as HTMLImageElement,
+                document.getElementById("crossSection") as HTMLImageElement,
                 0,
                 0,
                 0,
@@ -83,7 +81,6 @@ class Ocean {
 
     public setX(x: number): void {
         this.x = x;
-        
     }
     public getY(): number {
         return this.y;
@@ -123,7 +120,7 @@ class Ocean {
         this.velDown = VERTICAL_VELOCITY;
     }
 
-    public setVelDownReg(vel:number):void{
+    public setVelDownReg(vel: number): void {
         this.velDown = vel;
     }
 

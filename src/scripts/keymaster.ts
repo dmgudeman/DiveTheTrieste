@@ -7,7 +7,12 @@ import Zone from "./zone";
 import Images from "./images";
 import Cockpit from "./cockpit";
 import Modal from "./modal";
-import {showDepth, showLat, showGeoDisplay, showDistToBottom } from "./boundary";
+import {
+    showDepth,
+    showLat,
+    showGeoDisplay,
+    showDistToBottom,
+} from "./boundary";
 
 class Keymaster {
     private ocean: Ocean;
@@ -20,9 +25,8 @@ class Keymaster {
         this.ocean = Ocean.getInstance();
         this.sub = Sub.getInstance();
         this.modal = new Modal("modal", "close");
-        this.cockpitModal = new Modal("cockpitModal")
+        this.cockpitModal = new Modal("cockpitModal");
         this.move = new Move(this.ocean, this.sub);
-        
     }
     // set key function depending on which canvas is showing
     keyDown(
@@ -32,7 +36,7 @@ class Keymaster {
         ctx3: CanvasRenderingContext2D
     ) {
         let currentCanvas: number = getCurrentCanvas();
-       
+
         if (currentCanvas === 1) {
             if (e.key === "ArrowDown" || e.key === "Down") {
                 this.newPos("down");
@@ -53,7 +57,6 @@ class Keymaster {
             }
         } else if (currentCanvas === 3) {
             let cockpit = new Cockpit(ctx3);
-            // let debouncedDraw = cockpit.debounceDraw(1000);
             if (e.key === "ArrowDown" || e.key === "Down") {
                 cockpit.draw();
                 this.newPos("down");

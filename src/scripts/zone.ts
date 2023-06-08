@@ -9,7 +9,7 @@ import {
     textObjects,
 } from "./constants";
 import CalcConstant from "./calcConstant";
-import {ITextObject} from './types';
+import { ITextObject } from "./types";
 import InitialValues from "./initialValues";
 import CalcPosition from "./calcPosition";
 
@@ -20,7 +20,6 @@ class Zone {
     private flag: number;
     private oldFlag: number;
 
-
     constructor() {
         this.calcConstants = new CalcConstant();
         this.initialValues = InitialValues.getInstance();
@@ -28,37 +27,37 @@ class Zone {
         this.flag = null;
         this.oldFlag = null;
     }
-    upDateZoneObject():ITextObject{ 
+    upDateZoneObject(): ITextObject {
         this._getZone();
-      
+
         if (this.oldFlag !== this.flag) {
             this.oldFlag = this.flag;
-            if (this.flag === EUPHOTIC_PELAGIC) {           
-                return textObjects[0]
+            if (this.flag === EUPHOTIC_PELAGIC) {
+                return textObjects[0];
             } else if (this.flag === EUPHOTIC_BENTHIC) {
-                return textObjects[1]
-            } else if (this.flag === DYSPHOTIC_PELAGIC) {               
-                return textObjects[2]
-            } else if (this.flag === DYSPHOTIC_BENTHIC) {          
-                return textObjects[3]
+                return textObjects[1];
+            } else if (this.flag === DYSPHOTIC_PELAGIC) {
+                return textObjects[2];
+            } else if (this.flag === DYSPHOTIC_BENTHIC) {
+                return textObjects[3];
             } else if (this.flag === APHOTIC_PELAGIC) {
-                return textObjects[4]
+                return textObjects[4];
             } else if (this.flag === APHOTIC_BENTHIC) {
-                return textObjects[5]
+                return textObjects[5];
             } else {
-                return textObjects[this.flag]
+                return textObjects[this.flag];
             }
-        } 
-        return textObjects[this.flag]
+        }
+        return textObjects[this.flag];
     }
 
     _getZone(): void {
         let vert = this.calcPosition.getCompVert();
         let depth = this.calcPosition._calcDepthLimit2();
-      
+
         if (vert > this.initialValues.getHeight() * -0.211) {
             if (vert - depth > 4 * VERTICAL_VELOCITY) {
-                this.flag =  EUPHOTIC_PELAGIC;
+                this.flag = EUPHOTIC_PELAGIC;
             } else {
                 this.flag = EUPHOTIC_BENTHIC;
             }
@@ -76,8 +75,8 @@ class Zone {
             }
         }
     }
-    getZoneObjectNumber():number {
-       return  this.upDateZoneObject().id
+    getZoneObjectNumber(): number {
+        return this.upDateZoneObject().id;
     }
 }
 export default Zone;

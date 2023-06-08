@@ -1,11 +1,7 @@
 import { eventBus } from "./eventBus";
-import {
-    LAT_VELOCITY,
-    VERTICAL_VELOCITY,
-    MAP_POINT_OBJECTS,
-} from "./constants";
+import { VERTICAL_VELOCITY, MAP_POINT_OBJECTS } from "./constants";
 import InitialValues from "./initialValues";
-import { ITextObject, IMapPointObject } from "./types";
+import { IMapPointObject } from "./types";
 
 class CalcPosition {
     private static instance: CalcPosition;
@@ -63,7 +59,6 @@ class CalcPosition {
         this.oceanLat = newX;
         this.compLat =
             this.oceanLat - this.subLat + this.initialValues.getInitial_X();
- 
     };
 
     handleSubXChange = (newX: number) => {
@@ -77,7 +72,6 @@ class CalcPosition {
         this.oceanVert = newY;
         this.compVert =
             this.oceanVert - this.subVert + this.initialValues.getInitial_Y();
-        // console.log('ZZZZZZZZZ Ocean CALCPOS COMPVERT', this.compVert);
     };
 
     handleSubYChange = (newY: number) => {
@@ -85,7 +79,6 @@ class CalcPosition {
         this.subVert = newY;
         this.compVert =
             this.oceanVert - this.subVert + this.initialValues.getInitial_Y();
-        // console.log('ZZZZZZZZZ sub CALCPOS COMPVERT', this.compVert)
     };
 
     getCompLat() {
@@ -117,33 +110,20 @@ class CalcPosition {
         let vert = this.getCompVert();
         let latLimit = this.initialValues.getOceanLatLimit();
         let vertLimit = this.initialValues.getOceanVertLimit();
-        let modVertLimit = vertLimit + VERTICAL_VELOCITY;
-        // console.log("== GET OORS ==", vert);
-        // console.log("MODLIMIT", modVertLimit);
-        // console.log("LIMIT", vertLimit);
-        // console.log("VERT >= MODLIMIT", vert >= modVertLimit);
-        // console.log("VERT <= MODLIMIT", vert < modVertLimit);
-        // console.log("OCEAN VERT", this.getOceanVert());
-        // console.log("SUB VERT", this.getSubVert());
-        // console.log("=========");
         if (dir === "right" || dir === "left") {
             if (lat >= latLimit) {
-                console.log("this.OorS", this.OorS);
                 this.OorS[0] = "O";
                 return this.OorS;
             } else if (lat < latLimit) {
                 this.OorS[0] = "S";
-                console.log("this.OorS", this.OorS);
                 return this.OorS;
             }
         } else if (dir === "up" || dir === "down")
             if (vert >= vertLimit) {
                 this.OorS[1] = "O";
-                console.log("this.OorS", this.OorS);
                 return this.OorS;
             } else if (vert < vertLimit) {
                 this.OorS[1] = "S";
-                console.log("this.OorS", this.OorS);
                 return this.OorS;
             }
     }
@@ -186,6 +166,14 @@ class CalcPosition {
             // handles vertical line
             endX = endX + 1;
         }
+        // variable depth for a given x is the y intercept of the points held 
+        // in the MAP_POINT_OBJECTS. The MAP_POINTS were taken on an example
+        // screen and mapped out manually getting the x and y of the surface
+        // features of the map.  A x and y coeff was determined by x/width and
+        // y/height.  The width and height being determined in index.ts and
+        // approximately 2 times viewport w and h.  These coeffs then can be
+        // utilized to estimate the points when the w and h changes during
+        // resizing. 
         const slope = (endY - startY) / (endX - startX);
         const yIntercept = startY - slope * startX;
         const y = slope * x + yIntercept;

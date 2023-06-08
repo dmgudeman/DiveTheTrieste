@@ -2,7 +2,7 @@ import { LAT_VELOCITY, VERTICAL_VELOCITY } from "./constants";
 
 class InitialValues {
     private static instance: InitialValues;
-    public width: number;// OBJECT option values
+    public width: number; 
     public height: number;
 
     private constructor() {
@@ -30,7 +30,6 @@ class InitialValues {
     }
 
     getInitial_X() {
-        // return this.width * 0.2604;
         return this.roundDownToNearestVertVel(this.width * 0.2604);
     }
     getInitial_Y() {
@@ -42,16 +41,14 @@ class InitialValues {
     }
     getFullVertLimit() {
         return this.roundDownToNearestVertVel(this.height * -0.95);
-        // return this.height * -0.95;
     }
 
     getOceanLatLimit() {
         return this.roundDownToNearestLatVel(this.width * -0.45);
     }
-   
+
     getOceanVertLimit() {
         return this.roundDownToNearestVertVel(this.height * -0.55);
-        // return this.height *-0.55
     }
 
     roundDownToNearestLatVel(num: number) {

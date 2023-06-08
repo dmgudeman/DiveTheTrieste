@@ -12,19 +12,19 @@ class Modal {
 
         if (this.closeButton) {
             this.closeButton.addEventListener("click", () => {
-             this.hideModal();
+                this.hideModal();
             });
         }
 
         if (this.modal) {
             window.addEventListener("click", (event) => {
                 if (event.target === this.modal) {
-                    this.hideModal()
+                    this.hideModal();
                 }
             });
         }
-        if (this.modalId = "modal") {
-            localStorage.setItem("modal", "false")
+        if ((this.modalId = "modal")) {
+            localStorage.setItem("modal", "false");
         }
     }
 
@@ -41,10 +41,10 @@ class Modal {
     }
 
     hideModal() {
-        if(this.modal) {
+        if (this.modal) {
             this.modal.style.display = "none";
         }
-        localStorage.setItem(this.modal?.id || "modalDisplayed", 'true');
+        localStorage.setItem(this.modal?.id || "modalDisplayed", "true");
     }
     public getModalElement(): HTMLElement | null {
         return this.modal;

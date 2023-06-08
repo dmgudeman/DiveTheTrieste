@@ -4,8 +4,6 @@
 
 
 import { ITextObject, IMapPointObject, IMP} from './types';
-import CalcConstant from './calcConstant';
-import InitialValues from './initialValues';
 
 export const stopMessageAnimation = {
     messFlag: true

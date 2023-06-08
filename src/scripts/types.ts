@@ -49,10 +49,4 @@ export interface IMapPointObject {
     display: string;
 }
 
-export type IMP = [
-        number,
-        number,
-        string
-    ]
-
-
+export type IMP = [number, number, string];
