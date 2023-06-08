@@ -16,6 +16,7 @@ class Keymaster {
     // private cockpit: Cockpit
     // private dir: string;
     private modal: Modal;
+    private cockpitModal: Modal;
     private move: Move;
 
     constructor() {
@@ -24,6 +25,7 @@ class Keymaster {
         this.sub = Sub.getInstance();
         // this.images = new Images();
         this.modal = new Modal("modal", "close");
+        this.cockpitModal = new Modal("cockpitModal")
         this.move = new Move(this.ocean, this.sub);
         // this.currentCanvas = getCurrentCanvas() || 2;
     }
@@ -79,27 +81,20 @@ class Keymaster {
     navigate(navigate: string): void {
         let currentCanvas = getCurrentCanvas();
         console.log("CURRENT CANVAS", currentCanvas);
+        console.log('NAVIGATE', navigate);
+        console.log('localStorage', localStorage.modalDisplayed)
 
         if (navigate === "Enter") {
-            if (
-                localStorage.modalDisplayed === "false" &&
-                currentCanvas === 1
-            ) {
-                this.modal.hideModal();
-            } else {
-            switch (currentCanvas) {
-                case 1:
+            if (currentCanvas === 1) {
+                if (localStorage.getItem("modal") === "false") {
+                    this.modal.hideModal();
+                } else {
                     showCanvas3();
-                    break;
-                case 2:
-                    showCanvas1();
-                    break;
-                case 3:
-                    showCanvas1();
-                    break;
-                default:
-                    break;
-            }
+                }
+            } else if (currentCanvas === 2) {
+                showCanvas1();
+            } else if (currentCanvas === 3) {
+                showCanvas1();
             }
         } else if (navigate === "Escape") {
             switch (currentCanvas) {

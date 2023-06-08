@@ -36,6 +36,7 @@ const bubblesContainer = document.querySelector(".bubblesContainer") as HTMLElem
 const bubbles = bubblesContainer.getElementsByClassName("bubble")  as HTMLCollectionOf<Element>;
 const edContainer = document.getElementById("edContainer") as HTMLElement;
 const edText = new EdText();
+const modal = new Modal("modal", "close");
 
 
 export function showCanvas1() {
@@ -44,7 +45,6 @@ export function showCanvas1() {
     showDepth();
     edText.updateEdText(1);
     bubblesContainer.classList.add("hide");
-    const modal = new Modal("modal", "close");
     modal.displayModalInitially();
     canvas1.style.display = "block";
     canvas2.style.display = "none";

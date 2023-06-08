@@ -1,8 +1,10 @@
 class Modal {
+    private modalId: string;
     private modal: HTMLElement | null;
     private closeButton: HTMLSpanElement | null;
 
-    constructor(modalId: string, closeButtonClass: string) {
+    constructor(modalId: string, closeButtonClass?: string) {
+        this.modalId = modalId;
         this.modal = document.getElementById(modalId);
         this.closeButton = document.getElementsByClassName(
             closeButtonClass
@@ -20,6 +22,9 @@ class Modal {
                     this.hideModal()
                 }
             });
+        }
+        if (this.modalId = "modal") {
+            localStorage.setItem("modal", "false")
         }
     }
 
