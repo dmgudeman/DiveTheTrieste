@@ -32,7 +32,11 @@ document.addEventListener("DOMContentLoaded", () => {
         HEIGHT = visualViewport.height * 2.05;
     });
 
+<<<<<<< HEAD
     // localStorage.setItem("modalDisplayed", false.toString());
+=======
+    localStorage.setItem("modalDisplayed", false.toString());
+>>>>>>> main
 
     const canvas1: HTMLCanvasElement = document.getElementById(
         "canvas1"
@@ -160,12 +164,15 @@ document.addEventListener("DOMContentLoaded", () => {
                 isInstructions1Visible = !isInstructions1Visible; // toggle the flag
             }
         };
+<<<<<<< HEAD
     };
     const instructions = new Image();
     instructions.src = "assets/instructions.png";
     instructions.onload = () => {
         ctx2.drawImage(instructions, 450, 250, 600, 600);
         update();
+=======
+>>>>>>> main
     };
 
     //use update to make sure the canvas is rendered
