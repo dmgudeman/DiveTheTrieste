@@ -1,18 +1,14 @@
-import { LAT_VELOCITY, VERTICAL_VELOCITY } from "./constants";
-import {
-    WIDTH,
-    HEIGHT,
-} from "../index";
+import { LAT_VELOCITY, VERTICAL_VELOCITY, setHitBottomFlag, getCurrentCanvas } from "./constants";
 import Ocean from "./ocean";
 import Sub from "./sub";
 import { IMapPointObject } from "./types";
 import CalcConstant from "./calcConstant";
 import EdText from "./edText";
 import Zone from "./zone";
-import { getCurrentCanvas, setHitBottomFlag } from "./constants";
 import { eventBus } from "./eventBus";
 import CalcPosition from "./calcPosition";
 import InitialValues from "./initialValues";
+import Modal from './modal';
 
 class Move {
     private ocean: Ocean;
@@ -29,6 +25,7 @@ class Move {
     private latVel: number;
     private vertVel: number;
     private edText: EdText;
+    private modal: Modal;
 
     constructor(ocean: Ocean, sub: Sub, dir?: string) {
         this.ocean = ocean;
@@ -45,8 +42,9 @@ class Move {
         this.increaseVelFlag = "";
         this.latVel = LAT_VELOCITY;
         this.vertVel = VERTICAL_VELOCITY;
-
         this.edText = new EdText();
+        this.modal =  new Modal("cockpitModal", "closeCockpitModal")
+       
     }
 
     public getMove = (dir: string) => {
@@ -60,6 +58,7 @@ class Move {
             setHitBottomFlag(false);
             this.getLatMove();
         }
+        
         this.getVerticalMove();
 
         // let zoneObject = zone.upDateZoneObject();
@@ -73,7 +72,8 @@ class Move {
     private getLatMove() {
         // console.log("xxxxxxxxxxxxxx");
         let oors = this.calcConstant.getOorS();
-        if (oors[0] == "O") {
+        if (oors[0] == "O")
+         {
             this.sub.setX(this.sub.getInitialLatPos());
           
             // console.log('LATERAL 0000000 LAT');
@@ -210,22 +210,23 @@ class Move {
         hitBottom.classList.add("hide");
     };
 
-    resetVelocities = () => {
-        this.ocean.zeroVelRight();
-        this.ocean.zeroVelLeft();
-        this.ocean.zeroVelUp();
-        this.ocean.zeroVelDown();
-        this.sub.zeroVelRight();
-        this.sub.zeroVelLeft();
-        this.sub.zeroVelUp();
-        this.sub.zeroVelDown();
-    };
+    // resetVelocities = () => {
+    //     this.ocean.zeroVelRight();
+    //     this.ocean.zeroVelLeft();
+    //     this.ocean.zeroVelUp();
+    //     this.ocean.zeroVelDown();
+    //     this.sub.zeroVelRight();
+    //     this.sub.zeroVelLeft();
+    //     this.sub.zeroVelUp();
+    //     this.sub.zeroVelDown();
+    // };
 
     private configureHitBottomMove = (dir: string) => {
+       console.log('99999999999999999999999')
+       console.log('99999999', dir);
+    
         let mvmt = this.calcConstant.getMapPointObject().mvmtLat
-
-        // console.log('ConfigureHitBottommmmmmmmmmmmm mvmt', mvmt);
-        // console.log('ConfigureHitBottommmmmmmmmmmmm dir', dir);
+        console.log('99999999 MVMT',mvmt)
         if (this.OorS[1] === "O") {
             if (dir === "right") {
                 if (mvmt === "right" || mvmt === "both") {
@@ -233,9 +234,12 @@ class Move {
                 }
             } else if (dir === "left") {
                 if (mvmt === "left" || mvmt === "both") {
+                   
+                    // this.modal.showModal();
                     this.moveOceanLeft(this.latVel);
                 }
             }
+            console.log('9b9b9b9b9b9b9b9b9b9')
         } else if (this.OorS[1] === "S") {
         
             if (dir === "right") {
@@ -250,12 +254,24 @@ class Move {
                 }
             }
         }
+        console.log('9a9a9a9a9a9a9a9a9a9a9a9a9a9')
+        console.log( localStorage.getItem("cockpitModal"))
+       console.log('current Canavs ', getCurrentCanvas())
+       if (getCurrentCanvas() === 3){
+        this.modal.showModal();
+                
+                // Hide the modal after 1 second (1000 ms)
+                setTimeout(() => {
+                    this.modal.hideModal();
+                }, 1000);
+       }
+     
+        console.log('9c9c9c9c9c9c9c9c9c9c9')
     };
 
     printCoordinates = (where: string) => {
         console.log(`=${where}==============`);
-        console.log("WIDTH", WIDTH);
-        console.log("HEiGHT", HEIGHT);
+
         console.log("viewport.width", visualViewport.width);
         console.log("OorS", this.OorS);
         console.log("COMP LAT VERT", this.calcPosition.getCompLat(), this.calcPosition.getCompVert());
@@ -283,7 +299,7 @@ class Move {
     printLateral = (where: string) => {
         console.log(`${where}`);
         console.log("COMPLAT", this.calcPosition.getCompLat());
-        console.log("WIDTH", WIDTH);
+   
         console.log("mapPointObjectName", this.mapPointObject.name);
         console.log("==============");
     };

@@ -118,12 +118,15 @@
     border: 3px solid var(--three);
     box-shadow: 3px 3px 4px rgba(0, 0, 0, 0.5);
 }
+
 .home.can1home{
     left:300px
 }
+
 .home.can2home {
     display: none;
 }
+
 .home.can3home {
     left: 25px;
 }
@@ -201,6 +204,7 @@ body img {
     animation: bubbleRise 3s linear infinite;
     z-index: 100;
 }
+
 .bubble1 {
     left: 100px;
     position: absolute;
@@ -212,6 +216,7 @@ body img {
     animation: bubbleRise 2s linear infinite;
     z-index: 100;
 }
+
 .bubble2 {
     left: 100px;
     position: absolute;
@@ -223,6 +228,7 @@ body img {
     animation: bubbleRise 5s linear infinite;
     z-index: 100;
 }
+
 .bubble3 {
     left: 100px;
     position: absolute;
@@ -234,6 +240,7 @@ body img {
     animation: bubbleRise 4s linear infinite;
     z-index: 100;
 }
+
 .bubble4 {
     left: 100px;
     position: absolute;
@@ -245,6 +252,7 @@ body img {
     animation: bubbleRise 1.2s linear infinite;
     z-index: 100;
 }
+
 .bubble5 {
     left: 100px;
     position: absolute;
@@ -320,16 +328,49 @@ body img {
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
   }
   
-  .close {
+.close {
     float: right;
     cursor: pointer;
-  }
+}
   
-  .close:hover {
+.close:hover {
     color: red;
-  }
+}
 
-  #message {
+.cockpitModal {
+    display: none; /* Initially hide the modal */
+    position: fixed;
+    z-index: 9999;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(239, 6, 6, 0.5);
+}
+
+.cockpitModalTitle {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 8rem;
+    font-weight: 800;
+    color: red;
+    text-align: center;
+    margin-top: 30%;
+    margin-bottom: 40px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+
+}
+
+.cockpitModalMessage {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 4rem;
+    font-weight: 800;
+    color: red;
+
+}
+
+#message {
     display:none;
     position: fixed;
     opacity: 1;
@@ -343,11 +384,11 @@ body img {
     z-index: 101;  
   }
 
-  .fade-out {
+.fade-out {
     opacity: 0;
-  }
+}
 
-  #edMessage {
+#edMessage {
     position: absolute;
     top: 200px; /* Adjust the initial position */
     left: 50%;
@@ -362,7 +403,7 @@ body img {
   }
 
   ///// CANVASES
-  #canvasContainer {
+#canvasContainer {
     position: relative;
 }
 canvas {
@@ -375,23 +416,22 @@ canvas {
 #canvas3Container {
     position: relative;
     display:none;
-   width: 100%;
-   height: 100%;
-    // display: block;
+    width: 100%;
+    height: 100%;
     background:brown;
     left:0;
     right:0;
 }
-#canvas1{
+#canvas1 {
     display: none;
     background-color:#E0AE7D;
 }
 
-#canvas2{   
+#canvas2 {   
     background-color: green;
 }
 
-#canvas3{
+#canvas3 {
     display:none;
     background-color: purple;  
    

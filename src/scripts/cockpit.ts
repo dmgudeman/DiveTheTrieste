@@ -31,19 +31,20 @@ class Cockpit {
 
   draw() {
     // make first image
-    let ui = new Image();
+    let underImage = new Image();
     let images = new Images();
-    ui.src = images.getImage();
+    underImage.src = images.getImage();
 
-    ui.onload = () => {
-      this.ctx.drawImage(ui, this.width * 0.1, 0, this.width * 0.35, this.height * 0.3952);
+    underImage.onload = () => {
+      this.ctx.drawImage(underImage, this.width * 0.07
+        , 0, this.width * 0.35, this.height * 0.3952);
       // on load of first image, make the second image
-      let cpi = new Image();
-      cpi.src = this.cockpitImageUrl;
-      cpi.onload = () => {
+      let cockpitImage = new Image();
+      cockpitImage.src = this.cockpitImageUrl;
+      cockpitImage.onload = () => {
         // draw cockpit image
-        this.ctx.drawImage(cpi, this.x, this.y, this.width *0.5, this.height* 0.4879);
-        cpi.style.zIndex = "55";
+        this.ctx.drawImage(cockpitImage, this.x, this.y, this.width *0.5, this.height* 0.4879);
+        cockpitImage.style.zIndex = "55";
       };
     };
   }
