@@ -69,9 +69,6 @@ class Move {
         if (this.vert === 0 && this.oldVert < 0 ) {
             this.showSurfaceModal();
         }
-
-        console.log('THIS OLD VERT', this.oldVert);
-        console.log('THIS VERT', this.vert)
         this.oldVert = this.vert;
         this.lOceanLim = this.initialValues.getOceanLatLimit();
         this.vOceanLim = this.initialValues.getOceanVertLimit();
