@@ -52,7 +52,8 @@ class InitialValues {
         return this.roundDownToNearestLatVel(this.width * -0.6375);
     }
     getFullVertLimit() {
-        return this.roundDownToNearestVertVel(this.height * -0.95);
+        // return this.roundDownToNearestVertVel(this.height * -0.95);
+        return this.height * -0.95;
     }
 
     getOceanLatLimit() {
@@ -60,7 +61,8 @@ class InitialValues {
     }
    
     getOceanVertLimit() {
-        return this.roundDownToNearestVertVel(this.height * -0.55);
+        // return this.roundDownToNearestVertVel(this.height * -0.55);
+        return this.height *-0.55
     }
 
     roundDownToNearestLatVel(num: number) {

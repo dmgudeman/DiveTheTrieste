@@ -154,7 +154,7 @@ export const MAP_POINT_OBJECTS: IMapPointObject[] = [
   {'id':11, 'name':'TRENCH_BOTTOM_L',  'point': MP_11,  mvmtLat: 'right', 'coeff': [ -0.4635, -0.8862 ], "display": "Marina Trench" },
   {'id':12, 'name':'TRENCH_BOTTOM_R',  'point': MP_12,  mvmtLat: 'both',  'coeff': [ -0.4791, -0.8862 ], "display": "Marina Trench" },
   {'id':13, 'name':'END_TRENCH',       'point': MP_13,  mvmtLat: 'left',  'coeff': [ -0.5312, -0.2618 ], "display": "Marina Trench" },
-  {'id':14, 'name':'END_POSITION',     'point': MP_14,  mvmtLat: 'both',  'coeff': [ -0.5729, -0.2618 ], "display": "Abyssal Plain" },
+  {'id':14, 'name':'END_POSITION',     'point': MP_14,  mvmtLat: 'both',  'coeff': [ -0.5729, -0.2618 ], "display": "Volcanic Island" },
   {'id':15, 'name':'OOB_RIGHT',        'point': MP_15,  mvmtLat: 'left',  'coeff': [ -1, -0.2618 ],      "display": "There be Dragons" },
   {'id':16, 'name':'OOB_RIGHT_2',      'point': MP_16,  mvmtLat: 'left',  'coeff': [ -1, -0.2618 ],      "display": "There be Dragons" },
 ]

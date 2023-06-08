@@ -54,7 +54,7 @@ class Zone {
 
     _getZone(): void {
         let vert = this.calcPosition.getCompVert();
-        let depth = this.calcConstants._calcDepthLimit2();
+        let depth = this.calcPosition._calcDepthLimit2();
       
         if (vert > this.initialValues.getHeight() * -0.211) {
             if (vert - depth > 4 * VERTICAL_VELOCITY) {

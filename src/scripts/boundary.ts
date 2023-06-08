@@ -38,7 +38,7 @@ export function showDepth() {
 
 export function showGeoDisplay(): void {
     const IPZoneGauge = document.getElementById("IPZoneGauge");
-    let mapPointObject: IMapPointObject = calcConstant.getMapPointObject();
+    let mapPointObject: IMapPointObject = calcPosition.getMapPointObject();
     let display = mapPointObject.display;
     if (calcPosition.getCompLat() === 0) display = 'Home';
     IPZoneGauge.classList.remove('IPTrench');

@@ -20,14 +20,11 @@ class Keymaster {
     private move: Move;
 
     constructor() {
-        // this.dir = dir;
         this.ocean = Ocean.getInstance();
         this.sub = Sub.getInstance();
-        // this.images = new Images();
         this.modal = new Modal("modal", "close");
         this.cockpitModal = new Modal("cockpitModal")
         this.move = new Move(this.ocean, this.sub);
-        // this.currentCanvas = getCurrentCanvas() || 2;
     }
     // set key funciton depending on which canvas is showing
     keyDown(
@@ -37,7 +34,6 @@ class Keymaster {
         ctx3: CanvasRenderingContext2D
     ) {
         let currentCanvas: number = getCurrentCanvas();
-        console.log("JJJJJJJJJ", currentCanvas);
         if (currentCanvas === 1) {
             if (e.key === "ArrowDown" || e.key === "Down") {
                 this.newPos("down");
