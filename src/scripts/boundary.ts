@@ -39,11 +39,8 @@ export function showDepth() {
 export function showDistToBottom(){
     const IPDistToBottom = document.getElementById("IPDistToBottom");
     const vert = calcPosition.getCompVert();
-    const depthLimit =calcPosition._calcDepthLimit2();
+    const depthLimit =calcPosition.calcDepthLimit();
     const diff = vert - depthLimit;
-    console.log('depthLimit', depthLimit)
-    console.log('vert', vert)
-    console.log('diff', diff)
     IPDistToBottom.innerHTML = `Dist to Sea Floor: ${diff} ft`;
 
 }

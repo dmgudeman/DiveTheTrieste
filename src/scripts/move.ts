@@ -3,6 +3,7 @@ import {
     VERTICAL_VELOCITY,
     setHitBottomFlag,
     getCurrentCanvas,
+    getHitBottomFlag,
 } from "./constants";
 import Ocean from "./ocean";
 import Sub from "./sub";
@@ -48,7 +49,7 @@ class Move {
         this.vOceanLim = this.initialValues.getOceanVertLimit();
         this.lFullLim = this.initialValues.getFullLatLimit();
         this.vFullLim = this.initialValues.getFullVertLimit();
-        this.depthLim = this.calcPosition._calcDepthLimit2() || null;
+        this.depthLim = this.calcPosition.calcDepthLimit() || null;
         this.increaseVelFlag = "";
         this.latVel = LAT_VELOCITY;
         this.vertVel = VERTICAL_VELOCITY;
@@ -57,7 +58,8 @@ class Move {
     }
 
     public getMove = (dir: string) => {
-        this.depthLim = this.calcPosition._calcDepthLimit2();
+        // get fresh data
+        this.depthLim = this.calcPosition.calcDepthLimit();
         this.lat = this.calcPosition.getCompLat();
         this.vert = this.calcPosition.getCompVert();
         this.lOceanLim = this.initialValues.getOceanLatLimit();
@@ -191,7 +193,7 @@ class Move {
             }
         }
 
-        if (getCurrentCanvas() === 3) {
+        if (getCurrentCanvas() === 3 && getHitBottomFlag() ) {
             this.modal.showModal();
             // Hide the cockpit modal after 1 second (1000 ms)
             setTimeout(() => {

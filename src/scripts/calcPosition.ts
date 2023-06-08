@@ -75,7 +75,6 @@ class CalcPosition {
     };
 
     handleSubYChange = (newY: number) => {
-        console.log("this is in CALCPOS", newY);
         this.subVert = newY;
         this.compVert =
             this.oceanVert - this.subVert + this.initialValues.getInitial_Y();
@@ -150,7 +149,7 @@ class CalcPosition {
             console.error("getMapPointObject did not work for lat = ", lat);
         }
     }
-    _calcDepthLimit2() {
+    calcDepthLimit() {
         const index = this.getMapPointObject().id;
         const lastMapPointObject: IMapPointObject =
             MAP_POINT_OBJECTS[index - 1];

@@ -51,12 +51,12 @@ class Zone {
         return textObjects[this.flag];
     }
 
-    _getZone(): void {
+    private _getZone(): void {
         let vert = this.calcPosition.getCompVert();
-        let depth = this.calcPosition._calcDepthLimit2();
+        let depth = this.calcPosition.calcDepthLimit();
 
         if (vert > this.initialValues.getHeight() * -0.211) {
-            if (vert - depth > 4 * VERTICAL_VELOCITY) {
+            if (vert - depth > 5 * VERTICAL_VELOCITY) {
                 this.flag = EUPHOTIC_PELAGIC;
             } else {
                 this.flag = EUPHOTIC_BENTHIC;
