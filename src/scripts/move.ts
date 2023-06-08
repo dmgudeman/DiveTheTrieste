@@ -99,6 +99,10 @@ class Move {
     };
 
     private getLatMove(dir: string) {
+        if (this.vert === 0 && this.sub.getY() !== this.initialValues.getInitial_Y()) {
+            this.ocean.setY (0);
+            this.sub.setY(this.initialValues.getInitial_Y())
+        }
       
         if (this.OorS[0] == "O") {
             console.log("+ O MOVE LAT ++++");
@@ -159,6 +163,10 @@ class Move {
     }
 
     private getVerticalMove(dir: string) {
+        if (this.vert === 0 && this.sub.getY() !== this.initialValues.getInitial_Y()) {
+            this.ocean.setY (0);
+            this.sub.setY(this.initialValues.getInitial_Y())
+        }
         let vertLim: number;
         console.log("this.depthLim", this.depthLim);
         console.log("vOceanLim", this.vOceanLim);
@@ -177,7 +185,6 @@ class Move {
             console.log("Vy ", this.vert);
             console.log("0y ", this.calcPosition.getOceanVert());
             console.log("Sy ", this.calcPosition.getSubVert());
-            console.log("VOLimit", vertLim);
             console.log("+++++++++++++++++");
 
             if (this.depthLim > this.vOceanLim) {
@@ -185,16 +192,8 @@ class Move {
             } else {
                 vertLim = this.vOceanLim;
             }
-            // this.sub.setY(this.sub.getInitialVertPos());  // reset sub to assure accuracy at transition S to O on way up
-            // if (vert > 0) {
-            //     // move down no matter what if above surface
-            //     // console.log("BBBBBBBBB");
-            //     this.moveOceanDown();
-            // } else
             if (this.vert > -VERTICAL_VELOCITY) {
-                // stop one vertical vel upon rising
                 if (dir === "down") {
-                    // console.log("CCCCCCCCC");
                     this.moveOceanDown();
                 }
             } else if (this.vert >= vertLim) {
@@ -207,8 +206,6 @@ class Move {
                     this.moveOceanUp();
                 }
             } else if (this.vert < vertLim) {
-                // stop one vel unit from lower limit
-                console.log("FFFFFFFF");
                 if (dir === "up") {
                     this.moveOceanUp();
                 }
@@ -221,19 +218,7 @@ class Move {
             console.log("VOLimit", this.initialValues.getOceanVertLimit());
             console.log("$$$$$$$$$$$$$$$$$");
             console.log('AAAAAAAAA')
-            // if (vert > this.initialValues.getOceanVertLimit() + 1) {
-            //     console.log("1111111111");
-
-            //     if (this.dir === "down") {
-            //         this.moveSubDown();
-            //     }
-
-            //     // } else if (vert >= depth - 2*VERTICAL_VELOCITY && this.compVert <= depth) {
-            //     //     if (this.dir === "down") {
-            //     //         console.log('22222')
-            //     //         this.moveSubDown();
-            //     //     }
-            /* } else if */ if (this.vert >= this.depthLim) {
+          if (this.vert > this.depthLim) {
 
                 console.log('this.vert', this.vert);
                 console.log('vertLim', vertLim);
@@ -251,7 +236,7 @@ class Move {
                     this.moveSubUp();
                     console.log("Sy AFTER", this.calcPosition.getSubVert());
                 }
-            } else if (this.vert < this.depthLim) {
+            } else if (this.vert <= this.depthLim) {
                 console.log('CCCCCCCCCCC')
                 if (dir === "up") {
                   
