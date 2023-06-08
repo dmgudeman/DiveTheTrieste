@@ -42,7 +42,8 @@ class InitialValues {
     }
 
     getInitial_X() {
-        return this.width * 0.2604;
+        // return this.width * 0.2604;
+        return this.roundDownToNearestVertVel(this.width * 0.2604);
     }
     getInitial_Y() {
         return this.roundDownToNearestVertVel(this.height * 0.04028);
@@ -52,8 +53,8 @@ class InitialValues {
         return this.roundDownToNearestLatVel(this.width * -0.6375);
     }
     getFullVertLimit() {
-        // return this.roundDownToNearestVertVel(this.height * -0.95);
-        return this.height * -0.95;
+        return this.roundDownToNearestVertVel(this.height * -0.95);
+        // return this.height * -0.95;
     }
 
     getOceanLatLimit() {
@@ -61,8 +62,8 @@ class InitialValues {
     }
    
     getOceanVertLimit() {
-        // return this.roundDownToNearestVertVel(this.height * -0.55);
-        return this.height *-0.55
+        return this.roundDownToNearestVertVel(this.height * -0.55);
+        // return this.height *-0.55
     }
 
     roundDownToNearestLatVel(num: number) {

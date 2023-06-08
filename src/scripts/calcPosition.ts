@@ -18,6 +18,7 @@ class CalcPosition {
     private oceanVertLimit: number;
     private subLat: number;
     private subVert: number;
+    private OorS: string[];
 
     private constructor(
         oceanLat?: number,
@@ -30,6 +31,7 @@ class CalcPosition {
         this.compVert = 0;
         this.oceanLat = oceanLat || 0;
         this.oceanVert = oceanVert || 0;
+        this.OorS = ["O", "O"];
         this.oceanLatLimit = this.initialValues.getOceanLatLimit();
         this.oceanVertLimit = this.initialValues.getOceanVertLimit();
         this.subLat = subLat || this.initialValues.getInitial_X();
@@ -112,52 +114,57 @@ class CalcPosition {
     getCompVert() {
         return this.compVert;
     }
-    getSubVert() {
-        return this.subVert;
+
+    getOceanLat() {
+        return this.oceanLat;
     }
+
+    getSubLat() {
+        return this.subLat;
+    }
+
     getOceanVert() {
         return this.oceanVert;
+    }
+
+    getSubVert() {
+        return this.subVert;
     }
 
     getOorS(dir: string): string[] {
         let lat = this.getCompLat();
         let vert = this.getCompVert();
+        let latLimit = this.initialValues.getOceanLatLimit();
         let vertLimit = this.initialValues.getOceanVertLimit();
         let modVertLimit = vertLimit + VERTICAL_VELOCITY;
-        console.log("== GET OORS ==", vert);
-        console.log("MODLIMIT", modVertLimit);
-        console.log("LIMIT", vertLimit);
-        console.log("VERT >= MODLIMIT", vert >= modVertLimit);
-        console.log("VERT <= MODLIMIT", vert < modVertLimit);
-        console.log("OCEAN VERT", this.getOceanVert());
-        console.log("SUB VERT", this.getSubVert());
-        console.log("=========");
-        if (dir === "right" || dir === "left")
-            if (
-                lat >= this.initialValues.getOceanLatLimit() &&
-                vert >= vertLimit
-            ) {
-                console.log("RETURN [ O, O]");
-                return ["O", "O"];
+        // console.log("== GET OORS ==", vert);
+        // console.log("MODLIMIT", modVertLimit);
+        // console.log("LIMIT", vertLimit);
+        // console.log("VERT >= MODLIMIT", vert >= modVertLimit);
+        // console.log("VERT <= MODLIMIT", vert < modVertLimit);
+        // console.log("OCEAN VERT", this.getOceanVert());
+        // console.log("SUB VERT", this.getSubVert());
+        // console.log("=========");
+        if (dir === "right" || dir === "left") {
+            if (lat >= latLimit) {
+                console.log("this.OorS", this.OorS);
+                this.OorS[0] = "O";
+                return this.OorS;
+            } else if (lat < latLimit) {
+                this.OorS[0] = "S";
+                console.log("this.OorS", this.OorS);
+                return this.OorS;
             }
-        if (
-            lat < this.initialValues.getOceanLatLimit() + LAT_VELOCITY &&
-            vert >= vertLimit
-        ) {
-            console.log("RETURN [ S, O]");
-            return ["S", "O"];
-        }
-        if (lat >= this.initialValues.getOceanLatLimit() && vert < vertLimit) {
-            console.log("RETURN [ O, S]");
-            return ["O", "S"];
-        }
-        if (
-            lat < this.initialValues.getOceanLatLimit() + LAT_VELOCITY &&
-            vert < vertLimit
-        ) {
-            console.log("RETURN [ S, S]");
-            return ["S", "S"];
-        }
+        } else if (dir === "up" || dir === "down")
+            if (vert >= vertLimit) {
+                this.OorS[1] = "O";
+                console.log("this.OorS", this.OorS);
+                return this.OorS;
+            } else if (vert < vertLimit) {
+                this.OorS[1] = "S";
+                console.log("this.OorS", this.OorS);
+                return this.OorS;
+            }
     }
     getMapPointObject(): IMapPointObject {
         let lastObject: IMapPointObject;

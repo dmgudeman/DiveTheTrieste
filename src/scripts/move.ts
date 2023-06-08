@@ -1,26 +1,33 @@
-import { LAT_VELOCITY, VERTICAL_VELOCITY, setHitBottomFlag, getCurrentCanvas } from "./constants";
+import {
+    LAT_VELOCITY,
+    VERTICAL_VELOCITY,
+    setHitBottomFlag,
+    getCurrentCanvas,
+} from "./constants";
 import Ocean from "./ocean";
 import Sub from "./sub";
 import { IMapPointObject } from "./types";
 import CalcConstant from "./calcConstant";
 import EdText from "./edText";
-import Zone from "./zone";
 import { eventBus } from "./eventBus";
 import CalcPosition from "./calcPosition";
 import InitialValues from "./initialValues";
-import Modal from './modal';
+import Modal from "./modal";
 
 class Move {
     private ocean: Ocean;
     private sub: Sub;
-    private dir: string;
-    private constants: CalcConstant;
     private calcPosition: CalcPosition;
-    private calcConstant: CalcConstant;
     private initialValues: InitialValues;
-    private varDepth: number;
     private mapPointObject: IMapPointObject;
     private OorS: string[];
+    private lat: number;
+    private vert: number;
+    private lOceanLim: number;
+    private vOceanLim: number;
+    private lFullLim: number;
+    private vFullLim: number;
+    private depthLim: number;
     private increaseVelFlag: string;
     private latVel: number;
     private vertVel: number;
@@ -30,95 +37,133 @@ class Move {
     constructor(ocean: Ocean, sub: Sub, dir?: string) {
         this.ocean = ocean;
         this.sub = sub;
-        this.dir = dir || null;
-        this.constants = new CalcConstant() || null;
+        // this.constants = new CalcConstant() || null;
         this.calcPosition = CalcPosition.getInstance();
-        this.calcConstant = new CalcConstant();
         this.initialValues = InitialValues.getInstance();
-        this.mapPointObject =
-            this.calcPosition.getMapPointObject() || null;
-        this.varDepth = this.calcPosition._calcDepthLimit2() || null;
-        this.OorS = this.calcPosition.getOorS(this.dir) || null;
+        this.mapPointObject = this.calcPosition.getMapPointObject() || null;
+        this.OorS = this.calcPosition.getOorS("right") || null;
+        this.lat = this.calcPosition.getCompLat();
+        this.vert = this.calcPosition.getCompVert();
+        this.lOceanLim = this.initialValues.getOceanLatLimit();
+        this.vOceanLim = this.initialValues.getOceanVertLimit();
+        this.lFullLim = this.initialValues.getFullLatLimit();
+        this.vFullLim = this.initialValues.getFullVertLimit();
+        this.depthLim = this.calcPosition._calcDepthLimit2() || null;
         this.increaseVelFlag = "";
         this.latVel = LAT_VELOCITY;
         this.vertVel = VERTICAL_VELOCITY;
         this.edText = new EdText();
-        this.modal =  new Modal("cockpitModal", "closeCockpitModal")
-       
+        this.modal = new Modal("cockpitModal", "closeCockpitModal");
     }
 
     public getMove = (dir: string) => {
-        const zone = new Zone();
-        this.setDir(dir);
+        this.depthLim = this.calcPosition._calcDepthLimit2();
+        this.lat = this.calcPosition.getCompLat();
+        this.vert = this.calcPosition.getCompVert();
+        this.lOceanLim = this.initialValues.getOceanLatLimit();
+        this.vOceanLim = this.initialValues.getOceanVertLimit();
+        this.lFullLim = this.initialValues.getFullLatLimit();
+        this.vFullLim = this.initialValues.getFullVertLimit();
+        this.OorS = this.calcPosition.getOorS(dir);
+        console.log("=START MOVE =======");
+        console.log("lat", this.lat);
+        console.log("vert", this.vert);
+        console.log("lOceanLim", this.lOceanLim);
+        console.log("vOceanLim", this.vOceanLim);
+        console.log("depthLim" , this.depthLim)
+        console.log("lFullLim", this.lFullLim);
+        console.log("vFullLim", this.vFullLim);
+        console.log("OorS", this.OorS);
+        console.log("===================");
+
         this.checkToIncreaseVel(dir);
-        if (this.calcPosition.getCompVert() <= this.varDepth - 1) {
-            setHitBottomFlag(true);
-            this.configureHitBottomMove(dir);
-        } else {
-            setHitBottomFlag(false);
-            this.getLatMove();
+
+        if (dir === "left" || dir === "right") {
+            if (this.calcPosition.getCompVert() <= this.depthLim) {
+                setHitBottomFlag(true);
+                this.configureHitBottomMove(dir);
+            } else {
+                setHitBottomFlag(false);
+                this.getLatMove(dir);
+            }
         }
-        
-        this.getVerticalMove();
+
+        if (dir === "up" || dir === "down") {
+            this.getVerticalMove(dir);
+        }
 
         // let zoneObject = zone.upDateZoneObject();
         // let zoneNum = zoneObject.id;
         let canvasNumber = getCurrentCanvas();
         this.edText.updateEdText(canvasNumber);
-    
-
     };
 
-    private getLatMove() {
-        // console.log("xxxxxxxxxxxxxx");
-        let oors = this.calcPosition.getOorS(this.dir);
-        if (oors[0] == "O")
-         {
+    private getLatMove(dir: string) {
+      
+        if (this.OorS[0] == "O") {
+            console.log("+ O MOVE LAT ++++");
+            console.log("Vx ", this.lat);
+            console.log("0x ", this.calcPosition.getOceanLat());
+            console.log("Sx ", this.calcPosition.getSubLat());
+            console.log("LOLimit", this.initialValues.getOceanLatLimit());
+            console.log("+++++++++++++++++");
             // this.sub.setX(this.sub.getInitialLatPos());
-          
+
             // console.log('LATERAL 0000000 LAT');
-            if (this.calcPosition.getCompLat() > 0) {
+            if (this.lat > 0) {
                 // console.log('LATERAL 1111111 LAT');
-                this.moveOceanRight(this.latVel);
-            } else if (this.calcPosition.getCompLat() > -LAT_VELOCITY) {
+                this.moveOceanRight();
+            } else if (this.lat > -LAT_VELOCITY) {
                 // stop one vertical vel upon rising
-                if (this.dir === "right") {
+                if (dir === "right") {
                     // console.log("1010101010101");
-                    this.moveOceanRight(this.latVel);
+                    this.moveOceanRight();
                 }
-            } else if (this.calcPosition.getCompLat() >= this.initialValues.getOceanLatLimit()) {
+            } else if (this.lat >= this.lOceanLim) {
                 // console.log('LATERAL 2222222 LAT');
-                if (this.dir === "right") {
+                if (dir === "right") {
                     // console.log('LATERAL 3333333 LAT');
-                    this.moveOceanRight(this.latVel);
-                } else if (this.dir === "left") {
+                    this.moveOceanRight();
+                } else if (dir === "left") {
                     // console.log('LATERAL 44444444 LAT');
-                    this.moveOceanLeft(this.latVel);
+                    this.moveOceanLeft();
                 }
             }
-        } else if (oors[0] === "S") {
-            // console.log('yyyyyyyyyyyyy')
-          
-            if (this.calcPosition.getCompLat() > this.initialValues.getFullLatLimit()) {
+        } else if (this.OorS[0] === "S") {
+            console.log("$ S MOVE LAT $$$$");
+            console.log("Vx ", this.lat);
+            console.log("0x ", this.calcPosition.getOceanLat());
+            console.log("Sx ", this.calcPosition.getSubLat());
+            console.log("LOLimit", this.initialValues.getOceanLatLimit());
+            console.log("$$$$$$$$$$$$$$$$");
+            if (this.lat > this.lFullLim) {
                 // console.log('LATERAL 5555555 LAT');
-                if (this.dir === "right") {
-                    // console.log('LATERAL 66666666 LAT');
+                if (dir === "right") {
+                    console.log("Ox BEFORE", this.calcPosition.getOceanLat());
+                    console.log("Sx BEFORE ", this.calcPosition.getSubLat());
                     this.moveSubRight();
-                } else if (this.dir === "left") {
-                    // console.log('LATERAL 777777777 LAT');
+                    console.log("Ox AFTER", this.calcPosition.getOceanLat());
+                    console.log("Sx AFTER ", this.calcPosition.getSubLat());
+                } else if (dir === "left") {
+                    console.log("LATERAL 777777777 LAT");
                     this.moveSubLeft();
                 }
-            } else if (this.calcPosition.getCompLat() <= this.initialValues.getFullLatLimit()) {
-                // console.log('LATERAL 88888888 LAT');
-                if (this.dir === "left") {
+            } else if (this.lat <= this.lFullLim) {
+                console.log("LATERAL 88888888 LAT");
+                if (dir === "left") {
                     this.moveSubLeft();
                 }
             }
+            console.log("LATERAL 9999999 LAT");
         }
     }
 
-    private getVerticalMove() {
-        this.varDepth = this.calcPosition._calcDepthLimit2();
+    private getVerticalMove(dir: string) {
+        let vertLim: number;
+        console.log("this.depthLim", this.depthLim);
+        console.log("vOceanLim", this.vOceanLim);
+
+        
         // console.log('==VERT MOVE===')
         // console.log('OOORS', this.calcPosition.getOorS());
         // console.log('VERT', this.calcPosition.getCompVert())
@@ -126,86 +171,94 @@ class Move {
         // console.log('Vert Limit', this.initialValues.getOceanVertLimit())
         // console.log('Lat Limit', this.initialValues.getOceanLatLimit())
         // console.log('==============')
-       
-       
-       
-       
-      
-        let oorS = this.calcPosition.getOorS(this.dir);
-        if (oorS[1] == "O") {
-            
-           
+
+        if (this.OorS[1] == "O") {
+            console.log("++O MOVE VERT +++++");
+            console.log("Vy ", this.vert);
+            console.log("0y ", this.calcPosition.getOceanVert());
+            console.log("Sy ", this.calcPosition.getSubVert());
+            console.log("VOLimit", vertLim);
+            console.log("+++++++++++++++++");
+
+            if (this.depthLim > this.vOceanLim) {
+                vertLim = this.depthLim;
+            } else {
+                vertLim = this.vOceanLim;
+            }
             // this.sub.setY(this.sub.getInitialVertPos());  // reset sub to assure accuracy at transition S to O on way up
-            if (this.calcPosition.getCompVert() > 0) {
-                // move down no matter what if above surface
-                // console.log("BBBBBBBBB");
-                this.moveOceanDown(this.vertVel);
-                
-            // } else if (this.calcPosition.getCompVert() > -VERTICAL_VELOCITY) {
-            //     // stop one vertical vel upon rising
-            //     if (this.dir === "down") {
-            //         // console.log("CCCCCCCCC");
-            //         this.moveOceanDown(this.vertVel);
-            //     }
-            } else if (this.calcPosition.getCompVert() >= this.varDepth) {
-                console.log('++++ MOVE O +++++')
-                console.log('Vy ', this.calcPosition.getCompVert())
-                console.log('0y ', this.calcPosition.getOceanVert())
-                console.log('Sy ', this.calcPosition.getSubVert())
-                console.log('+++++++++++++++++')
-                // normal
-                if (this.dir === "down") {
-                    console.log("DDDDDDDD");
-                    this.moveOceanDown(this.vertVel);
-                } else if (this.dir === "up") {
-                    console.log("EEEEEEEEE");
-                    this.moveOceanUp(this.vertVel);
+            // if (vert > 0) {
+            //     // move down no matter what if above surface
+            //     // console.log("BBBBBBBBB");
+            //     this.moveOceanDown();
+            // } else
+            if (this.vert > -VERTICAL_VELOCITY) {
+                // stop one vertical vel upon rising
+                if (dir === "down") {
+                    // console.log("CCCCCCCCC");
+                    this.moveOceanDown();
                 }
-            } else if (this.calcPosition.getCompVert() <= this.varDepth + 1) {
+            } else if (this.vert >= vertLim) {
+                // normal
+                if (dir === "down") {
+                    console.log("OCEAN NORMAL D");
+                    this.moveOceanDown();
+                } else if (dir === "up") {
+                    console.log("OCEAN NORMAL U");
+                    this.moveOceanUp();
+                }
+            } else if (this.vert < vertLim) {
                 // stop one vel unit from lower limit
                 console.log("FFFFFFFF");
-                if (this.dir === "up") {
-                    this.moveOceanUp(this.vertVel);
+                if (dir === "up") {
+                    this.moveOceanUp();
                 }
             }
-        } else if ((oorS[1] = "S")) {
-            console.log('$$$$ MOVE S $$$$$')
-            console.log('Vy ', this.calcPosition.getCompVert())
-            console.log('0y ', this.calcPosition.getOceanVert())
-            console.log('Sy ', this.calcPosition.getSubVert())
-            console.log('$$$$$$$$$$$$$$$$$')
-          
-            
-            // if (this.calcPosition.getCompVert() > this.initialValues.getOceanVertLimit() + 1) {
+        } else if ((this.OorS[1] = "S")) {
+            console.log("$$$S MOVE VERT $$$$");
+            console.log("Vy ", this.vert);
+            console.log("0y ", this.calcPosition.getOceanVert());
+            console.log("Sy ", this.calcPosition.getSubVert());
+            console.log("VOLimit", this.initialValues.getOceanVertLimit());
+            console.log("$$$$$$$$$$$$$$$$$");
+            console.log('AAAAAAAAA')
+            // if (vert > this.initialValues.getOceanVertLimit() + 1) {
             //     console.log("1111111111");
-        
 
             //     if (this.dir === "down") {
             //         this.moveSubDown();
             //     }
 
-            //     // } else if (this.calcPosition.getCompVert() >= this.varDepth - 2*VERTICAL_VELOCITY && this.compVert <= this.varDepth) {
+            //     // } else if (vert >= depth - 2*VERTICAL_VELOCITY && this.compVert <= depth) {
             //     //     if (this.dir === "down") {
             //     //         console.log('22222')
             //     //         this.moveSubDown();
             //     //     }
-            /* } else if */ if (this.calcPosition.getCompVert() >= this.varDepth) {
+            /* } else if */ if (this.vert >= this.depthLim) {
+
+                console.log('this.vert', this.vert);
+                console.log('vertLim', vertLim);
+                console.log('vFullLim', this.vFullLim)
+                console.log('BBBBBBBBB')
                 // normal
-                if (this.dir === "down") {
-                    console.log("3333333");
+                if (dir === "down") {
+                    console.log("SUB NORMAL D");
                     this.moveSubDown();
-                } else if (this.dir === "up") {
+                    console.log("Oy AFTER", this.calcPosition.getOceanVert());
+                    console.log("Sy AFTER ", this.calcPosition.getSubVert());
+                } else if (dir === "up") {
                     //
-                    console.log("44444444");
+                    console.log("SUB NORMAL U");
                     this.moveSubUp();
+                    console.log("Sy AFTER", this.calcPosition.getSubVert());
                 }
-            } else if (this.calcPosition.getCompVert() < this.varDepth) {
-                // stop one vel unit from lower limit
-                if (this.dir === "up") {
-                    console.log("5555555");
+            } else if (this.vert < this.depthLim) {
+                console.log('CCCCCCCCCCC')
+                if (dir === "up") {
+                  
                     this.moveSubUp();
                 }
             }
+            console.log('DDDDDDDDDDDD')
         }
     }
 
@@ -219,38 +272,29 @@ class Move {
         hitBottom.classList.add("hide");
     };
 
-    // resetVelocities = () => {
-    //     this.ocean.zeroVelRight();
-    //     this.ocean.zeroVelLeft();
-    //     this.ocean.zeroVelUp();
-    //     this.ocean.zeroVelDown();
-    //     this.sub.zeroVelRight();
-    //     this.sub.zeroVelLeft();
-    //     this.sub.zeroVelUp();
-    //     this.sub.zeroVelDown();
-    // };
+   
+
+    
 
     private configureHitBottomMove = (dir: string) => {
-       console.log('99999999999999999999999')
-       console.log('99999999', dir);
-    
-        let mvmt = this.calcPosition.getMapPointObject().mvmtLat
-        console.log('99999999 MVMT',mvmt)
+        console.log("99999999999999999999999");
+        console.log("99999999", dir);
+
+        let mvmt = this.calcPosition.getMapPointObject().mvmtLat;
+        console.log("99999999 MVMT", mvmt);
         if (this.OorS[1] === "O") {
             if (dir === "right") {
                 if (mvmt === "right" || mvmt === "both") {
-                    this.moveOceanRight(this.latVel);
+                    this.moveOceanRight();
                 }
             } else if (dir === "left") {
                 if (mvmt === "left" || mvmt === "both") {
-                   
                     // this.modal.showModal();
-                    this.moveOceanLeft(this.latVel);
+                    this.moveOceanLeft();
                 }
             }
-            console.log('9b9b9b9b9b9b9b9b9b9')
+            console.log("9b9b9b9b9b9b9b9b9b9");
         } else if (this.OorS[1] === "S") {
-        
             if (dir === "right") {
                 console.log("    IN MOVE RIGHT");
                 if (mvmt === "right" || mvmt === "both") {
@@ -263,19 +307,19 @@ class Move {
                 }
             }
         }
-        console.log('9a9a9a9a9a9a9a9a9a9a9a9a9a9')
-        console.log( localStorage.getItem("cockpitModal"))
-       console.log('current Canavs ', getCurrentCanvas())
-       if (getCurrentCanvas() === 3){
-        this.modal.showModal();
-                
-                // Hide the modal after 1 second (1000 ms)
-                setTimeout(() => {
-                    this.modal.hideModal();
-                }, 1000);
-       }
-     
-        console.log('9c9c9c9c9c9c9c9c9c9c9')
+        console.log("HIT BOTTOM 9999999");
+        console.log(localStorage.getItem("cockpitModal"));
+        console.log("current Canavs ", getCurrentCanvas());
+        if (getCurrentCanvas() === 3) {
+            this.modal.showModal();
+
+            // Hide the modal after 1 second (1000 ms)
+            setTimeout(() => {
+                this.modal.hideModal();
+            }, 1000);
+        }
+
+        console.log("9c9c9c9c9c9c9c9c9c9c9");
     };
 
     printCoordinates = (where: string) => {
@@ -283,10 +327,13 @@ class Move {
 
         console.log("viewport.width", visualViewport.width);
         console.log("OorS", this.OorS);
-        console.log("COMP LAT VERT", this.calcPosition.getCompLat(), this.calcPosition.getCompVert());
+        console.log(
+            "COMP LAT VERT",
+            this.calcPosition.getCompLat(),
+            this.calcPosition.getCompVert()
+        );
         console.log("OCEAN VERT LIMIT", this.initialValues.getOceanVertLimit());
         console.log("OCEAN LAT LIMIT", this.initialValues.getOceanLatLimit());
-        console.log("VARDEPTH", Math.floor(this.varDepth));
         console.log("OCEAN X, Y", this.ocean.getX(), this.ocean.getY());
         console.log("SUB X, Y", this.sub.getX(), this.sub.getY());
         console.log("mapPointObjectName", this.mapPointObject.name);
@@ -300,7 +347,6 @@ class Move {
         console.log("COMPVERT", this.calcPosition.getCompVert());
         console.log("OCEAN Y", this.ocean.getY());
         console.log("SUB Y", this.sub.getY());
-        console.log("VARIABLE DEPTH", this.varDepth);
         console.log("mapPointObjectName", this.mapPointObject.name);
         console.log("==============");
     };
@@ -308,17 +354,29 @@ class Move {
     printLateral = (where: string) => {
         console.log(`${where}`);
         console.log("COMPLAT", this.calcPosition.getCompLat());
-   
+
         console.log("mapPointObjectName", this.mapPointObject.name);
         console.log("==============");
     };
 
-    moveOceanRight = (vel: number) => {
-        this.ocean.setX(this.ocean.getX() - vel);
+    printMove = (location: string) => {
+        console.log(`==${location}====`);
+        console.log("lat", this.lat);
+        console.log("vert", this.vert);
+        console.log("lOceanLim", this.lOceanLim);
+        console.log("vOceanLim", this.vOceanLim);
+        console.log("lFullLim", this.lFullLim);
+        console.log("vFullLim", this.vFullLim);
+        console.log("OorS", this.OorS);
+        console.log("===================");
+    }
+
+    moveOceanRight = () => {
+        this.ocean.setX(this.ocean.getX() - LAT_VELOCITY);
         eventBus.emit("oceanXChanged", this.ocean.getX());
     };
-    moveOceanLeft = (vel: number) => {
-        this.ocean.setX(this.ocean.getX() + vel);
+    moveOceanLeft = () => {
+        this.ocean.setX(this.ocean.getX() + LAT_VELOCITY);
         eventBus.emit("oceanXChanged", this.ocean.getX());
     };
     moveSubRight = () => {
@@ -329,13 +387,13 @@ class Move {
         this.sub.setX(this.sub.getX() - LAT_VELOCITY);
         eventBus.emit("subXChanged", this.sub.getX());
     };
-    moveOceanUp = (vel: number) => {
-        this.ocean.setY(this.ocean.getY() + vel);
+    moveOceanUp = () => {
+        this.ocean.setY(this.ocean.getY() + VERTICAL_VELOCITY);
         eventBus.emit("oceanYChanged", this.ocean.getY());
     };
 
-    moveOceanDown = (vel: number) => {
-        this.ocean.setY(this.ocean.getY() - vel);
+    moveOceanDown = () => {
+        this.ocean.setY(this.ocean.getY() - VERTICAL_VELOCITY);
         eventBus.emit("oceanYChanged", this.ocean.getY());
     };
 
@@ -345,13 +403,11 @@ class Move {
     };
 
     moveSubDown = () => {
+        
         this.sub.setY(this.sub.getY() + VERTICAL_VELOCITY);
+        console.log('SUB DOWN AFTER SubY', this.sub.getY())
         eventBus.emit("subYChanged", this.sub.getY());
     };
-
-    setDir(dir: string) {
-        this.dir = dir;
-    }
 
     checkToIncreaseVel(dir: string) {
         if (this.increaseVelFlag === dir) {
