@@ -10,8 +10,8 @@
   left: 48%;
   bottom: 0;
   transform: translateX(-50%);
-  width: 25%;
-  height: 190;
+  width: 35rem;
+  height: 12rem;
   z-index: 100;
   color: var(--cockpitBG);
   background-color: var(--cockpitBG);
@@ -33,13 +33,12 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 45%;
-  height: 65px;
-  margin-top: 20px;
+  width: 15rem;
+  height: 3rem;
   font-size: 1rem;
   font-weight: 550;
   text-align: center;
-  border-radius: 40px 40px 16px 16px;
+  border-radius: 40px 10px 10px 10px;
   border: 3px solid rgb(58, 19, 19);
   background-color: var(--cockpitText);
   z-index: 21;
@@ -49,13 +48,27 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 45%;
-  height: 65px;
-  margin-top: 20px;
+  width: 15rem;
+  height: 3rem;
   font-size: 1rem;
   font-weight: 550;
   text-align: center;
-  border-radius: 40px 40px 16px 16px;
+  border-radius: 10px 40px 10px 10px;
+  border: 3px solid rgb(58, 19, 19);
+  background-color: var(--cockpitText);
+  z-index: 21;
+}
+
+.IPDistToBottom {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30rem;
+  height: 3rem;
+  font-size: 22px;
+  font-weight: 550;
+  text-align: center;
+  border-radius: 10px;
   border: 3px solid rgb(58, 19, 19);
   background-color: var(--cockpitText);
   z-index: 21;
@@ -65,13 +78,12 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 87%;
-  height: 65px;
-  margin: 20px;
-  font-size: 22;
+  width: 30rem;
+  height: 3rem;
+  font-size: 22px;
   font-weight: 550;
   text-align: center;
-  border-radius: 16px;
+  border-radius: 10px;
   border: 3px solid rgb(58, 19, 19);
   background-color: var(--cockpitText);
   z-index: 21;
