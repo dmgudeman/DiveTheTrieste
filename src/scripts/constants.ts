@@ -91,8 +91,8 @@ export const MAP_POINTS: IMP[] = [
 // lateral based on width 3840    
 // vertical based on height of 1986
 // this array not being used
-const MULT_MP_0 :number[] = [  0,  0 ];
-const MULT_MP_1 :number[] = [  0,  0];
+const MULT_MP_0 :number[] = [  0,  -0.0101 ];
+const MULT_MP_1 :number[] = [  0,  -0.0101  ];
 const MULT_MP_2 :number[] = [ -0.0468, -0.2164 ];// lateral based on width 3840    
 const MULT_MP_3 :number[] = [ -0.1823, -0.2618 ];// vertical based on height of 1986
 const MULT_MP_4 :number[] = [ -0.2239, -0.2115 ];

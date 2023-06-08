@@ -127,16 +127,20 @@ class Move {
         this.reInitiateCoordinates();
         let vertLim: number;
 
-        if (this.OorS[1] == "O") {
+        if (this.OorS[1] === "O") {
+            console.log('this.depthLim', this.depthLim)
+            console.log('this.vOceanLim', this.vOceanLim)
+            console.log( 'this.vert', this.vert)
             if (this.depthLim > this.vOceanLim) {
                 vertLim = this.depthLim;
             } else {
                 vertLim = this.vOceanLim;
             }
-            if (this.vert === 0) {
+            if (this.vert >= 0) {
                 if (dir === "down") {
                     this.moveOceanDown();
                 }
+                return;
             } else if (this.vert >= vertLim) {
                 if (dir === "down") {
                     this.moveOceanDown();
@@ -176,7 +180,7 @@ class Move {
                 if (mvmt === "left" || mvmt === "both") {
                     this.moveOceanLeft();
                 }
-            } else if (dir == "up") {
+            } else if (dir == "up" && this.vert <0) {
                 this.moveOceanUp();
             }
         } else if (this.OorS[1] === "S") {
@@ -188,7 +192,7 @@ class Move {
                 if (mvmt === "left" || mvmt === "both") {
                     this.moveSubLeft();
                 }
-            } else if (dir == "up") {
+            } else if (dir =="up" && this.vert <=0) {
                 this.moveSubUp();
             }
         }
@@ -246,6 +250,12 @@ class Move {
         ) {
             this.ocean.setY(0);
             this.sub.setY(this.initialValues.getInitial_Y());
+        }
+
+        if ( this.vert >= 0) {
+            this.ocean.setY(0);
+            this.sub.setY(this.initialValues.getInitial_Y());
+
         }
     }
 
