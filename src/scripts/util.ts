@@ -8,7 +8,7 @@ import {
 import { globalCockpit } from "../index";
 import EdText from "./edText";
 import Modal from './modal';
-import { showDepth, showLat, showZone, showMouseAsSub, showGeoDisplay } from "./boundary";
+import { showDepth, showLat, showZone, showDistToBottom, showGeoDisplay } from "./boundary";
 
 
 // export function clear(ctx:CanvasRenderingContext2D) {
@@ -99,6 +99,7 @@ export function showCanvas3() {
     showDepth();
     showLat();
     showGeoDisplay();
+    showDistToBottom();
       
 }
 

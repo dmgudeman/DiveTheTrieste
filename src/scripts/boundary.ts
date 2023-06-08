@@ -36,6 +36,18 @@ export function showDepth() {
     return depth;
 }
 
+export function showDistToBottom(){
+    const IPDistToBottom = document.getElementById("IPDistToBottom");
+    const vert = calcPosition.getCompVert();
+    const depthLimit =calcPosition._calcDepthLimit2();
+    const diff = vert - depthLimit;
+    console.log('depthLimit', depthLimit)
+    console.log('vert', vert)
+    console.log('diff', diff)
+    IPDistToBottom.innerHTML = `Dist to Sea Floor: ${diff} ft`;
+
+}
+
 export function showGeoDisplay(): void {
     const IPZoneGauge = document.getElementById("IPZoneGauge");
     let mapPointObject: IMapPointObject = calcPosition.getMapPointObject();

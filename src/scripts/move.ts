@@ -65,17 +65,6 @@ class Move {
         this.lFullLim = this.initialValues.getFullLatLimit();
         this.vFullLim = this.initialValues.getFullVertLimit();
         this.OorS = this.calcPosition.getOorS(dir);
-        console.log("=START MOVE =======");
-        console.log("lat", this.lat);
-        console.log("vert", this.vert);
-        console.log("lOceanLim", this.lOceanLim);
-        console.log("vOceanLim", this.vOceanLim);
-        console.log("depthLim" , this.depthLim)
-        console.log("lFullLim", this.lFullLim);
-        console.log("vFullLim", this.vFullLim);
-        console.log("OorS", this.OorS);
-        console.log("===================");
-
         this.checkToIncreaseVel(dir);
 
         if (dir === "left" || dir === "right") {
@@ -111,15 +100,6 @@ class Move {
         }
       
         if (this.OorS[0] == "O") {
-            console.log("+ O MOVE LAT ++++");
-            console.log("Vx ", this.lat);
-            console.log("0x ", this.calcPosition.getOceanLat());
-            console.log("Sx ", this.calcPosition.getSubLat());
-            console.log("LOLimit", this.initialValues.getOceanLatLimit());
-            console.log("+++++++++++++++++");
-            // this.sub.setX(this.sub.getInitialLatPos());
-
-            // console.log('LATERAL 0000000 LAT');
             if (this.lat > 0) {
                 // console.log('LATERAL 1111111 LAT');
                 this.moveOceanRight();
@@ -187,12 +167,6 @@ class Move {
         // console.log('==============')
 
         if (this.OorS[1] == "O") {
-            console.log("++O MOVE VERT +++++");
-            console.log("Vy ", this.vert);
-            console.log("0y ", this.calcPosition.getOceanVert());
-            console.log("Sy ", this.calcPosition.getSubVert());
-            console.log("+++++++++++++++++");
-
             if (this.depthLim > this.vOceanLim) {
                 vertLim = this.depthLim;
             } else {
