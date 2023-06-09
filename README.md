@@ -59,7 +59,7 @@ Storing objects in an array to allowed the use of array filter method. The y coo
 floor was  calculated using the classic y intercept method calculated with points stored
 in the objects.
 <div style="float: left; margin-right: 10px;">
-<img src="./assets/code/yIntercept.png" alt="constants" width="600" height="300">
+<img src="./assets/code/yIntercept.png" alt="constants" width="600" height="400">
 </div>
 
 ### Flora and Fauna are shown from different areas of ocean
