@@ -53,7 +53,7 @@ data types difficult as I tried different solutions. I implemented Typescript to
 facilitate solving this issue and it proved invaluable. 
 
 <div style="float: left; margin-right: 10px;">
-<img src="./assets/code/constants.png" alt="constants" width="700" height="300">
+<img src="./assets/code/constants.png" alt="constants" width="800" height="400">
 </div>
 Storing objects in an array to allowed the use of array filter method. The y coordinate of the ocean
 floor was  calculated using the classic y intercept method calculated with points stored
