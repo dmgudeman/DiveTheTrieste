@@ -24,40 +24,41 @@ animals (pelagic) depending on where the sub is located.
 ### The submarine moves on a classic cross section of the ocean
 At first the submarine moves across the screen first due the background
 moving. At one point the background stops moving and the state is transferred
-to the submarine object which moves ontop the background
+to the submarine object which moves on top the background
 to the edge. The difficult job of maintaining state and creating a smooth
 transition was  accomplished by updating coordinates on both the submarine 
 as well as the background object. 
 
-These two objects were constructed as singleton an an attempt to create 
+These two objects were constructed as singleton in an attempt to create 
 a computed "single location of truth." This proved to be problematic
-because as canvas elements it was unwieldly to get the current context
+because, as canvas elements, it was unwieldy to get the current context
 to render appropriately.
 
 I then refactored using a Publish Subscribe model with a central event bus to
 define the events that are emitted. At first I tried emit events on the main animation
 loop. This overwhelmed the computer. Now an event is emitted
 every time a coordinate changed. Any area of the app can subscribe to the event,
-however I found that defining a singleton class CalcPosition as a single point
+however I found that defining a singleton class as a single point
 of truth to work the best. The position is then obtained from this instance. In building
 this app the impetus for Redux became very clear.
 
 The next task was to map out the topography of the ocean floor with hills and
 trenches. This was done by take manual measurements of the topograhic endpoints
 and using the coordinates to calculate a y intercept for each point of lateral
-movement. These were used to make a coefficient that 
+movement. These were used to make a coefficient that defines the topography by 
+points calculated from the viewport width and height. 
 
 The multiple complex data types to allow position calculaton, conditonal styling,
 showing textual data based on position on the canvas made keeping track of the 
-data types difficult as I tried different solutions. I implemented Typescript to 
-facilitate solving this issue and it proved invaluable. 
+data types difficult. I implemented Typescript to facilitate solving this issue 
+and it proved invaluable. An example type:
 
 <div style="float: left; margin-right: 10px;">
 <img src="./assets/code/constants.png" alt="constants" width="800" height="400">
 </div>
-Storing objects in an array to allowed the use of array filter method. The y coordinate of the ocean
-floor was  calculated using the classic y intercept method calculated with points stored
-in the objects.
+Storing objects in an array to allowed the use of array filter method. Points 
+are calculated the viewport dimensions. The y coordinate of the ocean
+floor is then calculated using the classic y intercept method.
 <div style="float: left; margin-right: 10px;">
 <img src="./assets/code/yIntercept.png" alt="constants" width="600" height="400">
 </div>
