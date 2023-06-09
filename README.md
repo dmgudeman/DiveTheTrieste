@@ -62,17 +62,22 @@ in the objects.
 <img src="./assets/code/yIntercept.png" alt="constants" width="600" height="400">
 </div>
 
-### Flora and Fauna are shown from different areas of ocean
-The submarine position in ocean is used to filter subsets of images
-showing life at that depth. One of six arrays of images is chosen by depth and
-proximity to shore. Then a random image is presented to the
-submarine viewport.
+### Images and text are shown from 6 different areas of ocean
+The submarine position in ocean is used to filter calulate 2 values: depth and
+proximity to the sea floor. One of six arrays of images is filtered then a random 
+image is presented to the submarine viewport. A parallel filter picks the appropriate
+text.
+
+### Modals provide instruction and user feedback in the cockpit
+A popup modal to provide instruction on how to use the app allowed me to add 
+educaitonal content to the splash page. I then used the modal class to make
+two more modals to give the user feedback in the cockpit as to when they
+hit the bottom or are at the surface. 
 
 ### Hand drawn sprite
-A controversial area for some people. I like the animated hand drawn quality of
-it, especially  over a polished sprite taken from the internet. It also allowed
-me to add features such as the "crash sprite" that occurs when sub hits ground
-in an expiditious manner. Plus I enjoyed drawing it :)  
+I drew a sprite to explore how sprites work. I liked the animated hand drawn quality of
+it so I kept it in the app. It also allowed me to add features such as the "crash sprite" 
+that occurs when sub hits ground in an expiditious manner. Plus I enjoyed drawing it :)  
 
 ### Music
 The built in music is a critical aspect to enjoy the user experience.
