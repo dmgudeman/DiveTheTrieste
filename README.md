@@ -34,13 +34,18 @@ a computed "single location of truth." This proved to be problematic
 because as canvas elements it was unwieldly to get the current context
 to render appropriately.
 
-I then updated to a Publish Subscribe model with a central event bus and
-made the single point of truth another class - CalcPostion.  This worked well.
+I then refactored using a Publish Subscribe model with a central event bus to
+define the events that are emitted. At first I tried emit events on the main animation
+loop. This overwhelmed the computer. Now an event is emitted
+every time a coordinate changed. Any area of the app can subscribe to the event,
+however I found that defining a singleton class CalcPosition as a single point
+of truth to work the best. The position is then obtained from this instance. In building
+this app the impetus for Redux became very clear.
 
 The next task was to map out the topography of the ocean floor with hills and
 trenches. This was done by take manual measurements of the topograhic endpoints
 and using the coordinates to calculate a y intercept for each point of lateral
-movement.  
+movement. These were used to make a coefficient that 
 
 The multiple complex data types to allow position calculaton, conditonal styling,
 showing textual data based on position on the canvas made keeping track of the 
