@@ -1,13 +1,10 @@
-
-
-
 .edContainer {
     position: relative;
     display: flex;
     flex-direction: column;
     top: 430px;
     left: 280px;
-    display: flex ;
+    display: flex;
     justify-content: center;
     align-items: center;
     width: 400px;
@@ -20,7 +17,7 @@
     display: none;
 }
 
-.edTitle { 
+.edTitle {
     padding-top: 20px;
     color: var(--four);
     font-size: 1.5rem;
@@ -33,30 +30,28 @@
     color: var(--three);
 }
 
-.upperStyleEdContainer { 
+.upperStyleEdContainer {
     background-color: var(--two);
     border: 3px solid var(--three);
 }
-
 
 .upperStyleEdTitle {
     color: var(--four);
 }
 
-
 .upperStyleEdText {
     color: var(--three);
 }
 
-.upperPelagicStyleEdContainer { 
+.upperPelagicStyleEdContainer {
     background-color: var(--two);
     border: 3px solid var(--three);
     top: 720px;
     left: 200px;
-    display: flex ;
+    display: flex;
     justify-content: center;
     align-items: center;
-    width:1200px;
+    width: 1200px;
     height: 200px;
     padding-bottom: 5px;
 }
@@ -69,32 +64,31 @@
     color: var(--three);
 }
 
-.middleStyleEdContainer { 
-    background-color:  #0D376F;
-    border: 3px solid #fafad2
+.middleStyleEdContainer {
+    background-color: #0d376f;
+    border: 3px solid #fafad2;
 }
 
 .middleStyleEdTitle {
-    color: yellow
+    color: yellow;
 }
 
 .middleStyleEdText {
-    color: lightgoldenrodyellow
+    color: lightgoldenrodyellow;
 }
 
-.lowerStyleEdContainer { 
-    background-color:  black;
-    border: 3px solid lightgreen
+.lowerStyleEdContainer {
+    background-color: black;
+    border: 3px solid lightgreen;
 }
 
 .lowerStyleEdTitle {
-    color: lightgreen
+    color: lightgreen;
 }
 
 .lowerStyleEdText {
-    color: lightsalmon
+    color: lightsalmon;
 }
-
 
 .cockpitStyleEdContainer {
     position: relative;
@@ -102,34 +96,21 @@
     flex-direction: column;
     top: 10%;
     left: 83%;
-    display: flex ;
+    display: flex;
     justify-content: center;
     align-items: center;
-    width:300px;
-  
+    width: 300px;
     padding-bottom: 5px;
-    background-color:  var(--cockpitBG);
+    background-color: var(--cockpitBG);
     border: 3px solid var(--cockpitText);
     border-radius: 30px;
     box-shadow: 3px 3px 4px rgba(0, 0, 0, 0.5);
-    
-    
-
 }
 
-.cockpitStyleEdTitle{
-    color: var(--cockpitText)
+.cockpitStyleEdTitle {
+    color: var(--cockpitText);
 }
 
 .cockpitStyleEdText {
-    color: var(--cockpitText)
-
+    color: var(--cockpitText);
 }
-// .transition-fade {
-//     transition: 0.3s ease-in-out;
-//     opacity: 1;
-// }
-
-// .transition-fade.fade-out {
-//     opacity: 0;
-// }

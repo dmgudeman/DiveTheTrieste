@@ -1,35 +1,29 @@
-
-
-@import 'styles/style.scss';
-@import 'styles/css_reset.scss';
-@import 'styles/educational.scss';
-@import 'styles/hitBottom.scss';
-@import 'styles/cockpit.scss';
+@import "styles/style.scss";
+@import "styles/css_reset.scss";
+@import "styles/educational.scss";
+@import "styles/hitBottom.scss";
+@import "styles/cockpit.scss";
 
 :root {
-    --one: #E0AE7D;
-	--two: wheat;
-    --three: rgb(58, 19, 19);;
-    --four: #4CAF50;
-	--dysphoticDarkBlue: #0D376F;
-	--dysphoticLightYellow: #fafa2d;
-	--cockpitText: #C5DEE8;
-	--cockpitBG: #111224;
-	--trenchBG: #df7128;
-	--IPGaugeHeight: 55px;
-
-
-    
+    --one: #e0ae7d;
+    --two: wheat;
+    --three: rgb(58, 19, 19);
+    --four: #4caf50;
+    --dysphoticDarkBlue: #0d376f;
+    --dysphoticLightYellow: #fafa2d;
+    --cockpitText: #c5dee8;
+    --cockpitBG: #111224;
+    --trenchBG: #df7128;
+    --IPGaugeHeight: 55px;
 }
 body {
     margin: 0;
-	padding: 0;
-	border: 0;
-	font-size: 100%;
-	font-family: Verdana, Geneva, Tahoma, sans-serif;
-	vertical-align: baseline;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    vertical-align: baseline;
     overflow: hidden;
     /* background-color: aquamarine; */
-	background-color: transparent;
+    background-color: transparent;
 }
-
