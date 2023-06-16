@@ -26,7 +26,7 @@ class Cockpit {
         this.cockpitImage = document.getElementById(
             "cockpit"
         ) as HTMLImageElement;
-        this.cockpitImageUrl = "assets/cockpit.png";
+        this.cockpitImageUrl = "src/assets/cockpit.png";
         this.underImageUrl = "assets/life/ep/001_shark.jpg";
     }
 
