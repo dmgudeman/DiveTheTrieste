@@ -5,7 +5,7 @@ import {
     spritesL,
     crashSprites,
     crashSpritesL,
-} from "../../assets/data/sprites";
+} from "../assets/data/sprites";
 import InitialValues from "./initialValues";
 
 class Sub {
