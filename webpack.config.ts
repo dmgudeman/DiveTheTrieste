@@ -4,9 +4,8 @@ const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 import { Configuration as WebpackDevServerConfiguration } from 'webpack-dev-server';
 import { Configuration as WebpackConfiguration } from 'webpack';
-interface Configuration extends WebpackConfiguration {
-  devServer?: WebpackDevServerConfiguration;
-}
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+
 
 interface Configuration extends WebpackConfiguration {
   devServer?: WebpackDevServerConfiguration;
@@ -51,7 +50,7 @@ const config: Configuration = {
           MiniCssExtractPlugin.loader, // create bundled css file
           {
             loader: 'css-loader', // resolves @import statements
-            options: { url: false } // don't resolve url() statements
+            // options: { url: false } // don't resolve url() statements
           },
           'sass-loader', // compiles sass to css
         ]
@@ -78,6 +77,9 @@ const config: Configuration = {
     extensions: ['.tsx', '.ts', '.js'],
   },
   plugins: [
+    new HtmlWebpackPlugin({
+      template: './index.html' // template file
+    }),
     new MiniCssExtractPlugin({
       filename: '[name].css', // Use [name] placeholder to generate separate CSS files
     })
@@ -94,34 +96,3 @@ module.exports = (env, argv) => {
   return config;
 }
 
-// interface Configuration {
-//   entry: {
-//     main: any[];
-//     styles1: any;
-//     styles2: any;
-//     styles3: any;
-//     styles4: any;
-//   };
-//   output: {
-//     path: any;
-//     filename: string;
-//   };
-//   module: {
-//     rules: ({
-//       test: RegExp;
-//       use: string[];
-//       exclude: RegExp;
-//     } | {
-//       test: RegExp;
-//       use: any[];
-//       exclude?: undefined;
-//     } | {
-//       // ... other rule types
-//     })[];
-//   };
-//   resolve: {
-//     // ... resolve configuration
-//   };
-//   plugins: any[];
-//   devtool?: string; // Add 'devtool' property to the type definition
-// }

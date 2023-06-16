@@ -1,3 +1,25 @@
-.hitBottomContainer{position:fixed;display:flex;align-items:center;justify-content:center;top:200px;left:400px;z-index:400}.hitBottom{color:red;font-size:2rem;font-weight:800;width:400px;height:100px;z-index:400}.hitBottomContainer.hide{display:none}
+/*!********************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./src/styles/hitBottom.scss ***!
+  \********************************************************************************************************************/
+.hitBottomContainer {
+  position: fixed;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  top: 200px;
+  left: 400px;
+  z-index: 400;
+}
 
-/*# sourceMappingURL=styles3.css.map*/
+.hitBottom {
+  color: red;
+  font-size: 2rem;
+  font-weight: 800;
+  width: 400px;
+  height: 100px;
+  z-index: 400;
+}
+
+.hitBottomContainer.hide {
+  display: none;
+}
