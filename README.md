@@ -54,13 +54,13 @@ data types difficult. I implemented Typescript to facilitate solving this issue
 and it proved invaluable. An example type:
 
 <div style="float: left; margin-right: 10px;">
-<img src="./assets/code/constants.png" alt="constants" width="800" height="400">
+<img src="./src/assets/code/constants.png" alt="constants" width="800" height="400">
 </div>
 Storing objects in an array to allowed the use of array filter method. Points 
 are calculated the viewport dimensions. The y coordinate of the ocean
 floor is then calculated using the classic y intercept method.
 <div style="float: left; margin-right: 10px;">
-<img src="./assets/code/yIntercept.png" alt="constants" width="600" height="400">
+<img src="./src/assets/code/yIntercept.png" alt="constants" width="600" height="400">
 </div>
 
 ### Images and text are shown from 6 different areas of ocean
