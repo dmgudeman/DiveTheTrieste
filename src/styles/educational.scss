@@ -2,15 +2,14 @@
     position: relative;
     display: flex;
     flex-direction: column;
-    top: 430px;
-    left: 280px;
+    top: 31rem;
+    left: 20rem;
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 400px;
-    padding-bottom: 20px;
-    border-radius: 30px;
-    box-shadow: 3px 3px 4px rgba(0, 0, 0, 0.5);
+    width: 26rem;
+    border-radius: 2rem;
+    box-shadow: var(--shadowEffect);
 }
 
 .edContainer.hide {
@@ -18,21 +17,21 @@
 }
 
 .edTitle {
-    padding-top: 20px;
+    padding-top: 0.75em;
     color: var(--four);
     font-size: 1.5rem;
     font-weight: 700;
 }
 
 .edText {
-    padding: 20px;
-    padding-top: 10px;
+    padding: 1em;
+    padding-top: 0.75em;
     color: var(--three);
 }
 
 .upperStyleEdContainer {
     background-color: var(--two);
-    border: 3px solid var(--three);
+    border: 0.25em solid var(--three);
 }
 
 .upperStyleEdTitle {
@@ -44,16 +43,16 @@
 }
 
 .upperPelagicStyleEdContainer {
-    background-color: var(--two);
-    border: 3px solid var(--three);
-    top: 720px;
-    left: 200px;
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 1200px;
-    height: 200px;
-    padding-bottom: 5px;
+    top: 45rem;
+    left: 15rem;
+    width: 75rem;
+    height: 12rem;
+    padding-bottom: 0.5em;
+    border:  0.25em solid var(--three);
+    background-color: var(--two);
 }
 
 .upperPelagicStyleEdTitle {
@@ -66,7 +65,7 @@
 
 .middleStyleEdContainer {
     background-color: #0d376f;
-    border: 3px solid #fafad2;
+    border: 0.25em solid #fafad2;
 }
 
 .middleStyleEdTitle {
@@ -79,7 +78,7 @@
 
 .lowerStyleEdContainer {
     background-color: black;
-    border: 3px solid lightgreen;
+    border: 0.25em solid lightgreen;
 }
 
 .lowerStyleEdTitle {
@@ -99,12 +98,12 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 300px;
-    padding-bottom: 5px;
+    width: 18rem;
+    padding-bottom: 1em;
     background-color: var(--cockpitBG);
-    border: 3px solid var(--cockpitText);
-    border-radius: 30px;
-    box-shadow: 3px 3px 4px rgba(0, 0, 0, 0.5);
+    border: 0.25em solid var(--cockpitText);
+    border-radius: 2em;
+    box-shadow: var(--shadowEffect)
 }
 
 .cockpitStyleEdTitle {
