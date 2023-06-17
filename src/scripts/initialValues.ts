@@ -6,8 +6,8 @@ class InitialValues {
     public height: number;
 
     private constructor() {
-        this.width = window.innerWidth * 2;
-        this.height = window.innerHeight * 2.05;
+        this.width = visualViewport.width * 2;;
+        this.height = this.width /(visualViewport.width / visualViewport.height)
         window.addEventListener("resize", this.updateWindowSize.bind(this));
     }
 
@@ -18,8 +18,8 @@ class InitialValues {
         return InitialValues.instance;
     }
     private updateWindowSize(): void {
-        this.width = window.innerWidth * 2;
-        this.height = window.innerHeight * 2.05;
+        this.width = visualViewport.width * 2;;
+        this.height = this.width /(visualViewport.width / visualViewport.height)
     }
 
     getWidth() {

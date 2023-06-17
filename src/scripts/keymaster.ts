@@ -21,9 +21,9 @@ class Keymaster {
     private cockpitModal: Modal;
     private move: Move;
 
-    constructor() {
-        this.ocean = Ocean.getInstance();
-        this.sub = Sub.getInstance();
+    constructor(ctx1) {
+        this.ocean = Ocean.getInstance(ctx1);
+        this.sub = Sub.getInstance(ctx1);
         this.modal = new Modal("modal", "close");
         this.cockpitModal = new Modal("cockpitModal");
         this.move = new Move(this.ocean, this.sub);

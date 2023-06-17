@@ -1,5 +1,6 @@
 import { WIDTH, HEIGHT } from "../index";
 import { LAT_VELOCITY, VERTICAL_VELOCITY } from "./constants";
+import InitialValues from "./initialValues";
 import { eventBus } from "./eventBus";
 
 class Ocean {
@@ -7,6 +8,7 @@ class Ocean {
     private ctx: CanvasRenderingContext2D;
     private x: number;
     private y: number;
+    private initialValues: InitialValues;
     private width: number;
     private height: number;
     private oceanImage: HTMLImageElement | null;
@@ -18,9 +20,7 @@ class Ocean {
     private constructor(
         ctx: CanvasRenderingContext2D,
         x?: number,
-        y?: number,
-        width?: number,
-        height?: number,
+        y?: number,  
         oceanImage?: HTMLImageElement | null,
         velRight?: number,
         velLeft?: number,
@@ -30,8 +30,9 @@ class Ocean {
         this.ctx = ctx;
         this.x = x || 0;
         this.y = y || 0;
-        this.width = width || WIDTH;
-        this.height = height || HEIGHT;
+        this.initialValues = InitialValues.getInstance();
+        this.width = this.initialValues.getWidth();
+        this.height = this.initialValues.getHeight();
         this.oceanImage =
             oceanImage ||
             (document.getElementById(
@@ -41,7 +42,9 @@ class Ocean {
         this.velLeft = velLeft || 0;
         this.velUp = velUp || 0;
         this.velDown = velDown || 0;
+        window.addEventListener("resize", this.handleResize);
     }
+    
 
     public static getInstance(ctx?: CanvasRenderingContext2D): Ocean {
         if (!Ocean.instance) {
@@ -54,9 +57,7 @@ class Ocean {
                 ctx,
                 0,
                 0,
-                WIDTH,
-                HEIGHT,
-                document.getElementById("crossSection") as HTMLImageElement,
+                document.getElementById("crossSection") as HTMLImageElement | null,
                 0,
                 0,
                 0,
@@ -65,7 +66,10 @@ class Ocean {
         }
         return Ocean.instance;
     }
+    
     public draw() {
+        this.width = this.initialValues.getWidth()
+        this.height = this.initialValues.getHeight();
         this.ctx.drawImage(
             this.oceanImage,
             this.x,
@@ -74,6 +78,11 @@ class Ocean {
             this.height
         );
     }
+    private handleResize = () => {
+        this.width = this.initialValues.getWidth()
+        this.height = this.initialValues.getHeight();
+        this.draw();
+    };
 
     public getX(): number {
         return this.x;
