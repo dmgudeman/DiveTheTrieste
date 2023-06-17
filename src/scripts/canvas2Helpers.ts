@@ -8,11 +8,11 @@ export const drawCanvas2 = (canvas2, ctx2, backgroundImage, isInstructions1Visib
 
      // resize responsive for both
      let docWidth = canvas2.width * 0.15;
-     let docX = (canvas2.width - docWidth) / 4;
+     let docX = (canvas2.width - docWidth) / 6;
 
      // Banner specific
      let bannerHeight = canvas2.height * 0.065;
-     let bannerY = bannerHeight * 0.6; 
+     let bannerY = bannerHeight * 0.8; 
 
       // Instruction specific
       let instructionsHeight = canvas2.width * 0.18; 

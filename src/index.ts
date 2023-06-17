@@ -25,6 +25,7 @@ export let ctx3;
 export let ocean;
 export let sub;
 export let cockpit;
+export let key;
 
 let audioFlag = false; //change this to true for production
 let firstFlag = true;
@@ -78,9 +79,14 @@ document.addEventListener("DOMContentLoaded", () => {
         sub = Sub.getInstance(ctx1);
         cockpit = new Cockpit(ctx3);
         globalCockpit.cockpit = cockpit;
-        cockpit.debounceDraw(ctx2)
+        cockpit.debounceDraw(ctx2);
+        key = new Keymaster(ctx1);
+        animateSprite();
+        document.addEventListener("keydown", keyDown);
+  
         drawCanvas2(canvas2, ctx2, backgroundImage, isInstructions1Visible);
         showCanvas2();
+        update();
 
     }
     const resizeCanvases = () => {
@@ -103,7 +109,7 @@ document.addEventListener("DOMContentLoaded", () => {
        initializeCanvases();
     }
 
-    printInitialViewPortStats();
+    // printInitialViewPortStats();
     window.addEventListener("resize", function () {
         resizeCanvases();
         printInitialViewPortStats();
@@ -119,7 +125,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // const ctx1 = canvas1.getContext("2d");
     // const ctx2 = canvas2.getContext("2d");
     // const ctx3 = canvas3.getContext("2d");
-    let key = new Keymaster();
+   
 
     CalcPosition.getInstance();
 
@@ -131,10 +137,10 @@ document.addEventListener("DOMContentLoaded", () => {
         window.location.href = "https://www.linkedin.com/in/davidmgudeman/";
     });
 
-    goToOceanButton.addEventListener("mouseover", () => {
-        console.log('gotoOcean pressed')
-        showCanvas1();
-    });
+    // goToOceanButton.addEventListener("click", () => {
+    //     console.log('gotoOcean pressed')
+    //     showCanvas1();
+    // });
 
     homeButton.addEventListener("click", () => {
         showCanvas2();
@@ -163,7 +169,7 @@ document.addEventListener("DOMContentLoaded", () => {
         showCanvas3();
         update();
     }
-    ctx1.canvas.addEventListener("mousedown", handler1);
+    // ctx1.canvas.addEventListener("mousedown", handler1);
 
     // adding click function to the cockpit
     const rect = canvas3.getBoundingClientRect();
@@ -187,24 +193,27 @@ document.addEventListener("DOMContentLoaded", () => {
     // MAIN ANIMATION LOOP //////
     function update() {
         clear();
+        
 
         ocean.draw();
         sub.draw();
-
+        
         requestAnimationFrame(update);
     }
     // start the seperate animation loop in the sub
     function animateSprite() {
         sub.updateSprite();
+      
         requestAnimationFrame(animateSprite);
     }
-    animateSprite();
-
+   
+  
     function keyDown(e: KeyboardEvent) {
         key.keyDown(e, ctx1, ctx2, ctx3);
+        console.log('PRESSED')
     }
 
-    document.addEventListener("keydown", keyDown);
+    
 });
 
 const printInitialViewPortStats = () => {
