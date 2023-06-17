@@ -2,15 +2,15 @@
     position: relative;
     display: flex;
     flex-direction: column;
-    top: 430px;
-    left: 280px;
+    top: 29rem;
+    left: 20rem;
     display: flex;
     justify-content: center;
     align-items: center;
     width: 400px;
-    padding-bottom: 20px;
-    border-radius: 30px;
-    box-shadow: 3px 3px 4px rgba(0, 0, 0, 0.5);
+    // padding-bottom: 20px;
+    border-radius: 2rem;
+    box-shadow: var(--shadowEffect);
 }
 
 .edContainer.hide {
