@@ -124,7 +124,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // make the instruction page canvas
     let isInstructions1Visible = true;
     const backgroundImage = new Image();
-    backgroundImage.src = "assets/openOcean.png"; // background for opening page
+    backgroundImage.src = "src/assets/openOcean.png"; // background for opening page
 
     backgroundImage.onload = function () {
         ctx2.drawImage(backgroundImage, 0, 0, canvas2.width, canvas2.height);
