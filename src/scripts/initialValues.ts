@@ -33,7 +33,7 @@ class InitialValues {
         return this.roundDownToNearestVertVel(this.width * 0.2604);
     }
     getInitial_Y() {
-        return this.roundDownToNearestVertVel(this.height * 0.04028);
+        return this.roundDownToNearestVertVel(this.height * 0.06);
     }
 
     getFullLatLimit() {
