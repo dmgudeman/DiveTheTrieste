@@ -131,9 +131,9 @@ document.addEventListener("DOMContentLoaded", () => {
         backgroundImage.style.zIndex = "100";
 
         const instructions1 = new Image();
-        instructions1.src = "assets/dtt8.png";
+        instructions1.src = "src/assets/dtt8.png";
         const instructions2 = new Image();
-        instructions2.src = "assets/dtt9.png";
+        instructions2.src = "src/assets/dtt9.png";
 
         instructions1.onload = () => {
             ctx2.drawImage(instructions1, 450, 200, 600, 600);
