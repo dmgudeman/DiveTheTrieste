@@ -8,6 +8,11 @@ import {
 } from "../assets/data/sprites";
 import InitialValues from "./initialValues";
 
+const pathSpriteR: string = "./src/assets/sprites/sprite.png";
+const pathSpriteL: string = "./src/assets/sprites/spriteL.png";
+const pathCrashSpriteR: string = "./src/assets/sprites/crashSprite.png";
+const pathCrashSpriteL: string = "./src/assets/sprites/crashSpriteL.png";
+
 class Sub {
     private static instance: Sub;
     private ctx: CanvasRenderingContext2D;
@@ -56,7 +61,7 @@ class Sub {
         this.velLeft = velLeft || 0;
         this.velUp = velUp || 0;
         this.velDown = velDown || 0;
-        this.spritesImageSrc = spritesImageSrc || "./src/assets/sprites/sprite.png";
+        this.spritesImageSrc = spritesImageSrc || pathSpriteR;
         this.sprites = sprites;
         this.currentFrame = currentFrame || 0;
         this.lastFrameTime = lastFrameTime || 0;
@@ -87,7 +92,7 @@ class Sub {
                 0,
                 0,
                 0,
-                "src/assets/sprites/sprite.png",
+                pathSpriteR,
                 sprites,
                 0,
                 0
@@ -225,24 +230,24 @@ class Sub {
         if (!getHitBottomFlag()) {
             if (this.lastLatDir === "right") {
                 this.sprites = sprites;
-                this.spritesImageSrc = "src/assets/sprites/sprite.png";
+                this.spritesImageSrc = pathSpriteR;
                 this.spriteSheet = new Image();
                 this.spriteSheet.src = this.spritesImageSrc;
             } else if (this.lastLatDir === "left") {
                 this.sprites = spritesL;
-                this.spritesImageSrc = "src/assets/sprites/spriteL.png";
+                this.spritesImageSrc = pathSpriteL;
                 this.spriteSheet = new Image();
                 this.spriteSheet.src = this.spritesImageSrc;
             }
         } else {
             if (this.lastLatDir === "right") {
                 this.sprites = crashSprites;
-                this.spritesImageSrc = "src/assets/sprites/crashSprite.png";
+                this.spritesImageSrc = pathCrashSpriteR;
                 this.spriteSheet = new Image();
                 this.spriteSheet.src = this.spritesImageSrc;
             } else if (this.lastLatDir === "left") {
                 this.sprites = crashSpritesL;
-                this.spritesImageSrc = "src/assets/sprites/crashSpriteL.png";
+                this.spritesImageSrc = pathCrashSpriteL;
                 this.spriteSheet = new Image();
                 this.spriteSheet.src = this.spritesImageSrc;
             }
