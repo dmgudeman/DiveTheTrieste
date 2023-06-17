@@ -87,7 +87,7 @@ class Sub {
                 0,
                 0,
                 0,
-                "src/assets/sprites/sprite.png",
+                "./src/assets/sprites/sprite.png",
                 sprites,
                 0,
                 0
@@ -225,24 +225,24 @@ class Sub {
         if (!getHitBottomFlag()) {
             if (this.lastLatDir === "right") {
                 this.sprites = sprites;
-                this.spritesImageSrc = "src/assets/sprites/sprite.png";
+                this.spritesImageSrc = "./src/assets/sprites/sprite.png";
                 this.spriteSheet = new Image();
                 this.spriteSheet.src = this.spritesImageSrc;
             } else if (this.lastLatDir === "left") {
                 this.sprites = spritesL;
-                this.spritesImageSrc = "src/assets/sprites/spriteL.png";
+                this.spritesImageSrc = "./scr/assets/sprites/spriteL.png";
                 this.spriteSheet = new Image();
                 this.spriteSheet.src = this.spritesImageSrc;
             }
         } else {
             if (this.lastLatDir === "right") {
                 this.sprites = crashSprites;
-                this.spritesImageSrc = "src/assets/sprites/crashSprite.png";
+                this.spritesImageSrc = "./src/assets/sprites/crashSprite.png";
                 this.spriteSheet = new Image();
                 this.spriteSheet.src = this.spritesImageSrc;
             } else if (this.lastLatDir === "left") {
                 this.sprites = crashSpritesL;
-                this.spritesImageSrc = "src/assets/sprites/crashSpriteL.png";
+                this.spritesImageSrc = "./src/assets/sprites/crashSpriteL.png";
                 this.spriteSheet = new Image();
                 this.spriteSheet.src = this.spritesImageSrc;
             }

@@ -1,0 +1,14 @@
+
+
+--scr
+   |
+   assets 
+   |   |
+   |   sprites
+   |        | 
+   |        sprite.png
+   |
+   |
+   scripts
+         |
+         sub.ts
