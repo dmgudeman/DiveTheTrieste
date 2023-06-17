@@ -9,15 +9,10 @@ import { showCanvas1, showCanvas2, showCanvas3 } from "./scripts/util";
 import Sub from "./scripts/sub";
 import Ocean from "./scripts/ocean";
 import Cockpit from "./scripts/cockpit";
-// import { getCursorPosition } from "./scripts/util";
 import Keymaster from "./scripts/keymaster";
-import { showMouseAsSub } from "./scripts/boundary";
-import CalcConstant from "./scripts/calcConstant";
 import CalcPosition from "./scripts/calcPosition";
 import InitialValues from "./scripts/initialValues";
-import Modal from './scripts/modal';
 
-const calcConstant = new CalcConstant();
 const initialValues = InitialValues.getInstance();
 
 export let WIDTH = visualViewport.width * 2; // width of canvases
@@ -31,9 +26,6 @@ document.addEventListener("DOMContentLoaded", () => {
         WIDTH = visualViewport.width * 2; // width of canvases
         HEIGHT = visualViewport.height * 2.05;
     });
-
-    // localStorage.setItem("modalDisplayed", false.toString());
-    // localStorage.setItem("modalDisplayed", false.toString());
 
     const canvas1: HTMLCanvasElement = document.getElementById(
         "canvas1"
@@ -75,7 +67,6 @@ document.addEventListener("DOMContentLoaded", () => {
     let cockpit = new Cockpit(ctx3);
     globalCockpit.cockpit = cockpit;
     let key = new Keymaster();
-    // const oceanModal = new Modal("modal", "close")
 
     CalcPosition.getInstance();
 
@@ -95,7 +86,6 @@ document.addEventListener("DOMContentLoaded", () => {
         showCanvas2();
     });
 
-    // const modal = document.getElementById("modal");
     let audio = document.getElementById("music");
     function toggleAudio(audio) {
         if (audioFlag) {
@@ -108,14 +98,6 @@ document.addEventListener("DOMContentLoaded", () => {
         audioFlag = !audioFlag;
     }
     toggleAudio(audio);
-    // localStorage.setItem("modalDisplayed", false.toString());
- 
-    // Close the modal when the user clicks outside
-    // window.addEventListener("click", function (event) {
-    //     if (event.target === oceanModal.getModalElement()) {
-    //         oceanModal.hideModal();
-    //     }
-    // });
 
     musicNoteButton.addEventListener("click", (e) => {
         toggleAudio(audio);
@@ -127,7 +109,7 @@ document.addEventListener("DOMContentLoaded", () => {
     backgroundImage.src = "src/assets/openOcean.png"; // background for opening page
 
     backgroundImage.onload = function () {
-        update();
+        update();   // important to start the animation loop here
         ctx2.drawImage(backgroundImage, 0, 0, canvas2.width, canvas2.height);
         backgroundImage.style.zIndex = "100";
 
@@ -163,12 +145,6 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         };
     };
-    // const instructions = new Image();
-    // instructions.src = "assets/instructions.png";
-    // instructions.onload = () => {
-    //     ctx2.drawImage(instructions, 450, 250, 600, 600);
-    //     update();
-    // };
 
     //use update to make sure the canvas is rendered
     function handler1() {
