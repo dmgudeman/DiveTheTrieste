@@ -26,6 +26,7 @@ document.addEventListener("DOMContentLoaded", () => {
     window.addEventListener("resize", function () {
         WIDTH = visualViewport.width * 2; // width of canvases
         HEIGHT = visualViewport.height * 2.05;
+        printInitialViewPortStats();
     });
 
     const canvas1: HTMLCanvasElement = document.getElementById(
@@ -211,6 +212,9 @@ const printInitialViewPortStats = () => {
     console.log("FULL_VERTICAL_LIMIT", initialValues.getFullVertLimit());
     console.log("SUB_INITAL_LAT_POS", initialValues.getInitial_X());
     console.log("INITIAL_Y_POSITION", initialValues.getInitial_Y());
+    console.log("OCEAN_LAT_LIMIT", initialValues.getOceanLatLimit())
+    console.log("OCEAN_VERT_LIMIT", initialValues.getOceanVertLimit())
+    console.log("VAR_DEPTH", CalcPosition.getInstance().calcDepthLimit())
     console.log("--------------------");
     console.log("=======================");
 };
