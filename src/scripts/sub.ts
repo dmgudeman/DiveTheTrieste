@@ -29,6 +29,7 @@ class Sub {
     private initialVertPos: number;
     private lastLatDir: string;
 
+    
     private constructor(
         ctx: CanvasRenderingContext2D,
         initialValues: InitialValues,
