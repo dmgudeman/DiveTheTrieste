@@ -82,6 +82,7 @@ document.addEventListener("DOMContentLoaded", () => {
         sub = Sub.getInstance(ctx1);
         cockpit = new Cockpit(ctx3);
         globalCockpit.cockpit = cockpit;
+        cockpit.debounceDraw(ctx2)
         drawCanvas2(canvas2, ctx2, backgroundImage, isInstructions1Visible);
 
     }
@@ -89,7 +90,6 @@ document.addEventListener("DOMContentLoaded", () => {
         let aspectRatio = visualViewport.width / visualViewport.height;
         WIDTH = visualViewport.width * 2; // width of canvases
         HEIGHT = visualViewport.width / aspectRatio; // keep aspect ratio;
-
         canvas1.width = WIDTH;
         canvas1.height = HEIGHT;
         canvas2.width = WIDTH;
@@ -99,6 +99,7 @@ document.addEventListener("DOMContentLoaded", () => {
         ctx1 = canvas1.getContext("2d");
         ctx2 = canvas2.getContext("2d");
         ctx3 = canvas3.getContext("2d");
+        cockpit.debounceDraw(ctx2)
         ocean.draw();
         sub.draw();
         drawCanvas2(canvas2, ctx2, backgroundImage, isInstructions1Visible);

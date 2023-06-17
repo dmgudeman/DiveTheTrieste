@@ -35,6 +35,8 @@ class Cockpit {
         let underImage = new Image();
         let images = new Images();
         underImage.src = images.getImage();
+        this.width = this.InitialValues.getWidth();
+        this.height = this.InitialValues.getHeight();
 
         underImage.onload = () => {
             this.ctx.drawImage(
