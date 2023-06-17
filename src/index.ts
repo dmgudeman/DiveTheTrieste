@@ -127,6 +127,7 @@ document.addEventListener("DOMContentLoaded", () => {
     backgroundImage.src = "src/assets/openOcean.png"; // background for opening page
 
     backgroundImage.onload = function () {
+        update();
         ctx2.drawImage(backgroundImage, 0, 0, canvas2.width, canvas2.height);
         backgroundImage.style.zIndex = "100";
 
@@ -162,12 +163,12 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         };
     };
-    const instructions = new Image();
-    instructions.src = "assets/instructions.png";
-    instructions.onload = () => {
-        ctx2.drawImage(instructions, 450, 250, 600, 600);
-        update();
-    };
+    // const instructions = new Image();
+    // instructions.src = "assets/instructions.png";
+    // instructions.onload = () => {
+    //     ctx2.drawImage(instructions, 450, 250, 600, 600);
+    //     update();
+    // };
 
     //use update to make sure the canvas is rendered
     function handler1() {
