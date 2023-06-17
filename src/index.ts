@@ -16,8 +16,8 @@ import { drawCanvas2 } from "./scripts/canvas2Helpers";
 
 const initialValues = InitialValues.getInstance();
 
-export let WIDTH: number;
-export let HEIGHT: number;
+export const WIDTH = (): number => initialValues.getWidth();
+export const HEIGHT = (): number => initialValues.getHeight();
 export const globalCockpit = { cockpit: null };
 export let ctx1;
 export let ctx2;
@@ -66,15 +66,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const initializeCanvases = () => {
         let aspectRatio = visualViewport.width / visualViewport.height;
-        WIDTH = visualViewport.width * 2; // width of canvases
-        HEIGHT = visualViewport.width / aspectRatio; // keep aspect ratio;
-
-        canvas1.width = WIDTH;
-        canvas1.height = HEIGHT;
-        canvas2.width = WIDTH;
-        canvas2.height = HEIGHT;
-        canvas3.width = WIDTH;
-        canvas3.height = HEIGHT;
+        // WIDTH = visualViewport.width * 2; // width of canvases
+        // HEIGHT = visualViewport.width / aspectRatio; // keep aspect ratio;
+         
+        canvas1.width = WIDTH();
+        canvas1.height = HEIGHT();
+        canvas2.width = WIDTH();
+        canvas2.height = HEIGHT();
+        canvas3.width = WIDTH();
+        canvas3.height = HEIGHT();
         ctx1 = canvas1.getContext("2d");
         ctx2 = canvas2.getContext("2d");
         ctx3 = canvas3.getContext("2d");
@@ -87,15 +87,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
     }
     const resizeCanvases = () => {
-        let aspectRatio = visualViewport.width / visualViewport.height;
-        WIDTH = visualViewport.width * 2; // width of canvases
-        HEIGHT = visualViewport.width / aspectRatio; // keep aspect ratio;
-        canvas1.width = WIDTH;
-        canvas1.height = HEIGHT;
-        canvas2.width = WIDTH;
-        canvas2.height = HEIGHT;
-        canvas3.width = WIDTH;
-        canvas3.height = HEIGHT;
+  
+        canvas1.width = WIDTH();
+        canvas1.height = HEIGHT();
+        canvas2.width = WIDTH();
+        canvas2.height = HEIGHT();
+        canvas3.width = WIDTH();
+        canvas3.height = HEIGHT();
         ctx1 = canvas1.getContext("2d");
         ctx2 = canvas2.getContext("2d");
         ctx3 = canvas3.getContext("2d");
@@ -257,13 +255,13 @@ const printInitialViewPortStats = () => {
     console.log("=======================");
     console.log("window width is " + window.innerWidth);
     console.log("viewport width is " + window.visualViewport.width);
-    console.log("WIDTH", WIDTH);
+    console.log("WIDTH", WIDTH());
     console.log("--------------------");
     console.log("window height is " + window.innerHeight);
     console.log("viewport height is " + window.visualViewport.height);
     console.log("HEIGHT", HEIGHT);
     console.log("=======================");
-    console.log("ASPECT_RATIO", WIDTH / HEIGHT);
+    console.log("ASPECT_RATIO", WIDTH() / HEIGHT());
     console.log("=======================");
     console.log("FULL_LAT_LIMIT", initialValues.getFullLatLimit());
     console.log("FULL_VERTICAL_LIMIT", initialValues.getFullVertLimit());
