@@ -230,7 +230,7 @@ class Sub {
                 this.spriteSheet.src = this.spritesImageSrc;
             } else if (this.lastLatDir === "left") {
                 this.sprites = spritesL;
-                this.spritesImageSrc = "scr/assets/sprites/spriteL.png";
+                this.spritesImageSrc = "src/assets/sprites/spriteL.png";
                 this.spriteSheet = new Image();
                 this.spriteSheet.src = this.spritesImageSrc;
             }
