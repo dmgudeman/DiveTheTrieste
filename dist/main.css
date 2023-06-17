@@ -290,10 +290,10 @@ body img {
 .modal-content {
   background-color: wheat;
   margin: 15% auto;
-  padding: 20px;
-  border: 4px solid rgb(58, 19, 19);
-  max-width: 580px;
-  border-radius: 15px;
+  padding: 1em;
+  border: 0.2em solid rgb(58, 19, 19);
+  max-width: 40rem;
+  border-radius: 2em;
 }
 
 .modalTitle {
@@ -302,9 +302,10 @@ body img {
   font-weight: 800;
   color: var(--four);
   text-align: center;
-  margin-top: 15px;
-  margin-bottom: 40px;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  margin-top: 0.4em;
+  margin-bottom: 0.5em;
+  text-shadow: var(--shadowEffect);
+  text-shadow: 0.05em 0.05em 0.1em rgba(0, 0, 0, 0.4);
 }
 
 .line {
@@ -319,7 +320,7 @@ body img {
   font-size: 1.5rem;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   font-weight: bold;
-  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+  text-shadow: 0.05em 0.05em 0.1em rgba(0, 0, 0, 0.4);
 }
 
 .close {
@@ -334,7 +335,7 @@ body img {
 .cockpitModal {
   display: none; /* Initially hide the modal */
   position: fixed;
-  z-index: 9999;
+  z-index: 800;
   left: 0;
   top: 0;
   width: 100%;
@@ -351,7 +352,7 @@ body img {
   text-align: center;
   margin-top: 30%;
   margin-bottom: 40px;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  text-shadow: 0.05em 0.05em 0.1em rgba(0, 0, 0, 0.4);
 }
 
 .cockpitModalMessage {
@@ -382,7 +383,7 @@ body img {
   text-align: center;
   margin-top: 30%;
   margin-bottom: 40px;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  text-shadow: 0.05em 0.05em 0.1em rgba(0, 0, 0, 0.4);
 }
 
 .surfaceModalMessage {
@@ -511,12 +512,12 @@ input {
   position: relative;
   display: flex;
   flex-direction: column;
-  top: 29rem;
+  top: 31rem;
   left: 20rem;
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 400px;
+  width: 26rem;
   border-radius: 2rem;
   box-shadow: var(--shadowEffect);
 }
@@ -526,21 +527,21 @@ input {
 }
 
 .edTitle {
-  padding-top: 20px;
+  padding-top: 0.75em;
   color: var(--four);
   font-size: 1.5rem;
   font-weight: 700;
 }
 
 .edText {
-  padding: 20px;
-  padding-top: 10px;
+  padding: 1em;
+  padding-top: 0.75em;
   color: var(--three);
 }
 
 .upperStyleEdContainer {
   background-color: var(--two);
-  border: 3px solid var(--three);
+  border: 0.25em solid var(--three);
 }
 
 .upperStyleEdTitle {
@@ -552,16 +553,16 @@ input {
 }
 
 .upperPelagicStyleEdContainer {
-  background-color: var(--two);
-  border: 3px solid var(--three);
-  top: 720px;
-  left: 200px;
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 1200px;
-  height: 200px;
-  padding-bottom: 5px;
+  top: 45rem;
+  left: 15rem;
+  width: 75rem;
+  height: 12rem;
+  padding-bottom: 0.5em;
+  border: 0.25em solid var(--three);
+  background-color: var(--two);
 }
 
 .upperPelagicStyleEdTitle {
@@ -574,7 +575,7 @@ input {
 
 .middleStyleEdContainer {
   background-color: #0d376f;
-  border: 3px solid #fafad2;
+  border: 0.25em solid #fafad2;
 }
 
 .middleStyleEdTitle {
@@ -587,7 +588,7 @@ input {
 
 .lowerStyleEdContainer {
   background-color: black;
-  border: 3px solid lightgreen;
+  border: 0.25em solid lightgreen;
 }
 
 .lowerStyleEdTitle {
@@ -607,12 +608,12 @@ input {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 300px;
-  padding-bottom: 5px;
+  width: 18rem;
+  padding-bottom: 1em;
   background-color: var(--cockpitBG);
-  border: 3px solid var(--cockpitText);
-  border-radius: 30px;
-  box-shadow: 3px 3px 4px rgba(0, 0, 0, 0.5);
+  border: 0.25em solid var(--cockpitText);
+  border-radius: 2em;
+  box-shadow: var(--shadowEffect);
 }
 
 .cockpitStyleEdTitle {
