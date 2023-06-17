@@ -22,11 +22,11 @@ class Keymaster {
     private move: Move;
 
     constructor() {
-        this.ocean = Ocean.getInstance();
-        this.sub = Sub.getInstance();
+        // this.ocean = Ocean.getInstance();
+        // this.sub = Sub.getInstance();
         this.modal = new Modal("modal", "close");
         this.cockpitModal = new Modal("cockpitModal");
-        this.move = new Move(this.ocean, this.sub);
+        // this.move = new Move(this.ocean, this.sub);
     }
     // set key function depending on which canvas is showing
     keyDown(

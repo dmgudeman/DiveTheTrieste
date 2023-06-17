@@ -27,45 +27,49 @@
     box-shadow: 0.1em 0.1em 0.15em rgba(0, 0, 0, 0.5);
 }
 
-.trieste3Button {
-    display: block;
-    position: fixed;
-    // left: 2em;
-    // // top: 32em;
-    width: 21em;
-    height: 18em;
-    background-color: transparent;
-    z-index: 100;
-}
+
 
 .trieste3Container {
     position: fixed;
+    display: flex;
+    justify-content: center;
+    align-content: center;
     left: 2rem;
-    top: 32rem;
+    top: 55vh;
     width: 21rem;
     height: 18rem;
     background-color: transparent;
     z-index: 100;
+    
 }
 
 .trieste3Container.hide {
     display: none;
 }
 
+.trieste3Button {
+    display: block;
+    position: relative;
+    width: 20vw; 
+    height: 25vh; 
+    background-color: transparent;
+    z-index: 100;
+}
+
 .textOverlay {
+    position: fixed;
     display: flex;
     align-items: center;
     justify-content: center;
-    position: fixed;
     font-size: 1.2em;
     font-weight: bold;
     font-family: Arial, Helvetica, sans-serif;
     color: white;
     background-color: gray;
-    left: 6em;
-    top: 33em;
-    width: 8em;
-    height: 1.5em;
+    left: 8vw; // 6% of the viewport width
+    top: 65vh; // 33% of the viewport height
+    width: 8vw; // 8% of the viewport width
+    height: 1.5em; // this will scale with the font size
     z-index: 101;
     border-radius: 0.3em;
     box-shadow: 0.1em 0.1em 0.15em rgba(0, 0, 0, 0.5);

@@ -49,6 +49,7 @@ const edText = new EdText();
 const modal = new Modal("modal", "close");
 
 export function showCanvas1() {
+    console.log('show canvas 1 was pressed')
     //the ocean
     setCurrentCanvas(1);
     showDepth();
@@ -66,10 +67,14 @@ export function showCanvas1() {
     homeButton.classList.add("can1home");
     homeButton.classList.remove("can2home");
     homeButton.classList.remove("can3home");
+    
 }
 
 export function showCanvas2() {
     //opening page
+    const goToOceanButton: HTMLElement = document.getElementById(
+        "trieste3Container"
+    ) as HTMLElement;
     setCurrentCanvas(2);
     edText.updateEdText(2);
     canvas1.style.display = "none";
@@ -83,6 +88,10 @@ export function showCanvas2() {
     homeButton.classList.remove("can1home");
     homeButton.classList.add("can2home");
     homeButton.classList.remove("can3home");
+    goToOceanButton.addEventListener("click", () => {
+        console.log('gotoOcean pressed')
+        showCanvas1();
+    });
 }
 
 export function showCanvas3() {

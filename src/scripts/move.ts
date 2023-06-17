@@ -37,9 +37,9 @@ class Move {
     private modal: Modal;
     private surfaceModal: Modal;
 
-    constructor(ocean: Ocean, sub: Sub, dir?: string) {
-        this.ocean = ocean;
-        this.sub = sub;
+    constructor( dir?: string) {
+        // this.ocean = ocean;
+        // this.sub = sub;
         // this.constants = new CalcConstant() || null;
         this.calcPosition = CalcPosition.getInstance();
         this.initialValues = InitialValues.getInstance();
