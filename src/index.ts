@@ -76,7 +76,8 @@ document.addEventListener("DOMContentLoaded", () => {
         sub = Sub.getInstance(ctx1);
         cockpit = new Cockpit(ctx3);
         globalCockpit.cockpit = cockpit;
-        cockpit.debounceDraw(100);
+        // cockpit.debounceDraw(100);
+        cockpit.draw();
         key = new Keymaster(ctx1);
         animateSprite();
         document.addEventListener("keydown", keyDown);
@@ -97,7 +98,8 @@ document.addEventListener("DOMContentLoaded", () => {
         ctx1 = canvas1.getContext("2d");
         ctx2 = canvas2.getContext("2d");
         ctx3 = canvas3.getContext("2d");
-        cockpit.debounceDraw(100)
+        // cockpit.debounceDraw(100)
+        cockpit.draw();
         ocean.draw();
         sub.draw();
         drawCanvas2(canvas2, ctx2, backgroundImage, isInstructions1Visible);
