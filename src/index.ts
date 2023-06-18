@@ -4,7 +4,7 @@
 // canvas2 is opening
 // canvas3 is the cockpit
 
-import { showCanvas1, showCanvas2, showCanvas3 } from "./scripts/util";
+import { showCanvas2 } from "./scripts/util";
 
 import Sub from "./scripts/sub";
 import Ocean from "./scripts/ocean";
@@ -109,13 +109,9 @@ document.addEventListener("DOMContentLoaded", () => {
        initializeCanvases();
     }
 
-    // printInitialViewPortStats();
     window.addEventListener("resize", function () {
         resizeCanvases();
-        printInitialViewPortStats();
     });
-
-  
 
     gitHubButton.addEventListener("click", () => {
         window.location.href = "https://github.com/dmgudeman";
@@ -146,14 +142,6 @@ document.addEventListener("DOMContentLoaded", () => {
         toggleAudio(audio);
     });
 
-    //use update to make sure the canvas is rendered
-    // function handler1() {
-    //     cockpit.draw();
-    //     showCanvas3();
-    //     update();
-    // }
-    // ctx1.canvas.addEventListener("mousedown", handler1);
-
     // adding click function to the cockpit
     const rect = canvas3.getBoundingClientRect();
     canvas3.addEventListener("mousedown", (e) => {
@@ -173,7 +161,8 @@ document.addEventListener("DOMContentLoaded", () => {
         ctx1.clearRect(0, 0, canvas1.width, canvas1.height);
     }
 
-    // MAIN ANIMATION LOOP //////
+    // MAIN ANIMATION LOOP //
+    // called in the initializer function
     function update() {
         clear();
         ocean.draw();
@@ -190,29 +179,7 @@ document.addEventListener("DOMContentLoaded", () => {
     function keyDown(e: KeyboardEvent) {
         key.keyDown(e, ctx1, ctx2, ctx3);
         console.log('PRESSED')
-    }
-    
+    }  
 });
 
-const printInitialViewPortStats = () => {
-    console.log("=======================");
-    console.log("window width is " + window.innerWidth);
-    console.log("viewport width is " + window.visualViewport.width);
-    console.log("WIDTH", WIDTH());
-    console.log("--------------------");
-    console.log("window height is " + window.innerHeight);
-    console.log("viewport height is " + window.visualViewport.height);
-    console.log("HEIGHT", HEIGHT);
-    console.log("=======================");
-    console.log("ASPECT_RATIO", WIDTH() / HEIGHT());
-    console.log("=======================");
-    console.log("FULL_LAT_LIMIT", initialValues.getFullLatLimit());
-    console.log("FULL_VERTICAL_LIMIT", initialValues.getFullVertLimit());
-    console.log("SUB_INITAL_LAT_POS", initialValues.getInitial_X());
-    console.log("INITIAL_Y_POSITION", initialValues.getInitial_Y());
-    console.log("OCEAN_LAT_LIMIT", initialValues.getOceanLatLimit());
-    console.log("OCEAN_VERT_LIMIT", initialValues.getOceanVertLimit());
-    console.log("VAR_DEPTH", CalcPosition.getInstance().calcDepthLimit());
-    console.log("--------------------");
-    console.log("=======================");
-};
+
