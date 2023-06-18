@@ -453,7 +453,7 @@ input {
   left: 15rem;
   width: 75rem;
   height: 12rem;
-  padding-bottom: 1rem;
+  padding-bottom: 1.5rem;
   border: 0.25em solid var(--three);
   background-color: var(--two);
 }
@@ -644,6 +644,18 @@ input {
   box-shadow: 0.1em 0.1em 0.15em rgba(0, 0, 0, 0.5);
 }
 
+.gitHub.can2GH {
+  color: #2CE1FB;
+  background-color: #014877;
+  border: 1px solid #014877;
+}
+
+.gitHub.can3GH {
+  color: var(--cockpitBG);
+  background-color: var(--cockpitText);
+  padding-right: 0.1rem;
+}
+
 .linkedIn {
   position: fixed;
   right: 11rem;
@@ -664,21 +676,9 @@ input {
   border: 1px solid #014877;
 }
 
-.gitHub.can2GH {
-  color: #2CE1FB;
-  background-color: #014877;
-  border: 1px solid #014877;
-}
-
 .linkedIn.can3LI {
   color: var(--cockpitBG);
   background-color: var(--cockpitText);
-}
-
-.gitHub.can3GH {
-  color: var(--cockpitBG);
-  background-color: var(--cockpitText);
-  padding-right: 0.1rem;
 }
 
 .musicNote {

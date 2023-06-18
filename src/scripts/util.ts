@@ -55,7 +55,6 @@ const edText = new EdText();
 const modal = new Modal("modal", "close");
 
 export function showCanvas1() {
-    console.log('show canvas 1 was pressed')
     //the ocean
     setCurrentCanvas(1);
     showDepth();
@@ -73,8 +72,10 @@ export function showCanvas1() {
     homeButton.classList.add("can1home");
     homeButton.classList.remove("can2home");
     homeButton.classList.remove("can3home");
-    linkedInButton.classList.remove("can2LI");
     gitHubButton.classList.remove("can2GH");
+    gitHubButton.classList.remove("can3GH");
+    linkedInButton.classList.remove("can2LI");
+    linkedInButton.classList.remove("can3LI");
     
 }
 
@@ -96,11 +97,12 @@ export function showCanvas2() {
     homeButton.classList.remove("can1home");
     homeButton.classList.add("can2home");
     homeButton.classList.remove("can3home");
-    linkedInButton.classList.add("can2LI");
     gitHubButton.classList.add("can2GH");
+    gitHubButton.classList.remove("can3GH");
+    linkedInButton.classList.add("can2LI");
+    linkedInButton.classList.remove("can3LI");
     
     goToOceanButton.addEventListener("click", () => {
-        console.log('gotoOcean pressed')
         showCanvas1();
     });
 }
@@ -122,8 +124,10 @@ export function showCanvas3() {
     homeButton.classList.remove("can1home");
     homeButton.classList.remove("can2home");
     homeButton.classList.add("can3home");
-    linkedInButton.classList.add("can3LI");
+    gitHubButton.classList.remove("can2GH");
     gitHubButton.classList.add("can3GH");
+    linkedInButton.classList.remove("can2LI");
+    linkedInButton.classList.add("can3LI");
 
     edText.updateEdText(3);
     showDepth();
