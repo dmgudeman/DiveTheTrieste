@@ -8,7 +8,6 @@ import {
 import Ocean from "./ocean";
 import Sub from "./sub";
 import { IMapPointObject } from "./types";
-import CalcConstant from "./calcConstant";
 import EdText from "./edText";
 import { eventBus } from "./eventBus";
 import CalcPosition from "./calcPosition";
@@ -40,7 +39,6 @@ class Move {
     constructor(ocean:Ocean, sub:Sub,  dir?: string) {
         this.ocean = ocean;
         this.sub = sub;
-        // this.constants = new CalcConstant() || null;
         this.calcPosition = CalcPosition.getInstance();
         this.initialValues = InitialValues.getInstance();
         this.mapPointObject = this.calcPosition.getMapPointObject() || null;

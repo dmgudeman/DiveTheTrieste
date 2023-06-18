@@ -16,12 +16,10 @@ import CalcPosition from "./calcPosition";
 class Zone {
     private initialValues: InitialValues;
     private calcPosition: CalcPosition;
-    private calcConstants: CalcConstant;
     private flag: number;
     private oldFlag: number;
 
     constructor() {
-        this.calcConstants = new CalcConstant();
         this.initialValues = InitialValues.getInstance();
         this.calcPosition = CalcPosition.getInstance();
         this.flag = null;
