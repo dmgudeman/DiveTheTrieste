@@ -31,7 +31,6 @@ class Cockpit {
     }
 
     draw() {
-        // make first image
         let underImage = new Image();
         let images = new Images();
         underImage.src = images.getImage();
@@ -39,24 +38,24 @@ class Cockpit {
         this.height = this.InitialValues.getHeight();
 
         underImage.onload = () => {
+            // image in cockpit porthole
             this.ctx.drawImage(
                 underImage,
                 this.width * 0.07,
                 0,
                 this.width * 0.35,
-                this.height * 0.3952
+                this.height * 0.41
             );
-            // on load of first image, make the second image
             let cockpitImage = new Image();
             cockpitImage.src = this.cockpitImageUrl;
             cockpitImage.onload = () => {
-                // draw cockpit image
+                // cockpit image
                 this.ctx.drawImage(
                     cockpitImage,
                     this.x,
                     this.y,
                     this.width * 0.5,
-                    this.height * 0.4879
+                    this.height * 0.5
                 );
                 cockpitImage.style.zIndex = "55";
             };

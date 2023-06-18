@@ -15,7 +15,7 @@ export const drawCanvas2 = (canvas2, ctx2, backgroundImage, isInstructions1Visib
      let bannerY = bannerHeight * 0.8; 
 
       // Instruction specific
-      let instructionsHeight = canvas2.width * 0.18; 
+      let instructionsHeight = canvas2.width * 0.165; 
       let instructionsY = (bannerHeight + bannerY);
 
 

@@ -38,6 +38,12 @@ const homeButton = document.getElementById("homeButton") as HTMLElement;
 const musicNoteButton = document.getElementById(
     "musicNoteButton"
 ) as HTMLElement;
+const gitHubButton: HTMLElement = document.getElementById(
+    "gitHubButton"
+) as HTMLElement;
+const linkedInButton: HTMLElement = document.getElementById(
+    "linkedInButton"
+) as HTMLElement;
 const bubblesContainer = document.querySelector(
     ".bubblesContainer"
 ) as HTMLElement;
@@ -67,6 +73,8 @@ export function showCanvas1() {
     homeButton.classList.add("can1home");
     homeButton.classList.remove("can2home");
     homeButton.classList.remove("can3home");
+    linkedInButton.classList.remove("can2LI");
+    gitHubButton.classList.remove("can2GH");
     
 }
 
@@ -88,6 +96,9 @@ export function showCanvas2() {
     homeButton.classList.remove("can1home");
     homeButton.classList.add("can2home");
     homeButton.classList.remove("can3home");
+    linkedInButton.classList.add("can2LI");
+    gitHubButton.classList.add("can2GH");
+    
     goToOceanButton.addEventListener("click", () => {
         console.log('gotoOcean pressed')
         showCanvas1();
@@ -111,6 +122,8 @@ export function showCanvas3() {
     homeButton.classList.remove("can1home");
     homeButton.classList.remove("can2home");
     homeButton.classList.add("can3home");
+    linkedInButton.classList.add("can3LI");
+    gitHubButton.classList.add("can3GH");
 
     edText.updateEdText(3);
     showDepth();

@@ -1,15 +1,17 @@
 .edContainer {
-    position: relative;
+    position: fixed;
+    bottom: 2rem; 
     display: flex;
     flex-direction: column;
-    top: 31rem;
-    left: 20rem;
-    display: flex;
     justify-content: center;
     align-items: center;
     width: 26rem;
-    border-radius: 2rem;
+    min-height: 10rem; 
+    max-height: 80vh;
+    left: 20rem;
     box-shadow: var(--shadowEffect);
+    border-radius: 2rem;
+    padding: 1rem;
 }
 
 .edContainer.hide {
@@ -43,6 +45,8 @@
 }
 
 .upperPelagicStyleEdContainer {
+    position: fixed;
+    bottom: 2rem; 
     display: flex;
     justify-content: center;
     align-items: center;
@@ -50,7 +54,7 @@
     left: 15rem;
     width: 75rem;
     height: 12rem;
-    padding-bottom: 0.5em;
+    padding-bottom: 1rem;
     border:  0.25em solid var(--three);
     background-color: var(--two);
 }
@@ -90,11 +94,11 @@
 }
 
 .cockpitStyleEdContainer {
-    position: relative;
+    position: fixed;
     display: flex;
     flex-direction: column;
     top: 10%;
-    left: 83%;
+    right: 2%;
     display: flex;
     justify-content: center;
     align-items: center;
