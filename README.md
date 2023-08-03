@@ -16,7 +16,7 @@ dive into the Mariana Trench.  The app opens with a submarine
 icon at the surface.  With the use of arrows the submarine
 starts its descent. It travels down the depths and the 
 sub allows the screen to travel to new and unseen places.
-The user can change into the codkpit where images of the
+The user can change into the cockpit where images of the
 appropriate depth and photic zone are shown.  The photos
 are either of bottom dwellers (benthic) or free swimming
 animals (pelagic) depending on where the sub is located.
